@@ -3,5 +3,5 @@
 </p>
 
 <p align="center">
-  🎓 Software Project Management and Software Engineering project for academic purposes.
+  🎓 Software Project Management and Software Engineering joint project for academic purposes.
 </p>
