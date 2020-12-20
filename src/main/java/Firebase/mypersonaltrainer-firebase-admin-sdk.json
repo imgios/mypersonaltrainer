@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mypersonaltrainer-a8310",
+  "private_key_id": "178d6ab5fbb3ea10924ea6be01449d0a72a583a5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCp+MDgxnYBzkt9\nmvEmPWFfDJ+5a18DbvvGSNlsWsugRxJVkJPObshCzTzPTeSf/cjdaxjBTVqlwgQ7\nRdUgFeH3kwy2xlcPH6x3yuNRnPsQj5fT1Oi9dB8Nz+1l4g80uGn9b+OG3TVW6idz\n7N+dBEQJ1UqNTag/WKbSErS+l8SGHxjGIJDwHqueK/8H47BwfUZYIGNJHxChy4NG\ncnVMSVku2DJ3QxfbjDS6DNgNfekUHqe1f9Vy/11aX3C/8xth5tP7P8fFRpI/zuYC\nH/crqbZty1GUN8gfY7iMaguI7HGoj4rRYd2rdy+dNzt9dEESlayZlNoiwaBYs3ds\n4SOmyGtJAgMBAAECggEAFKRlTz8G+JnsTNsu93sLmuKieL8nlTgKq3ZwMlK2CVds\nTHgwHSlS2JsKjC4caopElVBi+6HYdQpCn4yv8RM7Q8kH6aAdlVR+SneZQxF+o7Ce\nqp8gK1cBiPjELuQE/vz5AUqP/jJZ/p3WEAP31b69gRi2UsIYQWYzr05OhVmS6EtG\ncrsjYv/5s3J2UTpDoS7U0fD9QBCfimsZpKuWr7Jk6LKAV3l/U8Ws1WiprHneuLqO\nwyiCEeNyEMSIoV3iADkZTbPHLd14NLCLWLvi+IeRln4GTBAPOzFjcekIsOZwkLPr\ncAA89E/DWuDEvRRDn4K950gv7IfR/RMlBwGeU2PK0QKBgQDhRqH4aoGd8h0/vaSg\n37u6AUlyNKIQKV4fogeeIcp/U46UWzxUHuGppPJCAi4OUQ0pQCGhxvxqc18VdbHo\nJOKgiJK/hg840LktyRyK9VtAuBqYE6Pz3pzNt5foeUZgR0nrhCUMglV7INq2SGrc\n3La80r9pDtFkVkkzlwB1cTl28QKBgQDBJzVrCodtsXS6UpQLKBgz7keMA4/Vra7S\nUrdrnH/aTMhGh+Dt+/Ud7x81AxB8A8Uds4E6wWNkHSzNjpyNFw0eIBhpo9Vi9R4f\nE0f3Y9JfwW9LBNqY593uM/e4xKUyUND9Z7Hz9PVH3L3tIYuFmKG8E2XmtkKM5ejA\ngfPCZWYp2QKBgQCKl4jIKsYpZK2n7EUfD+YPTgFgeI8HwFt+vJFRMNrCsKY0EVkx\nK3qLgsXj5DFvb1/Yc/L8802RM/9YVXspJaAjQUJ+/7vXqVlzmJmtx7rnOxxpWRPx\n0Y/IY93aENpCGzmX4klkw75RLOpBYJYV4NevnTxTJuGdiBQq4AhROGIxEQKBgQCL\n8Zd/bYp/zHHRSWFfz/XxMjP+WtpMq+EdG7cvLZ1okfcNOweaBdIrlQPcSdMYtzaK\n9XKtGk6jy4uZhzkf9FKZwBFQANbrMsNXKoYa1OUoYaL8DJFA9cXS/y39XeR+1xUE\ndKv3IETSgznMZGCNM/ACr19GUElZgn4ndEAjWYoyyQKBgQDYwxOozVSkhXSxhObD\nabxDyqQ3fENlmLKzSwxbUTdqii7H/dVDgDWcKsiw3BpG/0KUgAmY6JMXM4TdykO8\nhqwON3FEt+ktQSSziJbl4vF+z/YVZOgXQukhW7mVDO0RNIXMr+RMfQIt+gA1vuzz\naOmysvuMnLJ8iQnnvn2hU+sVbQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-y62i5@mypersonaltrainer-a8310.iam.gserviceaccount.com",
+  "client_id": "114100857070513939630",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-y62i5%40mypersonaltrainer-a8310.iam.gserviceaccount.com"
+}
