@@ -10,13 +10,13 @@ import java.text.DecimalFormat;
 
 public class ParametersServiceImpl implements ParametersService {
     /**
-     * @param weight   compreso tra 40 e 150
+     * @param weight   compreso tra 40 e 150 formato consentito XX.XX
      * @param leanMass compreso tra 10% e 70%
      * @param fatMass  compreso tra 10% e 70%
      * @throws NumberFormatException
      * @throws IllegalArgumentException
      */
-    public Parameters acceptParameters(String weight, String leanMass, String fatMass) throws NumberFormatException, IllegalArgumentException {
+    public Parameters createParameters(String weight, String leanMass, String fatMass) throws NumberFormatException, IllegalArgumentException {
 
         if (weight != null && weight.length() < 2 || weight.length() > 3)
             throw new IllegalArgumentException("lenght weight non valida");

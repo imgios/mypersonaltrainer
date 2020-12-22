@@ -40,13 +40,15 @@
 <h1> Errore ! <%=error%>
 </h1>
 
-<% } %>
+<% }
+    request.getSession().removeAttribute("error");%>
 <% if (done != null) {
 %>
 <h1><%=done%>
 </h1>
 
-<% } %>
+<% }
+    request.getSession().removeAttribute("done"); %>
 
 
 </body>

@@ -23,14 +23,20 @@ public class ParametersController extends HttpServlet {
         String mg = request.getParameter("fatMass");
 
         try {
-            Parameters p = service.acceptParameters(weight, mm, mg);
+            Parameters p = service.createParameters(weight, mm, mg);
             System.out.println(p.toString());
             request.getSession().setAttribute("done", "Inserimento parametri completato con successo");
 
+
+
+            //resp.sjon tt ok
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             System.out.println("ahahahhha");
             request.getSession().setAttribute("error", e.getMessage());
+
+
+            //add resp.json
         }
         response.sendRedirect("index.jsp");
     }
