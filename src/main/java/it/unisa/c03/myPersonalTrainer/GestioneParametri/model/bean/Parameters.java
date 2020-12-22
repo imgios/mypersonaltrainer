@@ -1,4 +1,4 @@
-package it.unisa.c03.myPersonalTrainer.model.bean;
+package it.unisa.c03.myPersonalTrainer.GestioneParametri.model.bean;
 
 import java.text.DateFormat;
 import java.util.Date;

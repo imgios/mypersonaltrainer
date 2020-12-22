@@ -1,9 +1,9 @@
-package it.unisa.c03.myPersonalTrainer.control.servlet;
+package it.unisa.c03.myPersonalTrainer.GestioneParametri.control.servlet;
 
 
-import it.unisa.c03.myPersonalTrainer.control.service.ParametersService;
-import it.unisa.c03.myPersonalTrainer.model.bean.Parameters;
-import it.unisa.c03.myPersonalTrainer.control.serviceImpl.ParametersServiceImpl;
+import it.unisa.c03.myPersonalTrainer.GestioneParametri.control.service.ParametersService;
+import it.unisa.c03.myPersonalTrainer.GestioneParametri.model.bean.Parameters;
+import it.unisa.c03.myPersonalTrainer.GestioneParametri.control.serviceImpl.ParametersServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
