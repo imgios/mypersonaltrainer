@@ -1,6 +1,6 @@
 package it.unisa.c03.myPersonalTrainer.model.bean;
 
-public class Customer {
+public class Account {
 
     private String nome ;
     private String cognome ;
@@ -10,7 +10,7 @@ public class Customer {
 
     //costruttore
 
-    public Customer(String nome, String cognome, String email, String password, int telefono)
+    public Account(String nome, String cognome, String email, String password, int telefono)
     {
         this.nome = nome;
         this.cognome = cognome ;
