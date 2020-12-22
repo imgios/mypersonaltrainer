@@ -13,7 +13,7 @@ class ParametersServiceImplTest extends Mockito {
         String weight = "522222";
         String fatMass = "30%";
         String leanMass = "55%";
-        String message = "lenght weight non valida";
+        String message = "lunghezza peso non valida";
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             pservice.createParameters(weight, leanMass, fatMass);
         });
@@ -25,7 +25,7 @@ class ParametersServiceImplTest extends Mockito {
         String weight = "5X";
         String fatMass = "30%";
         String leanMass = "55%";
-        String message = "format weight non valido";
+        String message = "formato peso non valido";
         NumberFormatException exception = assertThrows(NumberFormatException.class, () -> {
             pservice.createParameters(weight, leanMass, fatMass);
         });
@@ -33,14 +33,14 @@ class ParametersServiceImplTest extends Mockito {
     }
 
     @Test
-    void lenghtLeanMassNotValid() {
+    void lenghtFatMassNotValid() {
         String weight = "50";
         String fatMass = "3%";
         String leanMass = "55%";
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             pservice.createParameters(weight, leanMass, fatMass);
         });
-        assertEquals("lenght fatMass non valida", exception.getMessage());
+        assertEquals("lunghezza massa grassa non valida", exception.getMessage());
     }
 
     @Test
@@ -48,11 +48,10 @@ class ParametersServiceImplTest extends Mockito {
         String weight = "50";
         String fatMass = "30X%";
         String leanMass = "55%";
-        String message = "format fatMass non valido";
         NumberFormatException exception = assertThrows(NumberFormatException.class, () -> {
             pservice.createParameters(weight, leanMass, fatMass);
         });
-        assertEquals("format fatMass non valido", exception.getMessage());
+        assertEquals("formato massa grassa non valido", exception.getMessage());
     }
 
     @Test
@@ -60,11 +59,10 @@ class ParametersServiceImplTest extends Mockito {
         String weight = "50";
         String fatMass = "30%";
         String leanMass = "55X%";
-        String message = "format leanMass non valido";
         NumberFormatException exception = assertThrows(NumberFormatException.class, () -> {
             pservice.createParameters(weight, leanMass, fatMass);
         });
-        assertEquals("format leanMass non valido", exception.getMessage());
+        assertEquals("formato massa magra non valido", exception.getMessage());
     }
 
     @Test
@@ -75,7 +73,7 @@ class ParametersServiceImplTest extends Mockito {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             pservice.createParameters(weight, leanMass, fatMass);
         });
-        assertEquals("lenght leanMass non valida", exception.getMessage());
+        assertEquals("lunghezza massa magra non valida", exception.getMessage());
     }
 
     @Test

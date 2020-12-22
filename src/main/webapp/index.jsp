@@ -39,6 +39,9 @@
 %>
 <h1> Errore ! <%=error%>
 </h1>
+<div class="alert alert-danger" role="alert">
+    <%=error%>
+</div>
 
 <% }
     request.getSession().removeAttribute("error");%>
@@ -46,6 +49,9 @@
 %>
 <h1><%=done%>
 </h1>
+<div class="alert alert-success" role="alert">
+    <%=done%>
+</div>
 
 <% }
     request.getSession().removeAttribute("done"); %>

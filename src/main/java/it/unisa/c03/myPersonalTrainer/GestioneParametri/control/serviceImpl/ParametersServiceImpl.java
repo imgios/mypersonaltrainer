@@ -17,22 +17,22 @@ public class ParametersServiceImpl implements ParametersService {
     public Parameters createParameters(String weight, String leanMass, String fatMass) throws NumberFormatException, IllegalArgumentException {
 
         if (weight != null && weight.length() < 2 || weight.length() > 3)
-            throw new IllegalArgumentException("lenght weight non valida");
+            throw new IllegalArgumentException("lunghezza peso non valida");
 
         if (!weight.matches("([0-9]){2,3}\\.?[0-9]{0,2}?$"))
-            throw new NumberFormatException("format weight non valido");
+            throw new NumberFormatException("formato peso non valido");
         if (!fatMass.matches("([0-9]+\\%){1,2}$"))
-            throw new NumberFormatException("format fatMass non valido");
-        if (!leanMass.matches("([0-9]+\\%){1,2}$")) throw new NumberFormatException("format leanMass non valido");
+            throw new NumberFormatException("formato massa grassa non valido");
+        if (!leanMass.matches("([0-9]+\\%){1,2}$")) throw new NumberFormatException("formato massa magra non valido");
 
         float weightF = Float.parseFloat(weight);
-        if (weightF < 40 || weightF > 150) throw new IllegalArgumentException("lenght weight non valida");
+        if (weightF < 40 || weightF > 150) throw new IllegalArgumentException("lunghezza peso non valida");
 
         float leanMassF = Float.parseFloat(leanMass.substring(0, leanMass.length() - 1));
         float fatMassF = Float.parseFloat(fatMass.substring(0, fatMass.length() - 1));
         if (fatMassF < 10 || fatMassF > 70)
-            throw new IllegalArgumentException("lenght fatMass non valida");
-        if (leanMassF < 10 || leanMassF > 70) throw new IllegalArgumentException("lenght leanMass non valida");
+            throw new IllegalArgumentException("lunghezza massa grassa non valida");
+        if (leanMassF < 10 || leanMassF > 70) throw new IllegalArgumentException("lunghezza massa magra non valida");
 
         float leanMassTot = (weightF / 100) * leanMassF;
         float fatMassTot = (weightF / 100) * fatMassF;
