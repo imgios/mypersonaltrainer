@@ -1,7 +1,6 @@
-package it.unisa.c03.myPersonalTrainer.model.daoImpl;
-import com.google.cloud.firestore.Firestore;
-import it.unisa.c03.myPersonalTrainer.model.dao.AccountDAO;
-import it.unisa.c03.myPersonalTrainer.model.bean.Account;
+package it.unisa.c03.myPersonalTrainer.account.dao;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
+import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 

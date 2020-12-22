@@ -1,9 +1,8 @@
-package it.unisa.c03.myPersonalTrainer.control.serviceImpl;
+package it.unisa.c03.myPersonalTrainer.account.service;
 
-import it.unisa.c03.myPersonalTrainer.control.service.AccountService;
-import it.unisa.c03.myPersonalTrainer.model.bean.Account;
-import it.unisa.c03.myPersonalTrainer.model.daoImpl.AccountDAOImpl;
-import it.unisa.c03.myPersonalTrainer.model.dao.AccountDAO;
+import it.unisa.c03.myPersonalTrainer.account.bean.Account;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 
 import java.io.IOException;
 

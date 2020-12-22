@@ -1,6 +1,6 @@
-package it.unisa.c03.myPersonalTrainer.control.service;
+package it.unisa.c03.myPersonalTrainer.account.service;
 
-import it.unisa.c03.myPersonalTrainer.model.bean.Account;
+import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 
 import java.io.IOException;
 
