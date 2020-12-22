@@ -1,5 +1,8 @@
-package it.unisa.c03.myPersonalTrainer;
+package it.unisa.c03.myPersonalTrainer.control.servlet;
 
+
+import it.unisa.c03.myPersonalTrainer.model.bean.Parameters;
+import it.unisa.c03.myPersonalTrainer.control.serviceImpl.ParametersServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,19 +15,19 @@ import java.io.IOException;
 public class ServletParameters extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ParametersService service = new ParametersService();
-        String peso = request.getParameter("peso");
-        String mm = request.getParameter("massaMagra");
-        String mg = request.getParameter("massaGrassa");
-        System.out.println("ho ricevuto "+peso+mg+mm);
+        ParametersServiceImpl service = new ParametersServiceImpl();
+        String weight = request.getParameter("weight");
+        String mm = request.getParameter("leanMass");
+        String mg = request.getParameter("fatMass");
+        System.out.println("ho ricevuto "+weight+mg+mm);
 
         try {
-            /*service.controllaPeso(peso);
-          service.controllaMM(mm);
-            service.controllaMassagGrassa(mg);*/
-          Parameters p =  service.acceptParams(peso,mm,mg);
+            /*service.controllafatMass(mg);
+            service.controllaleanMass(mm);
+            service.controllaweight(weight);*/
+          Parameters p = service.acceptParameters(weight,mm,mg);
 
-            System.out.println(p.toString());
+           System.out.println(p.toString());
 
         }catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
