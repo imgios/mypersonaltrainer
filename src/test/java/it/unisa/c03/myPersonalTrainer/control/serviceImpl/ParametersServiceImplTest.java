@@ -1,13 +1,9 @@
 package it.unisa.c03.myPersonalTrainer.control.serviceImpl;
-
 import it.unisa.c03.myPersonalTrainer.control.service.ParametersService;
 import it.unisa.c03.myPersonalTrainer.model.bean.Parameters;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-
 import static org.junit.jupiter.api.Assertions.*;
-
 class ParametersServiceImplTest extends Mockito {
 
     ParametersService pservice = new ParametersServiceImpl();

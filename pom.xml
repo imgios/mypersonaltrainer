@@ -71,8 +71,8 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>valiinsertionDate</id>
-                        <phase>valiinsertionDate</phase>
+                        <id>validate</id>
+                        <phase>validate</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>
