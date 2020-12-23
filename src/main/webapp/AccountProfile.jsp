@@ -79,19 +79,19 @@
                 <div id="testoPassword" class="card">
                     <div class="card-body">
 
-                        <h3>Inserisci la nuova password</h3>
+                        <h3>Modifica la password</h3>
 
                     <form action="ChangePassword" method="post">
                         <div class="row mb-3">
                             <label for="idEmail" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="idEmail" name="email" required>
+                                <input type="text" class="form-control" id="idEmail" name="email" placeholder="Inserisci la tua email" required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="idPassword" class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="idPassword" name="password" placeholder="Enter new password" required>
+                                <input type="password" class="form-control" id="idPassword" name="password" placeholder="Inserisci la nuova password" required>
                             </div>
                         </div>
 
@@ -99,10 +99,21 @@
                     </form>
 
                     <!-- Div in basso per errori -->
+                        <% String error = (String) request.getSession().getAttribute("errorToShow");
+                        if ( error != null)
+                        {%>
                     <div class="alert alert-danger" role="alert"  id="errorDiv">
-                        <ol id="errorsList">
-                        </ol>
+                       <p><%= error %> </p>
                     </div>
+                        <%}%>
+
+                        <% String success = (String) request.getSession().getAttribute("successToShow");
+                            if ( success != null)
+                            {%>
+                        <div class="alert alert-success" role="alert"  id="errorDiv">
+                            <p><%= success %> </p>
+                        </div>
+                        <%}%>
 
                     </div>
 

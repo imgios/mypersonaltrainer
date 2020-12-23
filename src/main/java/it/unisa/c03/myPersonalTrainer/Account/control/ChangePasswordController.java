@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "ChangePassword", value = "/ChangePassword")
-public class ChangePasswordServlet extends HttpServlet {
+public class ChangePasswordController extends HttpServlet {
 
     AccountService service = new AccountServiceImpl();
 
@@ -43,6 +43,20 @@ public class ChangePasswordServlet extends HttpServlet {
         {
             errors  = errors + exception.getMessage();
         }
+
+        // if res is false, it means that there's an error to show
+        if(!res){
+            request.getSession().removeAttribute("successToShow");
+            request.getSession().setAttribute("errorToShow", errors);
+            response.sendRedirect("AccountProfile.jsp");
+        }
+        // if res is true, show the success to the user
+        else if (res == true){
+            request.getSession().removeAttribute("errorToShow");
+            request.getSession().setAttribute("successToShow", "Password modificata!");
+            response.sendRedirect("AccountProfile.jsp");
+        }
+
 
 
         System.out.println("Ecco gli errori: " + errors + "\narriva:" + res);

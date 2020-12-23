@@ -1,7 +1,6 @@
 $(document).ready(function() {
     $('#testoProfilo').hide();
-    $('#testoPassword').hide();
-    $('#errorDiv').hide();
+    $('#testoPassword').show();
 });
 
 
