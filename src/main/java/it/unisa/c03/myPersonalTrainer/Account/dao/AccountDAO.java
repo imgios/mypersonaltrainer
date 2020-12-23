@@ -6,5 +6,7 @@ public interface AccountDAO {
 
     public Account findAccountByEmail(String email) ;
 
-    public void updatePassword(String password) ;
+    public void updatePassword(String email , String password) ;
+
+    public String getAccountDocumentIdByEmail(String email);
 }
