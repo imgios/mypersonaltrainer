@@ -1,23 +1,29 @@
-package it.unisa.c03.myPersonalTrainer.model.bean;
+package it.unisa.c03.myPersonalTrainer.account.bean;
 
 public class Account {
 
-    public Account(String name, String surname, String email, String password, String phone) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
+    public Account() {
+
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
+    public Account(String name, String surname, String phone, String email, String password, int role) {
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
         return "Account{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", email=" + email +
-                ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
                 '}';
     }
 
@@ -37,6 +43,14 @@ public class Account {
         this.surname = surname;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -53,18 +67,19 @@ public class Account {
         this.password = password;
     }
 
-    public String getPhone() {
-        return phone;
+    public int getRole() {
+        return role;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setRole(int role) {
+        this.role = role;
     }
 
     private String name;
     private String surname;
+    private String phone;
     private String email;
     private String password;
-    private String phone;
+    private int role;
 
 }
