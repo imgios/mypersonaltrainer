@@ -1,9 +1,10 @@
-package it.unisa.c03.myPersonalTrainer.GestioneParametri.control.servlet;
+package it.unisa.c03.myPersonalTrainer.GestioneParametri.control;
 
 
-import it.unisa.c03.myPersonalTrainer.GestioneParametri.control.service.ParametersService;
-import it.unisa.c03.myPersonalTrainer.GestioneParametri.model.bean.Parameters;
-import it.unisa.c03.myPersonalTrainer.GestioneParametri.control.serviceImpl.ParametersServiceImpl;
+import com.google.gson.Gson;
+import it.unisa.c03.myPersonalTrainer.GestioneParametri.service.ParametersService;
+import it.unisa.c03.myPersonalTrainer.GestioneParametri.bean.Parameters;
+import it.unisa.c03.myPersonalTrainer.GestioneParametri.service.ParametersServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,32 +14,30 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 //to do -> prendere la mail del cliente dalla sessione, dopo che il login è stato fatto. cambiare il costruttore
 
-@WebServlet(name = "ParametersController", value = "/parameters-controller")
-public class ParametersController extends HttpServlet {
+@WebServlet(name = "provaController", value = "/prova-controller")
+public class provaController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        ParametersService service = new ParametersServiceImpl();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         String weight = request.getParameter("weight");
         String mm = request.getParameter("leanMass");
         String mg = request.getParameter("fatMass");
+        System.out.println("ho ricevuto " + weight + mm + mg);
+        ParametersService service = new ParametersServiceImpl();
+        String res = "";
 
         try {
             Parameters p = service.createParameters(weight, mm, mg);
-            System.out.println(p.toString());
-            request.getSession().setAttribute("done", "Inserimento parametri completato con successo");
+            res = new Gson().toJson(1);
 
 
-
-            //resp.sjon tt ok
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            System.out.println("ahahahhha");
-            request.getSession().setAttribute("error", e.getMessage());
+            res = new Gson().toJson(e.getMessage());
 
-
-            //add resp.json
         }
-        response.sendRedirect("index.jsp");
+        response.getWriter().write(res);
+        return;
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
