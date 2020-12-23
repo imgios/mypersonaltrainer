@@ -6,17 +6,21 @@ public class Account {
     private String surname;
     private String email ;
     private String password ;
-    private int telefono ;
+    private String telefono ;
 
     //costruttore
 
-    public Account(String name, String surname, String email, String password, int telefono)
+    public Account(String name, String surname, String email, String password, String telefono)
     {
         this.name = name;
         this.surname = surname ;
         this.email = email ;
         this.password = password ;
         this.telefono = telefono ;
+    }
+
+    public Account() {
+
     }
 
     //getter and setter
@@ -53,11 +57,11 @@ public class Account {
         this.password = password;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
