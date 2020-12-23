@@ -1,8 +1,7 @@
-package it.unisa.c03.myPersonalTrainer.control.servlet;
+package it.unisa.c03.myPersonalTrainer.Account.control;
 
-import it.unisa.c03.myPersonalTrainer.control.service.AccountService;
-import it.unisa.c03.myPersonalTrainer.control.serviceImpl.AccountServiceImpl;
-import it.unisa.c03.myPersonalTrainer.model.bean.Account;
+import it.unisa.c03.myPersonalTrainer.Account.service.AccountService;
+import it.unisa.c03.myPersonalTrainer.Account.service.AccountServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,11 +18,17 @@ public class ChangePasswordServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        //TO DO: Check if user is logged with session attribute.
+        // if not, redirect on the homepage
+
         //Get parameters form the request form
         String clientMail = request.getParameter("email") ;
         String newPassword = request.getParameter("password") ;
 
         System.out.println("Mi è arrivato la pass: " + newPassword);
+
+        //TO DO: check if email exists in db
+        // with find by email
 
         //set te error string to show
         String errors = ""; ;

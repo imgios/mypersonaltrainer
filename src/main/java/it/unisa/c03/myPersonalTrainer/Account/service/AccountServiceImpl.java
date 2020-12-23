@@ -1,8 +1,6 @@
-package it.unisa.c03.myPersonalTrainer.control.serviceImpl;
+package it.unisa.c03.myPersonalTrainer.Account.service;
 
-import it.unisa.c03.myPersonalTrainer.control.service.AccountService;
-
-import java.util.IllegalFormatException;
+import it.unisa.c03.myPersonalTrainer.Account.service.AccountService;
 
 public class AccountServiceImpl implements AccountService {
 

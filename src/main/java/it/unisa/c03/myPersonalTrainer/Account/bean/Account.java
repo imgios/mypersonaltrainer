@@ -1,19 +1,19 @@
-package it.unisa.c03.myPersonalTrainer.model.bean;
+package it.unisa.c03.myPersonalTrainer.Account.bean;
 
 public class Account {
 
-    private String nome ;
-    private String cognome ;
+    private String name ;
+    private String surname;
     private String email ;
     private String password ;
     private int telefono ;
 
     //costruttore
 
-    public Account(String nome, String cognome, String email, String password, int telefono)
+    public Account(String name, String surname, String email, String password, int telefono)
     {
-        this.nome = nome;
-        this.cognome = cognome ;
+        this.name = name;
+        this.surname = surname ;
         this.email = email ;
         this.password = password ;
         this.telefono = telefono ;
@@ -21,20 +21,20 @@ public class Account {
 
     //getter and setter
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCognome() {
-        return cognome;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getEmail() {
@@ -66,8 +66,8 @@ public class Account {
     @Override
     public String toString() {
         return "Customer{" +
-                "nome='" + nome +
-                ", cognome='" + cognome +
+                "name='" + name +
+                ", surname='" + surname +
                 ", email='" + email +
                 ", password='" + password +
                 ", telefono=" + telefono +

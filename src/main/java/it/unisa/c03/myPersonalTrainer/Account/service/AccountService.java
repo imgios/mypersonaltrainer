@@ -1,4 +1,4 @@
-package it.unisa.c03.myPersonalTrainer.control.service;
+package it.unisa.c03.myPersonalTrainer.Account.service;
 
 
 

@@ -1,7 +1,7 @@
 package it.unisa.c03.myPersonalTrainer;
 
 import it.unisa.c03.myPersonalTrainer.Account.Firebase.DBConnection;
-import it.unisa.c03.myPersonalTrainer.model.bean.Account;
+import it.unisa.c03.myPersonalTrainer.Account.bean.Account;
 
 import java.io.*;
 import javax.servlet.http.*;
