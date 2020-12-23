@@ -4,7 +4,7 @@ public class Account {
     //va implementata serializable?
     //dichiarazione delle variabili
     String name;                       //name surname phone email password role
-    String surname;
+    String surname;                    //nome cognome numeroditelefono email password ruolo
     String phone;
     String email;
     String password;
