@@ -14,7 +14,7 @@ public class AccountServiceImpl implements AccountService {
     public void RegisterAccount(Account utente) throws IOException {
 
         AccountDAO accountDAO = new AccountDAOImpl();
-       // utente.getEmail();
+        // utente.getEmail();
         //va implementato il check della email che non deve essere già presente nel db
         //System.out.println(utente.getEmail());
 

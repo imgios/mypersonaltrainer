@@ -8,4 +8,5 @@ public interface AccountService {
 
     //metodi che vanno implementati
     public void RegisterAccount(Account utente) throws IOException;
+
 }

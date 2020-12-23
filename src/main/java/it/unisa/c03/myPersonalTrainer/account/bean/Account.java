@@ -78,10 +78,10 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-                "nome='" + name + '\'' +
-                ", cognome='" + surname + '\'' +
-                ", n_telefono='" + phone + '\'' +
-                ", email='" + email + '\'' +
+                "Nome='" + name + '\'' +
+                ", Cognome='" + surname + '\'' +
+                ", Numero di Telefono='" + phone + '\'' +
+                ", eMail='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", ruolo=" + role +
                 '}';
