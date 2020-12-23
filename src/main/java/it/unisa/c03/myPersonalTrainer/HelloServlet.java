@@ -1,5 +1,8 @@
 package it.unisa.c03.myPersonalTrainer;
 
+import it.unisa.c03.myPersonalTrainer.Account.Firebase.DBConnection;
+import it.unisa.c03.myPersonalTrainer.model.bean.Account;
+
 import java.io.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -18,7 +21,9 @@ public class HelloServlet extends HttpServlet {
 
         System.out.println(presa);
 
+        Account a = new Account("mic", "mic","cliente@gmail.com","ciaociao1.",1);
 
+        DBConnection.getConnection().collection("Account").add(a);
     }
 
     public void destroy() {
