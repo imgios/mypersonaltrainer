@@ -4,15 +4,19 @@ import java.text.DateFormat;
 import java.util.Date;
 
 public class Parameters {
-    float weight, leanMass, fatMass;
+    double weight, leanMass, fatMass;
     String mailClient;
     String insertionDate;
 
-    public float getweight() {
+    public Parameters() {
+
+    }
+
+    public double getweight() {
         return weight;
     }
 
-    public Parameters(float weight, float leanMass, float fatMass, String mailClient) {
+    public Parameters(double weight, double leanMass, double fatMass, String mailClient) {
         this.weight = weight;
         this.leanMass = leanMass;
         this.fatMass = fatMass;
@@ -38,23 +42,23 @@ public class Parameters {
                 '}';
     }
 
-    public void setweight(float weight) {
+    public void setweight(double weight) {
         this.weight = weight;
     }
 
-    public float getleanMass() {
+    public double getleanMass() {
         return leanMass;
     }
 
-    public void setleanMass(float leanMass) {
+    public void setleanMass(double leanMass) {
         this.leanMass = leanMass;
     }
 
-    public float getfatMass() {
+    public double getfatMass() {
         return fatMass;
     }
 
-    public void setfatMass(float fatMass) {
+    public void setfatMass(double fatMass) {
         this.fatMass = fatMass;
     }
 
