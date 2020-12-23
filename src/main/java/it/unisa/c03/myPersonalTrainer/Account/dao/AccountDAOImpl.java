@@ -30,7 +30,7 @@ public class AccountDAOImpl implements AccountDAO {
         // retrieve  query results asynchronously using query.get()
         ApiFuture<QuerySnapshot> querySnapshot = query.get();
 
-        //create Bean to return document.get("email"));
+        //create Bean to return
         Account accountBean = new Account() ;
         try {
             for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
@@ -39,7 +39,7 @@ public class AccountDAOImpl implements AccountDAO {
                 accountBean.setName(String.valueOf(document.get("nome")));
                 accountBean.setSurname(String.valueOf(document.get("cognome")));
                 accountBean.setPassword(String.valueOf(document.get("password")));
-                accountBean.setTelefono(String.valueOf(document.get("n_telefono")));
+                accountBean.setPhone(String.valueOf(document.get("n_telefono")));
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

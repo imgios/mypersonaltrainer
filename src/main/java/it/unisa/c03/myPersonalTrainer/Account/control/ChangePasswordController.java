@@ -25,41 +25,37 @@ public class ChangePasswordController extends HttpServlet {
         String clientMail = request.getParameter("email") ;
         String newPassword = request.getParameter("password") ;
 
-        System.out.println("Mi è arrivato la pass: " + newPassword);
 
         //TO DO: check if email exists in db
         // with find by email
 
         //set te error string to show
         String errors = ""; ;
-        boolean res  = false ;
+        boolean result  = false ;
 
-        //call the checkPassword method
+        //call the service method
         try
         {
-             res = service.checkCredentials(clientMail,newPassword) ;
+            result = service.checkCredentials(clientMail,newPassword) ;
         }
         catch(IllegalArgumentException exception)
         {
             errors  = errors + exception.getMessage();
         }
 
-        // if res is false, it means that there's an error to show
-        if(!res){
+        // if result is false, it means that there's an error to show
+        if(!result){
             request.getSession().removeAttribute("successToShow");
             request.getSession().setAttribute("errorToShow", errors);
             response.sendRedirect("AccountProfile.jsp");
         }
-        // if res is true, show the success to the user
-        else if (res == true){
+        // if result is true, show the success to the user
+        else if (result == true){
             request.getSession().removeAttribute("errorToShow");
             request.getSession().setAttribute("successToShow", "Password modificata!");
             response.sendRedirect("AccountProfile.jsp");
         }
 
-
-
-        System.out.println("Ecco gli errori: " + errors + "\narriva:" + res);
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
