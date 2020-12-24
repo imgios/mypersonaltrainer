@@ -1,9 +1,13 @@
 package it.unisa.c03.myPersonalTrainer.Account.service;
 
+import it.unisa.c03.myPersonalTrainer.Account.bean.Account;
+import it.unisa.c03.myPersonalTrainer.Account.dao.AccountDAO;
+import it.unisa.c03.myPersonalTrainer.Account.dao.AccountDAOImpl;
 import it.unisa.c03.myPersonalTrainer.Account.service.AccountService;
 
 public class AccountServiceImpl implements AccountService {
 
+    private AccountDAO accountDAO = new AccountDAOImpl();
     @Override
     public boolean checkCredentials(String clientMail, String newPassword)  throws IllegalArgumentException{
 
@@ -33,5 +37,26 @@ public class AccountServiceImpl implements AccountService {
 
         return result ;
 
+    }
+
+    public boolean searchAccountByEmail(String email)
+    {
+        boolean result = false ;
+        Account account = new Account();
+        account = accountDAO.findAccountByEmail(email);
+
+        //the email exists in the DB
+        if (account.getEmail() != null)
+            result = true ;
+        //the email doesn't exist in the DB
+        else if (account.getEmail() == null)
+            result = false ;
+
+        return result ;
+    }
+
+    public void changePassword(String email, String password)
+    {
+        accountDAO.updatePassword(email,password);
     }
 }

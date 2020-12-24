@@ -60,7 +60,7 @@ public class AccountDAOImpl implements AccountDAO {
         Account accountBean = new Account() ;
         try {
             for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
-                
+
                     accountBean.setEmail(String.valueOf(document.get("email")));
                     accountBean.setName(String.valueOf(document.get("nome")));
                     accountBean.setSurname(String.valueOf(document.get("cognome")));

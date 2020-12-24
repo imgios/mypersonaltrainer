@@ -19,19 +19,21 @@ public class HelloServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String presa = request.getParameter("prova");
-
-        System.out.println(presa);
-
         //Account a = new Account("mic", "mic","cliente@gmail.com","ciaociao1.",1);
-
         //DBConnection.getConnection().collection("Account").add(a);
-        AccountDAO acc = new AccountDAOImpl();
+
         Account prova = new Account();
+        AccountDAO acc = new AccountDAOImpl();
 
-        prova = acc.findAccountByEmail("ciao@a.it");
+         prova = acc.findAccountByEmail("prova@prova.it");
 
-        System.out.println("ECCOOOLOOOOOOOOO:" + prova.toString());
+         if (prova.getEmail() != null)
+             System.out.println("Trovato");
+         else if (prova.getEmail() == null)
+             System.out.println("Non Trovato");
+
+
+        // acc.updatePassword("prova@prova.it","nuovapasscambia23.");
 
     }
 
