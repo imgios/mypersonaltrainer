@@ -8,17 +8,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
 
 @WebServlet(name = "ViewInfoAccountServlet", value= "/ViewInfoAccountServlet")
 public class ViewInfoAccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String email = request.getParameter("email");
+/*
         AccountService p = new AccountServiceImpl();
-        HashMap<String, String> dati = p.viewInfoAccount(email);
-        System.out.println(dati);
+        request.getSession().setAttribute("Account", p.viewInfoAccount() );
+        response.sendRedirect("ViewInfoAccount.jsp");
+*/
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
