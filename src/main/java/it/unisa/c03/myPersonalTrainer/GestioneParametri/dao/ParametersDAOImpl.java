@@ -1,4 +1,4 @@
-package it.unisa.c03.myPersonalTrainer.GestioneParametri.model.daoImpl;
+package it.unisa.c03.myPersonalTrainer.GestioneParametri.dao;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
@@ -6,8 +6,7 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QuerySnapshot;
 import it.unisa.c03.myPersonalTrainer.GestioneParametri.Firebase.DBConnection;
-import it.unisa.c03.myPersonalTrainer.GestioneParametri.model.bean.Parameters;
-import it.unisa.c03.myPersonalTrainer.GestioneParametri.model.dao.ParametersDAO;
+import it.unisa.c03.myPersonalTrainer.GestioneParametri.bean.Parameters;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,8 +24,9 @@ public class ParametersDAOImpl implements ParametersDAO {
         }
     }
 
+
     @Override
-    public Parameters getByMail(String email) {
+    public ArrayList<Parameters> selectByMail(String email) {
         // Create a reference to the account collection
         CollectionReference parameters = null;
         try {
@@ -42,25 +42,25 @@ public class ParametersDAOImpl implements ParametersDAO {
         ApiFuture<QuerySnapshot> querySnapshot = query.get();
 
         //create Bean to return document.get("email"));
-
-        Parameters params = new Parameters();
+        ArrayList<Parameters> list = new ArrayList<Parameters>();
         try {
             for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+            Parameters params = new Parameters();
 
-                Object x = document.get("fatMass");
-                System.out.println(x.getClass());
-                params.setfatMass((( Float.parseFloat(String.valueOf(document.get("fatMass"))))));
-                params.setleanMass((( Float.parseFloat(String.valueOf(document.get("leanMass"))))));
-                params.setweight((( Float.parseFloat(String.valueOf(document.get("weight"))))));
+                params.setfatMass(Double.valueOf((Double) document.get("fatMass")));
+                params.setleanMass((Double) document.get("leanMass"));
+                params.setweight((Double) document.get("weight"));
                 params.setMailClient(String.valueOf(document.get("mailClient")));
                 params.setinsertionDate(String.valueOf(document.get("insertionDate")));
+                list.add(params) ;
             }
+            return list;
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
-        return params ;
+        return null;
     }
 }

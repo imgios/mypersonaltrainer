@@ -1,14 +1,12 @@
-package it.unisa.c03.myPersonalTrainer.GestioneParametri.control.serviceImpl;
+package it.unisa.c03.myPersonalTrainer.GestioneParametri.service;
 
-import it.unisa.c03.myPersonalTrainer.GestioneParametri.control.service.ParametersService;
-import it.unisa.c03.myPersonalTrainer.GestioneParametri.model.bean.Parameters;
-import it.unisa.c03.myPersonalTrainer.GestioneParametri.model.dao.ParametersDAO;
-import it.unisa.c03.myPersonalTrainer.GestioneParametri.model.daoImpl.ParametersDAOImpl;
+import it.unisa.c03.myPersonalTrainer.GestioneParametri.bean.Parameters;
+import it.unisa.c03.myPersonalTrainer.GestioneParametri.dao.ParametersDAO;
+import it.unisa.c03.myPersonalTrainer.GestioneParametri.dao.ParametersDAOImpl;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ParametersServiceImpl implements ParametersService {
 
@@ -54,9 +52,19 @@ public class ParametersServiceImpl implements ParametersService {
         Parameters pa = new Parameters(weightD, fatMassTotal, leanMassTotal, "mail@io.it");
         parametersDAO.insertParameters(pa);
 
-        System.out.println(parametersDAO.getByMail("ciao@io.we"));
+        //System.out.println(parametersDAO.getByMail("prova@io.it"));
 
         return pa;
+
+    }
+    /**
+     *
+     * @param email mail client who want to retrieve his parameters
+     * @return list of parameters
+     */
+    public ArrayList<Parameters> getByMail(String email){
+
+        return (parametersDAO.selectByMail(email));
 
     }
 
