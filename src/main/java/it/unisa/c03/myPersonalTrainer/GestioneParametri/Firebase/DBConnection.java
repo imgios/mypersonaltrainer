@@ -22,8 +22,6 @@ public class DBConnection {
     public static Firestore getConnection() throws IOException {
         if(connection!=null) return connection;
         try {
-
-
             FirebaseOptions options=new FirebaseOptions.Builder().setCredentials(GoogleCredentials.getApplicationDefault()).build();
             connection=FirestoreClient.getFirestore( FirebaseApp.initializeApp(options));
             return connection;

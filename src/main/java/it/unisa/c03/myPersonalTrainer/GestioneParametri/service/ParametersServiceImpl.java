@@ -51,9 +51,6 @@ public class ParametersServiceImpl implements ParametersService {
 
         Parameters pa = new Parameters(weightD, fatMassTotal, leanMassTotal, "mail@io.it");
         parametersDAO.insertParameters(pa);
-
-        //System.out.println(parametersDAO.getByMail("prova@io.it"));
-
         return pa;
 
     }
@@ -63,9 +60,8 @@ public class ParametersServiceImpl implements ParametersService {
      * @return list of parameters
      */
     public ArrayList<Parameters> getByMail(String email){
-
+        if(email == null) throw new IllegalArgumentException("Email non valida");
         return (parametersDAO.selectByMail(email));
-
     }
 
 }
