@@ -7,6 +7,7 @@ import java.io.IOException;
 public interface AccountService {
 
     //metodi che vanno implementati
-    public void RegisterAccount(Account utente) throws IOException;
+    public boolean RegisterAccount(Account utente) throws IOException, IllegalArgumentException;
 
+    public boolean checkCredentials(String clientMail, String newPassword)  throws IllegalArgumentException;
 }

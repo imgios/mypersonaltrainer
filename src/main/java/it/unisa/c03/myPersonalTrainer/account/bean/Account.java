@@ -1,6 +1,8 @@
 package it.unisa.c03.myPersonalTrainer.account.bean;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
     //va implementata serializable?
     //dichiarazione delle variabili
     String name;                       //name surname phone email password role
