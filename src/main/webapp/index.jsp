@@ -13,13 +13,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="js/insertParameters.js"></script>
 </head>
 <body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="ServletParameters">Hello Servlet</a>
-<form action="parameters-controller">
+
+<form>
     <div class="form-group">
         <label for="idweight">Il tuo weight</label>
         <input class="form-control" id="idweight" name="weight" placeholder="Enter weight">
@@ -32,30 +30,12 @@
         <label for="idleanMass">massa magra</label>
         <input class="form-control" id="idleanMass" name="leanMass">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" id="buttonSubmit" class="btn btn-primary">Submit</button>
 </form>
 
-<% if (error != null) {
-%>
-<h1> Errore ! <%=error%>
-</h1>
-<div class="alert alert-danger" role="alert">
-    <%=error%>
-</div>
+<div class="alert alert-danger" role="alert" id="divError"> </div>
 
-<% }
-    request.getSession().removeAttribute("error");%>
-<% if (done != null) {
-%>
-<h1><%=done%>
-</h1>
-<div class="alert alert-success" role="alert">
-    <%=done%>
-</div>
-
-<% }
-    request.getSession().removeAttribute("done"); %>
-
+<div class="alert alert-success" role="alert" id="divSuccess"> </div>
 
 </body>
 </html>

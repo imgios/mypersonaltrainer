@@ -1,6 +1,7 @@
 package it.unisa.c03.myPersonalTrainer.GestioneParametri.control;
 
 
+import com.google.gson.Gson;
 import it.unisa.c03.myPersonalTrainer.GestioneParametri.service.ParametersService;
 import it.unisa.c03.myPersonalTrainer.GestioneParametri.bean.Parameters;
 import it.unisa.c03.myPersonalTrainer.GestioneParametri.service.ParametersServiceImpl;
@@ -18,37 +19,24 @@ import java.util.ArrayList;
 public class ParametersController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ParametersService service = new ParametersServiceImpl();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         String weight = request.getParameter("weight");
         String mm = request.getParameter("leanMass");
         String mg = request.getParameter("fatMass");
+        ParametersService service = new ParametersServiceImpl();
+        String res = "";
 
         try {
-           /* Parameters p = service.createParameters(weight, mm, mg);
-            System.out.println(p.toString());
-            request.getSession().setAttribute("done", "Inserimento parametri completato con successo");
-            //resp.sjon tt ok
-
-            */
-
-            ArrayList<Parameters> p = service.getByMail("prova@io.it");
-            if (p == null || p.size() < 1) {
-                System.out.println("non ce");
-            } else {
-                for (Parameters parameters : p) {
-                    System.out.println(parameters.toString());
-                }
-            }
-
+            Parameters p = service.createParameters(weight, mm, mg);
+            res = new Gson().toJson(1);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            System.out.println("ahahahhha");
-            request.getSession().setAttribute("error", e.getMessage());
-
-
-            //add resp.json
+            res = new Gson().toJson(e.getMessage());
+            response.getWriter().write(res);
+            return;
         }
-        response.sendRedirect("index.jsp");
+        response.getWriter().write(res);
+        return;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
