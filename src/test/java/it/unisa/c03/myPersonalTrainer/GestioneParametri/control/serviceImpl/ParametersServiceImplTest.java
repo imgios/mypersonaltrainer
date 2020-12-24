@@ -1,10 +1,15 @@
 package it.unisa.c03.myPersonalTrainer.GestioneParametri.control.serviceImpl;
+
 import it.unisa.c03.myPersonalTrainer.GestioneParametri.service.ParametersService;
 import it.unisa.c03.myPersonalTrainer.GestioneParametri.bean.Parameters;
 import it.unisa.c03.myPersonalTrainer.GestioneParametri.service.ParametersServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
+
 class ParametersServiceImplTest extends Mockito {
 
     ParametersService pservice = new ParametersServiceImpl();
@@ -84,4 +89,17 @@ class ParametersServiceImplTest extends Mockito {
         String leanMass = "50%";
         assertEquals(Parameters.class, pservice.createParameters(weight, leanMass, fatMass).getClass());
     }
+
+
+    @Test
+    void testFindByEmailNull() {
+
+        String email = null;
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            pservice.getByMail(email);
+        });
+        assertEquals("Email non valida", exception.getMessage());
+    }
+
+
 }
