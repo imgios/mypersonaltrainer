@@ -9,7 +9,7 @@ public interface AccountDAO {
     //funzione per salvare un nuovo utente in firestore
     void saveAccount(Account utente) throws IOException;
 
-    //funzione per prelevare dal db se l'utente è presente con quella email
+    //funzione per controllare dal db se l'utente è già registrato con quella email
     public Account findAccountByEmail(String email);
 
 }

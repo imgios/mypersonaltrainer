@@ -12,6 +12,7 @@ public class Account implements Serializable {
     String password;
     int role;
 
+
     //getter-setter
     public String getName() {
         return name;

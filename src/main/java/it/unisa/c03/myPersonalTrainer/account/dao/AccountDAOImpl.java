@@ -50,12 +50,19 @@ public class AccountDAOImpl implements AccountDAO {
         Account accountBean = new Account() ;
         try {
             for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
-
+/*
                 accountBean.setEmail(String.valueOf(document.get("email")));
                 accountBean.setName(String.valueOf(document.get("nome")));
                 accountBean.setSurname(String.valueOf(document.get("cognome")));
                 accountBean.setPassword(String.valueOf(document.get("password")));
                 accountBean.setPhone(String.valueOf(document.get("n_telefono")));
+                inserimento del nome della tabella in inglese
+ */
+                accountBean.setEmail(String.valueOf(document.get("email")));
+                accountBean.setName(String.valueOf(document.get("name")));
+                accountBean.setSurname(String.valueOf(document.get("surname")));
+                accountBean.setPassword(String.valueOf(document.get("password")));
+                accountBean.setPhone(String.valueOf(document.get("phone")));
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
