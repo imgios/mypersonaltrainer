@@ -14,7 +14,12 @@ import java.util.stream.Collectors;
 
 public class AccountDAOImpl implements AccountDAO {
 
-    public Collection<Account> getAccounts(){
+    /**
+     * this is an implementation of AccountDAO.
+     */
+
+    @Override
+    public Collection<Account> getAccounts() {
 
         // Create a reference to the account collection
         CollectionReference db = null;
@@ -27,15 +32,21 @@ public class AccountDAOImpl implements AccountDAO {
 
         ApiFuture<QuerySnapshot> accounts = db.get();
 
-        //Se è vuota da tutto null ATTENZIONEEE
         List<Account> accountBean = null;
 
-        try {
-            accountBean = accounts.get().getDocuments().stream()
-                    .map(queryDocumentSnapshot -> queryDocumentSnapshot.toObject(Account.class))
-                    .collect(Collectors.toList());
+        /**
+         * this method estracts accounts into database.
+         **/
 
-        } catch (InterruptedException e) {
+        try {
+            accountBean = accounts.get()
+                    .getDocuments()
+                            .stream()
+                                .map(queryDocumentSnapshot -> queryDocumentSnapshot
+                                    .toObject(Account.class))
+                                        .collect(Collectors.toList());
+
+        } catch (InterruptedException e ) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();

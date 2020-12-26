@@ -6,9 +6,12 @@ import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashMap;
 
 public class AccountServiceImpl implements AccountService {
+
+    /*
+    * This class calls back AccountDAOImpl
+    * */
 
     @Override
     public Collection<Account> viewInfoAccount() throws IOException {

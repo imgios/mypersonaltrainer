@@ -1,32 +1,18 @@
 package it.unisa.c03.myPersonalTrainer.account.bean;
 
-public class Account {
+import java.io.Serializable;
 
-    public Account() {
+public class Account implements Serializable {
 
-    }
+    private String name;
+    private String surname;
+    private String phone;
+    private String email;
+    private String password;
+    private int role;
 
-    public Account(String name, String surname, String phone, String email, String password, int role) {
-        this.name = name;
-        this.surname = surname;
-        this.phone = phone;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                '}';
-    }
-
+    //getter-setter
     public String getName() {
         return name;
     }
@@ -75,11 +61,46 @@ public class Account {
         this.role = role;
     }
 
-    private String name;
-    private String surname;
-    private String phone;
-    private String email;
-    private String password;
-    private int role;
+    public Account() {
+    }
 
+    public Account(String name, String surname, String phone,
+                   String email, String password, int role) {
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{"
+                +
+                "Name='"
+                + name
+                + '\''
+                +
+                ", Surname='"
+                + surname
+                + '\''
+                +
+                ", Phone='"
+                + phone
+                + '\''
+                +
+                ", Email='"
+                + email
+                + '\''
+                +
+                ", Password='"
+                + password
+                + '\''
+                +
+                ", Role="
+                + role
+                +
+                '}';
+    }
 }
