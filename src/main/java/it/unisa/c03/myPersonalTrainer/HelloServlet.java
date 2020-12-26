@@ -1,5 +1,10 @@
 package it.unisa.c03.myPersonalTrainer;
 
+import it.unisa.c03.myPersonalTrainer.Account.Firebase.DBConnection;
+import it.unisa.c03.myPersonalTrainer.Account.bean.Account;
+import it.unisa.c03.myPersonalTrainer.Account.dao.AccountDAO;
+import it.unisa.c03.myPersonalTrainer.Account.dao.AccountDAOImpl;
+
 import java.io.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -13,13 +18,23 @@ public class HelloServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
 
-        // Hello
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>" + message + "</h1>");
-        out.println("</body></html>");
+        //Account a = new Account("mic", "mic","cliente@gmail.com","ciaociao1.",1);
+        //DBConnection.getConnection().collection("Account").add(a);
+
+        Account prova = new Account();
+        AccountDAO acc = new AccountDAOImpl();
+
+         prova = acc.findAccountByEmail("prova@prova.it");
+
+         if (prova.getEmail() != null)
+             System.out.println("Trovato");
+         else if (prova.getEmail() == null)
+             System.out.println("Non Trovato");
+
+
+        // acc.updatePassword("prova@prova.it","nuovapasscambia23.");
+
     }
 
     public void destroy() {
