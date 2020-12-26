@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class Account implements Serializable {
     //va implementata serializable?
     //dichiarazione delle variabili
-    private String name;                       //name surname phone email password role
-    private String surname;                    //nome cognome numeroditelefono email password ruolo
+    private String name;
+    private String surname;
     private String phone;
     private String email;
     private String password;
@@ -67,7 +67,8 @@ public class Account implements Serializable {
     public Account() {
     }
 
-    public Account(String name, String surname, String phone, String email, String password, int role) {
+    public Account(String name, String surname, String phone,
+                   String email, String password, int role) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
@@ -80,13 +81,31 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "Account{" +
-                "Nome='" + name + '\'' +
-                ", Cognome='" + surname + '\'' +
-                ", Numero di Telefono='" + phone + '\'' +
-                ", eMail='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", ruolo=" + role +
+        return "Account{"
+                +
+                "Nome='"
+                + name
+                + '\''
+                +
+                ", Cognome='"
+                + surname
+                + '\''
+                +
+                ", Numero di Telefono='"
+                + phone
+                + '\''
+                +
+                ", eMail='"
+                + email
+                + '\''
+                +
+                ", password='"
+                + password
+                + '\''
+                +
+                ", ruolo="
+                + role
+                +
                 '}';
     }
 }
