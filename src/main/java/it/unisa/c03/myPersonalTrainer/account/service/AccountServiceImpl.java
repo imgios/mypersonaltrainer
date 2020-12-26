@@ -10,6 +10,8 @@ public class AccountServiceImpl implements AccountService {
 
     //metodi implementati
 
+    private AccountDAO accountDAO = new AccountDAOImpl();
+
     @Override
     public boolean RegisterAccount(Account utente) throws IOException, IllegalArgumentException {
 
@@ -80,5 +82,28 @@ public class AccountServiceImpl implements AccountService {
 
         return result ;
 
+    }
+
+    @Override
+    public boolean searchAccountByEmail(String email) {
+
+        boolean result = false ;
+        Account account = new Account();
+        account = accountDAO.findAccountByEmail(email);
+
+        //the email exists in the DB
+        if (account.getEmail() != null)
+            result = true ;
+            //the email doesn't exist in the DB
+        else if (account.getEmail() == null)
+            result = false ;
+
+        return result ;
+    }
+
+    @Override
+    public void changePassword(String email, String password) {
+
+        accountDAO.updatePassword(email,password);
     }
 }

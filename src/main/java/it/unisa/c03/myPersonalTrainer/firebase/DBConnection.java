@@ -9,38 +9,36 @@ import com.google.firebase.cloud.FirestoreClient;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
 
 /*Classe che permetterà alle altre componenti del sistema di interagire con il database
 * il costruttore della classe è privato in modo da usare metodi statici che non appartengno ad istanze della classe ma
 * alla classe stessa*/
-public class DBConnection {
-    private static DBConnection singleton;
+public final class DBConnection {
+    private static Firestore singleton;
     private DBConnection(){}
 
-
-    public static DBConnection getInstance()
-    {
-        if (singleton==null)
-        {
-            singleton=new DBConnection();
-        }
-        return singleton;
-    }
 
 
     /* ritornerà un oggetto di tipo Firestore in grado di comunicare con il database
     * dichiarato come static così da appartenere alla classe e non ad un'istanza della stessa*/
     public static Firestore getConnection() throws IOException {
-        Firestore connection=null;
+
+        if(singleton == null)
+        {
+
         try {
 
             FirebaseOptions options=new FirebaseOptions.Builder().setCredentials(GoogleCredentials.getApplicationDefault()).build();
-            connection=FirestoreClient.getFirestore( FirebaseApp.initializeApp(options));
-            return connection;
+            singleton=FirestoreClient.getFirestore(FirebaseApp.initializeApp(options));
+            return singleton;
         }
         catch (FileNotFoundException ignored){}
-        return connection ;
+
+        }
+        return singleton ;
     }
+
 
 }

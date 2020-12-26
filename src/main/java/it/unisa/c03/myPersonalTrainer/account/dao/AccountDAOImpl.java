@@ -1,10 +1,6 @@
 package it.unisa.c03.myPersonalTrainer.account.dao;
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.CollectionReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Query;
-import com.google.cloud.firestore.QuerySnapshot;
-import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
+import com.google.cloud.firestore.*;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
@@ -71,6 +67,55 @@ public class AccountDAOImpl implements AccountDAO {
         }
 
         return accountBean ;
+    }
+
+    @Override
+    public void updatePassword(String email, String password) {
+
+        //find document id
+        String id = getAccountDocumentIdByEmail(email);
+
+        // Update an existing document thanks to its id
+        try {
+            DocumentReference docRef = DBConnection.getConnection().collection("Account").document(id);
+
+            // Update password field
+            ApiFuture<WriteResult> future = docRef.update("password", password);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String getAccountDocumentIdByEmail(String email) {
+        // Create a reference to the account collection
+        CollectionReference accounts = null;
+        try {
+            accounts = DBConnection.getConnection().collection("Account");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Create a query against the collection.
+        Query query = accounts.whereEqualTo("email", email);
+
+        // retrieve  query results asynchronously using query.get()
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+
+        String id = "" ;
+        try {
+            for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+                id = id + document.getId();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return id ;
     }
 
 

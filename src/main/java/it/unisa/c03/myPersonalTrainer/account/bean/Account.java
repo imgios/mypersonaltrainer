@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class Account implements Serializable {
     //va implementata serializable?
     //dichiarazione delle variabili
-    String name;                       //name surname phone email password role
-    String surname;                    //nome cognome numeroditelefono email password ruolo
-    String phone;
-    String email;
-    String password;
-    int role;
+    private String name;                       //name surname phone email password role
+    private String surname;                    //nome cognome numeroditelefono email password ruolo
+    private String phone;
+    private String email;
+    private String password;
+    private int role;
 
 
     //getter-setter

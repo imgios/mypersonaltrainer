@@ -10,4 +10,8 @@ public interface AccountService {
     public boolean RegisterAccount(Account utente) throws IOException, IllegalArgumentException;
 
     public boolean checkCredentials(String clientMail, String newPassword)  throws IllegalArgumentException;
+
+    public boolean searchAccountByEmail(String email);
+
+    public void changePassword(String email, String password);
 }

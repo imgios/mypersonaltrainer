@@ -12,4 +12,8 @@ public interface AccountDAO {
     //funzione per controllare dal db se l'utente è già registrato con quella email
     public Account findAccountByEmail(String email);
 
+    public void updatePassword(String email , String password) ;
+
+    public String getAccountDocumentIdByEmail(String email);
+
 }
