@@ -1,9 +1,10 @@
 package it.unisa.c03.myPersonalTrainer;
 
-import it.unisa.c03.myPersonalTrainer.Account.Firebase.DBConnection;
-import it.unisa.c03.myPersonalTrainer.Account.bean.Account;
-import it.unisa.c03.myPersonalTrainer.Account.dao.AccountDAO;
-import it.unisa.c03.myPersonalTrainer.Account.dao.AccountDAOImpl;
+
+
+import it.unisa.c03.myPersonalTrainer.account.bean.Account;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 
 import java.io.*;
 import javax.servlet.http.*;
@@ -22,7 +23,7 @@ public class HelloServlet extends HttpServlet {
         //Account a = new Account("mic", "mic","cliente@gmail.com","ciaociao1.",1);
         //DBConnection.getConnection().collection("Account").add(a);
 
-        Account prova = new Account();
+        Account prova= new Account();
         AccountDAO acc = new AccountDAOImpl();
 
          prova = acc.findAccountByEmail("prova@prova.it");

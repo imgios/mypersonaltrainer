@@ -1,10 +1,10 @@
 package it.unisa.c03.myPersonalTrainer.Account.control.serviceImpl;
 
 
-
-import it.unisa.c03.myPersonalTrainer.Account.service.AccountService;
-import it.unisa.c03.myPersonalTrainer.Account.service.AccountServiceImpl;
-import org.junit.jupiter.api.Test;
+import it.unisa.c03.myPersonalTrainer.account.service.AccountService;
+import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
+import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,10 +19,10 @@ class AccountServiceImplTest {
         String password = "password" ;
         String message = "Lunghezza email non valida" ;
 
-        IllegalArgumentException exception =  assertThrows(IllegalArgumentException.class , () -> {
+        IllegalArgumentException exception =  Assertions.assertThrows(IllegalArgumentException.class , () -> {
             service.checkCredentials(mail,password) ;
         });
-        assertEquals(message,exception.getMessage());
+        Assertions.assertEquals(message,exception.getMessage());
     }
 
     // TC_1.3_2
@@ -33,10 +33,10 @@ class AccountServiceImplTest {
         String password = "password" ;
         String message = "Formato email non valido" ;
 
-        IllegalArgumentException exception =  assertThrows(IllegalArgumentException.class , () -> {
+        IllegalArgumentException exception =  Assertions.assertThrows(IllegalArgumentException.class , () -> {
             service.checkCredentials(mail,password) ;
         });
-        assertEquals(message,exception.getMessage());
+        Assertions.assertEquals(message,exception.getMessage());
     }
 
     // TC_1.3_3
@@ -47,10 +47,10 @@ class AccountServiceImplTest {
         String password = "" ;
         String message = "Lunghezza password non valida" ;
 
-        IllegalArgumentException exception =  assertThrows(IllegalArgumentException.class , () -> {
+        IllegalArgumentException exception =  Assertions.assertThrows(IllegalArgumentException.class , () -> {
             service.checkCredentials(mail,password) ;
         });
-        assertEquals(message,exception.getMessage());
+        Assertions.assertEquals(message,exception.getMessage());
     }
 
     // TC_1.3_4
@@ -61,10 +61,10 @@ class AccountServiceImplTest {
         String password = "prova" ;
         String message = "Formato password non valido" ;
 
-        IllegalArgumentException exception =  assertThrows(IllegalArgumentException.class , () -> {
+        IllegalArgumentException exception =  Assertions.assertThrows(IllegalArgumentException.class , () -> {
             service.checkCredentials(mail,password) ;
         });
-        assertEquals(message,exception.getMessage());
+        Assertions.assertEquals(message,exception.getMessage());
     }
 
     // TC_1.3_5
@@ -74,6 +74,6 @@ class AccountServiceImplTest {
         String mail = "client@prova.it" ;
         String password = "password1." ;
 
-        assertEquals(true, service.checkCredentials(mail,password));
+        Assertions.assertEquals(true, service.checkCredentials(mail,password));
     }
 }
