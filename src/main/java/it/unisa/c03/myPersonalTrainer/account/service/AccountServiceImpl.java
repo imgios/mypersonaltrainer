@@ -8,16 +8,21 @@ import java.io.IOException;
 
 public class AccountServiceImpl implements AccountService {
 
-    //metodi implementati
+    private static final int MIN_EMAIL_LENGTH = 7;
+    public static final int MAX_EMAIL_LENGTH = 25;
+    public static final int MIN_PASSWORD_LENGTH = 1;
+    public static final int MAX_PASSWORD_LENGTH = 30;
 
     private AccountDAO accountDAO = new AccountDAOImpl();
 
     @Override
-    public boolean RegisterAccount(Account utente) throws IOException, IllegalArgumentException {
+    public boolean registerAccount(final Account utente)
+            throws IOException, IllegalArgumentException {
 
         AccountDAO accountDAO = new AccountDAOImpl();
         // utente.getEmail();
-        //va implementato il check della email che non deve essere già presente nel db
+        //va implementato il check della email che non deve
+        // essere già presente nel db
         //System.out.println(utente.getEmail());
 
         System.out.println("CONTROLLO EMAIL PRIMA DELL'INSERIMENTO NEL DB");
@@ -34,15 +39,15 @@ public class AccountServiceImpl implements AccountService {
         System.out.println(ricerca.getEmail());
 
 
-       //if (utente.getEmail() != ricerca.getEmail()){
-        if (ricerca.getEmail() == null){
+       //if (utente.getEmail() != ricerca.getEmail()) {
+        if (ricerca.getEmail() == null) {
            System.out.println("email non presente, la inserisco nel DB");
             accountDAO.saveAccount(utente);
             return true;
-        } else
-       {
+        } else {
           System.out.println("email già presente");
-           throw new IllegalArgumentException("email già presente nel DB, utilizza una nuova email");
+           throw new IllegalArgumentException("email già presente nel DB, "
+                   + "utilizza una nuova email");
          //  return false;
           //inserire comando per tornare alla servlet di inserimento
         }
@@ -54,56 +59,60 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public boolean checkCredentials(String clientMail, String newPassword)  throws IllegalArgumentException{
+    public boolean checkCredentials(final String clientMail,
+                                    final String newPassword)
+            throws IllegalArgumentException {
 
 
-        boolean result = false ;
+        boolean result = false;
 
         // lunghezza email
-        if(clientMail.length() < 7 || clientMail.length() > 25)
+        if (clientMail.length() < MIN_EMAIL_LENGTH
+                || clientMail.length() > MAX_EMAIL_LENGTH) {
             throw new IllegalArgumentException("Lunghezza email non valida");
-
+        } else if (!(clientMail.matches(
+                "\\w+([\\._\\-]?\\w+)*@\\w+([\\.\\-]?\\w+)*(\\.\\w+)+$"))) {
             // formato email
-        else if(!(clientMail.matches("\\w+([\\._\\-]?\\w+)*@\\w+([\\.\\-]?\\w+)*(\\.\\w+)+$")))
             throw new IllegalArgumentException("Formato email non valido");
-
+        } else if (newPassword.length() < MIN_PASSWORD_LENGTH
+                || newPassword.length() > MAX_PASSWORD_LENGTH) {
             //controllo lunghezza password
-        else if(newPassword.length() < 1 || newPassword.length() > 30)
             throw new IllegalArgumentException("Lunghezza password non valida");
-
+        } else if (!(newPassword.matches(
+                "^[a-zA-Z 0-9 \\@\\._\\!\\?\\-]{8,}$"))) {
             //controllo formato password
-        else if(!(newPassword.matches("^[a-zA-Z 0-9 \\@\\._\\!\\?\\-]{8,}$")))
             throw new IllegalArgumentException("Formato password non valido");
-
-        else{
+        } else {
             // controllo dei test
-            result = true ;
+            result = true;
         }
 
-        return result ;
+        return result;
 
     }
 
     @Override
-    public boolean searchAccountByEmail(String email) {
+    public boolean searchAccountByEmail(final String email) {
 
-        boolean result = false ;
+        boolean result = false;
         Account account = new Account();
         account = accountDAO.findAccountByEmail(email);
 
         //the email exists in the DB
-        if (account.getEmail() != null)
-            result = true ;
+        if (account.getEmail() != null) {
+            result = true;
+        } else if (account.getEmail() == null) {
             //the email doesn't exist in the DB
-        else if (account.getEmail() == null)
-            result = false ;
+            result = false;
+        }
 
-        return result ;
+        return result;
     }
 
     @Override
-    public void changePassword(String email, String password) {
+    public void changePassword(final String email,
+                               final String password) {
 
-        accountDAO.updatePassword(email,password);
+        accountDAO.updatePassword(email, password);
     }
 }

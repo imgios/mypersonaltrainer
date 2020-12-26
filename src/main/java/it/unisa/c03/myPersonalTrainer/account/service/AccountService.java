@@ -6,12 +6,14 @@ import java.io.IOException;
 
 public interface AccountService {
 
-    //metodi che vanno implementati
-    public boolean RegisterAccount(Account utente) throws IOException, IllegalArgumentException;
 
-    public boolean checkCredentials(String clientMail, String newPassword)  throws IllegalArgumentException;
+     boolean registerAccount(Account utente)
+            throws IOException, IllegalArgumentException;
 
-    public boolean searchAccountByEmail(String email);
+     boolean checkCredentials(String clientMail, String newPassword)
+            throws IllegalArgumentException;
 
-    public void changePassword(String email, String password);
+     boolean searchAccountByEmail(String email);
+
+     void changePassword(String email, String password);
 }

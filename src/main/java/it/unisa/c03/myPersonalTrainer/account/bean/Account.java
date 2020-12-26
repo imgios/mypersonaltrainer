@@ -18,48 +18,48 @@ public class Account implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(final String userName) {
+        this.name = userName;
     }
 
     public String getSurname() {
         return surname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setSurname(final String userSurname) {
+        this.surname = userSurname;
     }
 
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhone(final String userPhone) {
+        this.phone = userPhone;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(final String userEmail) {
+        this.email = userEmail;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(final String userPassword) {
+        this.password = userPassword;
     }
 
     public int getRole() {
         return role;
     }
 
-    public void setRole(int role) {
-        this.role = role;
+    public void setRole(final int userRole) {
+        this.role = userRole;
     }
 
     //costruttore
@@ -67,14 +67,15 @@ public class Account implements Serializable {
     public Account() {
     }
 
-    public Account(String name, String surname, String phone,
-                   String email, String password, int role) {
-        this.name = name;
-        this.surname = surname;
-        this.phone = phone;
-        this.email = email;
-        this.password = password;
-        this.role = role;
+    public Account(final String userName, final String userSurname,
+                   final String userPhone, final String userEmail,
+                   final String userPassword, final int userRole) {
+        this.name = userName;
+        this.surname = userSurname;
+        this.phone = userPhone;
+        this.email = userEmail;
+        this.password = userPassword;
+        this.role = userRole;
     }
 
     //tostring

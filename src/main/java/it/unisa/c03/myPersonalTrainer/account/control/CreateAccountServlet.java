@@ -49,7 +49,7 @@ public class CreateAccountServlet extends HttpServlet {
             if (controllo_credenziali == true) {
                 System.out.println("credenziali OK");
 
-                controllo = accountService.RegisterAccount(utente);
+                controllo = accountService.registerAccount(utente);
 
                 if (controllo == true) {
                     System.out.println("boolean true inserito");
