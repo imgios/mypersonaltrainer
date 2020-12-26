@@ -43,10 +43,4 @@ public class DBConnection {
         return connection ;
     }
 
-    public static void main(String[] args) throws IOException {
-        HashMap<String,String> dati=new HashMap<String, String>();
-        dati.put("nome","umberto");
-        dati.put("ruolo","0");
-        DBConnection.getConnection().collection("dumb").document().set(dati);
-    }
 }
