@@ -1,12 +1,17 @@
-package it.unisa.c03.myPersonalTrainer.GestioneParametri.bean;
+package it.unisa.c03.myPersonalTrainer.parameters.bean;
 
 import java.text.DateFormat;
 import java.util.Date;
 
+/**
+ * this class show the user parameters details.
+ */
 public class Parameters {
-    double weight, leanMass, fatMass;
-    String mailClient;
-    String insertionDate;
+    private double weight;
+    private double leanMass;
+    private double fatMass;
+    private String mailClient;
+    private String insertionDate;
 
     public Parameters() {
 
@@ -16,7 +21,8 @@ public class Parameters {
         return weight;
     }
 
-    public Parameters(double weight, double leanMass, double fatMass, String mailClient) {
+    public Parameters(double weight, double leanMass,
+                      double fatMass, String mailClient) {
         this.weight = weight;
         this.leanMass = leanMass;
         this.fatMass = fatMass;
@@ -26,20 +32,18 @@ public class Parameters {
         DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
         String x = (df.format(d));
         this.insertionDate = x;
-
     }
-
 
 
     @Override
     public String toString() {
-        return "Parameters{" +
-                "weight=" + weight +
-                ", leanMass=" + leanMass +
-                ", fatMass=" + fatMass +
-                ", mailClient='" + mailClient + '\'' +
-                ", insertionDate=" + insertionDate +
-                '}';
+        return "Parameters{"
+                + "weight=" + weight
+                + ", leanMass=" + leanMass
+                + ", fatMass=" + fatMass
+                + ", mailClient='" + mailClient + '\''
+                + ", insertionDate=" + insertionDate
+                + '}';
     }
 
     public void setweight(double weight) {
@@ -77,5 +81,4 @@ public class Parameters {
     public void setinsertionDate(String insertionDate) {
         this.insertionDate = insertionDate;
     }
-
 }
