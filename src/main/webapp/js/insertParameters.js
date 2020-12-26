@@ -20,7 +20,7 @@ $(document).ready(function () {
                 $('#divError').empty().append("<p>" + data + "</p>");
                 $('#divError').show();
             }
-        })
+        });
         $('#divError').empty();
         $('#divSuccess').empty();
         $('#divError').hide();
