@@ -1,5 +1,7 @@
 package it.unisa.c03.myPersonalTrainer.account.service;
 
+import it.unisa.c03.myPersonalTrainer.account.bean.Account;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 import org.junit.jupiter.api.Test;
 
 
@@ -8,6 +10,10 @@ import org.junit.jupiter.api.Test;
 import it.unisa.c03.myPersonalTrainer.account.service.AccountService;
 import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import static org.mockito.Mockito.*;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -78,5 +84,26 @@ class AccountServiceImplTest {
         String password = "password1." ;
 
         assertEquals(true, service.checkCredentials(mail,password));
+    }
+
+    @Test
+    public void searchAccountByEmailFalse()
+    {
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        when(accountDAO.findAccountByEmail(anyString())).thenReturn(new Account());
+        assertEquals(false, service.searchAccountByEmail("mailnot@italy.it"));
+    }
+
+    @Test
+    public void searchAccountByEmailTrue()
+    {
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        when(accountDAO.findAccountByEmail(anyString())).thenReturn(new Account());
+        assertEquals(true, service.searchAccountByEmail("cliente@gmail.com"));
+    }
+
+    @Test
+    public void changePassword(){
+
     }
 }
