@@ -1,9 +1,9 @@
 package it.unisa.c03.myPersonalTrainer;
 
-import it.unisa.c03.myPersonalTrainer.Account.Firebase.DBConnection;
-import it.unisa.c03.myPersonalTrainer.Account.bean.Account;
-import it.unisa.c03.myPersonalTrainer.Account.dao.AccountDAO;
-import it.unisa.c03.myPersonalTrainer.Account.dao.AccountDAOImpl;
+
+import it.unisa.c03.myPersonalTrainer.account.bean.Account;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 
 import java.io.*;
 import javax.servlet.http.*;
