@@ -5,9 +5,8 @@ import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QuerySnapshot;
-import it.unisa.c03.myPersonalTrainer.parameters.Firebase.DBConnection;
 import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
-
+import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -23,14 +22,10 @@ public class ParametersDAOImpl implements ParametersDAO {
      * @param parameters the parameters to add into database
      */
     @Override
-    public void insertParameters(Parameters parameters) {
-        try {
+    public void insertParameters(Parameters parameters) throws IOException {
             DBConnection.getConnection().collection(
                     "Parameters").add(parameters);
-        } catch (IOException e) {
-            e.getMessage();
-            e.printStackTrace();
-        }
+
     }
 
 
@@ -40,14 +35,10 @@ public class ParametersDAOImpl implements ParametersDAO {
      * @return a list of client parameters
      */
     @Override
-    public ArrayList<Parameters> selectByMail(String email) {
+    public ArrayList<Parameters> selectByMail(String email) throws IOException, ExecutionException, InterruptedException {
         // Create a reference to the account collection
-        CollectionReference parameters = null;
-        try {
-            parameters = DBConnection.getConnection().collection("Parameters");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        CollectionReference parameters =  DBConnection.getConnection().collection("Parameters");
+
 
         // Create a query against the collection.
         Query query = parameters.whereEqualTo("mailClient", email);
@@ -57,7 +48,6 @@ public class ParametersDAOImpl implements ParametersDAO {
 
         //create Bean to return document.get("email"));
         ArrayList<Parameters> list = new ArrayList<Parameters>();
-        try {
             for (DocumentSnapshot document
                     : querySnapshot.get().getDocuments()) {
                 Parameters params = new Parameters();
@@ -74,12 +64,5 @@ public class ParametersDAOImpl implements ParametersDAO {
                 list.add(params);
             }
             return list;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-        return list;
     }
 }

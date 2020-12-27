@@ -7,7 +7,9 @@ import it.unisa.c03.myPersonalTrainer.parameters.service.ParametersServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -18,7 +20,7 @@ class ParametersServiceImplTest {
     ParametersDAO parametersDAO = Mockito.mock(ParametersDAO.class);
 
     @Test
-    void lenghtWeightNotValid() {
+    void lenghtWeightNotValid() throws IOException {
         String weight = "2";
         String fatMass = "30%";
         String leanMass = "55%";
@@ -30,7 +32,7 @@ class ParametersServiceImplTest {
     }
 
     @Test
-    void formatWeightNotValid() {
+    void formatWeightNotValid() throws IOException {
         String weight = "5X";
         String fatMass = "30%";
         String leanMass = "55%";
@@ -42,7 +44,7 @@ class ParametersServiceImplTest {
     }
 
     @Test
-    void lenghtFatMassNotValid() {
+    void lenghtFatMassNotValid() throws IOException {
         String weight = "50";
         String fatMass = "3%";
         String leanMass = "55%";
@@ -54,7 +56,7 @@ class ParametersServiceImplTest {
     }
 
     @Test
-    void formatfatMassNotValid() {
+    void formatfatMassNotValid() throws IOException {
         String weight = "50";
         String fatMass = "30X%";
         String leanMass = "55%";
@@ -66,7 +68,7 @@ class ParametersServiceImplTest {
     }
 
     @Test
-    void formatleanMassNotValid() {
+    void formatleanMassNotValid() throws IOException {
         String weight = "50";
         String fatMass = "30%";
         String leanMass = "55X%";
@@ -78,7 +80,7 @@ class ParametersServiceImplTest {
     }
 
     @Test
-    void lenghtleanMassNotValid() {
+    void lenghtleanMassNotValid() throws IOException {
         String weight = "50";
         String fatMass = "30%";
         String leanMass = "5%";
@@ -90,7 +92,7 @@ class ParametersServiceImplTest {
     }
 
     @Test
-    void finalTest() {
+    void finalTest() throws IOException {
         String weight = "50";
         String fatMass = "30%";
         String leanMass = "50%";
@@ -101,7 +103,7 @@ class ParametersServiceImplTest {
     /**
      * the email doesn't exists
      */
-    void testFindByEmailThatNotExists() {
+    void testFindByEmailThatNotExists() throws InterruptedException, ExecutionException, IOException {
         ArrayList<Parameters> list = new ArrayList<Parameters>();
         when(parametersDAO.selectByMail(anyString())).thenReturn(list);
         String email = "provamail";
@@ -118,7 +120,7 @@ class ParametersServiceImplTest {
     }
 
     @Test
-    void testFindByEmailThatExists() {
+    void testFindByEmailThatExists() throws InterruptedException, ExecutionException, IOException {
         ArrayList<Parameters> list = new ArrayList<Parameters>();
         Parameters p = new Parameters(50, 33, 25, "prova@io.it");
         list.add(p);

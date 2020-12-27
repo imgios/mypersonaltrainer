@@ -4,9 +4,11 @@ import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
 import it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAO;
 import it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAOImpl;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class ParametersServiceImpl implements ParametersService {
     private static final int MIN_WEIGHT = 40;
@@ -32,7 +34,7 @@ public class ParametersServiceImpl implements ParametersService {
      */
     public Parameters createParameters(String weight, String leanMass,
                                        String fatMass)
-            throws NumberFormatException, IllegalArgumentException {
+            throws NumberFormatException, IllegalArgumentException, IOException {
 
         if (weight != null
                 && weight.length() < MIN_LENGHT_WEIGHT
@@ -56,11 +58,11 @@ public class ParametersServiceImpl implements ParametersService {
                     "formato massa magra non valido");
         }
         double weightD = Double.parseDouble(weight);
-        if (weightD < MIN_WEIGHT
+       /* if (weightD < MIN_WEIGHT
                 || weightD > MAX_WEIGHT) {
             throw new IllegalArgumentException(
                     "lunghezza peso non valida");
-        }
+        }*/
         double leanMassD =
                 Double.parseDouble(leanMass.substring(
                         0, leanMass.length() - 1));
@@ -102,7 +104,7 @@ public class ParametersServiceImpl implements ParametersService {
      * @param email mail client who want to retrieve his parameters
      * @return list of parameters
      */
-    public ArrayList<Parameters> getByMail(String email) {
+    public ArrayList<Parameters> getByMail(String email) throws InterruptedException, ExecutionException, IOException {
         if (email == null) {
             throw new IllegalArgumentException(
                     "Email non valida");
