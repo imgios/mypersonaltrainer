@@ -1,7 +1,10 @@
 package it.unisa.c03.myPersonalTrainer.account.service;
 
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.*;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
+import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import org.junit.jupiter.api.Test;
 
 
@@ -11,6 +14,8 @@ import it.unisa.c03.myPersonalTrainer.account.service.AccountService;
 import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import java.io.IOException;
 
 import static org.mockito.Mockito.*;
 
@@ -103,7 +108,27 @@ class AccountServiceImplTest {
     }
 
     @Test
-    public void changePassword(){
+    public void changePassword() throws IOException {
+
+        Firestore connection = Mockito.mock(DBConnection.getConnection().getClass());
+        CollectionReference collectionRef = Mockito.mock(CollectionReference.class);
+
+        when(connection.collection(anyString())).thenReturn(collectionRef);
+
+        Query query = Mockito.mock(Query.class);
+
+        when(collectionRef.whereEqualTo(anyString(),anyString())).thenReturn(query);
+
+
+        DocumentReference docRef = Mockito.mock(DocumentReference.class);
+        when(collectionRef.document(anyString())).thenReturn(docRef);
+
+        ApiFuture<WriteResult> api = Mockito.mock(ApiFuture.class);
+        when(docRef.update(anyString(),any())).thenReturn(api);
+
+
+        when(connection.collection(anyString()).document(anyString()).update(anyString(),any()).isDone()).thenReturn(false);
+        assertEquals(false, connection.collection("Account").document("documentId").update("password","newPassword1").isDone());
 
     }
 }

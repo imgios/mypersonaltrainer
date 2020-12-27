@@ -4,6 +4,7 @@ import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 
+import java.io.IOException;
 
 
 public class AccountServiceImpl implements AccountService {
@@ -67,9 +68,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void changePassword(String email,
-                               String password) {
+    public boolean changePassword(String email,
+                               String password) throws IOException {
 
-        accountDAO.updatePassword(email, password);
+        return accountDAO.updatePassword(email, password);
     }
 }

@@ -59,23 +59,21 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public void updatePassword(String email, String password) {
+    public boolean updatePassword(String email, String password) throws IOException {
 
         //find document id
         String id = getAccountDocumentIdByEmail(email);
 
         // Update an existing document thanks to its id
-        try {
+
             DocumentReference docRef = DBConnection.getConnection()
                     .collection("Account").document(id);
 
             // Update password field
             ApiFuture<WriteResult> future = docRef.update("password", password);
 
+            return future.isDone();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

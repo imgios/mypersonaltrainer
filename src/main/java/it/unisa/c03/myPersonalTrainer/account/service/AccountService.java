@@ -1,6 +1,7 @@
 package it.unisa.c03.myPersonalTrainer.account.service;
 
 
+import java.io.IOException;
 
 public interface AccountService {
 
@@ -9,5 +10,5 @@ public interface AccountService {
 
      boolean searchAccountByEmail(String email);
 
-     void changePassword(String email, String password);
+     boolean changePassword(String email, String password) throws IOException;
 }
