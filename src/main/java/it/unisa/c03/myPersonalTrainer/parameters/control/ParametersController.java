@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * this class manage the insert parameters. if return 1 the insert passed, else return the oracle message.
+ */
 @WebServlet(name = "ParametersController", value = "/parameters-controller")
 public class ParametersController extends HttpServlet {
     protected void doPost(HttpServletRequest request,
