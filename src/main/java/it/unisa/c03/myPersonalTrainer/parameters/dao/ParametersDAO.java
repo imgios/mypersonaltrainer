@@ -10,5 +10,6 @@ public interface ParametersDAO {
 
     void insertParameters(Parameters p) throws IOException;
 
-    ArrayList<Parameters> selectByMail(String email) throws IOException, ExecutionException, InterruptedException;
+    ArrayList<Parameters> selectByMail(String email)
+            throws IOException, ExecutionException, InterruptedException;
 }

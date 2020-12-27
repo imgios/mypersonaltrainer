@@ -30,7 +30,8 @@ public class DBConnection {
         Firestore connection = null;
         try {
 
-            FirebaseOptions options = new FirebaseOptions.Builder().setCredentials(GoogleCredentials.getApplicationDefault()).build();
+            FirebaseOptions options = new
+                    FirebaseOptions.Builder().setCredentials(GoogleCredentials.getApplicationDefault()).build();
             FirebaseApp firebaseApp = null;
             List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
             if (firebaseApps != null && !firebaseApps.isEmpty()) {

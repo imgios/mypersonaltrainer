@@ -11,5 +11,6 @@ public interface ParametersService {
                                 String fatMass)
             throws NumberFormatException, IllegalArgumentException, IOException;
 
-    ArrayList<Parameters> getByMail(String email) throws InterruptedException, ExecutionException, IOException;
+    ArrayList<Parameters> getByMail(String email)
+            throws InterruptedException, ExecutionException, IOException;
 }

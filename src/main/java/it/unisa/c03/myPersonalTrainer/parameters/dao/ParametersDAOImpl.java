@@ -35,9 +35,11 @@ public class ParametersDAOImpl implements ParametersDAO {
      * @return a list of client parameters
      */
     @Override
-    public ArrayList<Parameters> selectByMail(String email) throws IOException, ExecutionException, InterruptedException {
+    public ArrayList<Parameters> selectByMail(String email)
+            throws IOException, ExecutionException, InterruptedException {
         // Create a reference to the account collection
-        CollectionReference parameters =  DBConnection.getConnection().collection("Parameters");
+        CollectionReference parameters =
+                DBConnection.getConnection().collection("Parameters");
 
 
         // Create a query against the collection.

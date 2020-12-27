@@ -34,7 +34,8 @@ public class ParametersServiceImpl implements ParametersService {
      */
     public Parameters createParameters(String weight, String leanMass,
                                        String fatMass)
-            throws NumberFormatException, IllegalArgumentException, IOException {
+            throws NumberFormatException, IllegalArgumentException,
+            IOException {
 
         if (weight != null
                 && weight.length() < MIN_LENGHT_WEIGHT
@@ -104,7 +105,9 @@ public class ParametersServiceImpl implements ParametersService {
      * @param email mail client who want to retrieve his parameters
      * @return list of parameters
      */
-    public ArrayList<Parameters> getByMail(String email) throws InterruptedException, ExecutionException, IOException {
+    public ArrayList<Parameters> getByMail(String email)
+            throws InterruptedException, ExecutionException,
+            IOException {
         if (email == null) {
             throw new IllegalArgumentException(
                     "Email non valida");
