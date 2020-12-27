@@ -12,9 +12,9 @@ public class ParametersServiceImpl implements ParametersService {
     private static final int MIN_WEIGHT = 40;
     private static final int MAX_WEIGHT = 150;
     private static final int MIN_PERCENTAGE = 10;
-    private static final int MAX_PERCENTAGE = 10;
-    private static final int MAX_LENGHT_WEIGHT = 2;
-    private static final int MIN_LENGHT_WEIGHT = 6;
+    private static final int MAX_PERCENTAGE = 70;
+    private static final int MIN_LENGHT_WEIGHT = 2;
+    private static final int MAX_LENGHT_WEIGHT = 6;
     private static final int PERCENTAGE = 100;
 
 
