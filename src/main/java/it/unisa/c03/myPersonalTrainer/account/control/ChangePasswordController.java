@@ -16,8 +16,8 @@ public class ChangePasswordController extends HttpServlet {
 
     private AccountService service = new AccountServiceImpl();
 
-    public void doPost(final HttpServletRequest request,
-                       final HttpServletResponse response)
+    public void doPost(HttpServletRequest request,
+                       HttpServletResponse response)
             throws ServletException, IOException {
 
         //TO DO: Check if user is logged with session attribute.
@@ -75,8 +75,8 @@ public class ChangePasswordController extends HttpServlet {
 
     }
 
-    public void doGet(final HttpServletRequest request,
-                      final HttpServletResponse response)
+    public void doGet(HttpServletRequest request,
+                      HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
     }

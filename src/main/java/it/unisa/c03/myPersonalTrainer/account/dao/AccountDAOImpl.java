@@ -18,22 +18,9 @@ import java.util.concurrent.ExecutionException;
 
 public class AccountDAOImpl implements AccountDAO {
 
-    @Override
-    public void saveAccount(final Account utente) throws IOException {
-            System.out.println("stampa dal DAO");
-            System.out.println(utente);
-
-
-        //inserimento della connessione al db per il salvataggio del documento
-            //Firestore connection
-            //connection.getCollections();
-        DBConnection.getConnection().collection("Account").add(utente);
-           // connection.collection("Account").add(utente);
-
-        }
 
     @Override
-    public Account findAccountByEmail(final String email) {
+    public Account findAccountByEmail(String email) {
 
         // Create a reference to the account collection
         CollectionReference accounts = null;
@@ -72,7 +59,7 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public void updatePassword(final String email, final String password) {
+    public void updatePassword(String email, String password) {
 
         //find document id
         String id = getAccountDocumentIdByEmail(email);
@@ -92,7 +79,7 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public String getAccountDocumentIdByEmail(final String email) {
+    public String getAccountDocumentIdByEmail(String email) {
         // Create a reference to the account collection
         CollectionReference accounts = null;
         try {

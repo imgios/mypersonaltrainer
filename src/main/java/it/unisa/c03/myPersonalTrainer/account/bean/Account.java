@@ -18,7 +18,7 @@ public class Account implements Serializable {
         return name;
     }
 
-    public void setName(final String userName) {
+    public void setName(String userName) {
         this.name = userName;
     }
 
@@ -26,7 +26,7 @@ public class Account implements Serializable {
         return surname;
     }
 
-    public void setSurname(final String userSurname) {
+    public void setSurname(String userSurname) {
         this.surname = userSurname;
     }
 
@@ -34,7 +34,7 @@ public class Account implements Serializable {
         return phone;
     }
 
-    public void setPhone(final String userPhone) {
+    public void setPhone(String userPhone) {
         this.phone = userPhone;
     }
 
@@ -42,7 +42,7 @@ public class Account implements Serializable {
         return email;
     }
 
-    public void setEmail(final String userEmail) {
+    public void setEmail(String userEmail) {
         this.email = userEmail;
     }
 
@@ -50,7 +50,7 @@ public class Account implements Serializable {
         return password;
     }
 
-    public void setPassword(final String userPassword) {
+    public void setPassword(String userPassword) {
         this.password = userPassword;
     }
 
@@ -58,7 +58,7 @@ public class Account implements Serializable {
         return role;
     }
 
-    public void setRole(final int userRole) {
+    public void setRole(int userRole) {
         this.role = userRole;
     }
 
@@ -67,9 +67,9 @@ public class Account implements Serializable {
     public Account() {
     }
 
-    public Account(final String userName, final String userSurname,
-                   final String userPhone, final String userEmail,
-                   final String userPassword, final int userRole) {
+    public Account(String userName, String userSurname,
+                   String userPhone, String userEmail,
+                   String userPassword, int userRole) {
         this.name = userName;
         this.surname = userSurname;
         this.phone = userPhone;
