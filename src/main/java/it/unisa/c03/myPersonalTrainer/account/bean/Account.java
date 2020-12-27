@@ -7,27 +7,25 @@ public class Account {
     private String phone;
     private String password;
     private String email;
-    int role;
+    private int role;
 
-    public Account(String name, String surname, String phone, String email, String password, int role) {
+    public Account(String name, String surname, String phone,
+                   String email, String password, int role) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
         this.email = email;
         this.password = password;
-        role=0;
+        role = 0;
     }
 
-    public Account()
-    {
-
-    }
+    public Account() { }
 
     public int getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(final int role) {
         this.role = role;
     }
 
@@ -35,7 +33,7 @@ public class Account {
         return name;
     }
 
-    public void setName(String firstName) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -43,7 +41,7 @@ public class Account {
         return surname;
     }
 
-    public void setSurname(String surname) {
+    public void setSurname(final String surname) {
         this.surname = surname;
     }
 
@@ -51,7 +49,7 @@ public class Account {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(final String phone) {
         this.phone = phone;
     }
 
@@ -59,7 +57,7 @@ public class Account {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
@@ -67,19 +65,19 @@ public class Account {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
     @Override
     public String toString() {
-        return "Account{" +
-                "  name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phone=" + phone +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
-                '}';
+        return "Account{"
+                + "  name='" + name + '\''
+                + ", surname='" + surname + '\''
+                + ", phone=" + phone
+                + ", password='" + password + '\''
+                + ", email='" + email + '\''
+                + ", role='" + role + '\''
+                + '}';
     }
 }

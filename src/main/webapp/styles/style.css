@@ -11,6 +11,9 @@
 *:before,
 *:after {
   box-sizing: border-box;
+  align-self: flex-start;
+  border: none;
+  background: none;
 }
 
 a {
@@ -49,7 +52,7 @@ body {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  color: #fff;
+  color: #ffffff;
   background-color: #9fc5f8;
   min-width: 120px;
   padding: 0.5rem 1rem;

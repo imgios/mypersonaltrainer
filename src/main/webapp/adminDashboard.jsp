@@ -20,12 +20,12 @@ isPT = true allora procedi, altrimenti errore. >
             <button class="nav__toggle" aria-expanded="false" type="button">
                 <img src="images\sidebar.png">
             </button>
-
             <ul class="nav__wrapper">
                 <li class="nav__item"><a href="#">Dashboard</a></li>
-                <li class="nav__item"><a href="#">Statistiche</a></li>
                 <li class="nav__item"><a href="#">Agenda</a></li>
-                <li class="nav__item"><a href="#">Cronologia Schede</a></li>
+                <li class="nav__item"><a href="#">Clienti</a></li>
+                <li class="nav__item"><a href="#">Schede</a></li>
+                <li class="nav__item"><a href="#">Pagamenti</a></li>
             </ul>
         </nav>
         <a href="#" class="brand"><img src="images\nlogo.png"></a>
