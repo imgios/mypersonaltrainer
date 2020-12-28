@@ -3,12 +3,22 @@ package it.unisa.c03.myPersonalTrainer.account.service;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
-
+import java.util.Collection;
 import java.io.IOException;
 
 public class AccountServiceImpl implements AccountService {
 
-    //metodi implementati
+    /*
+    * This class calls back AccountDAOImpl
+    * */
+
+    @Override
+    public Collection<Account> viewInfoAccount() throws IOException {
+
+        AccountDAO p = new AccountDAOImpl();
+        return p.getAccounts();
+
+    }
 
     @Override
     public boolean RegisterAccount(Account utente) throws IOException, IllegalArgumentException {
