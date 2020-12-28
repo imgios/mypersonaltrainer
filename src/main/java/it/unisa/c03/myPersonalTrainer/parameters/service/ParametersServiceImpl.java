@@ -20,7 +20,11 @@ public class ParametersServiceImpl implements ParametersService {
     private static final int PERCENTAGE = 100;
 
 
-    private final ParametersDAO parametersDAO = new ParametersDAOImpl();
+    private ParametersDAO parametersDAO;
+
+    public ParametersServiceImpl(ParametersDAO parametersDAO) {
+        this.parametersDAO = parametersDAO;
+    }
 
     /**
      * allows to check the format parameters, and to insert into database.
@@ -34,8 +38,7 @@ public class ParametersServiceImpl implements ParametersService {
      */
     public Parameters createParameters(String weight, String leanMass,
                                        String fatMass)
-            throws NumberFormatException, IllegalArgumentException,
-            IOException {
+            throws IllegalArgumentException, IOException {
 
         if (weight != null
                 && weight.length() < MIN_LENGHT_WEIGHT
@@ -59,11 +62,7 @@ public class ParametersServiceImpl implements ParametersService {
                     "formato massa magra non valido");
         }
         double weightD = Double.parseDouble(weight);
-       /* if (weightD < MIN_WEIGHT
-                || weightD > MAX_WEIGHT) {
-            throw new IllegalArgumentException(
-                    "lunghezza peso non valida");
-        }*/
+
         double leanMassD =
                 Double.parseDouble(leanMass.substring(
                         0, leanMass.length() - 1));

@@ -16,8 +16,8 @@ import static org.mockito.Mockito.*;
 
 class ParametersServiceImplTest {
 
-    ParametersService pservice = new ParametersServiceImpl();
     ParametersDAO parametersDAO = Mockito.mock(ParametersDAO.class);
+    ParametersService pservice = new ParametersServiceImpl(parametersDAO);
 
     @Test
     void lenghtWeightNotValid() throws IOException {
@@ -100,9 +100,7 @@ class ParametersServiceImplTest {
     }
 
     @Test
-    /**
-     * the email doesn't exists
-     */
+
     void testFindByEmailThatNotExists() throws InterruptedException, ExecutionException, IOException {
         ArrayList<Parameters> list = new ArrayList<Parameters>();
         when(parametersDAO.selectByMail(anyString())).thenReturn(list);
@@ -119,13 +117,5 @@ class ParametersServiceImplTest {
         assertEquals("Email non valida", exception.getMessage());
     }
 
-    @Test
-    void testFindByEmailThatExists() throws InterruptedException, ExecutionException, IOException {
-        ArrayList<Parameters> list = new ArrayList<Parameters>();
-        Parameters p = new Parameters(50, 33, 25, "prova@io.it");
-        list.add(p);
-        when(parametersDAO.selectByMail(anyString())).thenReturn(list);
-        String email = "prova@io.it";
-        assertNotEquals(pservice.getByMail("prova@io.it").size(), list.size());
-    }
+
 }
