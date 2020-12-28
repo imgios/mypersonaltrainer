@@ -17,7 +17,7 @@ import java.io.IOException;
 public class ParametersController extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
