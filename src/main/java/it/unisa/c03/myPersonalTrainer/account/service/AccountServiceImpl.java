@@ -14,7 +14,12 @@ public class AccountServiceImpl implements AccountService {
     public static final int MIN_PASSWORD_LENGTH = 1;
     public static final int MAX_PASSWORD_LENGTH = 30;
 
-    private AccountDAO accountDAO = new AccountDAOImpl();
+    private AccountDAO accountDAO ;
+
+    public AccountServiceImpl(AccountDAO accountDao)
+    {
+        accountDAO = accountDao ;
+    }
 
     @Override
     public boolean checkCredentials(String clientMail,

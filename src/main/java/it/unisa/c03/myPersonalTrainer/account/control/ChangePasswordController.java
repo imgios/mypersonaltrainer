@@ -1,6 +1,8 @@
 package it.unisa.c03.myPersonalTrainer.account.control;
 
 
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 import it.unisa.c03.myPersonalTrainer.account.service.AccountService;
 import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
 
@@ -14,7 +16,8 @@ import java.io.IOException;
 @WebServlet(name = "ChangePassword", value = "/ChangePassword")
 public class ChangePasswordController extends HttpServlet {
 
-    private AccountService service = new AccountServiceImpl();
+    private AccountDAO account = new AccountDAOImpl();
+    private AccountService service = new AccountServiceImpl(account);
 
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response)

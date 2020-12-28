@@ -24,7 +24,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AccountServiceImplTest {
 
-    AccountService service = new AccountServiceImpl();
+    //AccountService service = new AccountServiceImpl();
+
 
     // TC_1.3_1
     @Test
@@ -32,6 +33,9 @@ class AccountServiceImplTest {
         String mail = "p@l.it" ;
         String password = "password" ;
         String message = "Lunghezza email non valida" ;
+
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        AccountService service  = new AccountServiceImpl(accountDAO);
 
         IllegalArgumentException exception =  assertThrows(IllegalArgumentException.class , () -> {
             service.checkCredentials(mail,password) ;
@@ -47,6 +51,9 @@ class AccountServiceImplTest {
         String password = "password" ;
         String message = "Formato email non valido" ;
 
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        AccountService service  = new AccountServiceImpl(accountDAO);
+
         IllegalArgumentException exception =  assertThrows(IllegalArgumentException.class , () -> {
             service.checkCredentials(mail,password) ;
         });
@@ -60,6 +67,9 @@ class AccountServiceImplTest {
         String mail = "client@prova.it" ;
         String password = "" ;
         String message = "Lunghezza password non valida" ;
+
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        AccountService service  = new AccountServiceImpl(accountDAO);
 
         IllegalArgumentException exception =  assertThrows(IllegalArgumentException.class , () -> {
             service.checkCredentials(mail,password) ;
@@ -75,6 +85,9 @@ class AccountServiceImplTest {
         String password = "prova" ;
         String message = "Formato password non valido" ;
 
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        AccountService service  = new AccountServiceImpl(accountDAO);
+
         IllegalArgumentException exception =  assertThrows(IllegalArgumentException.class , () -> {
             service.checkCredentials(mail,password) ;
         });
@@ -88,28 +101,46 @@ class AccountServiceImplTest {
         String mail = "client@prova.it" ;
         String password = "password1." ;
 
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        AccountService service  = new AccountServiceImpl(accountDAO);
+
         assertEquals(true, service.checkCredentials(mail,password));
     }
+
+
 
     @Test
     public void searchAccountByEmailFalse()
     {
         AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
-        when(accountDAO.findAccountByEmail(anyString())).thenReturn(new Account());
+        Account a = new Account();
+        a.setEmail(null);
+        Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(a);
+
+        AccountService service  = new AccountServiceImpl(accountDAO);
         assertEquals(false, service.searchAccountByEmail("mailnot@italy.it"));
+
     }
+
 
     @Test
     public void searchAccountByEmailTrue()
     {
         AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
-        when(accountDAO.findAccountByEmail(anyString())).thenReturn(new Account());
+        Account a = new Account();
+        a.setEmail("mail@mail.com");
+        Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(a);
+        AccountService service  = new AccountServiceImpl(accountDAO);
         assertEquals(true, service.searchAccountByEmail("cliente@gmail.com"));
     }
 
-    @Test
-    public void changePassword() throws IOException {
 
+
+    @Test
+    public void changePasswordFalse() throws IOException {
+
+
+        /*
         Firestore connection = Mockito.mock(DBConnection.getConnection().getClass());
         CollectionReference collectionRef = Mockito.mock(CollectionReference.class);
 
@@ -129,6 +160,19 @@ class AccountServiceImplTest {
 
         when(connection.collection(anyString()).document(anyString()).update(anyString(),any()).isDone()).thenReturn(false);
         assertEquals(false, connection.collection("Account").document("documentId").update("password","newPassword1").isDone());
+*/
 
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        when(accountDAO.updatePassword(anyString(),anyString())).thenReturn(false);
+        AccountService service  = new AccountServiceImpl(accountDAO);
+        assertEquals(false, service.changePassword("cliente@gmail.com", "nuovaPassword45"));
+    }
+
+    @Test
+    public void changePasswordTrue() throws IOException{
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        when(accountDAO.updatePassword(anyString(),anyString())).thenReturn(true);
+        AccountService service  = new AccountServiceImpl(accountDAO);
+        assertEquals(true, service.changePassword("cliente@gmail.com", "nuovaPassword45"));
     }
 }

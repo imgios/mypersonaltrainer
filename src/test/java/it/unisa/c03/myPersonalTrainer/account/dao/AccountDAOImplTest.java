@@ -18,7 +18,8 @@ import static org.mockito.Mockito.when;
 
 class AccountDAOImplTest {
 
-    AccountDAO accountDAOTest = new AccountDAOImpl();
+    //AccountDAO accountDAOTest = new AccountDAOImpl();
+
     @Test
     void findAccountByEmailTestNotFound() throws ExecutionException, InterruptedException {
         try {
@@ -110,6 +111,68 @@ class AccountDAOImplTest {
     }
 
     @Test
-    void getAccountDocumentIdByEmail() {
+    void getAccountDocumentIdByEmailFound() throws ExecutionException, InterruptedException {
+        try {
+            Firestore connection = Mockito.mock(DBConnection.getConnection().getClass());
+            CollectionReference collectionRef = Mockito.mock(CollectionReference.class);
+
+            when(connection.collection(anyString())).thenReturn(collectionRef);
+
+            Query query = Mockito.mock(Query.class);
+
+            when(collectionRef.whereEqualTo(anyString(),anyString())).thenReturn(query);
+
+            ApiFuture<QuerySnapshot> api = Mockito.mock(ApiFuture.class);
+            when(query.get()).thenReturn(api);
+
+            QuerySnapshot qs = Mockito.mock(QuerySnapshot.class);
+            when(api.get()).thenReturn(qs);
+
+            List<QueryDocumentSnapshot> listQds = Mockito.mock(List.class);
+            when(qs.getDocuments()).thenReturn(listQds);
+
+            QueryDocumentSnapshot qds = Mockito.mock(QueryDocumentSnapshot.class);
+            when(listQds.get(anyInt())).thenReturn(qds);
+
+            when(connection.collection(anyString()).whereEqualTo(anyString(),anyString()).get().get().getDocuments().get(anyInt()).getId()).thenReturn("QqHaNZWZPC75Wgik5gco");
+
+            String accountId = "QqHaNZWZPC75Wgik5gco";
+            assertEquals(accountId, connection.collection("Account").whereEqualTo("email","cliente@gmail.com").get().get().getDocuments().get(0).getId());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void getAccountDocumentIdByEmailNotFound() throws ExecutionException, InterruptedException {
+        try {
+            Firestore connection = Mockito.mock(DBConnection.getConnection().getClass());
+            CollectionReference collectionRef = Mockito.mock(CollectionReference.class);
+
+            when(connection.collection(anyString())).thenReturn(collectionRef);
+
+            Query query = Mockito.mock(Query.class);
+
+            when(collectionRef.whereEqualTo(anyString(),anyString())).thenReturn(query);
+
+            ApiFuture<QuerySnapshot> api = Mockito.mock(ApiFuture.class);
+            when(query.get()).thenReturn(api);
+
+            QuerySnapshot qs = Mockito.mock(QuerySnapshot.class);
+            when(api.get()).thenReturn(qs);
+
+            List<QueryDocumentSnapshot> listQds = Mockito.mock(List.class);
+            when(qs.getDocuments()).thenReturn(listQds);
+
+            QueryDocumentSnapshot qds = Mockito.mock(QueryDocumentSnapshot.class);
+            when(listQds.get(anyInt())).thenReturn(qds);
+
+            when(connection.collection(anyString()).whereEqualTo(anyString(),anyString()).get().get().getDocuments().get(anyInt()).getId()).thenReturn(null);
+
+            String accountId = null ;
+            assertEquals(accountId, connection.collection("Account").whereEqualTo("email","emailerrata@prova.it").get().get().getDocuments().get(0).getId());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
