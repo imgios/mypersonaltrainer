@@ -21,7 +21,12 @@ public interface ParametersService {
                                 String fatMass)
             throws IllegalArgumentException, IOException;
 
-    ArrayList<Parameters> getByMail(String email)
-            throws InterruptedException, ExecutionException, IOException;
-
+    /**
+     * insert the parameters into database
+     *
+     * @param parameters the parameters to insert
+     * @return true if the operation is done
+     * @throws IOException
+     */
+    boolean insertParametersDB(Parameters parameters) throws IOException;
 }

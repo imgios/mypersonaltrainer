@@ -45,7 +45,6 @@ public class ParametersController extends HttpServlet {
                     res = new Gson().toJson(1);
                 }
             }
-            //res = new Gson().toJson(1);
         } catch (IllegalArgumentException e) {
             res = new Gson().toJson(e.getMessage());
             response.getWriter().write(res);
