@@ -1,9 +1,9 @@
-package it.unisa.c03.myPersonalTrainer.Account.control.serviceImpl;
+package it.unisa.c03.myPersonalTrainer.account.control.serviceImpl;
 
 
 
-import it.unisa.c03.myPersonalTrainer.Account.service.AccountService;
-import it.unisa.c03.myPersonalTrainer.Account.service.AccountServiceImpl;
+import it.unisa.c03.myPersonalTrainer.account.service.AccountService;
+import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
