@@ -39,7 +39,13 @@ public class ParametersController extends HttpServlet {
 
         try {
             Parameters p = service.createParameters(weight, mm, mg);
-            res = new Gson().toJson(1);
+
+            if (p != null) {
+                if (service.insertParametersDB(p)) {
+                    res = new Gson().toJson(1);
+                }
+            }
+            //res = new Gson().toJson(1);
         } catch (IllegalArgumentException e) {
             res = new Gson().toJson(e.getMessage());
             response.getWriter().write(res);
