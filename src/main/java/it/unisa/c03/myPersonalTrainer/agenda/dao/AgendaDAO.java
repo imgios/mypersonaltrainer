@@ -1,6 +1,7 @@
 package it.unisa.c03.myPersonalTrainer.agenda.dao;
 
 import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
+import it.unisa.c03.myPersonalTrainer.agenda.bean.Availability;
 
 import java.io.IOException;
 import java.util.Date;
@@ -8,24 +9,13 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public interface AgendaDAO {
-    /**
-     *
-     * @param appuntamento new appointment to insert in the database
-     * @return return true if the appointment is saved,false otherwise
-     */
-    boolean saveAppointment(Appointment appuntamento) throws IOException;
-    /**
-     *
-     * @param mail customer's email
-     * @return return all the customer's appointment
-     */
-    List<Appointment> findAppointmetsByEmail(String mail)
-            throws IOException, ExecutionException, InterruptedException;
+
 
     /**
+     * interact with database to insert the availability .
      *
-     * @param date date to check appointment
-     * @return returns all appointments for a given date
+     * @param availability the availability to insert into database
+     * @throws IOException
      */
-    List<Appointment> findAppointmentByDate(Date date);
+    void insertAvailability(Availability availability) throws IOException;
 }
