@@ -3,7 +3,6 @@ package it.unisa.c03.myPersonalTrainer.agenda.dao;
 import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -27,5 +26,5 @@ public interface AgendaDAO {
      * @param date date to check appointment
      * @return returns all appointments for a given date
      */
-    List<Appointment> findAppointmentByDate(Date date);
+    List<Appointment> findAppointmentByDate(String date) throws IOException, ExecutionException, InterruptedException;
 }

@@ -1,5 +1,4 @@
 package it.unisa.c03.myPersonalTrainer.firebase;
-
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -9,7 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DBConnectionTest
 {
-    /*metodo per testare la lettura dei dati dal database*/
+    @Test
+    public void getConnectionTest() throws IOException {
+        assertNotNull(DBConnection.getConnection());
+    }
     @Test
     public void TestRead() throws IOException, ExecutionException, InterruptedException {
         String test="dumb";

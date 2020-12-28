@@ -5,8 +5,6 @@ import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
@@ -15,6 +13,9 @@ import java.io.IOException;
  * class that allows connection to the database.
  */
 public final class DBConnection {
+    /**
+     * connession to the database.
+     */
     private static Firestore singleton;
 
     private DBConnection() {
@@ -29,15 +30,12 @@ public final class DBConnection {
      */
     public static Firestore getConnection() throws IOException {
         if (singleton == null) {
-            try {
                 FirebaseOptions options = new FirebaseOptions.Builder()
                         .setCredentials(GoogleCredentials
                                 .getApplicationDefault()).build();
                 singleton = FirestoreClient.
                         getFirestore(FirebaseApp.initializeApp(options));
                 return singleton;
-            } catch (FileNotFoundException ignored) {
-            }
         }
         return singleton;
     }

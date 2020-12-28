@@ -1,17 +1,12 @@
 package it.unisa.c03.myPersonalTrainer.agenda.bean;
-
-import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
-
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.Date;
 
 public final class Appointment implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
      * appointment's date.
      */
-    private Date date;
+    private String date;
     /**
      * appointment's time.
      */
@@ -34,8 +29,8 @@ public final class Appointment implements Serializable {
      * @param newtime appointment's
      * @param newcustomerMail appliant's mail
      */
-    public Appointment(final Date newdate, final String newtime,
-                       final String newcustomerMail) {
+    public Appointment(String newdate, String newtime,
+                        String newcustomerMail) {
         this.date = newdate;
         this.time = newtime;
         this.customerMail = newcustomerMail;
@@ -45,14 +40,14 @@ public final class Appointment implements Serializable {
      *
      * @return appoinment's date
      */
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
     /**
      * @param newdate date of new appointment
      */
-    public void setDate(final Date newdate) {
+    public void setDate(String newdate) {
         this.date = newdate;
     }
 
@@ -67,7 +62,7 @@ public final class Appointment implements Serializable {
      *
      * @param newtime time of new appointment
      */
-    public void setTime(final String newtime) {
+    public void setTime(String newtime) {
         this.time = newtime;
     }
 
@@ -83,7 +78,7 @@ public final class Appointment implements Serializable {
      *
      * @param newcustomerMail the email of who request
      */
-    public void setCustomerMail(final String newcustomerMail) {
+    public void setCustomerMail(String newcustomerMail) {
         this.customerMail = newcustomerMail;
     }
 }
