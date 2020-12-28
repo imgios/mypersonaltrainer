@@ -15,9 +15,10 @@ public final class AgendaDAOImpl implements AgendaDAO {
 
 
     @Override
-    public void insertAvailability(Availability availability)
+    public boolean insertAvailability(Availability availability)
             throws IOException {
         DBConnection.getConnection().collection(
-                "Availability").add(availability).isDone();
+                "Availability").add(availability);
+        return true;
     }
 }

@@ -17,5 +17,5 @@ public interface AgendaDAO {
      * @param availability the availability to insert into database
      * @throws IOException
      */
-    void insertAvailability(Availability availability) throws IOException;
+    boolean insertAvailability(Availability availability) throws IOException;
 }

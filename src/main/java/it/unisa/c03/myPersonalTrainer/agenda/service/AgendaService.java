@@ -19,7 +19,8 @@ public interface AgendaService {
      *
      * @param availability the availability to insert into database
      * @throws IOException
+     * @return true if the availability was insert
      */
-    void createAvailability(Availability availability)
+    boolean createAvailability(Availability availability)
             throws IOException;
 }

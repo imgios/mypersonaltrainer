@@ -45,9 +45,9 @@ public class AgendaServiceImpl implements AgendaService {
     }
 
     @Override
-    public void createAvailability(Availability availability)
+    public boolean createAvailability(Availability availability)
             throws IOException {
 
-        agendaDAO.insertAvailability(availability);
+        return agendaDAO.insertAvailability(availability);
     }
 }
