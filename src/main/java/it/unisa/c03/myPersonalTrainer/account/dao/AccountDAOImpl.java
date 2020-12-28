@@ -20,15 +20,13 @@ public class AccountDAOImpl implements AccountDAO {
 
 
     @Override
-    public Account findAccountByEmail(String email) {
+    public Account findAccountByEmail(String email) throws IOException, ExecutionException, InterruptedException {
 
         // Create a reference to the account collection
         CollectionReference accounts = null;
-        try {
+
             accounts = DBConnection.getConnection().collection("Account");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         // Create a query against the collection.
         Query query = accounts.whereEqualTo("email", email);
@@ -38,7 +36,7 @@ public class AccountDAOImpl implements AccountDAO {
 
         //create Bean to return
         Account accountBean = new Account();
-        try {
+
             for (DocumentSnapshot document
                     : querySnapshot.get().getDocuments()) {
 
@@ -49,17 +47,14 @@ public class AccountDAOImpl implements AccountDAO {
                         String.valueOf(document.get("password")));
                 accountBean.setPhone(String.valueOf(document.get("phone")));
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+
 
         return accountBean;
     }
 
     @Override
-    public boolean updatePassword(String email, String password) throws IOException {
+    //javadoc
+    public boolean updatePassword(String email, String password) throws IOException, ExecutionException, InterruptedException {
 
         //find document id
         String id = getAccountDocumentIdByEmail(email);
@@ -72,19 +67,18 @@ public class AccountDAOImpl implements AccountDAO {
             // Update password field
             ApiFuture<WriteResult> future = docRef.update("password", password);
 
-            return future.isDone();
+            return true;
 
     }
 
     @Override
-    public String getAccountDocumentIdByEmail(String email) {
+    //javadoc
+    public String getAccountDocumentIdByEmail(String email) throws IOException, ExecutionException, InterruptedException {
         // Create a reference to the account collection
         CollectionReference accounts = null;
-        try {
+
             accounts = DBConnection.getConnection().collection("Account");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         // Create a query against the collection.
         Query query = accounts.whereEqualTo("email", email);
@@ -93,16 +87,12 @@ public class AccountDAOImpl implements AccountDAO {
         ApiFuture<QuerySnapshot> querySnapshot = query.get();
 
         String id = "";
-        try {
+
             for (DocumentSnapshot document
                     : querySnapshot.get().getDocuments()) {
                 id = id + document.getId();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+
 
         return id;
     }

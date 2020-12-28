@@ -4,6 +4,8 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -18,161 +20,40 @@ import static org.mockito.Mockito.when;
 
 class AccountDAOImplTest {
 
-    //AccountDAO accountDAOTest = new AccountDAOImpl();
+    static Account accountTest ;
+    //AccountDAO dao = new AccountDAOImpl();
+    @BeforeAll
+    static void setUp() throws IOException {
 
-    @Test
-    void findAccountByEmailTestNotFound() throws ExecutionException, InterruptedException {
-        try {
-            Firestore connection = Mockito.mock(DBConnection.getConnection().getClass());
-            CollectionReference collectionRef = Mockito.mock(CollectionReference.class);
+        accountTest = new Account("clientName", "clientSurname","332","hismail@italy.com","hispassword1",0);
+        DBConnection.getConnection().collection("Account").add(accountTest);
+    }
 
-            when(connection.collection(anyString())).thenReturn(collectionRef);
 
-            Query query = Mockito.mock(Query.class);
+    @AfterAll
+    static void clean() throws IOException, ExecutionException, InterruptedException {
+        List<QueryDocumentSnapshot> lqds = DBConnection.getConnection().collection("Account").whereEqualTo("email","hismail@italy.com").get().get().getDocuments();
 
-            when(collectionRef.whereEqualTo(anyString(),anyString())).thenReturn(query);
-
-            ApiFuture<QuerySnapshot> api = Mockito.mock(ApiFuture.class);
-            when(query.get()).thenReturn(api);
-
-            QuerySnapshot qs = Mockito.mock(QuerySnapshot.class);
-            when(api.get()).thenReturn(qs);
-
-            List<QueryDocumentSnapshot> listQds = Mockito.mock(List.class);
-            when(qs.getDocuments()).thenReturn(listQds);
-
-            QueryDocumentSnapshot qds = Mockito.mock(QueryDocumentSnapshot.class);
-            when(listQds.get(anyInt())).thenReturn(qds);
-
-            when(connection.collection(anyString()).whereEqualTo(anyString(),anyString()).get().get().getDocuments().get(anyInt()).get(anyString())).thenReturn(null);
-            Account account = new Account() ;
-            account.setEmail(null);
-            assertEquals(account.getEmail(), connection.collection("Account").whereEqualTo("email","emailerrata@prova.it").get().get().getDocuments().get(0).get("email"));
-        } catch (IOException e) {
-            e.printStackTrace();
+        for(QueryDocumentSnapshot document : lqds)
+        {
+            document.getReference().delete();
         }
     }
 
     @Test
-    void findAccountByEmailTestFound() throws ExecutionException, InterruptedException {
-        try {
-            Firestore connection = Mockito.mock(DBConnection.getConnection().getClass());
-            CollectionReference collectionRef = Mockito.mock(CollectionReference.class);
+    void findAccountByEmail() throws InterruptedException, ExecutionException, IOException {
 
-            when(connection.collection(anyString())).thenReturn(collectionRef);
+        AccountDAO dao = new AccountDAOImpl();
+        Account accountToSearch = dao.findAccountByEmail("hismail@italy.com");
 
-            Query query = Mockito.mock(Query.class);
-
-            when(collectionRef.whereEqualTo(anyString(),anyString())).thenReturn(query);
-
-            ApiFuture<QuerySnapshot> api = Mockito.mock(ApiFuture.class);
-            when(query.get()).thenReturn(api);
-
-            QuerySnapshot qs = Mockito.mock(QuerySnapshot.class);
-            when(api.get()).thenReturn(qs);
-
-            List<QueryDocumentSnapshot> listQds = Mockito.mock(List.class);
-            when(qs.getDocuments()).thenReturn(listQds);
-
-            QueryDocumentSnapshot qds = Mockito.mock(QueryDocumentSnapshot.class);
-            when(listQds.get(anyInt())).thenReturn(qds);
-
-            when(connection.collection(anyString()).whereEqualTo(anyString(),anyString()).get().get().getDocuments().get(anyInt()).get(anyString())).thenReturn("cliente@gmail.com");
-            Account account = new Account() ;
-            account.setEmail("cliente@gmail.com");
-            assertEquals(account.getEmail(), connection.collection("Account").whereEqualTo("email","cliente@gmail.com").get().get().getDocuments().get(0).get("email"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        assertEquals(accountTest.getEmail(), accountToSearch.getEmail());
     }
 
     @Test
-    void updatePassword() throws IOException {
-        Firestore connection = Mockito.mock(DBConnection.getConnection().getClass());
-        CollectionReference collectionRef = Mockito.mock(CollectionReference.class);
-
-        when(connection.collection(anyString())).thenReturn(collectionRef);
-
-        Query query = Mockito.mock(Query.class);
-
-        when(collectionRef.whereEqualTo(anyString(),anyString())).thenReturn(query);
-
-
-        DocumentReference docRef = Mockito.mock(DocumentReference.class);
-        when(collectionRef.document(anyString())).thenReturn(docRef);
-
-        ApiFuture<WriteResult> api = Mockito.mock(ApiFuture.class);
-        when(docRef.update(anyString(),any())).thenReturn(api);
-
-
-        when(connection.collection(anyString()).document(anyString()).update(anyString(),any()).isDone()).thenReturn(false);
-        assertEquals(false, connection.collection("Account").document("documentId").update("password","newPassword1").isDone());
-
+    void updatePassword() throws IOException, ExecutionException, InterruptedException {
+        AccountDAO dao = new AccountDAOImpl();
+        assertEquals(true, dao.updatePassword(accountTest.getEmail(),"changedPassword56"));
     }
 
-    @Test
-    void getAccountDocumentIdByEmailFound() throws ExecutionException, InterruptedException {
-        try {
-            Firestore connection = Mockito.mock(DBConnection.getConnection().getClass());
-            CollectionReference collectionRef = Mockito.mock(CollectionReference.class);
 
-            when(connection.collection(anyString())).thenReturn(collectionRef);
-
-            Query query = Mockito.mock(Query.class);
-
-            when(collectionRef.whereEqualTo(anyString(),anyString())).thenReturn(query);
-
-            ApiFuture<QuerySnapshot> api = Mockito.mock(ApiFuture.class);
-            when(query.get()).thenReturn(api);
-
-            QuerySnapshot qs = Mockito.mock(QuerySnapshot.class);
-            when(api.get()).thenReturn(qs);
-
-            List<QueryDocumentSnapshot> listQds = Mockito.mock(List.class);
-            when(qs.getDocuments()).thenReturn(listQds);
-
-            QueryDocumentSnapshot qds = Mockito.mock(QueryDocumentSnapshot.class);
-            when(listQds.get(anyInt())).thenReturn(qds);
-
-            when(connection.collection(anyString()).whereEqualTo(anyString(),anyString()).get().get().getDocuments().get(anyInt()).getId()).thenReturn("QqHaNZWZPC75Wgik5gco");
-
-            String accountId = "QqHaNZWZPC75Wgik5gco";
-            assertEquals(accountId, connection.collection("Account").whereEqualTo("email","cliente@gmail.com").get().get().getDocuments().get(0).getId());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    void getAccountDocumentIdByEmailNotFound() throws ExecutionException, InterruptedException {
-        try {
-            Firestore connection = Mockito.mock(DBConnection.getConnection().getClass());
-            CollectionReference collectionRef = Mockito.mock(CollectionReference.class);
-
-            when(connection.collection(anyString())).thenReturn(collectionRef);
-
-            Query query = Mockito.mock(Query.class);
-
-            when(collectionRef.whereEqualTo(anyString(),anyString())).thenReturn(query);
-
-            ApiFuture<QuerySnapshot> api = Mockito.mock(ApiFuture.class);
-            when(query.get()).thenReturn(api);
-
-            QuerySnapshot qs = Mockito.mock(QuerySnapshot.class);
-            when(api.get()).thenReturn(qs);
-
-            List<QueryDocumentSnapshot> listQds = Mockito.mock(List.class);
-            when(qs.getDocuments()).thenReturn(listQds);
-
-            QueryDocumentSnapshot qds = Mockito.mock(QueryDocumentSnapshot.class);
-            when(listQds.get(anyInt())).thenReturn(qds);
-
-            when(connection.collection(anyString()).whereEqualTo(anyString(),anyString()).get().get().getDocuments().get(anyInt()).getId()).thenReturn(null);
-
-            String accountId = null ;
-            assertEquals(accountId, connection.collection("Account").whereEqualTo("email","emailerrata@prova.it").get().get().getDocuments().get(0).getId());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

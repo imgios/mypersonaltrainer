@@ -6,6 +6,7 @@ import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 
 import java.io.*;
+import java.util.concurrent.ExecutionException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
@@ -25,9 +26,15 @@ public class HelloServlet extends HttpServlet {
         Account prova = new Account();
         AccountDAO acc = new AccountDAOImpl();
 
-         prova = acc.findAccountByEmail("prova@prova.it");
+        try {
+            prova = acc.findAccountByEmail("prova@prova.it");
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-         if (prova.getEmail() != null)
+        if (prova.getEmail() != null)
              System.out.println("Trovato");
          else if (prova.getEmail() == null)
              System.out.println("Non Trovato");

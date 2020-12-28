@@ -5,6 +5,7 @@ import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 
 public class AccountServiceImpl implements AccountService {
@@ -54,8 +55,13 @@ public class AccountServiceImpl implements AccountService {
 
     }
 
+    /**
+     * ajasjcjas.
+     * @param email to search
+     * @return true or false perche
+     */
     @Override
-    public boolean searchAccountByEmail(String email) {
+    public boolean searchAccountByEmail(String email) throws InterruptedException, ExecutionException, IOException {
 
         boolean result = false;
         Account account = new Account();
@@ -73,8 +79,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    // java doc
     public boolean changePassword(String email,
-                               String password) throws IOException {
+                               String password) throws IOException, ExecutionException, InterruptedException {
 
         return accountDAO.updatePassword(email, password);
     }

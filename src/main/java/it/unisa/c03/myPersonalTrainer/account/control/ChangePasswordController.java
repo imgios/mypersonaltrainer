@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 @WebServlet(name = "ChangePassword", value = "/ChangePassword")
 public class ChangePasswordController extends HttpServlet {
@@ -52,25 +53,31 @@ public class ChangePasswordController extends HttpServlet {
 
 
             // check if mail exists in the db
-            if (service.searchAccountByEmail(clientMail)) {
-                /*TO DO
-                 * if esiste
-                 * se è uguale alla mail in session allora
-                 * tutto ok, cambiaPassword
-                 * altrimenti scrivi errore: questa non è la tua mail
-                 * */
-                service.changePassword(clientMail, newPassword);
+            try {
+                if (service.searchAccountByEmail(clientMail)) {
+                    /*TO DO
+                     * if esiste
+                     * se è uguale alla mail in session allora
+                     * tutto ok, cambiaPassword
+                     * altrimenti scrivi errore: questa non è la tua mail
+                     * */
+                    service.changePassword(clientMail, newPassword);
 
-                request.getSession().removeAttribute("errorToShow");
-                request.getSession().setAttribute("successToShow",
-                        "Password modificata!");
-                response.sendRedirect("AccountProfile.jsp");
-            } else if (!(service.searchAccountByEmail(clientMail))) {
-                // if mail doesn't exist in the DB
-                request.getSession().removeAttribute("successToShow");
-                request.getSession().setAttribute("errorToShow",
-                        "Attenzione, questa non è la tua email!");
-                response.sendRedirect("AccountProfile.jsp");
+                    request.getSession().removeAttribute("errorToShow");
+                    request.getSession().setAttribute("successToShow",
+                            "Password modificata!");
+                    response.sendRedirect("AccountProfile.jsp");
+                } else if (!(service.searchAccountByEmail(clientMail))) {
+                    // if mail doesn't exist in the DB
+                    request.getSession().removeAttribute("successToShow");
+                    request.getSession().setAttribute("errorToShow",
+                            "Attenzione, questa non è la tua email!");
+                    response.sendRedirect("AccountProfile.jsp");
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
             }
 
 

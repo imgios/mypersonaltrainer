@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 import static org.mockito.Mockito.*;
 
@@ -110,8 +111,7 @@ class AccountServiceImplTest {
 
 
     @Test
-    public void searchAccountByEmailFalse()
-    {
+    public void searchAccountByEmailFalse() throws InterruptedException, ExecutionException, IOException {
         AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
         Account a = new Account();
         a.setEmail(null);
@@ -124,8 +124,7 @@ class AccountServiceImplTest {
 
 
     @Test
-    public void searchAccountByEmailTrue()
-    {
+    public void searchAccountByEmailTrue() throws InterruptedException, ExecutionException, IOException {
         AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
         Account a = new Account();
         a.setEmail("mail@mail.com");
@@ -137,7 +136,7 @@ class AccountServiceImplTest {
 
 
     @Test
-    public void changePasswordFalse() throws IOException {
+    public void changePasswordFalse() throws IOException, ExecutionException, InterruptedException {
 
 
         /*
@@ -169,7 +168,7 @@ class AccountServiceImplTest {
     }
 
     @Test
-    public void changePasswordTrue() throws IOException{
+    public void changePasswordTrue() throws IOException, ExecutionException, InterruptedException {
         AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
         when(accountDAO.updatePassword(anyString(),anyString())).thenReturn(true);
         AccountService service  = new AccountServiceImpl(accountDAO);
