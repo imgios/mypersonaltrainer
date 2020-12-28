@@ -1,33 +1,33 @@
 package it.unisa.c03.myPersonalTrainer.agenda.bean;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 
-public class Avaiability {
-
-    private LocalDate date;
+public class Availability implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private String date;
     private int time;
 
-    public Avaiability(LocalDate date, int time) {
+    public Availability(String date, int time) {
         this.date = date;
         this.time = time;
     }
 
     @Override
     public String toString() {
-        return "Avaiability{"
+        return "Availability{"
                 + "date=" + date
                 + ", time=" + time
                 + '}';
     }
 
-    public Avaiability() {
+    public Availability() {
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
