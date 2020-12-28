@@ -1,4 +1,4 @@
-package it.unisa.c03.myPersonalTrainer.parameters.control.serviceImpl;
+package it.unisa.c03.myPersonalTrainer.parameters.serviceImpl;
 
 import it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAO;
 import it.unisa.c03.myPersonalTrainer.parameters.service.ParametersService;
@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
