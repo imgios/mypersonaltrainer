@@ -24,7 +24,6 @@ class ParametersServiceImplTest {
         String weight = "2";
         String fatMass = "30%";
         String leanMass = "55%";
-        doNothing().when(parametersDAO).insertParameters(isA(Parameters.class));
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             pservice.createParameters(weight, leanMass, fatMass);
         });
@@ -36,7 +35,6 @@ class ParametersServiceImplTest {
         String weight = "5X";
         String fatMass = "30%";
         String leanMass = "55%";
-        doNothing().when(parametersDAO).insertParameters(isA(Parameters.class));
         NumberFormatException exception = assertThrows(NumberFormatException.class, () -> {
             pservice.createParameters(weight, leanMass, fatMass);
         });
@@ -48,7 +46,6 @@ class ParametersServiceImplTest {
         String weight = "50";
         String fatMass = "3%";
         String leanMass = "55%";
-        doNothing().when(parametersDAO).insertParameters(isA(Parameters.class));
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             pservice.createParameters(weight, leanMass, fatMass);
         });
@@ -60,7 +57,6 @@ class ParametersServiceImplTest {
         String weight = "50";
         String fatMass = "30X%";
         String leanMass = "55%";
-        doNothing().when(parametersDAO).insertParameters(isA(Parameters.class));
         NumberFormatException exception = assertThrows(NumberFormatException.class, () -> {
             pservice.createParameters(weight, leanMass, fatMass);
         });
@@ -72,7 +68,6 @@ class ParametersServiceImplTest {
         String weight = "50";
         String fatMass = "30%";
         String leanMass = "55X%";
-        doNothing().when(parametersDAO).insertParameters(isA(Parameters.class));
         NumberFormatException exception = assertThrows(NumberFormatException.class, () -> {
             pservice.createParameters(weight, leanMass, fatMass);
         });
@@ -84,7 +79,6 @@ class ParametersServiceImplTest {
         String weight = "50";
         String fatMass = "30%";
         String leanMass = "5%";
-        doNothing().when(parametersDAO).insertParameters(isA(Parameters.class));
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             pservice.createParameters(weight, leanMass, fatMass);
         });
@@ -100,21 +94,15 @@ class ParametersServiceImplTest {
     }
 
     @Test
-
-    void testFindByEmailThatNotExists() throws InterruptedException, ExecutionException, IOException {
-        ArrayList<Parameters> list = new ArrayList<Parameters>();
-        when(parametersDAO.selectByMail(anyString())).thenReturn(list);
-        String email = "provamail";
-        assertEquals(list, pservice.getByMail(email));
+    void testServiceInsert() throws IOException {
+        Mockito.when(parametersDAO.insertParameters(any())).thenReturn(true);
+        assertEquals(true,pservice.insertParametersDB(any()));
     }
 
     @Test
-    void testFindByEmailNull() {
-        String email = null;
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            pservice.getByMail(email);
-        });
-        assertEquals("Email non valida", exception.getMessage());
+    void testServiceInsertFalse() throws IOException {
+        Mockito.when(parametersDAO.insertParameters(any())).thenReturn(false);
+        assertEquals(false,pservice.insertParametersDB(any()));
     }
 
 
