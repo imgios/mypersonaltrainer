@@ -1,7 +1,6 @@
 package it.unisa.c03.myPersonalTrainer.parameters.control;
 
 import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
-import it.unisa.c03.myPersonalTrainer.parameters.service.ParametersService;
 import it.unisa.c03.myPersonalTrainer.parameters.service.ParametersServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
