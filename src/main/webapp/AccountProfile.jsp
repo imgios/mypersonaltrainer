@@ -13,7 +13,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- JavaScript -->
-    <script src="profileScript.js"></script>
+    <script src="js/profileScript.js"></script>
+    <script src="js/controlChangePassword.js"></script>
 
 
 </head>
@@ -82,17 +83,17 @@
 
                         <h3>Modifica la password</h3>
 
-                    <form action="ChangePassword" method="post">
+                    <form action="ChangePassword" method="post" onsubmit="return stopsubmit(this);">
                         <div class="row mb-3">
-                            <label for="idEmail" class="col-sm-2 col-form-label">Email</label>
+                            <label for="email" class="col-sm-2 col-form-label">Email</label> <label id="controlEmail"></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="idEmail" name="email" placeholder="Inserisci la tua email" required>
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Inserisci la tua email" onkeyup="validateEmail()" required>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="idPassword" class="col-sm-2 col-form-label">Password</label>
+                            <label for="password" class="col-sm-2 col-form-label">Password</label> <label id="controlPassword"></label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="idPassword" name="password" placeholder="Inserisci la nuova password" required>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Inserisci la nuova password" onkeyup="validatePassword()" required>
                             </div>
                         </div>
 
