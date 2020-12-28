@@ -1,51 +1,63 @@
 package it.unisa.c03.myPersonalTrainer.agenda.dao;
 
-import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.CollectionReference;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.Firestore;
 import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
-import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AgendaDAOImplTest {
 
-    @Test
-    void saveAppointment() throws IOException, ExecutionException, InterruptedException {
-        String data="2020-07-13";
-        String time="16:00";
-        String mail="gigio@alfredo.it";
-        Firestore connection=Mockito.mock(DBConnection.getConnection().getClass());
-        CollectionReference coll=Mockito.mock(CollectionReference.class);
-        Appointment app=new Appointment(data,time,mail);
-        when(connection.collection(anyString())).thenReturn(coll);
-        ApiFuture<DocumentReference> apiFuture= Mockito.mock(ApiFuture.class);
-        when(coll.add(app)).thenReturn(apiFuture);
-        when(apiFuture.isDone()).thenReturn(true);
-        assertTrue(connection.collection("prova").add(app).isDone());
+    AgendaDAOImpl dao=new AgendaDAOImpl();
+
+
+    @BeforeAll
+     static void populate() throws IOException {
+        AgendaDAOImpl dao=new AgendaDAOImpl();
+
+        Appointment prova=new Appointment("2020-05-17","17","gigio@gmail.com");
+        Appointment provabis=new Appointment("2020-06-15","11","gigio@gmail.com");
+        Appointment prova2=new Appointment("2022-03-22","12","gigioprova@gmail.com");
+        Appointment prova3=new Appointment("2020-05-17","16","gigioarola@gmail.com");
+        assertTrue(dao.saveAppointment(prova));
+        assertTrue(dao.saveAppointment(provabis));
+        assertTrue(dao.saveAppointment(prova2));
+        assertTrue(dao.saveAppointment(prova3));
+
 
     }
 
     @Test
-    void findAppointmetsByEmail() throws IOException, ExecutionException, InterruptedException {
-       // Firestore connection = Mockito.mock(DBConnection.getConnection().getClass());
-       // List<Appointment> appuntamenti=new ArrayList<Appointment>();
-      //  connection.collection("Appointment").whereEqualTo("customerMail", "prova@prova.it").get().get().getDocuments();
+    void findAppointmetsByEmail() throws InterruptedException, ExecutionException, IOException {
+        assertNotNull(dao.findAppointmetsByEmail("gigio@gmail.com"));
+        assertSame(ArrayList.class,dao.findAppointmetsByEmail("gigio@gmail.com").getClass());
+        assertNotEquals(0,dao.findAppointmetsByEmail("gigio@gmail.com").size());
     }
 
     @Test
-    void findAppointmentByDate() {
-        List<Appointment> appuntamenti=new ArrayList<Appointment>();
+    void findAppointmentByDate() throws InterruptedException, ExecutionException, IOException {
+        assertNotNull(dao.findAppointmentByDate("2020-05-17"));
+        assertSame(ArrayList.class, dao.findAppointmentByDate("2020-05-17").getClass());
+        assertNotEquals(0, dao.findAppointmentByDate("2020-05-17").size());
+    }
+
+    @AfterAll
+    static void spopola() throws InterruptedException, ExecutionException, IOException {
+        AgendaDAOImpl dao=new AgendaDAOImpl();
+
+        Appointment prova=new Appointment("2020-05-17","17","gigio@gmail.com");
+        Appointment provabis=new Appointment("2020-06-15","11","gigio@gmail.com");
+        Appointment prova2=new Appointment("2022-03-22","12","gigioprova@gmail.com");
+        Appointment prova3=new Appointment("2020-05-17","16","gigioarola@gmail.com");
+        assertTrue(dao.deleteappointment(prova));
+        assertTrue(dao.deleteappointment(provabis));
+        assertTrue(dao.deleteappointment(prova2));
+        assertTrue(dao.deleteappointment(prova3));
+
     }
 }

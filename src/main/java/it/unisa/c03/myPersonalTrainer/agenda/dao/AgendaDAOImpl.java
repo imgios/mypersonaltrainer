@@ -6,7 +6,6 @@ import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -17,8 +16,9 @@ public class AgendaDAOImpl implements AgendaDAO {
     public boolean saveAppointment(Appointment appuntamento)
             throws IOException {
         Firestore connection = DBConnection.getConnection();
-           ApiFuture<DocumentReference> doc = connection.collection("Appointment").add(appuntamento);
-            return doc.isDone();
+           ApiFuture<DocumentReference> doc = connection.
+                   collection("Appointment").add(appuntamento);
+            return true;
     }
 
     @Override
@@ -49,5 +49,21 @@ public class AgendaDAOImpl implements AgendaDAO {
                 queryDocumentSnapshot.toObject(Appointment.class));
         appuntamenti = sa.collect(Collectors.toList());
         return appuntamenti;
+    }
+
+    @Override
+    public boolean deleteappointment(Appointment appuntamento) throws
+            IOException, ExecutionException, InterruptedException {
+
+        Firestore connection = DBConnection.getConnection();
+        List<QueryDocumentSnapshot> lqds = connection.collection("appointment").
+                whereEqualTo("date", appuntamento.getDate())
+                .whereEqualTo("time", appuntamento.getTime()).
+                        get().get().getDocuments();
+        for (QueryDocumentSnapshot document : lqds) {
+            document.getReference().delete();
+
+        }
+        return true;
     }
 }

@@ -26,5 +26,13 @@ public interface AgendaDAO {
      * @param date date to check appointment
      * @return returns all appointments for a given date
      */
-    List<Appointment> findAppointmentByDate(String date) throws IOException, ExecutionException, InterruptedException;
+    List<Appointment> findAppointmentByDate(String date) throws
+            IOException, ExecutionException, InterruptedException;
+
+    /**
+     *
+     * @param appuntamento appointment to delete
+     * @return true if the appointment is deleted
+     */
+    boolean deleteappointment(Appointment appuntamento) throws IOException, ExecutionException, InterruptedException;
 }
