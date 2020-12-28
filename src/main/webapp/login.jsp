@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <!- inserire verifica che l'utente sia PT
 isPT = true allora procedi, altrimenti errore. >
@@ -46,12 +46,12 @@ isPT = true allora procedi, altrimenti errore. >
                 <div align="center">
                     <button type="submit" class="btn btn-primary">Accedi</button>
                 </div>
-    </form>
+            </form>
     </div>
 </div>
-
 </div>
 </div>
+    <%@ include file="footer.jsp"%>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <!- inserire verifica che l'utente sia PT
 isPT = true allora procedi, altrimenti errore. >
@@ -17,7 +17,7 @@ isPT = true allora procedi, altrimenti errore. >
 <header class="site-header">
     <div class="wrapper site-header__wrapper">
         <nav class="nav">
-            <button class="nav__toggle" aria-expanded="false" type="button">
+            <button class="nav__toggle" aria-expanded="false" type="button" style=" box-sizing: border-box; align-self: flex-start; border: none; background: none;">
                 <img src="images\sidebar.png">
             </button>
             <ul class="nav__wrapper">
@@ -37,7 +37,7 @@ isPT = true allora procedi, altrimenti errore. >
     </div>
 </header>
 <!-- Header End -->
-
+<%@ include file="footer.jsp"%>
 <script src="js/header-11.js"></script>
 
 </body>
