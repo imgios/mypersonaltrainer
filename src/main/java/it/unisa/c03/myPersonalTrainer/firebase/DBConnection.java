@@ -8,39 +8,45 @@ import com.google.firebase.cloud.FirestoreClient;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.List;
 
 
-/*Classe che permetterà alle altre componenti del sistema di interagire con il database
-* il costruttore della classe è privato in modo da usare metodi statici che non appartengno ad istanze della classe ma
-* alla classe stessa*/
 public class DBConnection {
     private static DBConnection singleton;
-    private DBConnection(){}
+
+    private DBConnection() {
+    }
 
 
-    public static DBConnection getInstance()
-    {
-        if (singleton==null)
-        {
-            singleton=new DBConnection();
+    public static DBConnection getInstance() {
+        if (singleton == null) {
+            singleton = new DBConnection();
         }
         return singleton;
     }
 
 
-    /* ritornerà un oggetto di tipo Firestore in grado di comunicare con il database
-    * dichiarato come static così da appartenere alla classe e non ad un'istanza della stessa*/
     public static Firestore getConnection() throws IOException {
-        Firestore connection=null;
+        Firestore connection = null;
         try {
 
-            FirebaseOptions options=new FirebaseOptions.Builder().setCredentials(GoogleCredentials.getApplicationDefault()).build();
-            connection=FirestoreClient.getFirestore( FirebaseApp.initializeApp(options));
+            FirebaseOptions options = new
+                    FirebaseOptions.Builder().setCredentials(GoogleCredentials.getApplicationDefault()).build();
+            FirebaseApp firebaseApp = null;
+            List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
+            if (firebaseApps != null && !firebaseApps.isEmpty()) {
+                for (FirebaseApp app : firebaseApps) {
+                    if (app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)) {
+                        firebaseApp = app;
+                    }
+                }
+            } else {
+                firebaseApp = FirebaseApp.initializeApp(options);
+            }
+            connection = FirestoreClient.getFirestore(firebaseApp);
             return connection;
+        } catch (FileNotFoundException ignored) {
         }
-        catch (FileNotFoundException ignored){}
-        return connection ;
+        return connection;
     }
-
 }

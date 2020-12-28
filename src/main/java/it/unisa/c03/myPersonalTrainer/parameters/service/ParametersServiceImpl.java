@@ -2,11 +2,10 @@ package it.unisa.c03.myPersonalTrainer.parameters.service;
 
 import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
 import it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAO;
-import it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAOImpl;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
 
 public class ParametersServiceImpl implements ParametersService {
     private static final int MIN_WEIGHT = 40;
@@ -18,21 +17,25 @@ public class ParametersServiceImpl implements ParametersService {
     private static final int PERCENTAGE = 100;
 
 
-    private final ParametersDAO parametersDAO = new ParametersDAOImpl();
+    private ParametersDAO parametersDAO;
+
+    public ParametersServiceImpl(ParametersDAO parametersDAO) {
+        this.parametersDAO = parametersDAO;
+    }
 
     /**
-     * allows to check the format parameters, and to insert into database.
+     * check the format parameters
      *
      * @param weight   between 40 and 150 format alloed XXX.XX
      * @param leanMass between 10% and 70%
      * @param fatMass  between 10% and 70%
-     * @return the added parameters
+     * @return the parameters, null if the parameters in input are not good
      * @throws NumberFormatException
      * @throws IllegalArgumentException
      */
     public Parameters createParameters(String weight, String leanMass,
                                        String fatMass)
-            throws NumberFormatException, IllegalArgumentException {
+            throws IllegalArgumentException, IOException {
 
         if (weight != null
                 && weight.length() < MIN_LENGHT_WEIGHT
@@ -56,11 +59,7 @@ public class ParametersServiceImpl implements ParametersService {
                     "formato massa magra non valido");
         }
         double weightD = Double.parseDouble(weight);
-        if (weightD < MIN_WEIGHT
-                || weightD > MAX_WEIGHT) {
-            throw new IllegalArgumentException(
-                    "lunghezza peso non valida");
-        }
+
         double leanMassD =
                 Double.parseDouble(leanMass.substring(
                         0, leanMass.length() - 1));
@@ -93,21 +92,17 @@ public class ParametersServiceImpl implements ParametersService {
                 bigDecimalleanMassTot.doubleValue();
         Parameters pa =
                 new Parameters(weightD,
-                        fatMassTotal, leanMassTotal, "mail@io.it");
-        parametersDAO.insertParameters(pa);
+                        fatMassTotal, leanMassTotal, "prova@io.it");
         return pa;
     }
 
     /**
-     * @param email mail client who want to retrieve his parameters
-     * @return list of parameters
+     * @param parameters the parameters to insert
+     * @return true if the parameters are inserted into database
+     * @throws IOException
      */
-    public ArrayList<Parameters> getByMail(String email) {
-        if (email == null) {
-            throw new IllegalArgumentException(
-                    "Email non valida");
-        }
-        ArrayList<Parameters> list = parametersDAO.selectByMail(email);
-        return list;
+    @Override
+    public boolean insertParametersDB(Parameters parameters) throws IOException {
+        return parametersDAO.insertParameters(parameters);
     }
 }

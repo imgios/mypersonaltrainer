@@ -2,6 +2,8 @@ package it.unisa.c03.myPersonalTrainer.parameters.control;
 
 
 import com.google.gson.Gson;
+import it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAO;
+import it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAOImpl;
 import it.unisa.c03.myPersonalTrainer.parameters.service.ParametersService;
 import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
 import it.unisa.c03.myPersonalTrainer.parameters.service.ParametersServiceImpl;
@@ -13,8 +15,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * this class manage the insert parameters.
+ * if return 1 the insert passed, else return the oracle message.
+ */
 @WebServlet(name = "ParametersController", value = "/parameters-controller")
 public class ParametersController extends HttpServlet {
+
+    private ParametersDAO parametersDAO = new ParametersDAOImpl();
+    private ParametersService service = new ParametersServiceImpl(parametersDAO);
+
+
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {
@@ -24,12 +35,16 @@ public class ParametersController extends HttpServlet {
         String weight = request.getParameter("weight");
         String mm = request.getParameter("leanMass");
         String mg = request.getParameter("fatMass");
-        ParametersService service = new ParametersServiceImpl();
         String res = "";
 
         try {
             Parameters p = service.createParameters(weight, mm, mg);
-            res = new Gson().toJson(1);
+
+            if (p != null) {
+                if (service.insertParametersDB(p)) {
+                    res = new Gson().toJson(1);
+                }
+            }
         } catch (IllegalArgumentException e) {
             res = new Gson().toJson(e.getMessage());
             response.getWriter().write(res);
