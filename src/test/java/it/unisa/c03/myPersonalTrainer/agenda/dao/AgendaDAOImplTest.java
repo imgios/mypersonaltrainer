@@ -1,46 +1,56 @@
 package it.unisa.c03.myPersonalTrainer.agenda.dao;
 
-import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.CollectionReference;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.Firestore;
 import it.unisa.c03.myPersonalTrainer.agenda.bean.Availability;
-import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
-import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
 
 class AgendaDAOImplTest {
-    AgendaDAO agendaDAO = Mockito.mock(AgendaDAO.class);
+    AgendaDAO agendaDAO = new AgendaDAOImpl();
+
+
+    @BeforeAll
+    static void populate() throws IOException {
+
+        AgendaDAO agendaDAO = new AgendaDAOImpl();
+        Availability prova = new Availability("2020-10-17", 9);
+        Availability prova2 = new Availability("2022-10-22", 10);
+        Availability prova3 = new Availability("2020-10-18", 11);
+        assertTrue(agendaDAO.insertAvailability(prova));
+        assertTrue(agendaDAO.insertAvailability(prova2));
+        assertTrue(agendaDAO.insertAvailability(prova3));
+    }
 
     @Test
-    void insertAvailability() throws IOException {
-        doNothing().when(agendaDAO).insertAvailability(isA(Availability.class));
+    void findAllByDateTest() throws InterruptedException, ExecutionException, IOException {
+        assertNotNull(agendaDAO.findAvailabilityByDate("2020-10-17"));
+        assertSame(ArrayList.class, agendaDAO.findAvailabilityByDate("2020-10-17").getClass());
+        assertNotEquals(0, agendaDAO.findAvailabilityByDate("2020-10-17").size());
+    }
+
+    @Test
+    void findAllByDateAndTimeTest() throws InterruptedException, ExecutionException, IOException {
+        assertNotNull(agendaDAO.findAvailabilityByDateAndTime("2020-10-17", 9));
+        assertSame(Availability.class, agendaDAO.findAvailabilityByDateAndTime("2020-10-17", 9).getClass());
+        assertNotEquals(new Availability(), agendaDAO.findAvailabilityByDateAndTime("2020-10-17", 9));
+    }
 
 
-        /*Firestore connection = Mockito.mock(DBConnection.getConnection().getClass());
-        CollectionReference collectionRef = Mockito.mock(CollectionReference.class);
-
-       // collectionRef.
-        Availability a = new Availability("2021-10-10",14);
-        when(connection.collection(anyString())).thenReturn(collectionRef);
-        ApiFuture apiFuture = Mockito.mock(ApiFuture.class);
-
-        when(collectionRef.add(a)).thenReturn(apiFuture);
-
-//        DocumentReference documentReference = Mockito.mock(DocumentReference.class);
-
-        //when(apiFuture.isDone()).thenReturn(false);
-
-        when(connection.collection(anyString()).add(a).isDone()).thenReturn(true);
-
-        assertEquals(true, connection.collection("Availability").add(new Availability("2021-10-10",14)).isDone());*/
-
+    @AfterAll
+    static void spopola() throws InterruptedException, ExecutionException, IOException {
+        AgendaDAO agendaDAO = new AgendaDAOImpl();
+        Availability prova = new Availability("2020-10-17", 9);
+        Availability prova2 = new Availability("2022-10-22", 10);
+        Availability prova3 = new Availability("2020-10-18", 11);
+        assertTrue(agendaDAO.deleteAvailability(prova));
+        assertTrue(agendaDAO.deleteAvailability(prova2));
+        assertTrue(agendaDAO.deleteAvailability(prova3));
     }
 }
