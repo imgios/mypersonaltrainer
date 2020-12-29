@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Marco Sica
-  Date: 27/12/2020
-  Time: 13:11
-  To change this template use File | Settings | File Templates.
---%>
+
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -16,18 +10,22 @@
     <script src="js/insertAvailability.js"></script>
 </head>
 <body>
-<form>
-    <label for="iddataSelected">Data desiderata:</label>
-    <input type="date" id="iddataSelected" name="dataSelected">
-    <br>
 
-    <label for="idtimeSelected">Orario desiderato:</label>
-    <input type="number" min="9" max="19" name="timeSelected" id="idtimeSelected" placeholder="9">
-    <br>
+<form>
+    <div class="form-group">
+        <label for="iddataSelected">Data desiderata:</label>
+        <input type="date" id="iddataSelected" name="dataSelected">
+    </div>
+    <div class="form-group">
+        <label for="idtimeSelected">Orario desiderato:</label>
+        <input type="number" min="9" max="19" name="timeSelected" id="idtimeSelected" placeholder="9">
+    </div>
     <button type="button" id="buttonSubmit">Inserisci Disponibilita'</button>
 </form>
+
 <div class="alert alert-danger" role="alert" id="divError"></div>
 
 <div class="alert alert-success" role="alert" id="divSuccess"></div>
+
 </body>
 </html>
