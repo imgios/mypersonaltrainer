@@ -29,7 +29,7 @@ class AvailabilityControllerTest {
         when(request.getParameter("dataSelected")).thenReturn("2021-10-10");
         when(request.getParameter("timeSelected")).thenReturn("18");
         when(agendaService.checkAvailability(anyString(), any())).thenReturn(true);
-        doNothing().when(agendaService).createAvailability(any());
+        Mockito.when(agendaService.createAvailability(any())).thenReturn(true);
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
@@ -43,7 +43,7 @@ class AvailabilityControllerTest {
         when(request.getParameter("dataSelected")).thenReturn("2021-10-10");
         when(request.getParameter("timeSelected")).thenReturn("18");
         when(agendaService.checkAvailability(anyString(), any())).thenReturn(true);
-        doNothing().when(agendaService).createAvailability(any());
+        Mockito.when(agendaService.createAvailability(any())).thenReturn(true);
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
@@ -57,7 +57,7 @@ class AvailabilityControllerTest {
         when(request.getParameter("dataSelected")).thenReturn("2019-10-10");
         when(request.getParameter("timeSelected")).thenReturn("18");
         when(agendaService.checkAvailability(anyString(), any())).thenReturn(false);
-        doNothing().when(agendaService).createAvailability(any());
+        Mockito.when(agendaService.createAvailability(any())).thenReturn(false);
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
@@ -71,7 +71,7 @@ class AvailabilityControllerTest {
         when(request.getParameter("dataSelected")).thenReturn("2019-10-10");
         when(request.getParameter("timeSelected")).thenReturn("18");
         when(agendaService.checkAvailability(anyString(), any())).thenReturn(false);
-        doNothing().when(agendaService).createAvailability(any());
+        Mockito.when(agendaService.createAvailability(any())).thenReturn(false);
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
