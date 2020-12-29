@@ -3,8 +3,15 @@ package it.unisa.c03.myPersonalTrainer.agenda.bean;
 import java.io.Serializable;
 
 public class Availability implements Serializable {
+
     private static final long serialVersionUID = 1L;
+    /**
+     * represent the availabilit date yyyy-mm-dd.
+     */
     private String date;
+    /**
+     * represent the time.
+     */
     private int time;
 
     public Availability(String date, int time) {
