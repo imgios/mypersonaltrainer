@@ -38,14 +38,10 @@ public class ParametersDAOImpl implements ParametersDAO {
      * @return a list of client parameters
      */
     @Override
-    public ArrayList<Parameters> selectByMail(String email) {
+    public ArrayList<Parameters> selectByMail(String email)throws InterruptedException,IOException,ExecutionException {
         // Create a reference to the account collection
         CollectionReference parameters = null;
-        try {
             parameters = DBConnection.getConnection().collection("Parameters");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         // Create a query against the collection.
         Query query = parameters.whereEqualTo("mailClient", email);
@@ -55,7 +51,6 @@ public class ParametersDAOImpl implements ParametersDAO {
 
         //create Bean to return document.get("email"));
         ArrayList<Parameters> list = new ArrayList<Parameters>();
-        try {
             for (DocumentSnapshot document
                     : querySnapshot.get().getDocuments()) {
                 Parameters params = new Parameters();
@@ -72,12 +67,5 @@ public class ParametersDAOImpl implements ParametersDAO {
                 list.add(params);
             }
             return list;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-        return list;
     }
 }

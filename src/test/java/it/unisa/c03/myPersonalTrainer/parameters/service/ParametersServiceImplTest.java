@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -92,14 +94,37 @@ class ParametersServiceImplTest {
     @Test
     void testServiceInsert() throws IOException {
         Mockito.when(parametersDAO.insertParameters(any())).thenReturn(true);
-        assertEquals(true,pservice.insertParametersDB(any()));
+        assertEquals(true, pservice.insertParametersDB(any()));
     }
 
     @Test
     void testServiceInsertFalse() throws IOException {
         Mockito.when(parametersDAO.insertParameters(any())).thenReturn(false);
-        assertEquals(false,pservice.insertParametersDB(any()));
+        assertEquals(false, pservice.insertParametersDB(any()));
     }
 
+    @Test
+    void testFindByEmailNull() {
+        String email = null;
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            pservice.getByMail(email);
+        });
+        assertEquals("Email non valida", exception.getMessage());
+    }
 
+    @Test
+    void mailNonExist() throws InterruptedException, ExecutionException, IOException {
+        ArrayList<Parameters> list = new ArrayList<>();
+        Mockito.when(parametersDAO.selectByMail(anyString())).thenReturn(list);
+        assertEquals(0, pservice.getByMail(anyString()).size());
+    }
+
+    @Test
+    void mailExist() throws InterruptedException, ExecutionException, IOException {
+        Parameters p1 = new Parameters(80, 48, 40, "test@utente.it");
+        ArrayList<Parameters> list = new ArrayList<>();
+        list.add(p1);
+        Mockito.when(parametersDAO.selectByMail(anyString())).thenReturn(list);
+        assertEquals(1, pservice.getByMail(anyString()).size());
+    }
 }

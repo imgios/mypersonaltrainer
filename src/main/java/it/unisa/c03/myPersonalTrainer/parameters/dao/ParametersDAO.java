@@ -4,6 +4,7 @@ import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public interface ParametersDAO {
 
@@ -20,7 +21,7 @@ public interface ParametersDAO {
      * @param email client mail to retrieve his parameters
      * @return a list of client parameters
      */
-    ArrayList<Parameters> selectByMail(String email);
+    ArrayList<Parameters> selectByMail(String email) throws InterruptedException, IOException, ExecutionException;
 
 
 

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class ParametersServiceImpl implements ParametersService {
     private static final int MIN_WEIGHT = 40;
@@ -111,7 +112,7 @@ public class ParametersServiceImpl implements ParametersService {
      * @param email mail client who want to retrieve his parameters
      * @return list of parameters
      */
-    public ArrayList<Parameters> getByMail(String email) {
+    public ArrayList<Parameters> getByMail(String email) throws InterruptedException, ExecutionException, IOException {
         if (email == null) {
             throw new IllegalArgumentException(
                     "Email non valida");

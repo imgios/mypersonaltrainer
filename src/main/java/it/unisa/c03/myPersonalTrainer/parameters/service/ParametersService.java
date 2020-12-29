@@ -4,6 +4,7 @@ import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public interface ParametersService {
     /**
@@ -33,5 +34,5 @@ public interface ParametersService {
      * @param email mail client who want to retrieve his parameters
      * @return list of parameters
      */
-    ArrayList<Parameters> getByMail(String email);
+    ArrayList<Parameters> getByMail(String email) throws InterruptedException, ExecutionException, IOException;
 }
