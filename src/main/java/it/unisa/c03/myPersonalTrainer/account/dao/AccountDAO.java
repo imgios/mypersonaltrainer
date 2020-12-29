@@ -9,12 +9,25 @@ import java.util.concurrent.ExecutionException;
 public interface AccountDAO {
 
 
-    //funzione per controllare dal db se l'utente è già
-    // registrato con quella email
-     Account findAccountByEmail(String email) throws IOException, ExecutionException, InterruptedException;
 
-     boolean updatePassword(String email, String password) throws IOException, ExecutionException, InterruptedException;
+     Account findAccountByEmail(String email)
+             throws IOException, ExecutionException, InterruptedException;
 
-     String getAccountDocumentIdByEmail(String email) throws IOException, ExecutionException, InterruptedException;
+    /**
+     * This DAO method changes the password of an account.
+     * @param email of the account
+     * @param password updated
+     * @return true after the change has taken place
+     */
+     boolean updatePassword(String email, String password)
+             throws IOException, ExecutionException, InterruptedException;
+
+    /**
+     * This DAO method looks for the document id of an account.
+     * @param email of the account
+     * @return the document Id
+     */
+     String getAccountDocumentIdByEmail(String email)
+             throws IOException, ExecutionException, InterruptedException;
 
 }

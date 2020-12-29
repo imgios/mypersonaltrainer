@@ -20,7 +20,8 @@ public class AccountDAOImpl implements AccountDAO {
 
 
     @Override
-    public Account findAccountByEmail(String email) throws IOException, ExecutionException, InterruptedException {
+    public Account findAccountByEmail(String email)
+            throws IOException, ExecutionException, InterruptedException {
 
         // Create a reference to the account collection
         CollectionReference accounts = null;
@@ -52,9 +53,15 @@ public class AccountDAOImpl implements AccountDAO {
         return accountBean;
     }
 
+    /**
+     * This DAO method changes the password of an account.
+     * @param email of the account
+     * @param password updated
+     * @return true after the change has taken place
+     */
     @Override
-    //javadoc
-    public boolean updatePassword(String email, String password) throws IOException, ExecutionException, InterruptedException {
+    public boolean updatePassword(String email, String password)
+            throws IOException, ExecutionException, InterruptedException {
 
         //find document id
         String id = getAccountDocumentIdByEmail(email);
@@ -71,9 +78,14 @@ public class AccountDAOImpl implements AccountDAO {
 
     }
 
+    /**
+     * This DAO method looks for the document id of an account.
+     * @param email of the account
+     * @return the document Id
+     */
     @Override
-    //javadoc
-    public String getAccountDocumentIdByEmail(String email) throws IOException, ExecutionException, InterruptedException {
+    public String getAccountDocumentIdByEmail(String email)
+            throws IOException, ExecutionException, InterruptedException {
         // Create a reference to the account collection
         CollectionReference accounts = null;
 

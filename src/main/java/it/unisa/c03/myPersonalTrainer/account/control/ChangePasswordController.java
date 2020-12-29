@@ -17,9 +17,24 @@ import java.util.concurrent.ExecutionException;
 @WebServlet(name = "ChangePassword", value = "/ChangePassword")
 public class ChangePasswordController extends HttpServlet {
 
+    /**
+     * @exclude
+     * */
     private AccountDAO account = new AccountDAOImpl();
+    /**
+     * @exclude
+     * */
     private AccountService service = new AccountServiceImpl(account);
 
+    /**
+     * This method checks the credentials arrived from the request,
+     * and calls all the service methods which it needs to change
+     * the password.
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response)
             throws ServletException, IOException {
@@ -84,7 +99,13 @@ public class ChangePasswordController extends HttpServlet {
         }
 
     }
-
+    /**
+     * This method simply recall doPost.
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
             throws ServletException, IOException {

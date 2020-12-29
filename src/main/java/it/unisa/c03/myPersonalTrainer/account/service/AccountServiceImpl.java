@@ -1,7 +1,6 @@
 package it.unisa.c03.myPersonalTrainer.account.service;
 
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
-import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 
 import java.io.IOException;
@@ -10,16 +9,34 @@ import java.util.concurrent.ExecutionException;
 
 public class AccountServiceImpl implements AccountService {
 
+    /**
+     * @exclude
+     * */
     private static final int MIN_EMAIL_LENGTH = 7;
+    /**
+     * @exclude
+     * */
     public static final int MAX_EMAIL_LENGTH = 25;
+    /**
+     * @exclude
+     * */
     public static final int MIN_PASSWORD_LENGTH = 1;
+    /**
+     * @exclude
+     * */
     public static final int MAX_PASSWORD_LENGTH = 30;
 
-    private AccountDAO accountDAO ;
-
-    public AccountServiceImpl(AccountDAO accountDao)
-    {
-        accountDAO = accountDao ;
+    /**
+     * @exclude
+     * */
+    private AccountDAO accountDAO;
+    /**
+     * Service constructor.
+     * @param accountDao is required, because is the DAO that
+     * all the service methods will call.
+     * */
+    public AccountServiceImpl(AccountDAO accountDao) {
+        accountDAO = accountDao;
     }
 
     @Override
@@ -56,12 +73,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     /**
-     * ajasjcjas.
-     * @param email to search
-     * @return true or false perche
+     * This service method checks if an account exists in the database.
+     * @param email referring to the account to search for
+     * @return true if the account exists, false if not
      */
     @Override
-    public boolean searchAccountByEmail(String email) throws InterruptedException, ExecutionException, IOException {
+    public boolean searchAccountByEmail(String email)
+            throws InterruptedException, ExecutionException, IOException {
 
         boolean result = false;
         Account account = new Account();
@@ -78,10 +96,15 @@ public class AccountServiceImpl implements AccountService {
         return result;
     }
 
+    /**
+     * This service method changes the password of an account.
+     * @param email of the account
+     * @param password updated
+     * @return true after the change has taken place
+     */
     @Override
-    // java doc
-    public boolean changePassword(String email,
-                               String password) throws IOException, ExecutionException, InterruptedException {
+    public boolean changePassword(String email, String password)
+            throws IOException, ExecutionException, InterruptedException {
 
         return accountDAO.updatePassword(email, password);
     }
