@@ -15,7 +15,7 @@ public class Subscription {
     /**
      subscription price.
      */
-    private int price;
+    private String price;
 
     /**
      * Void constructor of the class.
@@ -29,7 +29,7 @@ public class Subscription {
      * @param date the expiration date of the subscription
      * @param cost the subscription price
      */
-    public Subscription(String customerEmail, String date, int cost) {
+    public Subscription(String customerEmail, String date, String cost) {
         this.customerMail = customerEmail;
         this.expDate = date;
         this.price = cost;
@@ -71,7 +71,7 @@ public class Subscription {
      * method for get the subscription price.
      * @return the price
      */
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
@@ -79,7 +79,7 @@ public class Subscription {
      * method for set the subscription price.
      * @param cost to set
      */
-    public void setPrice(int cost) {
+    public void setPrice(String cost) {
         this.price = cost;
     }
 
@@ -89,7 +89,7 @@ public class Subscription {
     @Override
     public String toString() {
         return "Subscription{"
-                + ", eMail='" + customerMail + '\''
+                + " eMail='" + customerMail + '\''
                 + ", price='" + price + '\''
                 + ", expDate=" + expDate
                 + '}';

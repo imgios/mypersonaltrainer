@@ -58,7 +58,8 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
                     String.valueOf(document.get("customerMail")));
             subscriptionBean.setExpDate(
                     String.valueOf(document.get("expDate")));
-            subscriptionBean.setPrice((Integer) document.get("price"));
+            subscriptionBean.setPrice(
+                    String.valueOf(document.get("price")));
         }
 
 

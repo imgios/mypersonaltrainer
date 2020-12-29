@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.concurrent.ExecutionException;
 
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
@@ -14,6 +15,11 @@ import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 import it.unisa.c03.myPersonalTrainer.account.service.AccountService;
 import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
+import it.unisa.c03.myPersonalTrainer.subscription.bean.Subscription;
+import it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAO;
+import it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAOImpl;
+import it.unisa.c03.myPersonalTrainer.subscription.service.SubscriptionService;
+import it.unisa.c03.myPersonalTrainer.subscription.service.SubscriptionServiceImpl;
 
 /**
  * servlet for creating account.
@@ -74,6 +80,20 @@ public class CreateAccountServlet extends HttpServlet {
                 System.out.println("credenziali OK");
 
                 control = accountService.RegisterAccount(utente);
+
+                // subscription registration
+                SubscriptionDAO subDao = new SubscriptionDAOImpl();
+                SubscriptionService subService = new SubscriptionServiceImpl(subDao);
+                Subscription subBean = new Subscription();
+                subBean.setCustomerMail(utente.getEmail());
+                subBean.setPrice("30");
+
+                //setting the date one month later
+                LocalDate local = LocalDate.now();
+                LocalDate oneMonthLater = local.plusMonths(1);
+                subBean.setExpDate(oneMonthLater.toString());
+
+                subService.createSubscription(subBean);
 
                 if (control) {
                     System.out.println("boolean true inserito");
