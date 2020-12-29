@@ -43,3 +43,11 @@ footer h1:hover{
     color: #222;
 
 }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 10px;
+    background-color: #ffffff;
+    padding: 10px;
+}

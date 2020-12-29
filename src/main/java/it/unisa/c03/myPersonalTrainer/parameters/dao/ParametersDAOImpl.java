@@ -61,8 +61,8 @@ public class ParametersDAOImpl implements ParametersDAO {
             for (DocumentSnapshot document
                     : querySnapshot.get().getDocuments()) {
                 Parameters params = new Parameters();
-                params.setfatMass(Double.valueOf((Double)
-                        document.get("fatMass")));
+                params.setfatMass((Double)
+                        document.get("fatMass"));
                 params.setleanMass((Double)
                         document.get("leanMass"));
                 params.setweight((Double)

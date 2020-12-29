@@ -4,7 +4,6 @@ import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QuerySnapshot;
-import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
@@ -16,18 +15,25 @@ import java.util.concurrent.ExecutionException;
 public class AccountDAOImpl implements AccountDAO {
 
     @Override
-    public void saveAccount(Account utente) throws IOException {
-            System.out.println("stampa dal DAO");
-            System.out.println(utente);
+    public boolean saveAccount(Account utente) throws IOException {
+        System.out.println("stampa dal DAO");
+        System.out.println(utente);
 
+        boolean controllo;
+        controllo = false;
 
         //inserimento della connessione al db per il salvataggio del documento
-            //Firestore connection
-            //connection.getCollections();
-        DBConnection.getConnection().collection("Account").add(utente);
-           // connection.collection("Account").add(utente);
+        //Firestore connection
+        //connection.getCollections();
+        //DBConnection.getConnection().collection("Account").add(utente);
+        // connection.collection("Account").add(utente);
 
-        }
+            DBConnection.getConnection().collection("Account").add(utente);
+            controllo = true;
+            return controllo;
+
+    }
+
 
     @Override
     public Account findAccountByEmail(String email) {
