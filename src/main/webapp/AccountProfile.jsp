@@ -13,7 +13,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- JavaScript -->
-    <script src="profileScript.js"></script>
+    <script src="js/profileScript.js"></script>
 
 
 </head>

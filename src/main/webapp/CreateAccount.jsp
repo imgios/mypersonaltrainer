@@ -55,7 +55,7 @@ isPT = true allora procedi, altrimenti errore. -->
     <input type="submit" value="submit"> <input type ="reset">
 </form>
 -->
-
+<div id = "main">
 <!--inserimento form bootstrap -->
 <p>registrazione un nuovo account</p>
 
@@ -122,10 +122,12 @@ isPT = true allora procedi, altrimenti errore. -->
 </div>
 <%}%>
 </div>
-
+</div>
 
 <!--  inserimento footer -->
-<%@ include file="footer.jsp"%>
+<div id="footer">
+<%@ include file="footer/footer.jsp"%>
+</div>
 
 </body>
 </html>

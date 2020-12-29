@@ -18,6 +18,7 @@
     //}
     //String email = "mail@io.it";
     String email = "prova@io.it";
+        // String email = "test@utente.it";
 %>
 <%  //check of the parameters
  //devo prendere i parametri dalla sessione?
@@ -32,9 +33,10 @@
 <html>
 <head>
     <title>Progressi Cliente</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+
 <%
     ParametersService sparam = new ParametersServiceImpl();
   //  sparam.getByMail(email);
@@ -67,8 +69,9 @@
 <!-- inserimento script -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
+<h4>inserimento header</h4>
 
-<div class="grid-container">
+    <div id = "main">
     <div>
 <div class="chart-container" style="position: relative; height:auto; width:80vw">
     <canvas id="myChart"></canvas>
@@ -83,15 +86,24 @@
             labels: [<%=dati%>],
     datasets: [{
     label: 'Peso',
-    backgroundColor: 'rgb(255, 99, 132)',
-    borderColor: 'rgb(255, 99, 132)',
+    backgroundColor: 'rgb(74, 104, 254)',
+    borderColor: 'rgb(9,217,245)',
     data: [<%=passaggio%>]
 
     }]
     },
 
     // Configuration options go here
-    options: {}
+        options: {
+            layout: {
+                padding: {
+                    left: 300,
+                    right: 0,
+                    top: 0,
+                    bottom: 0
+                }
+            }
+        }
     });
     </script>
  </div>
@@ -111,21 +123,30 @@
                 labels: [<%=dati%>],
                 datasets: [{
                     label: 'Massa Magra',
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgb(30,196,255)',
+                    borderColor: 'rgb(30,252,209)',
                     data: [<%=massamagra%>]
 
                 }]
             },
             // Configuration options go here
-            options: {}
+            options: {
+                layout: {
+                    padding: {
+                        left: 300,
+                        right: 0,
+                        top: 0,
+                        bottom: 0
+                    }
+                }
+            }
         });
     </script>
     </div>
 </div>
 
 
-    <div>
+    <div>        <!-- 120px -->
         <div class="chart-container" style="position: relative; height:auto; width:80vw">
             <canvas id="myChart3"></canvas>
             <script>
@@ -139,24 +160,36 @@
                         labels: [<%=dati%>],
                         datasets: [{
                             label: 'Massa Grassa',
-                            backgroundColor: 'rgb(255, 99, 132)',
-                            borderColor: 'rgb(255, 99, 132)',
+                            backgroundColor: 'rgb(18,255,255)',
+                            borderColor: 'rgb(0,248,170)',
                             data: [<%=massagrassa%>]
 
                         }]
                     },
                     // Configuration options go here
-                    options: {}
+                    options: {
+                        layout: {
+                            padding: {
+                                left: 300,
+                                right: 0,
+                                top: 0,
+                                bottom: 0
+                            }
+                        }
+                    }
                 });
             </script>
         </div>
     </div>
 </div>
-</div>
+    </div>
 
 <!--  inserimento footer -->
+<div id="footer">
+        <%@ include file="footer/footer.jsp"%>
+            </div>
 
 
 </body>
-<%@ include file="footer.jsp"%>
+
 </html>
