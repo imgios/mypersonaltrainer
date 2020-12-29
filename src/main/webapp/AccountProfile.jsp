@@ -23,16 +23,18 @@
     <h1>Gestisci Profilo</h1>
 </div>
 
+<div class="container">
+
 <div class="row">
-    <div class="col-4">
+    <div class="col-sm-4">
         <div class="list-group" id="list-tab" role="tablist">
 
-            <button class="list-group-item list-group-item-action active" id="list-profile-btn" data-bs-toggle="list" role="tab" aria-controls="profile" onclick="showProfile()">Profile</button>
+            <button class="list-group-item list-group-item-action active" id="list-profile-btn" data-bs-toggle="list" role="tab" aria-controls="profile" onclick="showProfile()">Profilo</button>
             <button class="list-group-item list-group-item-action" id="list-password-btn" data-bs-toggle="list" role="tab" aria-controls="password" onclick="showPassword()">Cambia Password</button>
             <button class="list-group-item list-group-item-action" id="list-abbonamento-btn" data-bs-toggle="list" role="tab" aria-controls="abbonamento" onclick="showAbbonamento()">Abbonamento</button>
         </div>
     </div>
-    <div class="col-8">
+    <div class="col-sm-8">
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="scritta-profile" role="tabpanel">
 
@@ -160,6 +162,8 @@
 
         </div>
     </div>
+</div>
+
 </div>
 
 </body>
