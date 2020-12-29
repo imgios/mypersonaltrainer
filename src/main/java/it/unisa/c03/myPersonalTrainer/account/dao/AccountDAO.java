@@ -7,6 +7,8 @@ import java.util.concurrent.ExecutionException;
 
 public interface AccountDAO {
 
+    //funzione per salvare un nuovo utente in firestore
+    boolean saveAccount(Account utente) throws IOException;
 
 
      Account findAccountByEmail(String email)

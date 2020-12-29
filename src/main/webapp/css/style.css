@@ -1,0 +1,85 @@
+footer {
+    bottom: 0;
+    width: 100%;
+    position: relative;
+    height: auto;
+    background-color: #000000;
+}
+
+footer ul.footerleft{
+    margin-left: 150px;
+    margin-top: -200px;   /* 10 precedent value*/
+}
+footer ul.footerleft li{
+    display: inline;
+    margin-right: 25px;
+}
+footer a{
+    color: #ffffff;
+}
+
+footer a:hover{
+    color: #09ffc4;
+    text-decoration: none;
+}
+footer h5{
+    color: #ffffff;
+}
+footer p{
+    color: #ffffff;
+}
+/*
+footer h1:hover{
+    color: #09ffc4;
+    text-decoration: none;
+}
+*/
+#main {
+    overflow:auto;
+    padding-bottom: 200px;
+}
+
+.social:hover {
+    -webkit-transform: scale(1.0);
+    -webkit-transition-duration: 0.5s;
+}
+.social {
+    -webkit-transform: scale(0.8);
+    color: #222;
+
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 10px;
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+
+html, body {height: 100%;}
+
+#wrap {min-height: 100%;}
+
+/* allineamento centrale canvas */
+/*
+canvas{
+    margin: 0 auto;
+}
+
+.chartContainer{
+    text-align: center;
+}
+
+myChart{
+    width: 80% !important;
+    height: 700px !important;
+    margin: 0;
+}
+
+.myChart {
+    text-align: center;
+    margin: 0 auto;
+}
+*/

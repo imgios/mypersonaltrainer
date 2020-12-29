@@ -21,6 +21,26 @@ import java.util.concurrent.ExecutionException;
 public class AccountDAOImpl implements AccountDAO {
 
     @Override
+    public boolean saveAccount(Account utente) throws IOException {
+       System.out.println("stampa dal DAO");
+       System.out.println(utente);
+
+       boolean controllo;
+       controllo = false;
+
+       //inserimento della connessione al db per il salvataggio del documento
+       //Firestore connection
+       //connection.getCollections();
+       //DBConnection.getConnection().collection("Account").add(utente);
+       // connection.collection("Account").add(utente);
+
+           DBConnection.getConnection().collection("Account").add(utente);
+           controllo = true;
+           return controllo;
+
+    }
+
+    @Override
     public Collection<Account> getAccounts() {
 
         // Create a reference to the account collection
@@ -63,14 +83,21 @@ public class AccountDAOImpl implements AccountDAO {
             System.out.println("stampa dal DAO");
             System.out.println(utente);
 
+        boolean controllo;
+        controllo = false;
 
         //inserimento della connessione al db per il salvataggio del documento
-            //Firestore connection
-            //connection.getCollections();
-        DBConnection.getConnection().collection("Account").add(utente);
-           // connection.collection("Account").add(utente);
+        //Firestore connection
+        //connection.getCollections();
+        //DBConnection.getConnection().collection("Account").add(utente);
+        // connection.collection("Account").add(utente);
 
-        }
+            DBConnection.getConnection().collection("Account").add(utente);
+            controllo = true;
+            return controllo;
+
+    }
+
 
     @Override
     public Account findAccountByEmail(String email)

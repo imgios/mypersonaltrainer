@@ -146,3 +146,5 @@ mypersonaltrainer-firebase-admin-sdk.json
 myPersonalTrainer.iml
 
 .DS_Store
+
+src/main/java/it/unisa/c03/myPersonalTrainer/firebase/

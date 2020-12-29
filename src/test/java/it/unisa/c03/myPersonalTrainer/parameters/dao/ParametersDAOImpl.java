@@ -7,7 +7,6 @@ import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QuerySnapshot;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
-import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import java.util.concurrent.ExecutionException;
 /**
  * this is an implementation of ParametersDAO.
  */
-
 public class ParametersDAOImpl implements ParametersDAO {
 
     /**
@@ -63,8 +61,8 @@ public class ParametersDAOImpl implements ParametersDAO {
             for (DocumentSnapshot document
                     : querySnapshot.get().getDocuments()) {
                 Parameters params = new Parameters();
-                params.setfatMass((Double)
-                        document.get("fatMass"));
+                params.setfatMass(Double.valueOf((Double)
+                        document.get("fatMass")));
                 params.setleanMass((Double)
                         document.get("leanMass"));
                 params.setweight((Double)
