@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class ParametersServiceImplTest {
-/*
+
     ParametersDAO parametersDAO = Mockito.mock(ParametersDAO.class);
     ParametersService pservice = new ParametersServiceImpl(parametersDAO);
 
@@ -102,6 +102,4 @@ class ParametersServiceImplTest {
     }
 
 
-
- */
 }

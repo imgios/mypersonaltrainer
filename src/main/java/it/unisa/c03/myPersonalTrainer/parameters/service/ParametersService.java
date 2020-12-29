@@ -4,11 +4,10 @@ import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 public interface ParametersService {
     /**
-     * this methods check if the parameters are acceptable; then enable to insert them into database
+     * this methods check if the parameters are acceptable; then enable to insert them into database.
      *
      * @param weight
      * @param leanMass
@@ -22,7 +21,7 @@ public interface ParametersService {
             throws IllegalArgumentException, IOException;
 
     /**
-     * insert the parameters into database
+     * insert the parameters into database.
      *
      * @param parameters the parameters to insert
      * @return true if the operation is done

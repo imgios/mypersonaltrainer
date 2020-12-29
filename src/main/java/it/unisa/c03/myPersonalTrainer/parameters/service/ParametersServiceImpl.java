@@ -93,8 +93,7 @@ public class ParametersServiceImpl implements ParametersService {
                 bigDecimalleanMassTot.doubleValue();
         Parameters pa =
                 new Parameters(weightD,
-                        fatMassTotal, leanMassTotal, "test@utente.it");
-        parametersDAO.insertParameters(pa);
+                        fatMassTotal, leanMassTotal, "prova@io.it");
         return pa;
     }
 

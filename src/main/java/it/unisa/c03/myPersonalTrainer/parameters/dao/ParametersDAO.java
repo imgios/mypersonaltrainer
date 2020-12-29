@@ -4,7 +4,6 @@ import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 public interface ParametersDAO {
 
