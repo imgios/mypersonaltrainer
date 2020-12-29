@@ -4,6 +4,7 @@ import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public interface AgendaService {
     /**
@@ -27,12 +28,12 @@ public interface AgendaService {
      * @param appuntamneto appointment to delete
      * @return true if the appointment is successfully deleted
      */
-    boolean removeAppointment(Appointment appuntamneto);
+    boolean removeAppointment(Appointment appuntamneto) throws InterruptedException, ExecutionException, IOException;
 
     /**
      *
      * @param date
      * @return return a list of appointments fixed on that date
      */
-    List<Appointment> findAppointmentByDate(String date);
+    List<Appointment> findAppointmentByDate(String date) throws InterruptedException, ExecutionException, IOException;
 }

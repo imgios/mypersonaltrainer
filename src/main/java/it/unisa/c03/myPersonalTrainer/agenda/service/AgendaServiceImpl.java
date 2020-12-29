@@ -7,6 +7,7 @@ import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAOImpl;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public final class AgendaServiceImpl implements AgendaService {
 
@@ -48,12 +49,17 @@ public final class AgendaServiceImpl implements AgendaService {
     }
 
     @Override
-    public boolean removeAppointment(Appointment appuntamneto) {
-        return false;
+    public boolean removeAppointment(Appointment appuntamento) throws InterruptedException, ExecutionException, IOException {
+        dao.deleteappointment(appuntamento);
+        return true;
     }
 
     @Override
-    public List<Appointment> findAppointmentByDate(String date) {
+    public List<Appointment> findAppointmentByDate(String date) throws InterruptedException, ExecutionException, IOException {
+        boolean datacheck = checkDate(date);
+        if (datacheck) {
+            return dao.findAppointmentByDate(date);
+        }
         return null;
     }
 }
