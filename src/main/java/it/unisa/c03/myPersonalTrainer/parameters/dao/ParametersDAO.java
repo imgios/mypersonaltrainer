@@ -16,6 +16,13 @@ public interface ParametersDAO {
      */
     boolean insertParameters(Parameters param) throws IOException;
 
+    /***
+     *
+     * @param email client mail to retrieve his parameters
+     * @return a list of client parameters
+     */
+    ArrayList<Parameters> selectByMail(String email);
+
 
 
 }

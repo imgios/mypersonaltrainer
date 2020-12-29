@@ -174,4 +174,6 @@ class AccountServiceImplTest {
         AccountService service  = new AccountServiceImpl(accountDAO);
         assertEquals(true, service.changePassword("cliente@gmail.com", "nuovaPassword45"));
     }
+
+
 }

@@ -8,8 +8,10 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class ParametersDAOImplTest {
 
+    /*
     ParametersDAO parametersDAO = new ParametersDAOImpl();
     @Test
     void populatAndtest() throws IOException {
@@ -17,4 +19,6 @@ class ParametersDAOImplTest {
         Parameters parameters = new Parameters(50, 25, 25, "prova@io.it");
         assertTrue(parametersDAO.insertParameters(parameters));
     }
+
+     */
 }

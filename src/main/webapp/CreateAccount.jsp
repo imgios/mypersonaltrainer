@@ -55,79 +55,84 @@ isPT = true allora procedi, altrimenti errore. -->
     <input type="submit" value="submit"> <input type ="reset">
 </form>
 -->
-<div id = "main">
+
 <!--inserimento form bootstrap -->
 <p>registrazione un nuovo account</p>
 
 <div class="container">
-<form action="CreateAccountServlet" method="post">
+    <form action="<%=request.getContextPath()%>/CreateAccountServlet" method="post" onsubmit="return stopsubmit(this);">
 
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="name">Nome</label>
-            <input type="text" class="form-control" name="name" id="name" placeholder="inserire nome">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Nome</label> <label id="controlName"></label>
+                <input type="text" class="form-control" name="name" id="name" onkeyup="validateName()" placeholder="inserire nome">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="surname">Cognome</label> <label id="controlSurname"></label>
+                <input type="text" class="form-control" name="surname" id="surname" onkeyup="validateSurname()" placeholder="inserire cognome">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="phone">Telefono</label> <label id="controlPhone"></label>
+                <input type="text" class="form-control" id="phone" name="phone" onkeyup="validatePhone()" placeholder="inserire numero di telefono">
+            </div>
         </div>
-        <div class="form-group col-md-6">
-            <label for="surname">Cognome</label>
-            <input type="text" class="form-control" name="surname" id="surname" placeholder="inserire cognome">
+        <!-- non mi piace molto quella casella telefono da sola, credo di metterla vicino al cognome, ma non sono simmetriche poi aaaaa -->
+        <!-- </div> -->
+        <!--
+            <div class="form-group">
+            <div class="form-group col-md-6">
+                    <label for="phone">Telefono</label>
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="inserire numero di telefono">
+                </div>
+            </div>
+        -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="email">Email</label> <label id="controlEmail"></label>
+                <input type="email" class="form-control" name="email" id="email" onkeyup="validateEmail()" placeholder="Email">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="password">Password</label> <label id="controlPassword"></label>
+                <input type="password" class="form-control" name="password" id="password" onkeyup="validatePassword()" placeholder="Password">
+            </div>
         </div>
-        <div class="form-group col-md-6">
-            <label for="phone">Telefono</label>
-            <input type="text" class="form-control" id="phone" name="phone" placeholder="inserire numero di telefono">
-        </div>
-    </div>
-    <!-- non mi piace molto quella casella telefono da sola, credo di metterla vicino al cognome, ma non sono simmetriche poi aaaaa -->
-   <!-- </div> -->
-<!--
-    <div class="form-group">
-    <div class="form-group col-md-6">
-            <label for="phone">Telefono</label>
-            <input type="text" class="form-control" id="phone" name="phone" placeholder="inserire numero di telefono">
-        </div>
-    </div>
--->
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" name="email" id="email" placeholder="Email">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-        </div>
-    </div>
 
-    <button type="submit" class="btn btn-primary">Registrati</button>
-</form>
+        <button type="submit" class="btn btn-primary">Registrati</button>
+    </form>
 </div>
+
 
 <!-- ____________________________________________________________________________________ -->
 
 <!-- visualizza messaggio nella pagina di jsp-->
 <!-- Div in basso per errori -->
 <div>
-<% String error = (String) request.getSession().getAttribute("errorToShow");
-    if ( error != null)
-    {%>
-<div class="alert alert-danger" role="alert"  id="errorDiv">
-    <p><%= error %> </p>
-</div>
-<%}%>
+    <% String error = (String) request.getSession().getAttribute("errorToShow");
+        if ( error != null)
+        {%>
+    <div class="alert alert-danger" role="alert"  id="errorDiv">
+        <p><%= error %> </p>
+    </div>
+    <%}%>
 
-<% String success = (String) request.getSession().getAttribute("successToShow");
-    if ( success != null)
-    {%>
-<div class="alert alert-success" role="alert"  id="errorDiv">
-    <p><%= success %> </p>
+    <% String success = (String) request.getSession().getAttribute("successToShow");
+        if ( success != null)
+        {%>
+    <div class="alert alert-success" role="alert"  id="errorDiv">
+        <p><%= success %> </p>
+    </div>
+    <%}%>
 </div>
-<%}%>
-</div>
-</div>
+
+
+
+
+
+<!-- inserimento del file js -->
+<script type="text/javascript" src="./js/controlregistration.js"></script>
 
 <!--  inserimento footer -->
-<div id="footer">
-<%@ include file="footer/footer.jsp"%>
-</div>
+<%@ include file="./footer/footer.jsp"%>
 
 </body>
 </html>

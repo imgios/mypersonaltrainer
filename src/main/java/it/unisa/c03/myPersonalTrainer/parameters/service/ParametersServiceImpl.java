@@ -6,6 +6,7 @@ import it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAO;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 
 public class ParametersServiceImpl implements ParametersService {
     private static final int MIN_WEIGHT = 40;
@@ -105,5 +106,18 @@ public class ParametersServiceImpl implements ParametersService {
     @Override
     public boolean insertParametersDB(Parameters parameters) throws IOException {
         return parametersDAO.insertParameters(parameters);
+    }
+
+    /**
+     * @param email mail client who want to retrieve his parameters
+     * @return list of parameters
+     */
+    public ArrayList<Parameters> getByMail(String email) {
+        if (email == null) {
+            throw new IllegalArgumentException(
+                    "Email non valida");
+        }
+        ArrayList<Parameters> list = parametersDAO.selectByMail(email);
+        return list;
     }
 }

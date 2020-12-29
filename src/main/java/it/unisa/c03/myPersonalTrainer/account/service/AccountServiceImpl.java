@@ -2,33 +2,11 @@ package it.unisa.c03.myPersonalTrainer.account.service;
 
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
-import java.util.Collection;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
+
 import java.io.IOException;
+import java.util.Collection;
 import java.util.concurrent.ExecutionException;
-
-public class AccountServiceImpl implements AccountService {
-
-    /*
-    * This class calls back AccountDAOImpl
-    * */
-
-    @Override
-    public Collection<Account> viewInfoAccount() throws IOException {
-
-        AccountDAO p = new AccountDAOImpl();
-        return p.getAccounts();
-
-    }
-
-    @Override
-    public boolean RegisterAccount(Account utente) throws IOException, IllegalArgumentException {
-
-        AccountDAO accountDAO = new AccountDAOImpl();
-        // utente.getEmail();
-        //va implementato il check della email che non deve essere già presente nel db
-        //System.out.println(utente.getEmail());
-
-        System.out.println("CONTROLLO EMAIL PRIMA DELL'INSERIMENTO NEL DB");
 
 
 public class AccountServiceImpl implements AccountService {
@@ -63,6 +41,13 @@ public class AccountServiceImpl implements AccountService {
         accountDAO = accountDao;
     }
 
+    /**
+     * check the credential with the regular expression.
+     * @param clientMail email of the client
+     * @param newPassword new password to update
+     * @return clientMail, new Passoword, after check
+     * @throws IllegalArgumentException
+     */
     @Override
     public boolean checkCredentials(String clientMail,
                                     String newPassword)
@@ -132,4 +117,54 @@ public class AccountServiceImpl implements AccountService {
 
         return accountDAO.updatePassword(email, password);
     }
+
+
+    /*
+     * This class calls back AccountDAOImpl
+     * */
+    @Override
+    public Collection<Account> viewInfoAccount() throws IOException {
+        AccountDAO p = new AccountDAOImpl();
+        return p.getAccounts();
+    }
+
+    /**
+     * this function register the account.
+     * @param utente user into the db.
+     * @return utente user mem into the db.
+     * @throws IOException
+     * @throws IllegalArgumentException
+     */
+    @Override
+    public boolean RegisterAccount(Account utente)
+            throws IOException, IllegalArgumentException,
+            ExecutionException, InterruptedException {
+
+        AccountDAO accountDAO = new AccountDAOImpl();
+
+        System.out.println("CONTROLLO EMAIL PRIMA DELL'INSERIMENTO NEL DB");
+
+        // System.out.println(utente.getEmail());
+        // System.out.println(accountDAO.findAccountByEmail(utente.getEmail()));
+
+        Account ricerca;
+        ricerca = accountDAO.findAccountByEmail(utente.getEmail());
+
+        //stampa delle due email
+        System.out.println(utente.getEmail());
+        System.out.println(ricerca.getEmail());
+
+        //if (utente.getEmail() != ricerca.getEmail()){
+        if (ricerca.getEmail() == null) {
+            System.out.println("email non presente, la inserisco nel DB");
+            accountDAO.saveAccount(utente);
+            return true;
+        } else {
+            System.out.println("email già presente");
+            throw new IllegalArgumentException("email già presente"
+                    + " nel DB, utilizza una nuova email");
+        }
+
+    }
+
 }

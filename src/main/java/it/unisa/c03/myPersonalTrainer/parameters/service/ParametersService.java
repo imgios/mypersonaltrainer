@@ -29,4 +29,10 @@ public interface ParametersService {
      * @throws IOException
      */
     boolean insertParametersDB(Parameters parameters) throws IOException;
+
+    /**
+     * @param email mail client who want to retrieve his parameters
+     * @return list of parameters
+     */
+    ArrayList<Parameters> getByMail(String email);
 }

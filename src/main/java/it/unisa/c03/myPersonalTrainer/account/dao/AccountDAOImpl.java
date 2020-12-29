@@ -15,31 +15,41 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
+
 
 
 public class AccountDAOImpl implements AccountDAO {
 
+    /**
+     * this function save the account into the db.
+     * @param utente describe the user
+     * @throws IOException
+     * @return
+     */
     @Override
     public boolean saveAccount(Account utente) throws IOException {
-       System.out.println("stampa dal DAO");
-       System.out.println(utente);
 
-       boolean controllo;
-       controllo = false;
+        //System.out.println("stampa dal DAO");
+        //System.out.println(utente);
 
-       //inserimento della connessione al db per il salvataggio del documento
-       //Firestore connection
-       //connection.getCollections();
-       //DBConnection.getConnection().collection("Account").add(utente);
-       // connection.collection("Account").add(utente);
+        /*
+        inserimento della connessione al db per il salvataggio del documento
+        Firestore connection
+        connection.getCollections();
+         */
+        boolean controllo;
+        controllo = false;
 
-           DBConnection.getConnection().collection("Account").add(utente);
-           controllo = true;
-           return controllo;
+        DBConnection.getConnection().collection("Account").add(utente);
+        controllo = true;
 
+        return controllo;
     }
 
+
+    /**
+     * this method estracts accounts into database.
+     **/
     @Override
     public Collection<Account> getAccounts() {
 
@@ -56,19 +66,17 @@ public class AccountDAOImpl implements AccountDAO {
 
         List<Account> accountBean = null;
 
-        /**
-         * this method estracts accounts into database.
-         **/
+
 
         try {
             accountBean = accounts.get()
                     .getDocuments()
                             .stream()
-                                .map(queryDocumentSnapshot -> queryDocumentSnapshot
-                                    .toObject(Account.class))
+                    .map(queryDocumentSnapshot -> queryDocumentSnapshot
+                            .toObject(Account.class))
                                         .collect(Collectors.toList());
 
-        } catch (InterruptedException e ) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
@@ -78,27 +86,12 @@ public class AccountDAOImpl implements AccountDAO {
 
     }
 
-    @Override
-    public void saveAccount(Account utente) throws IOException {
-            System.out.println("stampa dal DAO");
-            System.out.println(utente);
 
-        boolean controllo;
-        controllo = false;
-
-        //inserimento della connessione al db per il salvataggio del documento
-        //Firestore connection
-        //connection.getCollections();
-        //DBConnection.getConnection().collection("Account").add(utente);
-        // connection.collection("Account").add(utente);
-
-            DBConnection.getConnection().collection("Account").add(utente);
-            controllo = true;
-            return controllo;
-
-    }
-
-
+    /**
+     * this function can check if the email is into the db.
+     * @param email is the pk to find the user into the db
+     * @return
+     */
     @Override
     public Account findAccountByEmail(String email)
             throws IOException, ExecutionException, InterruptedException {
@@ -106,7 +99,7 @@ public class AccountDAOImpl implements AccountDAO {
         // Create a reference to the account collection
         CollectionReference accounts = null;
 
-            accounts = DBConnection.getConnection().collection("Account");
+        accounts = DBConnection.getConnection().collection("Account");
 
 
         // Create a query against the collection.
@@ -118,16 +111,16 @@ public class AccountDAOImpl implements AccountDAO {
         //create Bean to return
         Account accountBean = new Account();
 
-            for (DocumentSnapshot document
-                    : querySnapshot.get().getDocuments()) {
+        for (DocumentSnapshot document
+                : querySnapshot.get().getDocuments()) {
 
-                accountBean.setEmail(String.valueOf(document.get("email")));
-                accountBean.setName(String.valueOf(document.get("name")));
-                accountBean.setSurname(String.valueOf(document.get("surname")));
-                accountBean.setPassword(
-                        String.valueOf(document.get("password")));
-                accountBean.setPhone(String.valueOf(document.get("phone")));
-            }
+            accountBean.setEmail(String.valueOf(document.get("email")));
+            accountBean.setName(String.valueOf(document.get("name")));
+            accountBean.setSurname(String.valueOf(document.get("surname")));
+            accountBean.setPassword(
+                    String.valueOf(document.get("password")));
+            accountBean.setPhone(String.valueOf(document.get("phone")));
+        }
 
 
         return accountBean;

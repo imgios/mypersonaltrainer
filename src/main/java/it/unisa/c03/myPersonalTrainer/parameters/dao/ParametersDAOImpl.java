@@ -25,7 +25,7 @@ public class ParametersDAOImpl implements ParametersDAO {
      * @param parameters the parameters to add into database
      */
     @Override
-    public void insertParameters(Parameters parameters) {
+    public boolean insertParameters(Parameters parameters) {
         try {
             DBConnection.getConnection().collection(
                     "Parameters").add(parameters);
@@ -33,6 +33,7 @@ public class ParametersDAOImpl implements ParametersDAO {
             e.getMessage();
             e.printStackTrace();
         }
+        return true;
     }
 
 

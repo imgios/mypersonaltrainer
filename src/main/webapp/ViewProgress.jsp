@@ -1,7 +1,9 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.parameters.service.ParametersServiceImpl" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.parameters.service.ParametersService" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters" %><%--
+<%@ page import="it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAOImpl" %><%--
   Created by IntelliJ IDEA.
   User: giampieroferrara
   Date: 28/12/20
@@ -38,7 +40,8 @@
 <body>
 
 <%
-    ParametersService sparam = new ParametersServiceImpl();
+    ParametersDAO paramDao = new ParametersDAOImpl();
+    ParametersService sparam = new ParametersServiceImpl(paramDao);
   //  sparam.getByMail(email);
     ArrayList<Parameters> list = sparam.getByMail(email);
   //  for (Parameters param: list){

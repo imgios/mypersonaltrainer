@@ -55,5 +55,13 @@ class AccountDAOImplTest {
         assertEquals(true, dao.updatePassword(accountTest.getEmail(),"changedPassword56"));
     }
 
+    @Test
+    void saveAccount() throws IOException {
+        Account utente = new Account("Admin", "Admin", "0000000000", "admin@adminnnnn.it", "Adminaccount00", 1);
+
+        AccountDAO adao = new AccountDAOImpl();
+        assertTrue(adao.saveAccount(utente));
+    }
+
 
 }
