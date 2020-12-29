@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -30,7 +29,7 @@
 
             <button class="list-group-item list-group-item-action active" id="list-profile-btn" data-bs-toggle="list" role="tab" aria-controls="profile" onclick="showProfile()">Profile</button>
             <button class="list-group-item list-group-item-action" id="list-password-btn" data-bs-toggle="list" role="tab" aria-controls="password" onclick="showPassword()">Cambia Password</button>
-
+            <button class="list-group-item list-group-item-action" id="list-abbonamento-btn" data-bs-toggle="list" role="tab" aria-controls="abbonamento" onclick="showAbbonamento()">Abbonamento</button>
         </div>
     </div>
     <div class="col-8">
@@ -41,36 +40,72 @@
                     <div class="card-body">
                         <h3>Le tue informazioni</h3>
 
-                    <div class="input-group mb-3">
-                        <label class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Telefono" aria-label="Phone" aria-describedby="basic-addon1">
+                        <div class="input-group mb-3">
+                            <label class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="Telefono" aria-label="Phone" aria-describedby="basic-addon1">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="input-group mb-3">
-                        <label class="col-sm-2 col-form-label">Nome</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Telefono" aria-label="Phone" aria-describedby="basic-addon1">
+                        <div class="input-group mb-3">
+                            <label class="col-sm-2 col-form-label">Nome</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="Telefono" aria-label="Phone" aria-describedby="basic-addon1">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="input-group mb-3">
-                        <label class="col-sm-2 col-form-label">Cognome</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Telefono" aria-label="Phone" aria-describedby="basic-addon1">
+                        <div class="input-group mb-3">
+                            <label class="col-sm-2 col-form-label">Cognome</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="Telefono" aria-label="Phone" aria-describedby="basic-addon1">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="input-group mb-3">
-                        <label class="col-sm-2 col-form-label">Telefono</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Telefono" aria-label="Phone" aria-describedby="basic-addon1">
+                        <div class="input-group mb-3">
+                            <label class="col-sm-2 col-form-label">Telefono</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="Telefono" aria-label="Phone" aria-describedby="basic-addon1">
+                            </div>
                         </div>
-                    </div>
 
+
+                    </div>
 
                 </div>
+
+            </div>
+
+            <div class="tab-pane fade show active" id="scritta-abbonamento" role="tabpanel">
+
+                <div id="testoAbbonamento" class="card">
+                    <div class="card-body">
+                        <h3>Il tuo Abbonamento</h3>
+
+                        <div class="input-group mb-3">
+                            <label class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="Telefono" aria-label="Phone" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <label class="col-sm-2 col-form-label">Scadenza</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="Telefono" aria-label="Phone" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <label class="col-sm-2 col-form-label">Prezzo</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="Telefono" aria-label="Phone" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
 
                 </div>
 
@@ -83,30 +118,30 @@
 
                         <h3>Modifica la password</h3>
 
-                    <form action="ChangePassword" method="post" onsubmit="return stopsubmit(this);">
-                        <div class="row mb-3">
-                            <label for="email" class="col-sm-2 col-form-label">Email</label> <label id="controlEmail"></label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Inserisci la tua email" onkeyup="validateEmail()" required>
+                        <form action="ChangePassword" method="post" onsubmit="return stopsubmit(this);">
+                            <div class="row mb-3">
+                                <label for="email" class="col-sm-2 col-form-label">Email</label> <label id="controlEmail"></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="Inserisci la tua email" onkeyup="validateEmail()" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="password" class="col-sm-2 col-form-label">Password</label> <label id="controlPassword"></label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Inserisci la nuova password" onkeyup="validatePassword()" required>
+                            <div class="row mb-3">
+                                <label for="password" class="col-sm-2 col-form-label">Password</label> <label id="controlPassword"></label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Inserisci la nuova password" onkeyup="validatePassword()" required>
+                                </div>
                             </div>
-                        </div>
 
-                        <button type="submit" class="btn btn-primary">Cambia</button>
-                    </form>
+                            <button type="submit" class="btn btn-primary">Cambia</button>
+                        </form>
 
-                    <!-- Div in basso per errori -->
+                        <!-- Div in basso per errori -->
                         <% String error = (String) request.getSession().getAttribute("errorToShow");
-                        if ( error != null)
-                        {%>
-                    <div class="alert alert-danger" role="alert"  id="errorDiv">
-                       <p><%= error %> </p>
-                    </div>
+                            if ( error != null)
+                            {%>
+                        <div class="alert alert-danger" role="alert"  id="errorDiv">
+                            <p><%= error %> </p>
+                        </div>
                         <%}%>
 
                         <% String success = (String) request.getSession().getAttribute("successToShow");
