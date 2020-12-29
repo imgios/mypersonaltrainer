@@ -3,12 +3,12 @@ package it.unisa.c03.myPersonalTrainer.trainingplan.service;
 import it.unisa.c03.myPersonalTrainer.trainingplan.bean.TrainingPlan;
 
 public class TrainingPlanServiceImpl implements TrainingPlanService {
-
+/*
     @Override
     public TrainingPlan createTrainingPlan() {
 
     }
-
+*/
     @Override
     public boolean checkExercise(String exercise, String repetitions, String series, String recoveryTime)  throws IllegalArgumentException {
 
@@ -38,7 +38,7 @@ public class TrainingPlanServiceImpl implements TrainingPlanService {
             throw  new IllegalArgumentException("invalid exercise");
         }
 
-        else if( recoveryTime.length() >= 1 || recoveryTime.length() <= 3) {
+        else if( !(recoveryTime.length() >= 1 || recoveryTime.length() <= 3)) {
             throw new IllegalArgumentException("invalid repeats");
         }
 
