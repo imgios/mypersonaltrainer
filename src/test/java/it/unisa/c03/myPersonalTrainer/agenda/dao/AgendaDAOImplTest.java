@@ -4,17 +4,16 @@ import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 class AgendaDAOImplTest {
 
     AgendaDAOImpl dao=new AgendaDAOImpl();
-
 
     @BeforeAll
      static void populate() throws IOException {
