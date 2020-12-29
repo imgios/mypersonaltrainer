@@ -9,10 +9,16 @@ import java.util.concurrent.ExecutionException;
 
 public interface AccountService {
 
-     Collection<Account> viewInfoAccount() throws IOException;
+
+  /**
+   * This function return the list of the account insert into the db.
+   * @return list of every account store
+   * @throws IOException exception
+   */
+    Collection<Account> viewInfoAccount() throws IOException;
 
     /**
-     * this function give the possibility to register a
+     * This function give the possibility to register a
      * new user into the system.
      * @param utente user into the db
      * @return true if is possibly to insert the
@@ -22,12 +28,12 @@ public interface AccountService {
      * @throws IOException //
      * @throws IllegalArgumentException //
      */
-     boolean RegisterAccount(Account utente)
+     boolean registerAccount(Account utente)
              throws IOException, IllegalArgumentException,
              ExecutionException, InterruptedException;
 
     /**
-     * this function check the credentials of
+     * This function check the credentials of
      * the client before insert into the db.
      * @param clientMail email of the client
      * @param newPassword new password to update

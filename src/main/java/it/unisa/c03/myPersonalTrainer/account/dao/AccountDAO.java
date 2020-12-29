@@ -13,7 +13,6 @@ public interface AccountDAO {
      * @throws IOException
      * @return
      */
-    //funzione per salvare un nuovo utente in firestore
     boolean saveAccount(Account utente) throws IOException;
 
     /** this function can search if the email is
@@ -43,6 +42,11 @@ public interface AccountDAO {
              throws IOException, ExecutionException, InterruptedException;
 
 
+    /**
+     * This function read the saved accounts into the db.
+     * @return List of the accounts
+     * @throws IOException
+     */
     Collection<Account> getAccounts() throws IOException;
 
 }

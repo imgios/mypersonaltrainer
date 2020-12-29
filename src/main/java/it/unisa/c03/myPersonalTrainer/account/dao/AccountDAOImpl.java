@@ -48,8 +48,9 @@ public class AccountDAOImpl implements AccountDAO {
 
 
     /**
-     * this method estracts accounts into database.
-     **/
+     *  This method estracts accounts into database.
+     * @return list of the accounts
+     */
     @Override
     public Collection<Account> getAccounts() {
 
@@ -65,8 +66,6 @@ public class AccountDAOImpl implements AccountDAO {
         ApiFuture<QuerySnapshot> accounts = db.get();
 
         List<Account> accountBean = null;
-
-
 
         try {
             accountBean = accounts.get()

@@ -119,9 +119,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
 
-    /*
-     * This class calls back AccountDAOImpl
-     * */
+    /**
+     * This function return the list of the account insert into the db.
+     * @return list of every account store
+     * @throws IOException exception
+     */
     @Override
     public Collection<Account> viewInfoAccount() throws IOException {
         AccountDAO p = new AccountDAOImpl();
@@ -136,7 +138,7 @@ public class AccountServiceImpl implements AccountService {
      * @throws IllegalArgumentException
      */
     @Override
-    public boolean RegisterAccount(Account utente)
+    public boolean registerAccount(Account utente)
             throws IOException, IllegalArgumentException,
             ExecutionException, InterruptedException {
 
