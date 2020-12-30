@@ -109,6 +109,7 @@ public class CreateAccountServlet extends HttpServlet {
          if result is false, it means that there's an error to show
         memorizzazzione okay e informazioni non presenti
          */
+
         if (controlcredential && control) {
             request.getSession().removeAttribute("errorToShow");
             request.getSession().setAttribute("successToShow",
@@ -127,7 +128,7 @@ public class CreateAccountServlet extends HttpServlet {
             request.getSession().setAttribute("errorToShow", errors);
             response.sendRedirect("CreateAccount.jsp");
         }
-
+        
         //
         //email o credenziali non valide
       /*
@@ -178,6 +179,6 @@ public class CreateAccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {
-
+        doPost(request, response);
     }
 }

@@ -60,4 +60,5 @@ public interface AccountService {
     */
     boolean changePassword(String email, String password)
            throws IOException, ExecutionException, InterruptedException;
+
 }
