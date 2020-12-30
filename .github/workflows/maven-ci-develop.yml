@@ -26,6 +26,10 @@ jobs:
 
     - name: Build project with Maven
       run: mvn -B package --file pom.xml
+      env: 
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
     
     - name: Run (J)Unit tests
       run: mvn clean test
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
