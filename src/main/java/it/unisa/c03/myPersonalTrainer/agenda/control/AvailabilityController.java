@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 /**
  * this class controls the interaction between personal trainer and system.
@@ -48,20 +49,29 @@ public class AvailabilityController extends HttpServlet {
         try {
             System.out.println(
                     agendaService.checkAvailability(data, x));
-            Availability avaiability =
-                    new Availability(data, Integer.parseInt(x));
-            agendaService.createAvailability(avaiability);
-            res = new Gson().toJson(1);
-        } catch (IllegalArgumentException | IOException e) {
+
+            Availability prova = agendaService.getAvailabilityByDateAndTime(data, Integer.parseInt(x));
+            System.out.println(prova);
+            if (prova == null) {
+                Availability avaiability =
+                        new Availability(data, Integer.parseInt(x));
+                agendaService.createAvailability(avaiability);
+                res = new Gson().toJson(1);
+            } else {
+                res = new Gson().toJson(2);
+            }
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             res = new Gson().toJson(e.getMessage());
             response.getWriter().write(res);
             return;
+        } catch (InterruptedException e) {
+            System.out.println("cazzo faiiii interr");
+        } catch (ExecutionException e) {
+            System.out.println("cazzo faiiii ExecutionException");
         }
         response.getWriter().write(res);
         return;
-
-
     }
 
     protected void doGet(HttpServletRequest request,

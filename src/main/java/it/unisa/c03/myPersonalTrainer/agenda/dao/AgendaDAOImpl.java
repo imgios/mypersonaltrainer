@@ -49,7 +49,7 @@ public final class AgendaDAOImpl
                 querySnapShot.get().getDocuments();
         Stream<Availability> sa =
                 docs.stream().map(queryDocumentSnapshot ->
-                queryDocumentSnapshot.toObject(Availability.class));
+                        queryDocumentSnapshot.toObject(Availability.class));
         dispo = sa.collect(Collectors.toList());
         return dispo;
     }
@@ -63,8 +63,8 @@ public final class AgendaDAOImpl
                 DBConnection.getConnection();
         List<QueryDocumentSnapshot> lqds =
                 connection.collection("Availability").
-                whereEqualTo("date", availability.getDate())
-                .whereEqualTo("time", availability.getTime()).
+                        whereEqualTo("date", availability.getDate())
+                        .whereEqualTo("time", availability.getTime()).
                         get().get().getDocuments();
         for (QueryDocumentSnapshot document : lqds) {
             document.getReference().delete();
@@ -86,6 +86,11 @@ public final class AgendaDAOImpl
         Stream<Availability> sa = docs.stream().map(queryDocumentSnapshot ->
                 queryDocumentSnapshot.toObject(Availability.class));
         dispo = sa.collect(Collectors.toList());
-        return dispo.get(0);
+        System.out.println("\n\n" + dispo.size());
+        if (dispo.size() == 0) {
+            return null;
+        } else {
+            return dispo.get(0);
+        }
     }
 }
