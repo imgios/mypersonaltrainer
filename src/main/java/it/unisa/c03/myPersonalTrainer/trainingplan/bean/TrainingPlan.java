@@ -1,28 +1,26 @@
 package it.unisa.c03.myPersonalTrainer.trainingplan.bean;
 
-import java.util.Date;
+
 
 public class TrainingPlan {
+    private String exercises;
+    private String date;
+    private String email;
 
     @Override
     public String toString() {
-
-        return "trainingPlan{" +
-                "exercises=" +
-                exercises +
-                ", date=" +
-                date +
-                ", email='" +
-                email +
-                '\'' +
+        return "TrainingPlan{" +
+                "exercises='" + exercises + '\'' +
+                ", date='" + date + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 
-    public TrainingPlan(){
+    public TrainingPlan() {
 
     }
 
-    public TrainingPlan(String exercises, Date date, String email) {
+    public TrainingPlan(String exercises, String date, String email) {
         this.exercises = exercises;
         this.date = date;
         this.email = email;
@@ -32,7 +30,7 @@ public class TrainingPlan {
         this.exercises = exercises;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -44,16 +42,11 @@ public class TrainingPlan {
         return exercises;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
     public String getEmail() {
         return email;
     }
-
-    private String exercises;
-    private Date date;
-    private String email;
-
 }

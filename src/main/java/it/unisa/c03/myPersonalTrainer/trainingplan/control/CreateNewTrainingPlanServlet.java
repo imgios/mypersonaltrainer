@@ -22,12 +22,7 @@ public class CreateNewTrainingPlanServlet extends HttpServlet {
 
         TrainingPlanService service = new TrainingPlanServiceImpl();
 
-        try{
-            TrainingPlan tp = service.createTrainingPlan();
-
-        }
-
-
+        //TrainingPlan tp = service.createTrainingPlan();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
