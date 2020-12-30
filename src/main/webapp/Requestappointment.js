@@ -1,6 +1,7 @@
 function ricaricalista()
 {
-    $('#listaappuntamento').load(window.location.href+'#listaappuntamento');
+
+    $('#container').load('#container');
 }
 
 

@@ -15,24 +15,29 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-@WebServlet(name = "RemoveAppointmentServlet",value = "/RemoveAppointmentServlet")
+@WebServlet(name = "RemoveAppointmentServlet",
+        value = "/RemoveAppointmentServlet")
 public class RemoveAppointmentServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse
+            response) throws ServletException, IOException {
         System.out.println("ci entro");
-        String data=request.getParameter("dataapp");
-        String time=request.getParameter("ora");
-        String mail=request.getParameter("mail");
-        Appointment appointment=new Appointment(data,time,mail);
-        AgendaDAO dao= new AgendaDAOImpl();
-        AgendaService service= new AgendaServiceImpl(dao);
+        String data = request.getParameter("dataapp");
+        String time = request.getParameter("ora");
+        String mail = request.getParameter("mail");
+        Appointment appointment = new Appointment(data, time, mail);
+        AgendaDAO dao = new AgendaDAOImpl();
+        AgendaService service = new AgendaServiceImpl(dao);
         response.setContentType("application/json");
         try {
-            response.getWriter().write(new Gson().toJson(service.removeAppointment(appointment)));
+            response.getWriter().write(new Gson().toJson(service.
+                    removeAppointment(appointment)));
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

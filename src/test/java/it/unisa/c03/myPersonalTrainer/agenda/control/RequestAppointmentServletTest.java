@@ -26,10 +26,13 @@ class RequestAppointmentServletTest {
         Mockito.when(service.createAppointment(Mockito.anyString(),Mockito.anyString(),Mockito.anyString())).thenReturn(true);
         assertTrue(service.createAppointment(request.getParameter("data"),request.getParameter("time"),request.getParameter("mailutente")));
 new RequestAppointmentServlet().doPost(request,response);
+new RequestAppointmentServlet().doGet(request,response);
 
     }
 
     @Test
     void doGet() throws ServletException, IOException {
+
+
     }
 }
