@@ -1,14 +1,14 @@
 footer {
     bottom: 0;
     width: 100%;
-    position: relative;
+    position: fixed;
     height: auto;
     background-color: #000000;
 }
 
 footer ul.footerleft{
     margin-left: 150px;
-    margin-top: -200px;   /* 10 precedent value*/
+    margin-top: 10px;   /* 10 precedent value  dopo -200*/
 }
 footer ul.footerleft li{
     display: inline;
@@ -60,7 +60,9 @@ footer h1:hover{
 
 html, body {height: 100%;}
 
+/*
 #wrap {min-height: 100%;}
+*/
 
 /* allineamento centrale canvas */
 /*

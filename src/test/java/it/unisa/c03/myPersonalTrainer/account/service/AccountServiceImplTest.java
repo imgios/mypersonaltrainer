@@ -4,6 +4,7 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import org.junit.jupiter.api.Test;
 
@@ -176,4 +177,46 @@ class AccountServiceImplTest {
     }
 
 
+    @Test
+    void registerAccountTrue() throws IOException, IllegalArgumentException,
+        ExecutionException, InterruptedException {
+
+        Account user = new Account("nome","cognome","1223232312321", "test_2@test.it", "Test0232", 0);
+
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class);
+       //Account user = Mockito.mock(Account.class);
+
+        AccountService accounts = new AccountServiceImpl(accountDAO);
+
+        Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(user);
+        Mockito.when(accountDAO.saveAccount(any())).thenReturn(true);
+        Account user_test = new Account("nome","cognome","1223232312321", "test_2_2@test.it", "Test0232", 0);
+
+        //accountDAO.saveAccount(account);
+        assertTrue(accounts.registerAccount(user_test));
+
+    }
+
+
+    @Test
+    void registerAccountFalse() throws IOException, IllegalArgumentException,
+        ExecutionException, InterruptedException {
+
+        Account user = new Account("nome", "cognome", "121212121212", "test@test.it", "Password12",
+            0);
+
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class);
+        AccountService accountS = new AccountServiceImpl(accountDAO);
+
+        Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(user);
+
+        Account user_test = new Account("nome", "cognome", "121212121212", "test@test.it",
+            "Password12", 0);
+
+        // assertFalse(accountS.registerAccount(user_test));
+        assertThrows(IllegalArgumentException.class, () -> {
+            accountS.registerAccount(user_test);
+            }
+        );
+    }
 }

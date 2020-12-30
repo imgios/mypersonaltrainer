@@ -89,21 +89,10 @@ public class CreateAccountServlet extends HttpServlet {
                 if (control) {
                     System.out.println("boolean true inserito");
                     System.out.println("valore inserito inserito");
-
-                    PrintWriter out = response.getWriter();
-                    out.println("<html><body>");
-                    out.println("<h1>hai salvato il nuovo utente, grande</h1>");
-                    out.println("</body></html>");
+                    System.out.println("Salvataggio nuovo utente");
                 } else {
-                    System.out.println("boolean false inserito");
-                    System.out.println("t'attacchi belllo");
-
-                    PrintWriter out = response.getWriter();
-                    out.println("<html><body>");
-                    out.println("<h1>non c'è niente di bello da vedere</h1>");
-                    out.println("</body></html>");
+                    System.out.println("boolean false non inserimento");
                 }
-
             } else {
                 System.out.println("le credenziali non sono valide.");
             }
@@ -120,6 +109,7 @@ public class CreateAccountServlet extends HttpServlet {
          if result is false, it means that there's an error to show
         memorizzazzione okay e informazioni non presenti
          */
+
         if (controlcredential && control) {
             request.getSession().removeAttribute("errorToShow");
             request.getSession().setAttribute("successToShow",
@@ -189,6 +179,6 @@ public class CreateAccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {
-
+        doPost(request, response);
     }
 }
