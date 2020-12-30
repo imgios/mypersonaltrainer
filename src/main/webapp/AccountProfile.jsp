@@ -31,7 +31,8 @@
 
                 <button class="list-group-item list-group-item-action active" id="list-profile-btn" data-bs-toggle="list" role="tab" aria-controls="profile" onclick="showProfile()">Profilo</button>
                 <button class="list-group-item list-group-item-action" id="list-password-btn" data-bs-toggle="list" role="tab" aria-controls="password" onclick="showPassword()">Cambia Password</button>
-                <button class="list-group-item list-group-item-action" id="list-abbonamento-btn" data-bs-toggle="list" role="tab" aria-controls="abbonamento" onclick="showAbbonamento()">Abbonamento</button>
+                <button class="list-group-item list-group-item-action" id="list-abbonamento-btn" data-bs-toggle="list" role="tab" aria-controls="abbonamento" onclick="showAbbonamento()">Abbonamento
+                    <span class="badge rounded-pill bg-success text-white">Attivo</span></button>
             </div>
         </div>
         <div class="col-sm-8">
