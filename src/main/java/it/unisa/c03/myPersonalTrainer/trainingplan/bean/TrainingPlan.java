@@ -1,6 +1,7 @@
 package it.unisa.c03.myPersonalTrainer.trainingplan.bean;
 
 
+import java.time.LocalDate;
 
 public class TrainingPlan {
     private String exercises;
@@ -20,9 +21,32 @@ public class TrainingPlan {
 
     }
 
-    public TrainingPlan(String exercises, String date, String email) {
+   /* @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        TrainingPlan that = (TrainingPlan) o;
+
+        if (!exercises.equals(that.exercises)) {
+            return false;
+        }
+        if (!date.equals(that.date)) {
+            return false;
+        }
+        return email.equals(that.email);
+    }
+*/
+
+    public TrainingPlan(String exercises, String email) {
         this.exercises = exercises;
-        this.date = date;
+        LocalDate date = LocalDate.now();
+        String dataaa = date.toString();
+        this.date = dataaa;
         this.email = email;
     }
 
