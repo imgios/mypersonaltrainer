@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RichiestaAppuntamentoServletTest {
+class RequestAppointmentServletTest {
 
     AgendaService service= Mockito.mock(AgendaService.class);
     HttpServletRequest request= Mockito.mock(HttpServletRequest.class);
@@ -25,7 +25,7 @@ class RichiestaAppuntamentoServletTest {
         Mockito.when(request.getParameter("mailutente")).thenReturn("prova@gmail.com");
         Mockito.when(service.createAppointment(Mockito.anyString(),Mockito.anyString(),Mockito.anyString())).thenReturn(true);
         assertTrue(service.createAppointment(request.getParameter("data"),request.getParameter("time"),request.getParameter("mailutente")));
-new RichiestaAppuntamentoServlet().doPost(request,response);
+new RequestAppointmentServlet().doPost(request,response);
 
     }
 

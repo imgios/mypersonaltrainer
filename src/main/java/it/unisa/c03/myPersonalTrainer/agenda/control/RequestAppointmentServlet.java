@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "RichiestaAppuntamentoServlet")
-public class RichiestaAppuntamentoServlet extends HttpServlet {
+@WebServlet(name = "RequestAppointmentServlet")
+public class RequestAppointmentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
         String data = request.getParameter("data");
