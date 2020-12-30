@@ -1,146 +1,181 @@
 package it.unisa.c03.myPersonalTrainer.account.bean;
 
-import java.io.Serializable;
-public final class Account implements Serializable {
+        import java.io.Serializable;
+
+/**
+ * account class.
+ */
+public class Account implements Serializable {
+
     /**
-     * @param name represent the name of Account
+     * user's name.
      */
     private String name;
+
     /**
-     * @param surname represent the surname of Account
+     * user's surname.
      */
     private String surname;
+
     /**
-     * @param phone represent telephone's number of Account
+     * user's phone.
      */
     private String phone;
+
     /**
-     * @param password represent the password of Account
-     */
-    private String password;
-    /**
-     * @param email represent the email of Account
+     * user's email.
      */
     private String email;
+
     /**
-     * @param role represent the role of Account
+     * user's password.
+     */
+    private String password;
+
+    /**
+     * attribute that construct the user into the db
+     * role when is 1 the user is personal trainer when
+     * for 0 is the user.
      */
     private int role;
-     /**
-     * For this constructor of Account we'll use the following parameters.
-     * @param newName represent the name of Account
-     * @param newSurname represent the surname of Account
-     * @param newPhone represent telephone's number of Account
-     * @param newEmail represent the email of Account
-     * @param newPassword represent the password of Account
-     * @param newRole represent the role of Account
-     */
-    public Account(String newName, String newSurname, String newPhone,
-                   String newEmail, String newPassword, int newRole) {
-        this.name = newName;
-        this.surname = newSurname;
-        this.phone = newPhone;
-        this.email = newEmail;
-        this.password = newPassword;
-        this.role = newRole;
-    }
+
+
     /**
-     * Another constructor of Account.
-     */
-    public Account() { }
-    /**
-     * Method to obtain Account's role.
-     * @return role of Account.
-     */
-    public int getRole() {
-        return role;
-    }
-    /**
-     * Method to set Account's role.
-     * @param newRole
-     */
-    public void setRole(final int newRole) {
-        this.role = newRole;
-    }
-    /**
-     * Method to obtain the Account's name.
-     * @return name of Account.
+     * method for get the name.
+     * @return name of the user
      */
     public String getName() {
         return name;
     }
+
     /**
-     * Method to set Account's name.
-     * @param newName
+     * method for set the name.
+     * @param newname name
      */
-    public void setName(final String newName) {
-        this.name = newName;
+    public void setName(String newname) {
+        this.name = newname;
     }
+
     /**
-     * Method to obtain the Account's surname.
-     * @return surname of Account.
+     * method for get the surname.
+     * @return surname of account
      */
     public String getSurname() {
         return surname;
     }
+
     /**
-     * Method to set Account's surname.
-     * @param newSurname
+     * method for set the surname.
+     * @param newsurname new surname
      */
-    public void setSurname(final String newSurname) {
-        this.surname = newSurname;
+    public void setSurname(String newsurname) {
+        this.surname = newsurname;
     }
+
     /**
-     * Method to obtain the Account's phone.
-     * @return phone of Account.
+     * method for get the phone.
+     * @return phone phone
      */
     public String getPhone() {
         return phone;
     }
+
     /**
-     * Method to set Account's phone.
-     * @param newPhone
+     * method for set the phone.
+     * @param newphone phone
      */
-    public void setPhone(final String newPhone) {
-        this.phone = newPhone;
+    public void setPhone(String newphone) {
+        this.phone = newphone;
     }
+
     /**
-     * Method to obtain the Account's password.
-     * @return password.
-     */
-    public String getPassword() {
-        return password;
-    }
-    /**
-     * Method to set Account's password.
-     * @param newPassword
-     */
-    public void setPassword(final String newPassword) {
-        this.password = newPassword;
-    }
-    /**
-     * Method to obtain Account's email.
-     * @return email.
+     * method for get the email.
+     * @return the email
      */
     public String getEmail() {
         return email;
     }
+
     /**
-     * Method to set Account's email.
-     * @param newEmail
+     * method for set the email.
+     * @param newemail email
      */
-    public void setEmail(final String newEmail) {
-        this.email = newEmail;
+    public void setEmail(String newemail) {
+        this.email = newemail;
     }
+
+    /**
+     * method for get the password.
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * method for set the password.
+     * @param newpassword password
+     */
+    public void setPassword(String newpassword) {
+        this.password = newpassword;
+    }
+
+    /**
+     * method for get the role.
+     * @return role
+     */
+    public int getRole() {
+        return role;
+    }
+
+    /**
+     * method for set the role.
+     * @param newrole role
+     */
+    public void setRole(int newrole) {
+        this.role = newrole;
+    }
+
+
+    /**
+     * constructor of the class.
+     */
+    public Account() {
+    }
+
+    /**
+     * param costructor.
+     * @param newname new name
+     * @param newsurname new surname
+     * @param newphone new phone
+     * @param newemail new email
+     * @param newpassword new passowrd
+     * @param newrole new role
+     */
+    public Account(String newname, String newsurname,
+                   String newphone, String newemail,
+                   String newpassword, int newrole) {
+        this.name = newname;
+        this.surname = newsurname;
+        this.phone = newphone;
+        this.email = newemail;
+        this.password = newpassword;
+        this.role = newrole;
+    }
+
+
+    /**
+     * method to string, to view the information during a stamp.
+     */
     @Override
     public String toString() {
         return "Account{"
-                + "  name='" + name + '\''
-                + ", surname='" + surname + '\''
-                + ", phone=" + phone
+                + "Nome='" + name + '\''
+                + ", Cognome='" + surname + '\''
+                + ", Numero di Telefono='" + phone + '\''
+                + ", eMail='" + email + '\''
                 + ", password='" + password + '\''
-                + ", email='" + email + '\''
-                + ", role='" + role + '\''
+                + ", ruolo=" + role
                 + '}';
     }
 }

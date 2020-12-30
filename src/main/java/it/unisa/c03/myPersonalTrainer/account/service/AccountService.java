@@ -1,38 +1,30 @@
 package it.unisa.c03.myPersonalTrainer.account.service;
-import it.unisa.c03.myPersonalTrainer.account.bean.Account;
-
-import java.io.IOException;
+        import it.unisa.c03.myPersonalTrainer.account.bean.Account;
+        import java.io.IOException;
+        import java.util.concurrent.ExecutionException;
 
 public interface AccountService {
+
     /**
-     *
-     * @param email email of user registred into the DataBase.
-     * @param password password of user registred into the DataBase.
-     * @return Return true if credential from the Login form
-     * matches with the credential into the DataBase.
-     * @throws IOException
+     * This function check the credentials of
+     * the client before insert into the db.
+     * @param clientMail email of the client
+     * @param newPassword new password to update
+     * @return true if the credentials follow the expression-regular,
+     * false when something is typing wrong.
+     * @throws IllegalArgumentException //
      */
-    boolean loginAccount(String email, String password)
-            throws IOException;
-    /**
-     *
-     * @param email email of user registred into the DataBase.
-     * @param password password of user registred into the DataBase.
-     * @return Return true if the credential from Login form are
-     * correct for the regular-expression.
-     * @throws IllegalArgumentException
-     */
-    boolean checkCredentials(String email, String password)
+    boolean checkCredentials(String clientMail, String newPassword)
             throws IllegalArgumentException;
+
     /**
-     *
-     * @param email email of user registred into the DataBase.
-     * @param password
-     * @return Return the Account that matches with the
-     * email and password from Login Form.
-     * @throws IOException
+     * This service method checks if an account exists in the database.
+     * @param email referring to the account to search for
+     * @return true if the account exists, false if not
      */
-    Account verifyAccount(String email, String password) throws IOException;
+    boolean searchAccountByEmail(String email)
+            throws InterruptedException, ExecutionException, IOException;
+
     /**
      *
      * @param account Account of user registred into the DataBase.

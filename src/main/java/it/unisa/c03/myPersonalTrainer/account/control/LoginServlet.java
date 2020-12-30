@@ -1,61 +1,85 @@
 package it.unisa.c03.myPersonalTrainer.account.control;
 
-import it.unisa.c03.myPersonalTrainer.account.bean.Account;
-import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
-import it.unisa.c03.myPersonalTrainer.account.service.AccountService;
-import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
+import it.unisa.c03.myPersonalTrainer.account.service.AccountService;
+import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
+import it.unisa.c03.myPersonalTrainer.account.bean.Account;
+
 /**
- *  Servlet used to allow the login of an User.
+ * servlet for Login account.
  */
-@WebServlet (name = "LoginServlet", value = "/LoginServlet")
+@WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
+
     /**
-     * Create an AccountService Object.
+     * method do post.
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
      */
-    private AccountService service = new AccountServiceImpl();
-    private static final long serialVersionUID = 1L;
-    //Protected generate a CheckStyle issue.
-    final protected void doPost(HttpServletRequest request,
-                                 HttpServletResponse response)
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
             throws ServletException, IOException {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        AccountServiceImpl accountTry;
-        accountTry = new AccountServiceImpl();
-        AccountDAOImpl currentAccount = new AccountDAOImpl();
-        Account analizeAccount;
-        analizeAccount = currentAccount.login(email, password);
-        if (accountTry.loginAccount(email, password)) {
-            if (accountTry.verifyIsAdmin(analizeAccount)) {
-                System.out.println("Bentornato Admin "
-                        + analizeAccount.getName() + " !");
-                response.sendRedirect("adminDashboard.jsp");
-            } else {
-                System.out.println("Bentornato Cliente "
-                        + analizeAccount.getName() + " !");
-                response.sendRedirect("clienteDashboard.jsp");
-                 }
-        } else {
-            System.out.println("Credenziali inesistenti!");
-            response.sendRedirect("login.jsp");
-             }
+
+        AccountDAO accountDao = new AccountDAOImpl();
+        AccountService accountService = new AccountServiceImpl(accountDao);
+
+        Account utente;
+        Account testUtente;
+        boolean verifiedCredential;
+
+        try {
+            verifiedCredential = accountService.
+                    checkCredentials(email, password);
+            if (verifiedCredential) {
+                utente = accountDao.
+                        findAccountByEmail(email);
+                testUtente = new Account(utente.getName(),
+                        utente.getSurname(), utente.getPhone(),
+                        utente.getEmail(), utente.getPassword(),
+                        utente.getRole());
+                if (utente.getEmail() != null) {
+                    if (email.equals(testUtente.getEmail())
+                            && password.equals(testUtente.getPassword())) {
+                        if (accountService.verifyIsAdmin(utente)) {
+                            System.out.println("Bentornato Personal Trainer "
+                                    + testUtente.getName() + " !");
+                            response.sendRedirect("adminDashboard.jsp");
+                        } else {
+                            System.out.println("Bentornato Utente "
+                                    + testUtente.getName() + " !");
+                            response.sendRedirect("clienteDashboard.jsp");
+                        }
+                    } else {
+                        System.out.println("Credenziali errate");
+                        response.sendRedirect("login.jsp");
+                    }
+                } else {
+                    System.out.println("Credenziali errate");
+                    response.sendRedirect("login.jsp");
+                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
-    /**
-     *
-     * @param request request get by the Login Form.
-     * @param response response reserved to relative JSP.
-     * @throws ServletException
-     * @throws IOException
-     */
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
+    final protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
     }

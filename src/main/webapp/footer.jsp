@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: giampieroferrara
+  Date: 25/12/20
+  Time: 11:23
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,7 +22,7 @@
 <footer class="footer">
     <nav class="navbar navbar-default navbar-custom">
 
-        <div class="container-fluid" align="center">
+        <div class="container-fluid">
             <div class="nav justify-content-center">
                 <div class="row text-center">
                     <div class="col-lg-12"> <h5 class="font-weight-bold">myPersonalTrainer</h5> </div>
@@ -59,9 +66,12 @@
     </nav>
 </footer>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- script carimento bootstrapppppp-->
+<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script-->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!--script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script-->
 </body>
 </html>

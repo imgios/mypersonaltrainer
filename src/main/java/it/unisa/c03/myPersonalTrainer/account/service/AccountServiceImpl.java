@@ -1,77 +1,108 @@
 package it.unisa.c03.myPersonalTrainer.account.service;
 
-import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.CollectionReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Query;
-import com.google.cloud.firestore.QuerySnapshot;
-import it.unisa.c03.myPersonalTrainer.account.bean.Account;
-import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
-import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
-import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
+        import it.unisa.c03.myPersonalTrainer.account.bean.Account;
+        import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
+        import java.io.IOException;
+        import java.util.concurrent.ExecutionException;
+
 
 public class AccountServiceImpl implements AccountService {
+
     /**
-     * This class contains AccountService's implementention.
-     */
-    private AccountDAO accountDAO = new AccountDAOImpl();
+     * @exclude
+     * */
+    private static final int MIN_EMAIL_LENGTH = 7;
     /**
-     *
-     * @param email email of user registred into the DataBase.
-     * @param password password of user registred into the DataBase.
-     * @return Return true if credential from the Login form
-     * matches with the credential into the DataBase.
-     * @throws IOException
-     */
-    @Override
-    public boolean loginAccount(final String email, final String password)
-            throws IOException {
-        boolean result = false;
-        Account account;
-        account = verifyAccount(email, password);
-        Account testAccount = new Account(account.getName(),
-                account.getSurname(), account.getPhone(),
-                account.getEmail(), account.getPassword(), account.getRole());
-        if (account.getEmail() != null) {
-            if (email.equals(testAccount.getEmail())
-                    && (password.equals(testAccount.getPassword()))) {
-                result = true;
-            } else {
-                result = false;
-            }
-        } else {
-            result = false;
-        }
-        return result;
+     * @exclude
+     * */
+    public static final int MAX_EMAIL_LENGTH = 25;
+    /**
+     * @exclude
+     * */
+    public static final int MIN_PASSWORD_LENGTH = 1;
+    /**
+     * @exclude
+     * */
+    public static final int MAX_PASSWORD_LENGTH = 30;
+
+    /**
+     * @exclude
+     * */
+    private AccountDAO accountDAO;
+    /**
+     * Service constructor.
+     * @param accountDao is required, because is the DAO that
+     * all the service methods will call.
+     * */
+    public AccountServiceImpl(AccountDAO accountDao) {
+        accountDAO = accountDao;
     }
+
     /**
-     *
-     * @param email email of user registred into the DataBase.
-     * @param password password of user registred into the DataBase.
-     * @return Return true if the credential from Login form are
-     * correct for the regular-expression.
+     * check the credential with the regular expression.
+     * @param clientMail email of the client
+     * @param newPassword new password to update
+     * @return clientMail, new Passoword, after check
      * @throws IllegalArgumentException
      */
     @Override
-    public boolean checkCredentials(String email, String password)
+    public boolean checkCredentials(String clientMail,
+                                    String newPassword)
             throws IllegalArgumentException {
 
-        boolean result;
 
-            // check email format
-        if (!(email.matches(
+        boolean result = false;
+
+        // lunghezza email
+        if (clientMail.length() < MIN_EMAIL_LENGTH
+                || clientMail.length() > MAX_EMAIL_LENGTH) {
+            throw new IllegalArgumentException("Lunghezza email non valida");
+        } else if (!(clientMail.matches(
                 "\\w+([\\._\\-]?\\w+)*@\\w+([\\.\\-]?\\w+)*(\\.\\w+)+$"))) {
+            // formato email
             throw new IllegalArgumentException("Formato email non valido");
-        } else if (!(password.matches("^[a-zA-Z 0-9 \\@\\._\\!\\?\\-]{8,}$"))) {
+        } else if (newPassword.length() < MIN_PASSWORD_LENGTH
+                || newPassword.length() > MAX_PASSWORD_LENGTH) {
+            //controllo lunghezza password
+            throw new IllegalArgumentException("Lunghezza password non valida");
+        } else if (!(newPassword.matches(
+                "^[a-zA-Z 0-9 \\@\\._\\!\\?\\-]{8,}$"))) {
+            //controllo formato password
             throw new IllegalArgumentException("Formato password non valido");
         } else {
+            // controllo dei test
             result = true;
-               }
+        }
+
+        return result;
+
+    }
+
+    /**
+     * This service method checks if an account exists in the database.
+     * @param email referring to the account to search for
+     * @return true if the account exists, false if not
+     */
+    @Override
+    public boolean searchAccountByEmail(String email)
+            throws InterruptedException, ExecutionException, IOException {
+
+        boolean result = false;
+        Account account = new Account();
+        account = accountDAO.findAccountByEmail(email);
+
+        //the email exists in the DB
+        if (account.getEmail() != null) {
+            result = true;
+        } else if (account.getEmail() == null) {
+            //the email doesn't exist in the DB
+            result = false;
+        }
+
         return result;
     }
+
     /**
      *
      * @param account Account of user registred into the DataBase.
@@ -87,51 +118,5 @@ public class AccountServiceImpl implements AccountService {
             return false;
         }
     }
-    /**
-     *
-     * @param email email of user registred into the DataBase.
-     * @param password
-     * @return Return the Account that matches with the
-     * email and password from Login Form.
-     * @throws IOException
-     */
-    @Override
-    public Account verifyAccount(String email, String password)
-            throws IOException {
-        CollectionReference accounts = null;
-        try {
-            accounts = DBConnection.getConnection().collection("Account");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        Query query = accounts.whereEqualTo("email", email);
-
-        ApiFuture<QuerySnapshot> querySnapshot = query.get();
-
-        Account accountBean = new Account();
-        try {
-            for (DocumentSnapshot document
-                    : querySnapshot.get().getDocuments()) {
-                accountBean.setEmail(
-                        String.valueOf(document.get("email")));
-                accountBean.setName(
-                        String.valueOf(document.get("name")));
-                accountBean.setSurname(
-                        String.valueOf(document.get("surname")));
-                accountBean.setPassword(
-                        String.valueOf(document.get("password")));
-                accountBean.setPhone(
-                        String.valueOf(document.get("phone")));
-                accountBean.setRole(Integer.parseInt(
-                        String.valueOf(document.get("role"))));
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-        return accountBean;
-    }
 }

@@ -1,15 +1,18 @@
 package it.unisa.c03.myPersonalTrainer.account.dao;
-import it.unisa.c03.myPersonalTrainer.account.bean.Account;
-import java.io.IOException;
+
+        import it.unisa.c03.myPersonalTrainer.account.bean.Account;
+        import java.io.IOException;
+        import java.util.concurrent.ExecutionException;
 
 public interface AccountDAO {
-    /**
-     * This interface allow the User to logged in his personal
-     * dashboard and services.
-     * @param mail represent the mail of Account.
-     * @param password represent the password of Account.
-     * @return Account account return the Account of the logged user.
-     * @throws IOException
+
+
+    /** this function can search if the email is
+     * just registered into the db.
+     * @param email is the pk to find the user into the db
+     * @return if the email is in the parameters of
+     * the user and if the email isn't registered "null"
      */
-    Account login(String mail, String password) throws IOException;
+    Account findAccountByEmail(String email)
+            throws IOException, ExecutionException, InterruptedException;
 }

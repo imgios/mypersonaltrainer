@@ -5,31 +5,20 @@
     <title>myPersonalTrainer | myAccount</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/styles.css">
     <!--link rel="stylesheet" href="styles/reset.min.css"/>
     <link rel="stylesheet" href="styles/style.css"/>
     <link rel="stylesheet" href="styles/header-11.css"/-->
 
 </head>
 <body>
-<body>
-<div id= "header">
-    <%@include file="header.jsp"%>
-    <div class="wrapper">
-        <div class="main_container">
-            <div class="item">
-                <div class="welcomeMessage">
-                    Benvenuto, Cliente
-                </div>
-            </div>
-            <div class="item">
 
-            </div>
-        </div>
-    </div>
+<div class="Kilojj">
+    Ciao
 </div>
-<!-- Header End -->
 
-<script src="js/header-11.js"></script>
-
+<div>
+    <%@include file="footer.jsp"%>
+</div>
 </body>
 </html>
