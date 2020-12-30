@@ -25,7 +25,10 @@ public class CreateTrainingPlanController extends HttpServlet {
             String action = request.getParameter("action");
             if (action.equals("addex")) {
 
-                String exercise, repetitions, series, recoveryTime;
+                String exercise;
+                String repetitions;
+                String series;
+                String recoveryTime;
                 final String exerciseName = "nome esercizio: ";
                 final String nRepetitions = " ripetizioni";
                 final String nseries = " serie";
@@ -74,7 +77,9 @@ public class CreateTrainingPlanController extends HttpServlet {
         }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(
+            HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doPost(request, response);
     }
 }
