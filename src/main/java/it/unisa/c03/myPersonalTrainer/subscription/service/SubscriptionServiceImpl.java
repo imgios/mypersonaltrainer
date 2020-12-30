@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.concurrent.ExecutionException;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 public class SubscriptionServiceImpl implements SubscriptionService {
 
     /**
@@ -59,5 +61,40 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public Subscription searchSubscriptionByEmail(String customerMail)
             throws InterruptedException, ExecutionException, IOException {
         return subscriptionDAO.getSubscriptionbyEmail(customerMail);
+    }
+
+    /**
+     * This method check the state of a subscription.
+     * @param customerMail the mail of the subscription owner
+     * @return 1 if the subscription is valid, 0 if
+     * subscription expiring, -1 for expired subscription.
+     */
+    @Override
+    public int checkSubscriptionState(String customerMail)
+            throws InterruptedException, ExecutionException, IOException {
+        Subscription sub = searchSubscriptionByEmail(customerMail);
+
+        // get today date
+        LocalDate oggi = LocalDate.now();
+        // get subscription expDate
+        LocalDate scadenza = LocalDate.parse(sub.getExpDate());
+
+        // calucating difference
+        long dayBetween = DAYS.between(oggi,scadenza);
+
+
+        //      A : if difference is >= 10 return 1, state : attivo
+        if(dayBetween >= 10) {
+            return 1;
+        } else if (dayBetween >= 0 && dayBetween < 10) {
+            //      B : if difference is >= 0 and < 10 return 0, state : in scadenza
+            return 0 ;
+        } else if (dayBetween < 0) {
+            //      A : if difference is < 0 return -1, state : scaduto
+            return -1 ;
+        }
+
+        return -1;
+
     }
 }
