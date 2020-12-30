@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $('#testoProfilo').hide();
+    $('#testoAbbonamento').hide();
     $('#testoPassword').show();
 });
 
@@ -7,11 +8,18 @@ $(document).ready(function() {
 
 function showProfile(){
     $('#testoPassword').hide();
+    $('#testoAbbonamento').hide();
     $('#testoProfilo').show();
 }
 
 function showPassword() {
     $('#testoProfilo').hide();
-    $('#testoPassword').show() ;
+    $('#testoAbbonamento').hide();
+    $('#testoPassword').show();
 }
 
+function showAbbonamento() {
+    $('#testoProfilo').hide();
+    $('#testoPassword').hide();
+    $('#testoAbbonamento').show();
+}

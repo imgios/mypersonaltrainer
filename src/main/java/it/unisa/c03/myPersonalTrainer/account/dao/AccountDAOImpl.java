@@ -89,7 +89,7 @@ public class AccountDAOImpl implements AccountDAO {
     /**
      * this function can check if the email is into the db.
      * @param email is the pk to find the user into the db
-     * @return
+     * @return the Account given its mail
      */
     @Override
     public Account findAccountByEmail(String email)
