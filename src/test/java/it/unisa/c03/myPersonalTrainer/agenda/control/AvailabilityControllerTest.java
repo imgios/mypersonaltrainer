@@ -3,6 +3,7 @@ package it.unisa.c03.myPersonalTrainer.agenda.control;
 import it.unisa.c03.myPersonalTrainer.agenda.bean.Availability;
 import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAO;
 import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAOImpl;
+import it.unisa.c03.myPersonalTrainer.agenda.service.AgendaService;
 import it.unisa.c03.myPersonalTrainer.agenda.service.AgendaServiceImpl;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
@@ -30,7 +31,7 @@ class AvailabilityControllerTest {
     AgendaDAO agendaDAO = Mockito.mock(AgendaDAO.class);
 
     // AgendaServiceImpl agendaService = new AgendaServiceImpl(agendaDAO);
-    AgendaServiceImpl agendaService = new AgendaServiceImpl(agendaDAO);
+    AgendaService agendaService = new AgendaServiceImpl(agendaDAO);
 
     @Test
     void doPost() throws IOException, ExecutionException, InterruptedException {
