@@ -27,10 +27,10 @@ class AvailabilityControllerTest {
     HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
     HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 
-    //AgendaDAO agendaDAO = Mockito.mock(AgendaDAO.class);
+    AgendaDAO agendaDAO = Mockito.mock(AgendaDAO.class);
 
     // AgendaServiceImpl agendaService = new AgendaServiceImpl(agendaDAO);
-    AgendaServiceImpl agendaService = Mockito.mock(AgendaServiceImpl.class);
+    AgendaServiceImpl agendaService = new AgendaServiceImpl(agendaDAO);
 
     @Test
     void doPost() throws IOException, ExecutionException, InterruptedException {
