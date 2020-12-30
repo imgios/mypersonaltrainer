@@ -84,16 +84,7 @@ public class CreateAccountServlet extends HttpServlet {
                 // subscription registration
                 SubscriptionDAO subDao = new SubscriptionDAOImpl();
                 SubscriptionService subService = new SubscriptionServiceImpl(subDao);
-                Subscription subBean = new Subscription();
-                subBean.setCustomerMail(utente.getEmail());
-                subBean.setPrice("30");
-
-                //setting the date one month later
-                LocalDate local = LocalDate.now();
-                LocalDate oneMonthLater = local.plusMonths(1);
-                subBean.setExpDate(oneMonthLater.toString());
-
-                subService.createSubscription(subBean);
+                subService.createSubscription(utente.getEmail());
 
                 if (control) {
                     System.out.println("boolean true inserito");

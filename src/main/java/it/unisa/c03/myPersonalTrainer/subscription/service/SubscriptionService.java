@@ -9,9 +9,12 @@ import java.util.concurrent.ExecutionException;
 public interface SubscriptionService {
     /**
      * This service method register the subscription for a customer.
-     * @param sub the subscription to register
+     * It only needs the customer email. Then it sets a standard price
+     * and the expiration date, obtained by adding an extra month
+     * to the registration date.
+     * @param customerMail the customer mail
      */
-    void createSubscription(Subscription sub) throws IOException;
+    void createSubscription(String customerMail) throws IOException;
 
     /**
      * his method searches in the database for a customer's
