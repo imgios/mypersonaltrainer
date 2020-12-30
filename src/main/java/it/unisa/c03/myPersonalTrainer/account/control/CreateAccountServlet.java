@@ -78,21 +78,10 @@ public class CreateAccountServlet extends HttpServlet {
                 if (control) {
                     System.out.println("boolean true inserito");
                     System.out.println("valore inserito inserito");
-
-                    PrintWriter out = response.getWriter();
-                    out.println("<html><body>");
-                    out.println("<h1>hai salvato il nuovo utente, grande</h1>");
-                    out.println("</body></html>");
+                    System.out.println("Salvataggio nuovo utente");
                 } else {
-                    System.out.println("boolean false inserito");
-                    System.out.println("t'attacchi belllo");
-
-                    PrintWriter out = response.getWriter();
-                    out.println("<html><body>");
-                    out.println("<h1>non c'è niente di bello da vedere</h1>");
-                    out.println("</body></html>");
+                    System.out.println("boolean false non inserimento");
                 }
-
             } else {
                 System.out.println("le credenziali non sono valide.");
             }
@@ -128,7 +117,7 @@ public class CreateAccountServlet extends HttpServlet {
             request.getSession().setAttribute("errorToShow", errors);
             response.sendRedirect("CreateAccount.jsp");
         }
-        
+
         //
         //email o credenziali non valide
       /*
