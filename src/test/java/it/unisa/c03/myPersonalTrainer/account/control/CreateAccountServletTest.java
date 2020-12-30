@@ -10,6 +10,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 
 
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
+import it.unisa.c03.myPersonalTrainer.account.service.AccountService;
 import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -38,6 +39,15 @@ class CreateAccountServletTest {
    Mockito.when(request.getParameter("role")).thenReturn("0");
     Account user = new Account (request.getParameter("username"),request.getParameter("surname"), request.getParameter("phone"), request.getParameter("email"), request.getParameter("passowrd"), request.getIntHeader("role"));
 
+
+    HttpSession session = Mockito.mock(HttpSession.class);
+    Mockito.when(request.getSession()).thenReturn(session);
+
+    doNothing().when(session).removeAttribute(anyString());
+    doNothing().when(session).setAttribute(anyString(),any());
+    doNothing().when(response).sendRedirect(anyString());
+
+
     Mockito.when(accountService.registerAccount(Mockito.any())).thenReturn(true);
 
       assertTrue(accountService.registerAccount(user));
@@ -64,15 +74,42 @@ class CreateAccountServletTest {
       accountService.registerAccount(user);
     });
 
+
     HttpSession session = Mockito.mock(HttpSession.class);
     Mockito.when(request.getSession()).thenReturn(session);
 
     doNothing().when(session).removeAttribute(anyString());
-    doNothing().when(session).setAttribute(anyString(), anyString());
+    doNothing().when(session).setAttribute(anyString(), any());
     doNothing().when(response).sendRedirect(anyString());
   }
 
+
   @Test
-  void doGet() {
+  void doGet() throws IOException, ServletException, ExecutionException, InterruptedException {
+
+    Mockito.when(request.getParameter("username")).thenReturn("TestUsername");
+    //assertEquals("TestUsername", request.getParameter("username"));
+    Mockito.when(request.getParameter("surname")).thenReturn("TestSurname");
+    Mockito.when(request.getParameter("phone")).thenReturn("0000000000");
+    Mockito.when(request.getParameter("email")).thenReturn("test@test.it");
+    Mockito.when(request.getParameter("password")).thenReturn("Test001");
+    Mockito.when(request.getParameter("role")).thenReturn("0");
+
+    Account user = new Account (request.getParameter("username"),
+        request.getParameter("surname"), request.getParameter("phone"), request.getParameter("email"), request.getParameter("passowrd"), request.getIntHeader("role"));
+
+  Mockito.when(accountService.registerAccount(any())).thenReturn(true);
+
+    HttpSession session = Mockito.mock(HttpSession.class);
+    Mockito.when(request.getSession()).thenReturn(session);
+
+
+    doNothing().when(session).removeAttribute(anyString());
+    doNothing().when(session).setAttribute(anyString(), any());
+    doNothing().when(response).sendRedirect(anyString());
+
+
+    new CreateAccountServlet().doPost(request,response);
+
   }
 }
