@@ -3,7 +3,6 @@ package it.unisa.c03.myPersonalTrainer.subscription.service;
 
 import it.unisa.c03.myPersonalTrainer.subscription.bean.Subscription;
 import it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAO;
-import it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAOImpl;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -17,6 +16,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
      * @exclude
      * */
     private SubscriptionDAO subscriptionDAO;
+
+    /**
+     * @exclude
+     * */
+    public static final int TEN_DAYS = 10;
     /**
      * Service constructor.
      * @param subscriptionDao is required, because is the DAO that
@@ -80,18 +84,19 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         LocalDate scadenza = LocalDate.parse(sub.getExpDate());
 
         // calucating difference
-        long dayBetween = DAYS.between(oggi,scadenza);
+        long dayBetween = DAYS.between(oggi, scadenza);
 
 
         //      A : if difference is >= 10 return 1, state : attivo
-        if(dayBetween >= 10) {
+        if (dayBetween >= TEN_DAYS) {
             return 1;
-        } else if (dayBetween >= 0 && dayBetween < 10) {
-            //      B : if difference is >= 0 and < 10 return 0, state : in scadenza
-            return 0 ;
+        } else if (dayBetween >= 0 && dayBetween < TEN_DAYS) {
+            //      B : if difference is >= 0 and < 10 return 0,
+            //      state : in scadenza
+            return 0;
         } else if (dayBetween < 0) {
             //      A : if difference is < 0 return -1, state : scaduto
-            return -1 ;
+            return -1;
         }
 
         return -1;
