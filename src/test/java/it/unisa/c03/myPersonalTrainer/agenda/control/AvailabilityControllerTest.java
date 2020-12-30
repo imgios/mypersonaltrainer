@@ -36,13 +36,13 @@ class AvailabilityControllerTest {
     @Test
     void doPost() throws IOException, ExecutionException, InterruptedException {
         AgendaDAO agendaDAO = new AgendaDAOImpl();
-        when(request.getParameter("dataSelected")).thenReturn("2021-10-10");
-        when(request.getParameter("timeSelected")).thenReturn("18");
-        when(agendaService.checkAvailability(anyString(), any())).thenReturn(true);
+        Mockito.when(request.getParameter("dataSelected")).thenReturn("2021-10-10");
+        Mockito.when(request.getParameter("timeSelected")).thenReturn("18");
+        Mockito.when(agendaService.checkAvailability(anyString(), any())).thenReturn(true);
         Mockito.when(agendaService.createAvailability(any())).thenReturn(true);
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
+        Mockito.when(response.getWriter()).thenReturn(writer);
         new AvailabilityController().doPost(request, response);
         assertEquals("1", stringWriter.toString());
         agendaDAO.deleteAvailability(new Availability("2021-10-10", 18));
@@ -51,13 +51,13 @@ class AvailabilityControllerTest {
     @Test
     void doGet() throws IOException, ExecutionException, InterruptedException {
         AgendaDAO agendaDAO = new AgendaDAOImpl();
-        when(request.getParameter("dataSelected")).thenReturn("2021-10-10");
-        when(request.getParameter("timeSelected")).thenReturn("18");
-        when(agendaService.checkAvailability(anyString(), any())).thenReturn(true);
+        Mockito.when(request.getParameter("dataSelected")).thenReturn("2021-10-10");
+        Mockito.when(request.getParameter("timeSelected")).thenReturn("18");
+        Mockito.when(agendaService.checkAvailability(anyString(), any())).thenReturn(true);
         Mockito.when(agendaService.createAvailability(any())).thenReturn(true);
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
+        Mockito.when(response.getWriter()).thenReturn(writer);
         new AvailabilityController().doGet(request, response);
         assertEquals("1", stringWriter.toString());
         agendaDAO.deleteAvailability(new Availability("2021-10-10", 18));
@@ -67,13 +67,13 @@ class AvailabilityControllerTest {
     @Test
     void doGetDateAleradyExists() throws IOException, ExecutionException, InterruptedException {
         AgendaDAO agendaDAO = new AgendaDAOImpl();
-        when(request.getParameter("dataSelected")).thenReturn("2021-01-08");
-        when(request.getParameter("timeSelected")).thenReturn("15");
-        when(agendaService.checkAvailability(anyString(), any())).thenReturn(true);
+        Mockito.when(request.getParameter("dataSelected")).thenReturn("2021-01-08");
+        Mockito.when(request.getParameter("timeSelected")).thenReturn("15");
+        Mockito.when(agendaService.checkAvailability(anyString(), any())).thenReturn(true);
         Mockito.when(agendaService.createAvailability(any())).thenReturn(true);
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
+        Mockito.when(response.getWriter()).thenReturn(writer);
         new AvailabilityController().doGet(request, response);
         assertEquals("2", stringWriter.toString());
     }
@@ -82,13 +82,13 @@ class AvailabilityControllerTest {
     @Test
     void doPostDateAleradyExists() throws IOException, ExecutionException, InterruptedException {
         AgendaDAO agendaDAO = new AgendaDAOImpl();
-        when(request.getParameter("dataSelected")).thenReturn("2021-01-08");
-        when(request.getParameter("timeSelected")).thenReturn("15");
-        when(agendaService.checkAvailability(anyString(), any())).thenReturn(true);
+        Mockito.when(request.getParameter("dataSelected")).thenReturn("2021-01-08");
+        Mockito.when(request.getParameter("timeSelected")).thenReturn("15");
+        Mockito.when(agendaService.checkAvailability(anyString(), any())).thenReturn(true);
         Mockito.when(agendaService.createAvailability(any())).thenReturn(true);
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
+        Mockito.when(response.getWriter()).thenReturn(writer);
         new AvailabilityController().doPost(request, response);
         assertEquals("2", stringWriter.toString());
     }
