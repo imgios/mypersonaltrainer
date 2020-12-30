@@ -6,18 +6,25 @@ import it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAO;
 import java.io.IOException;
 
 /**
- * javadoc.
+ * Implementation of TrainingPlanService.
  */
 public class TrainingPlanServiceImpl implements TrainingPlanService {
 
+    /**
+     * this is TrainingPlan
+     */
     private TrainingPlanDAO trainingPlanDAO;
 
+    /**
+     * .
+     * @param trainingPlanDAO
+     */
     public TrainingPlanServiceImpl(TrainingPlanDAO trainingPlanDAO) {
         this.trainingPlanDAO = trainingPlanDAO;
     }
 
     /**
-     * rigo.
+     * This method checks TrainingPlan entries.
      * @param exercise
      * @param repetitions
      * @param series
@@ -26,26 +33,36 @@ public class TrainingPlanServiceImpl implements TrainingPlanService {
      * @throws IllegalArgumentException
      */
     @Override
-    public boolean checkExercise(String exercise, String repetitions, String series, String recoveryTime) throws IllegalArgumentException {
+    public boolean checkExercise(String exercise, String repetitions,
+                                 String series, String recoveryTime)
+            throws IllegalArgumentException {
 
         boolean result = false;
-         final int MAX_LENGHT = 3;
+
+        final int MAX_LENGHT_EX = 25;
+        final int MAX_LENGHT = 3;
+        final int MIN_LENGHT_EX = 4;
+        final int MIN_LENGHT = 1;
 
         if (!exercise.matches("^[a-zA-Z]+$")) {
             throw new IllegalArgumentException("invalid exercise");
-        } else if (exercise.length() < 4 || exercise.length() > 25) {
+        } else if (exercise.length() < MIN_LENGHT_EX
+                || exercise.length() > MAX_LENGHT_EX) {
             throw new IllegalArgumentException("invalid exercise length");
         } else if (!series.matches("^[0-9]+$")) {
             throw new IllegalArgumentException("invalid series format");
-        } else if (series.length() < 1 || series.length() > MAX_LENGHT) {
+        } else if (series.length() < MIN_LENGHT
+                || series.length() > MAX_LENGHT) {
             throw new IllegalArgumentException("invalid series length");
         } else if (!repetitions.matches("^[0-9]+$")) {
             throw new IllegalArgumentException("invalid repetitions format");
-        } else if (repetitions.length() < 1 || repetitions.length() > 3) {
+        } else if (repetitions.length() < MIN_LENGHT
+                || repetitions.length() > MAX_LENGHT) {
             throw new IllegalArgumentException("invalid repetitions length");
         } else if (!recoveryTime.matches("^[0-9]+$")) {
             throw new IllegalArgumentException("invalid recoveryTime format");
-        } else if (recoveryTime.length() < 1 || recoveryTime.length() > 3) {
+        } else if (recoveryTime.length() < MIN_LENGHT
+                || recoveryTime.length() > MAX_LENGHT) {
             throw new IllegalArgumentException("invalid recoveryTime length");
         } else {
             result = true;
@@ -54,6 +71,12 @@ public class TrainingPlanServiceImpl implements TrainingPlanService {
         return result;
     }
 
+    /**
+     * This method calls TrainingPlanDAO.
+     * @param trainingPlan
+     * @return boolean
+     * @throws IOException
+     */
     @Override
     public boolean createTrainingPlan(TrainingPlan trainingPlan)
             throws IOException {

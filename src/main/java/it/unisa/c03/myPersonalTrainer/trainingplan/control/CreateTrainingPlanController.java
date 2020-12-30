@@ -13,13 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "CreateNewTrainingPlanServlet", value = "/createTP-controller")
-public class CreateTrainingPlanController extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+@WebServlet(name = "CreateNewTrainingPlanServlet",
+        value = "/createTP-controller")
+public class CreateTrainingPlanController extends
+        HttpServlet {
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws IOException {
 
 
-        TrainingPlanDAO trainingPlanDAO = new TrainingPlanDAOImpl();
-        TrainingPlanService trainingPlanService = new TrainingPlanServiceImpl(trainingPlanDAO);
+        TrainingPlanDAO trainingPlanDAO =
+                new TrainingPlanDAOImpl();
+        TrainingPlanService trainingPlanService =
+                new TrainingPlanServiceImpl(trainingPlanDAO);
 
         try {
             String action = request.getParameter("action");
@@ -39,34 +45,59 @@ public class CreateTrainingPlanController extends HttpServlet {
                 series = request.getParameter("series");
                 recoveryTime = request.getParameter("recoveryTime");
 
-                trainingPlanService.checkExercise(exercise, repetitions, series, recoveryTime);
+                trainingPlanService.checkExercise(exercise, repetitions,
+                        series, recoveryTime);
 
 
-                String exercises = (String) request.getSession().getAttribute("exercises");
+                String exercises = (String) request.getSession()
+                        .getAttribute("exercises");
                 if (exercises == null) {
-                    String firstEx = "\n" + exerciseName + "\t" + exercise + "\n" + repetitions + "\t\t\t\t" + nRepetitions + "\n" + series + "\t\t\t\t" + nseries + "\n" + recoveryTime + "\t\t\t\t" + recoveryTimeSecond;
+                    String firstEx = "\n" + exerciseName
+                            + "\t" + exercise
+                            + "\n" + repetitions
+                            + "\t\t\t\t" + nRepetitions
+                            + "\n" + series
+                            + "\t\t\t\t" + nseries
+                            + "\n" + recoveryTime
+                            + "\t\t\t\t" + recoveryTimeSecond;
                     request.getSession().setAttribute("exercises", firstEx);
-                    String prova = (String) (request.getSession().getAttribute("exercises"));
+                    String prova = (String) (request.getSession()
+                            .getAttribute("exercises"));
                 } else {
-                    String notFirstEx = "\n\n" + exerciseName + "\t" + exercise + "\n" + repetitions + "\t\t\t\t" + nRepetitions + "\n" + series + "\t\t\t\t" + nseries + "\n" + recoveryTime + "\t\t\t\t" + recoveryTimeSecond;
+                    String notFirstEx = "\n\n" + exerciseName
+                            + "\t" + exercise
+                            + "\n" + repetitions
+                            + "\t\t\t\t" + nRepetitions
+                            + "\n" + series
+                            + "\t\t\t\t" + nseries
+                            + "\n" + recoveryTime
+                            + "\t\t\t\t" + recoveryTimeSecond;
                     exercises += notFirstEx;
                     request.getSession().setAttribute("exercises", exercises);
-                    String prova = (String) (request.getSession().getAttribute("exercises"));
+                    String prova = (String)
+                            (request.getSession().getAttribute("exercises"));
                 }
-                request.getSession().setAttribute("success", "Inserimento effettuato, puoi continuare ad inserire esercizi o cliccare su Crea Scheda");
+                request.getSession()
+                        .setAttribute("success", "Inserimento effettuato, "
+                                + "puoi continuare ad inserire esercizi "
+                                + "o cliccare su Crea Scheda");
 
                 response.sendRedirect("CreateTrainingPlan.jsp");
             } else if (action.equals("addtp")) {
 
-                String exercises = (String) request.getSession().getAttribute("exercises");
+                String exercises = (String) request.getSession()
+                        .getAttribute("exercises");
                 if (exercises == null) {
-                    request.getSession().setAttribute("noEx", "Inserisci almeno un esercizio per creare una scheda!");
+                    request.getSession().setAttribute("noEx",
+                            "Inserisci almeno un esercizio per creare una scheda!");
                     response.sendRedirect("CreateTrainingPlan.jsp");
                 } else {
-                    TrainingPlan trainingPlan = new TrainingPlan(exercises, "clientemail@prova.io");
+                    TrainingPlan trainingPlan =
+                            new TrainingPlan(exercises, "clientemail@prova.io");
                     trainingPlanService.createTrainingPlan(trainingPlan);
                     request.getSession().removeAttribute("exercises");
-                    request.getSession().setAttribute("success", "Scheda creata con successo");
+                    request.getSession().setAttribute("success",
+                            "Scheda creata con successo");
                     response.sendRedirect("CreateTrainingPlan.jsp");
                 }
             }
