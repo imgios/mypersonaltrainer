@@ -21,7 +21,8 @@ public class ParametersServiceImpl implements ParametersService {
 
     private ParametersDAO parametersDAO;
 
-    public ParametersServiceImpl(ParametersDAO parametersDAO) {
+    public ParametersServiceImpl(
+            ParametersDAO parametersDAO) {
         this.parametersDAO = parametersDAO;
     }
 
@@ -35,8 +36,8 @@ public class ParametersServiceImpl implements ParametersService {
      * @throws NumberFormatException
      * @throws IllegalArgumentException
      */
-    public Parameters createParameters(String weight, String leanMass,
-                                       String fatMass)
+    public Parameters createParameters(
+            String weight, String leanMass, String fatMass)
             throws IllegalArgumentException, IOException {
 
         if (weight != null
@@ -78,16 +79,20 @@ public class ParametersServiceImpl implements ParametersService {
             throw new IllegalArgumentException(
                     "lunghezza massa magra non valida");
         }
-        double fatMassTotal = (weightD / PERCENTAGE) * fatMassD;
-        double leanMassTotal = (weightD / PERCENTAGE) * leanMassD;
+        double fatMassTotal =
+                (weightD / PERCENTAGE) * fatMassD;
+        double leanMassTotal =
+                (weightD / PERCENTAGE) * leanMassD;
         BigDecimal bigDecimalleanMassTot =
                 new BigDecimal(Double.toString(leanMassTotal));
         BigDecimal bigDecimalfatMassTot =
                 new BigDecimal(Double.toString(fatMassTotal));
         bigDecimalleanMassTot =
-                bigDecimalleanMassTot.setScale(1, RoundingMode.HALF_UP);
+                bigDecimalleanMassTot.setScale(
+                        1, RoundingMode.HALF_UP);
         bigDecimalfatMassTot =
-                bigDecimalfatMassTot.setScale(1, RoundingMode.HALF_UP);
+                bigDecimalfatMassTot.setScale(
+                        1, RoundingMode.HALF_UP);
         fatMassTotal =
                 bigDecimalfatMassTot.doubleValue();
         leanMassTotal =
@@ -104,7 +109,8 @@ public class ParametersServiceImpl implements ParametersService {
      * @throws IOException
      */
     @Override
-    public boolean insertParametersDB(Parameters parameters) throws IOException {
+    public boolean insertParametersDB(
+            Parameters parameters) throws IOException {
         return parametersDAO.insertParameters(parameters);
     }
 
@@ -112,12 +118,15 @@ public class ParametersServiceImpl implements ParametersService {
      * @param email mail client who want to retrieve his parameters
      * @return list of parameters
      */
-    public ArrayList<Parameters> getByMail(String email) throws InterruptedException, ExecutionException, IOException {
+    public ArrayList<Parameters> getByMail(
+            String email) throws InterruptedException,
+            ExecutionException, IOException {
         if (email == null) {
             throw new IllegalArgumentException(
                     "Email non valida");
         }
-        ArrayList<Parameters> list = parametersDAO.selectByMail(email);
+        ArrayList<Parameters> list =
+                parametersDAO.selectByMail(email);
         return list;
     }
 }

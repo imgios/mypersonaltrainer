@@ -19,11 +19,14 @@ import java.io.IOException;
  * this class manage the insert parameters.
  * if return 1 the insert passed, else return the oracle message.
  */
-@WebServlet(name = "ParametersController", value = "/parameters-controller")
-public class ParametersController extends HttpServlet {
-    
+@WebServlet(name = "ParametersController",
+        value = "/parameters-controller")
+public class ParametersController
+        extends HttpServlet {
+
     /**
-     * private ParametersDAO parametersDAO = new ParametersDAOImpl();
+     * private ParametersDAO parametersDAO =
+     * new ParametersDAOImpl();
      */
     private ParametersDAO parametersDAO =
             new ParametersDAOImpl();
@@ -46,7 +49,8 @@ public class ParametersController extends HttpServlet {
         String res = "";
 
         try {
-            Parameters p = service.createParameters(weight, mm, mg);
+            Parameters p =
+                    service.createParameters(weight, mm, mg);
 
             if (p != null) {
                 if (service.insertParametersDB(p)) {

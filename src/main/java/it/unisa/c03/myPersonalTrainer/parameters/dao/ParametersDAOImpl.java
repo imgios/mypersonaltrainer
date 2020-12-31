@@ -25,7 +25,8 @@ public class ParametersDAOImpl implements ParametersDAO {
      * @param parameters the parameters to add into database
      */
     @Override
-    public boolean insertParameters(Parameters parameters) throws IOException {
+    public boolean insertParameters(
+            Parameters parameters) throws IOException {
         DBConnection.getConnection().collection(
                 "Parameters").add(parameters);
         return true;
@@ -38,10 +39,12 @@ public class ParametersDAOImpl implements ParametersDAO {
      * @return a list of client parameters
      */
     @Override
-    public ArrayList<Parameters> selectByMail(String email)throws InterruptedException,IOException,ExecutionException {
+    public ArrayList<Parameters> selectByMail(
+            String email) throws
+            InterruptedException, IOException, ExecutionException {
         // Create a reference to the account collection
         CollectionReference parameters = null;
-            parameters = DBConnection.getConnection().collection("Parameters");
+        parameters = DBConnection.getConnection().collection("Parameters");
 
         // Create a query against the collection.
         Query query = parameters.whereEqualTo("mailClient", email);
@@ -51,21 +54,21 @@ public class ParametersDAOImpl implements ParametersDAO {
 
         //create Bean to return document.get("email"));
         ArrayList<Parameters> list = new ArrayList<Parameters>();
-            for (DocumentSnapshot document
-                    : querySnapshot.get().getDocuments()) {
-                Parameters params = new Parameters();
-                params.setfatMass((Double)
-                        document.get("fatMass"));
-                params.setleanMass((Double)
-                        document.get("leanMass"));
-                params.setweight((Double)
-                        document.get("weight"));
-                params.setMailClient(
-                        String.valueOf(document.get("mailClient")));
-                params.setinsertionDate(
-                        String.valueOf(document.get("insertionDate")));
-                list.add(params);
-            }
-            return list;
+        for (DocumentSnapshot document
+                : querySnapshot.get().getDocuments()) {
+            Parameters params = new Parameters();
+            params.setfatMass((Double)
+                    document.get("fatMass"));
+            params.setleanMass((Double)
+                    document.get("leanMass"));
+            params.setweight((Double)
+                    document.get("weight"));
+            params.setMailClient(
+                    String.valueOf(document.get("mailClient")));
+            params.setinsertionDate(
+                    String.valueOf(document.get("insertionDate")));
+            list.add(params);
+        }
+        return list;
     }
 }

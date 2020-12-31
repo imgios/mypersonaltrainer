@@ -28,11 +28,14 @@ public interface ParametersService {
      * @return true if the operation is done
      * @throws IOException
      */
-    boolean insertParametersDB(Parameters parameters) throws IOException;
+    boolean insertParametersDB(
+            Parameters parameters) throws IOException;
 
     /**
      * @param email mail client who want to retrieve his parameters
      * @return list of parameters
      */
-    ArrayList<Parameters> getByMail(String email) throws InterruptedException, ExecutionException, IOException;
+    ArrayList<Parameters> getByMail(
+            String email) throws
+            InterruptedException, ExecutionException, IOException;
 }

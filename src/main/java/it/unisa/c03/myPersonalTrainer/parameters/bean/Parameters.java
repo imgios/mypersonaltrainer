@@ -13,6 +13,9 @@ public class Parameters {
     private String mailClient;
     private String insertionDate;
 
+    /**
+     * costructor for parameters
+     */
     public Parameters() {
 
     }
@@ -21,6 +24,14 @@ public class Parameters {
         return weight;
     }
 
+    /**
+     * costructor for parameters
+     *
+     * @param weight
+     * @param leanMass
+     * @param fatMass
+     * @param mailClient
+     */
     public Parameters(double weight, double leanMass,
                       double fatMass, String mailClient) {
         this.weight = weight;

@@ -14,15 +14,15 @@ public interface ParametersDAO {
      * @param param the parameters to insert into database
      * @throws IOException
      */
-    boolean insertParameters(Parameters param) throws IOException;
+    boolean insertParameters(
+            Parameters param) throws IOException;
 
     /***
      *
      * @param email client mail to retrieve his parameters
      * @return a list of client parameters
      */
-    ArrayList<Parameters> selectByMail(String email) throws InterruptedException, IOException, ExecutionException;
-
-
-
+    ArrayList<Parameters> selectByMail(
+            String email) throws
+            InterruptedException, IOException, ExecutionException;
 }
