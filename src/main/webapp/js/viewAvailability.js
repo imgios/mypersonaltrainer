@@ -15,22 +15,25 @@ $(document).ready(function () {
         $.get('view-availability', {
             "dataSelected": dataSelected,
         }, function (data) {
+            // var obj=JSON.parse(data);
+            //$('#divError').empty().append("<p> " + data.valueOf() + "</p>");
+            // $('#divError').show();
+
             if (data == 0) {
-                $('#divError').empty().append("<p>Non ci sono disponibilita' per il giorno " + dataSelected + "</p>");
+                $('#divError').empty().append("<p> non ci sono prenotazioni per la data " + dataSelected + "</p>");
                 $('#divError').show();
 
-            }
-
-            if (data.charAt(0) == 1) {
+            } else if (data.toString().substr(0, 1) == 1) {
                 var str = data.substring(1,);
-                $('#divError').empty().append("<p>"+str+"</p>");
+                $('#divError').empty().append("<p>" + str + "</p>");
                 $('#divError').show();
             } else {
 
                 var str = "";
+                str += "<h2>Disponibilita' per la data " + dataSelected + "</h2>";
                 str += "<table class=" + "table table-hover table-dark" + "> <thead> <tr> <th scope=" + "col" + ">Data</th> <th scope=" + "col" + ">Orario</th>  </tr> </thead> <tbody>";
 
-                $.each(obj, function (i, name) {
+                $.each(data, function (i, name) {
                     str += "<tr> <td scope=" + "row" + ">"
                         + name.date
                         + "</td>"

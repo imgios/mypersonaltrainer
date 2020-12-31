@@ -50,7 +50,6 @@ public class ViewAvailabilityServlet extends HttpServlet {
         try {
             agendaService.checkAvailability(data, TIME_PASS);
             ArrayList<Availability> list = (ArrayList<Availability>) agendaService.getAvailabilityByDate(data);
-
             if (list.size() == 0) {
 
                 res = new Gson().toJson(0);
@@ -62,7 +61,6 @@ public class ViewAvailabilityServlet extends HttpServlet {
         } catch (IllegalArgumentException | InterruptedException | ExecutionException e) {
             res = new Gson().toJson("1" + e.getMessage());
             System.out.println("1" + e.getMessage() + "\n\n" + res);
-
             response.getWriter().write(res);
             return;
         }
