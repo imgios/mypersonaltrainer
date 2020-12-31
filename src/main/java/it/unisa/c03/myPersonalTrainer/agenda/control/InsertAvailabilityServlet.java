@@ -18,9 +18,9 @@ import java.util.concurrent.ExecutionException;
  * this class controls the interaction between personal trainer and system.
  * return 1 if the insertion is done, 0 not done, 2 if the availability already exists
  */
-@WebServlet(name = "AvailabilityController",
+@WebServlet(name = "InsertAvailabilityServlet",
         value = "/availability-controller")
-public class AvailabilityController extends HttpServlet {
+public class InsertAvailabilityServlet extends HttpServlet {
     /**
      * AgendaDAO
      */
