@@ -4,6 +4,7 @@ package it.unisa.c03.myPersonalTrainer.subscription.service;
 import it.unisa.c03.myPersonalTrainer.subscription.bean.Subscription;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public interface SubscriptionService {
@@ -32,5 +33,19 @@ public interface SubscriptionService {
     subscription expiring, -1 for expired subscription.
      */
     int checkSubscriptionState(String customerMail)
+            throws InterruptedException, ExecutionException, IOException;
+
+    /**
+     * This service method shows all expiring Subscriptions.
+     * @return the list of expiring Subscriptions
+     */
+    ArrayList<Subscription> getExpiringSubscriptions()
+            throws InterruptedException, ExecutionException, IOException;
+
+    /**
+     * This service method shows all expired Subscriptions.
+     * @return the list of expired Subscriptions
+     */
+    ArrayList<Subscription> getExpiredSubscriptions()
             throws InterruptedException, ExecutionException, IOException;
 }
