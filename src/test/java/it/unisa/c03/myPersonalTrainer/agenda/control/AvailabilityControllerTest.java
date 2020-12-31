@@ -24,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AvailabilityControllerTest {
+class InsertAvailabilityServletTest {
     HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
     HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 
@@ -43,7 +43,7 @@ class AvailabilityControllerTest {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         Mockito.when(response.getWriter()).thenReturn(writer);
-        new AvailabilityController().doPost(request, response);
+        new InsertAvailabilityServlet().doPost(request, response);
         assertEquals("1", stringWriter.toString());
         agendaDAO.deleteAvailability(new Availability("2021-10-10", 18));
     }
@@ -58,7 +58,7 @@ class AvailabilityControllerTest {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         Mockito.when(response.getWriter()).thenReturn(writer);
-        new AvailabilityController().doGet(request, response);
+        new InsertAvailabilityServlet().doGet(request, response);
         assertEquals("1", stringWriter.toString());
         agendaDAO.deleteAvailability(new Availability("2021-10-10", 18));
     }
@@ -74,7 +74,7 @@ class AvailabilityControllerTest {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         Mockito.when(response.getWriter()).thenReturn(writer);
-        new AvailabilityController().doGet(request, response);
+        new InsertAvailabilityServlet().doGet(request, response);
         assertEquals("2", stringWriter.toString());
     }
 
@@ -89,7 +89,7 @@ class AvailabilityControllerTest {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         Mockito.when(response.getWriter()).thenReturn(writer);
-        new AvailabilityController().doPost(request, response);
+        new InsertAvailabilityServlet().doPost(request, response);
         assertEquals("2", stringWriter.toString());
     }
 
@@ -103,7 +103,7 @@ class AvailabilityControllerTest {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
-        new AvailabilityController().doGet(request, response);
+        new InsertAvailabilityServlet().doGet(request, response);
         assertFalse(stringWriter.toString().contains("1"));
     }
 
@@ -117,7 +117,7 @@ class AvailabilityControllerTest {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
-        new AvailabilityController().doPost(request, response);
+        new InsertAvailabilityServlet().doPost(request, response);
         assertFalse(stringWriter.toString().contains("1"));
     }
 }
