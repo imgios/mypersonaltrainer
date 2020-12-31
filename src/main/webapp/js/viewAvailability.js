@@ -19,8 +19,13 @@ $(document).ready(function () {
                 $('#divError').empty().append("<p>Non ci sono disponibilita' per il giorno " + dataSelected + "</p>");
                 $('#divError').show();
 
-            } else {
+            }
 
+            if (data.charAt(0) == 1) {
+                var str = data.substring(1,);
+                $('#divError').empty().append("<p>"+str+"</p>");
+                $('#divError').show();
+            } else {
 
                 var str = "";
                 str += "<table class=" + "table table-hover table-dark" + "> <thead> <tr> <th scope=" + "col" + ">Data</th> <th scope=" + "col" + ">Orario</th>  </tr> </thead> <tbody>";

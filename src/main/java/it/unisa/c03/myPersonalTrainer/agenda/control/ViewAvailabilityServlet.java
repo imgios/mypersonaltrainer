@@ -37,8 +37,8 @@ public class ViewAvailabilityServlet extends HttpServlet {
                           HttpServletResponse response)
             throws IOException {
 
-
-       response.setContentType("application/json");
+        final String TIME_PASS = "15";
+        response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
         String data = request.getParameter("dataSelected");
@@ -47,9 +47,8 @@ public class ViewAvailabilityServlet extends HttpServlet {
         String res = "";
 
 
-        agendaService.checkDate(data);
-
         try {
+            agendaService.checkAvailability(data, TIME_PASS);
             ArrayList<Availability> list = (ArrayList<Availability>) agendaService.getAvailabilityByDate(data);
 
             if (list.size() == 0) {
@@ -60,10 +59,12 @@ public class ViewAvailabilityServlet extends HttpServlet {
                 System.out.println(list.size());
                 System.out.println(list);
             }
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (IllegalArgumentException | InterruptedException | ExecutionException e) {
+            res = new Gson().toJson("1" + e.getMessage());
+            System.out.println("1" + e.getMessage() + "\n\n" + res);
+
+            response.getWriter().write(res);
+            return;
         }
 
         response.getWriter().write(res);
