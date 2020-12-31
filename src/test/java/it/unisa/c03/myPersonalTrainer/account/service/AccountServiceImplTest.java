@@ -31,6 +31,7 @@ class AccountServiceImplTest {
 
     //AccountService service = new AccountServiceImpl();
 
+    static Account user;
 
     // TC_1.3_1
     @Test
@@ -187,7 +188,7 @@ class AccountServiceImplTest {
     static void deleteAccountifExist() throws IOException, ExecutionException, InterruptedException {
 
         List<QueryDocumentSnapshot> list_account = DBConnection.getConnection()
-            .collection("Account").whereEqualTo("email", "test@test.it").get().get().getDocuments();
+            .collection("Account").whereEqualTo("email", "test_1@test.it").get().get().getDocuments();
         for (QueryDocumentSnapshot document : list_account) {
             document.getReference().delete();
         }
@@ -195,7 +196,7 @@ class AccountServiceImplTest {
 
     @AfterAll
     static void deleteAccountAfterInsert() throws IOException, ExecutionException, InterruptedException {
-        List<QueryDocumentSnapshot> list_account = DBConnection.getConnection().collection("Account").whereEqualTo("email","test@test.it").get().get().getDocuments();
+        List<QueryDocumentSnapshot> list_account = DBConnection.getConnection().collection("Account").whereEqualTo("email","test_1@test.it").get().get().getDocuments();
 
         for(QueryDocumentSnapshot document : list_account)
         {
@@ -218,7 +219,7 @@ class AccountServiceImplTest {
 
         Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(user);
         Mockito.when(accountDAO.saveAccount(any())).thenReturn(true);
-        Account user_test = new Account("nome","cognome","1223232312321", "test@test.it", "Test0232", 0);
+        Account user_test = new Account("nome","cognome","1223232312321", "test_1@test.it", "Test0232", 0);
 
         //accountDAO.saveAccount(account);
         assertTrue(accounts.registerAccount(user_test));
@@ -226,11 +227,34 @@ class AccountServiceImplTest {
     }
 
 
+
+    //inserimento prima del check
+
+    @BeforeAll
+    static void insertbeforetest() throws IOException {
+
+        user = new Account("AccountName", "AccountSurname", "121212121212", "test_2@test.it", "Password12",
+            0);
+        DBConnection.getConnection().collection("Account").add(user);
+    }
+
+    @AfterAll
+    static void deleteaftertest() throws IOException, ExecutionException, InterruptedException {
+        List<QueryDocumentSnapshot> list_account = DBConnection.getConnection().collection("Account").whereEqualTo("email","test_2@test.it").get().get().getDocuments();
+
+        for(QueryDocumentSnapshot document : list_account)
+        {
+            document.getReference().delete();
+        }
+    }
+
+
     @Test
     void registerAccountFalse() throws IOException, IllegalArgumentException,
         ExecutionException, InterruptedException {
 
-        Account user = new Account("nome", "cognome", "121212121212", "test@test.it", "Password12",
+        Account user = new Account("nome", "cognome", "121212121212",
+            "test_2@test.it", "Password12",
             0);
 
         AccountDAO accountDAO = Mockito.mock(AccountDAO.class);
@@ -238,7 +262,7 @@ class AccountServiceImplTest {
 
         Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(user);
 
-        Account user_test = new Account("nome", "cognome", "121212121212", "test@test.it",
+        Account user_test = new Account("nome", "cognome", "121212121212", "test_2@test.it",
             "Password12", 0);
 
         // assertFalse(accountS.registerAccount(user_test));
