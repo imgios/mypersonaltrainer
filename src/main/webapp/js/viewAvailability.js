@@ -21,7 +21,6 @@ $(document).ready(function () {
 
             } else {
 
-                const obj = JSON.parse(data);
 
                 var str = "";
                 str += "<table class=" + "table table-hover table-dark" + "> <thead> <tr> <th scope=" + "col" + ">Data</th> <th scope=" + "col" + ">Orario</th>  </tr> </thead> <tbody>";

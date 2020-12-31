@@ -38,8 +38,8 @@ public class ViewAvailabilityServlet extends HttpServlet {
             throws IOException {
 
 
-       /*response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");*/
+       response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
         String data = request.getParameter("dataSelected");
         System.out.println(data);
