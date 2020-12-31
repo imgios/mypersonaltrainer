@@ -16,11 +16,13 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * this class controls the interaction between personal trainer and system.
- * return 1 if the insertion is done, 0 not done, 2 if the availability already exists
+ * return 1 if the insertion is done, 0 not done,
+ * 2 if the availability already exists
  */
 @WebServlet(name = "InsertAvailabilityServlet",
         value = "/availability-controller")
-public class InsertAvailabilityServlet extends HttpServlet {
+public class InsertAvailabilityServlet
+        extends HttpServlet {
     /**
      * AgendaDAO
      */
@@ -51,7 +53,9 @@ public class InsertAvailabilityServlet extends HttpServlet {
             System.out.println(
                     agendaService.checkAvailability(data, x));
 
-            Availability prova = agendaService.getAvailabilityByDateAndTime(data, Integer.parseInt(x));
+            Availability prova =
+                    agendaService.getAvailabilityByDateAndTime(
+                            data, Integer.parseInt(x));
             System.out.println(prova);
             if (prova == null) {
                 Availability avaiability =
@@ -61,7 +65,8 @@ public class InsertAvailabilityServlet extends HttpServlet {
             } else {
                 res = new Gson().toJson(2);
             }
-        } catch (IllegalArgumentException | InterruptedException | ExecutionException e) {
+        } catch (IllegalArgumentException
+                | InterruptedException | ExecutionException e) {
             System.out.println(e.getMessage());
             res = new Gson().toJson(e.getMessage());
             response.getWriter().write(res);
