@@ -29,9 +29,8 @@ class InsertAvailabilityServletTest {
     HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 
     AgendaDAO agendaDAO = Mockito.mock(AgendaDAO.class);
+    AgendaService agendaService = Mockito.mock(AgendaService.class);
 
-    // AgendaServiceImpl agendaService = new AgendaServiceImpl(agendaDAO);
-    AgendaService agendaService = new AgendaServiceImpl(agendaDAO);
 
     @Test
     void doPost() throws IOException, ExecutionException, InterruptedException {
