@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AccountServiceImplTest {
 
-    // TC_1.3_1
+    // TC_1.1_1
     @Test
     public void emailLengthNotValid() {
         String mail = "p@l.it" ;
@@ -45,7 +45,7 @@ class AccountServiceImplTest {
         assertEquals(message,exception.getMessage());
     }
 
-    // TC_1.3_2
+    // TC_1.1_2
     @Test
     public void emailFormatNotValid()
     {
@@ -62,38 +62,17 @@ class AccountServiceImplTest {
         assertEquals(message,exception.getMessage());
     }
 
-    // TC_1.3_3
+    // TC_1.1_3
     @Test
-    public void passwordLengthNotValid()
+    public void finalTest()
     {
         String mail = "client@prova.it" ;
-        String password = "" ;
-        String message = "Lunghezza password non valida" ;
+        String password = "password1." ;
 
         AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
         AccountService service  = new AccountServiceImpl(accountDAO);
 
-        IllegalArgumentException exception =  assertThrows(IllegalArgumentException.class , () -> {
-            service.checkCredentials(mail,password) ;
-        });
-        assertEquals(message,exception.getMessage());
-    }
-
-    // TC_1.3_4
-    @Test
-    public void passwordFormatNotValid()
-    {
-        String mail = "client@prova.it" ;
-        String password = "prova" ;
-        String message = "Formato password non valido" ;
-
-        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
-        AccountService service  = new AccountServiceImpl(accountDAO);
-
-        IllegalArgumentException exception =  assertThrows(IllegalArgumentException.class , () -> {
-            service.checkCredentials(mail,password) ;
-        });
-        assertEquals(message,exception.getMessage());
+        assertEquals(true, service.checkCredentials(mail,password));
     }
 
     @Test

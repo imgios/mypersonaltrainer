@@ -46,11 +46,11 @@ class AccountDAOImplTest {
 
 
     @Test
-    void findAccountByEmail() throws InterruptedException, ExecutionException, IOException {
+    void findTheAccountByEmail() throws InterruptedException, ExecutionException, IOException {
 
         AccountDAO dao = new AccountDAOImpl();
         Account accountToSearch = dao.findAccountByEmail("hismail@italy.com");
 
-        assertEquals(accountTest.getEmail(), dao.findAccountByEmail());
+        assertEquals(accountTest.getEmail(),dao.findAccountByEmail("hismail@italy.com").getEmail());
     }
 }
