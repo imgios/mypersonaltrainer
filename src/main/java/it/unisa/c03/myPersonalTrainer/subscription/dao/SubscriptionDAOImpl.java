@@ -9,6 +9,7 @@ import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import it.unisa.c03.myPersonalTrainer.subscription.bean.Subscription;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class SubscriptionDAOImpl implements SubscriptionDAO {
@@ -36,7 +37,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
     @Override
     public Subscription getSubscriptionbyEmail(String clientMail)
             throws IOException, ExecutionException, InterruptedException {
-        // Create a reference to the account collection
+        // Create a reference to the Subscription collection
         CollectionReference accounts = null;
 
         accounts = DBConnection.getConnection().collection("Subscription");
@@ -64,5 +65,35 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 
 
         return subscriptionBean;
+    }
+
+    /**
+     * This method retrieves all subscriptions saved in db.
+     *
+     * @return subscription list
+     */
+    @Override
+    public ArrayList<Subscription> getAllSubscriptions()
+            throws IOException, ExecutionException, InterruptedException {
+        // Create a reference to the Subscription collection
+        CollectionReference subColl = null;
+
+        subColl = DBConnection.getConnection().collection("Subscription");
+
+        // Create a query against the collection.
+        Query query = subColl.select("customerMail", "expDate", "price");
+
+        // retrieve  query results asynchronously using query.get()
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+
+        //create the list to return
+        ArrayList<Subscription> list = new ArrayList<>();
+
+        for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+            Subscription s = document.toObject(Subscription.class);
+            list.add(s);
+        }
+
+        return list;
     }
 }
