@@ -2,11 +2,9 @@ package it.unisa.c03.myPersonalTrainer.account.dao;
 
         import it.unisa.c03.myPersonalTrainer.account.bean.Account;
         import java.io.IOException;
-        import java.util.Collection;
         import java.util.concurrent.ExecutionException;
 
 public interface AccountDAO {
-
 
     /** this function can search if the email is
      * just registered into the db.

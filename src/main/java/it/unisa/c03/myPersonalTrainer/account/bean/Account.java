@@ -1,11 +1,11 @@
 package it.unisa.c03.myPersonalTrainer.account.bean;
 
-        import java.io.Serializable;
+import java.io.Serializable;
 
 /**
  * account class.
  */
-public class Account implements Serializable{
+public class Account implements Serializable {
     /**
      * user's name.
      */

@@ -76,6 +76,37 @@ class AccountServiceImplTest {
     }
 
     @Test
+    public void passwordLengthNotValid()
+    {
+        String mail = "client@prova.it" ;
+        String password = "" ;
+        String message = "Lunghezza password non valida" ;
+
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        AccountService service  = new AccountServiceImpl(accountDAO);
+
+        IllegalArgumentException exception =  assertThrows(IllegalArgumentException.class , () -> {
+            service.checkCredentials(mail,password) ;
+        });
+        assertEquals(message,exception.getMessage());
+    }
+
+    @Test
+    public void passwordFormatNotValid()
+    {
+        String mail = "client@prova.it" ;
+        String password = "prova" ;
+        String message = "Formato password non valido" ;
+
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        AccountService service  = new AccountServiceImpl(accountDAO);
+
+        IllegalArgumentException exception =  assertThrows(IllegalArgumentException.class , () -> {
+            service.checkCredentials(mail,password) ;
+        });
+        assertEquals(message,exception.getMessage());
+    }
+    @Test
     public void searchAccountByEmailFalse() throws InterruptedException, ExecutionException, IOException {
         AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
         Account a = new Account();
@@ -114,5 +145,22 @@ class AccountServiceImplTest {
         AccountService service  = new AccountServiceImpl(accountDAO);
         assertEquals(true, service.verifyIsAdmin(a));
     }
-}
 
+    @Test
+     void loginAccountTrue() throws IOException, ExecutionException, InterruptedException {
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        Account a = new Account("clientName", "clientSurname","332","hismail@italy.com","hispassword1",0);
+        when(accountDAO.findAccountByEmail(anyString())).thenReturn(a);
+        AccountService service  = new AccountServiceImpl(accountDAO);
+        assertEquals(true, service.loginAccount("hismail@italy.com", "hispassword1"));
+    }
+
+    @Test
+    void loginAccountFalse() throws IOException, ExecutionException, InterruptedException {
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        Account a = new Account("clientName", "clientSurname","332","hismail@italy.com","hispassword1",0);
+        when(accountDAO.findAccountByEmail(anyString())).thenReturn(null);
+        AccountService service  = new AccountServiceImpl(accountDAO);
+        assertEquals(false, service.loginAccount("hismail@italy.com", "hispasswod1"));
+    }
+}

@@ -1,20 +1,13 @@
 package it.unisa.c03.myPersonalTrainer.account.dao;
  import com.google.api.core.ApiFuture;
-
  import com.google.cloud.firestore.CollectionReference;
  import com.google.cloud.firestore.DocumentSnapshot;
-
  import com.google.cloud.firestore.Query;
  import com.google.cloud.firestore.QuerySnapshot;
-
  import it.unisa.c03.myPersonalTrainer.account.bean.Account;
  import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
-
- import java.util.Collection;
- import java.util.List;
  import java.util.concurrent.ExecutionException;
  import java.io.IOException;
- import java.util.stream.Collectors;
 
 public class AccountDAOImpl implements AccountDAO {
 
@@ -32,7 +25,6 @@ public class AccountDAOImpl implements AccountDAO {
         CollectionReference accounts = null;
 
         accounts = DBConnection.getConnection().collection("Account");
-
 
         // Create a query against the collection.
         Query query = accounts.whereEqualTo("email", email);

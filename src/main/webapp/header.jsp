@@ -1,6 +1,19 @@
+<!--------- NOTE PER UTILIZZARE L'HEADER ----->
+<!----- Momentaneo
+Prima di inserire qualisasi elemento nella vostra JSP, è
+necessario strutturarla partendo dai seguenti div riportati:
+<div class="wrapper">
+<div class="main_container">
+<div class="item">
+Questo perchè in questo modo anche la vostra JSP sarà coordinata con l'header
+e non dovreste avere particolari problemi ad inserire i vostri elementi senza che la sidebar
+li copra o si sovrapponga ad essi.
+Includere anche il CSS:
+<link rel="stylesheet" href="css/style.css">
+-->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>myPersonalTrainer</title>

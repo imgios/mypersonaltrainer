@@ -1,11 +1,23 @@
 package it.unisa.c03.myPersonalTrainer.account.service;
         import it.unisa.c03.myPersonalTrainer.account.bean.Account;
         import java.io.IOException;
-        import java.util.Collection;
         import java.util.concurrent.ExecutionException;
 
 public interface AccountService {
-
+    /**
+     * This function allow to verify the credentials
+     * typed between form before the login.
+     * @param email
+     * @param password
+     * @return true if credentials are in the Database,
+     * false if the credentials aren't linked to an account s
+     * tored in the Database
+     * @throws IOException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+    boolean loginAccount(String email, String password)
+            throws IOException, ExecutionException, InterruptedException;
     /**
      * This function check the credentials of
      * the client before insert into the db.

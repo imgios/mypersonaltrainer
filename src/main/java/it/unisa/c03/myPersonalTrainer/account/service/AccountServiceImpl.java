@@ -2,12 +2,8 @@ package it.unisa.c03.myPersonalTrainer.account.service;
 
         import it.unisa.c03.myPersonalTrainer.account.bean.Account;
         import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
-        import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
-
         import java.io.IOException;
-        import java.util.Collection;
         import java.util.concurrent.ExecutionException;
-
 
 public class AccountServiceImpl implements AccountService {
 
@@ -43,16 +39,35 @@ public class AccountServiceImpl implements AccountService {
         accountDAO = accountDao;
     }
 
-    public AccountServiceImpl() {
+    /**
+     * Check the credential before login.
+     * @param email
+     * @param password
+     * @return
+     * @throws IOException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
 
+    @Override
+    public boolean loginAccount(String email, String password)
+            throws IOException, ExecutionException, InterruptedException {
+        Account accountLogged;
+        accountLogged = accountDAO.findAccountByEmail(email);
+        if (accountLogged != null) {
+                return true;
+            } else {
+            return false;
+        }
     }
 
     /**
-     * check the credential with the regular expression.
-     *
+     * check the credential with the regular expression
+     * before login.
      * @param clientMail  email of the client
      * @param newPassword new password to update
-     * @return clientMail, new Passoword, after check
+     * @return true if credentials follow the regular expression.
+     * false if credentials don't respect regular expression
      * @throws IllegalArgumentException
      */
     @Override
@@ -80,14 +95,11 @@ public class AccountServiceImpl implements AccountService {
             // controllo dei test
             result = true;
         }
-
         return result;
-
     }
 
     /**
      * This service method checks if an account exists in the database.
-     *
      * @param email referring to the account to search for
      * @return true if the account exists, false if not
      */
@@ -106,12 +118,11 @@ public class AccountServiceImpl implements AccountService {
             //the email doesn't exist in the DB
             result = false;
         }
-
         return result;
     }
 
     /**
-     * @param account Account of user registred into the DataBase.
+     * @param account Account of registred user into the DataBase.
      * @return Return true if the following account is
      * a Personal Trainer's account.
      * @throws IllegalArgumentException

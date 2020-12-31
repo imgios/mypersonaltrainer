@@ -15,14 +15,15 @@ import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 
 /**
- * servlet for Login account.
+ * Servlet that allow the Account's login.
  */
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
     /**
-     * method do post.
-     * @param request
+     * Method doPost.
+     * @param request The request include the content
+     * of Login form at the moment of Account's authentication.
      * @param response
      * @throws ServletException
      * @throws IOException
@@ -45,41 +46,42 @@ public class LoginServlet extends HttpServlet {
             verifiedCredential = accountService.
                     checkCredentials(email, password);
             if (verifiedCredential) {
-                utente = accountDao.
-                        findAccountByEmail(email);
-                testUtente = new Account(utente.getName(),
-                        utente.getSurname(), utente.getPhone(),
-                        utente.getEmail(), utente.getPassword(),
-                        utente.getRole());
-                if (utente.getEmail() != null) {
+                if (accountService.loginAccount(email, password)) {
+                    utente = accountDao.
+                            findAccountByEmail(email);
+                    testUtente = new Account(utente.getName(),
+                            utente.getSurname(), utente.getPhone(),
+                            utente.getEmail(), utente.getPassword(),
+                            utente.getRole());
                     if (email.equals(testUtente.getEmail())
                             && password.equals(testUtente.getPassword())) {
                         if (accountService.verifyIsAdmin(utente)) {
-                            System.out.println("Bentornato Personal Trainer "
-                                    + testUtente.getName() + " !");
-                            System.out.println(testUtente.toString());//TEST
                             response.sendRedirect("adminDashboard.jsp");
                         } else {
-                            System.out.println("Bentornato Utente "
-                                    + testUtente.getName() + " !");
                             response.sendRedirect("clienteDashboard.jsp");
                         }
                     } else {
-                        System.out.println("Credenziali errate");
                         response.sendRedirect("login.jsp");
                     }
                 } else {
-                    System.out.println("Credenziali errate");
                     response.sendRedirect("login.jsp");
                 }
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
     }
-    final protected void doGet(HttpServletRequest request,
+
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+     public void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
