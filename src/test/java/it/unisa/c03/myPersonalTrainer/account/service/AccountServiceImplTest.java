@@ -6,6 +6,9 @@ import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
+import java.util.List;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 
@@ -177,11 +180,36 @@ class AccountServiceImplTest {
     }
 
 
+
+
+
+    @BeforeAll
+    static void deleteAccountifExist() throws IOException, ExecutionException, InterruptedException {
+
+        List<QueryDocumentSnapshot> list_account = DBConnection.getConnection()
+            .collection("Account").whereEqualTo("email", "test@test.it").get().get().getDocuments();
+        for (QueryDocumentSnapshot document : list_account) {
+            document.getReference().delete();
+        }
+    }
+
+    @AfterAll
+    static void deleteAccountAfterInsert() throws IOException, ExecutionException, InterruptedException {
+        List<QueryDocumentSnapshot> list_account = DBConnection.getConnection().collection("Account").whereEqualTo("email","test@test.it").get().get().getDocuments();
+
+        for(QueryDocumentSnapshot document : list_account)
+        {
+            document.getReference().delete();
+        }
+    }
+
+
+
     @Test
     void registerAccountTrue() throws IOException, IllegalArgumentException,
         ExecutionException, InterruptedException {
 
-        Account user = new Account("nome","cognome","1223232312321", "test_2@test.it", "Test0232", 0);
+        Account user = new Account("nome","cognome","1223232312321", "test@test.it", "Test0232", 0);
 
         AccountDAO accountDAO = Mockito.mock(AccountDAO.class);
        //Account user = Mockito.mock(Account.class);
@@ -190,7 +218,7 @@ class AccountServiceImplTest {
 
         Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(user);
         Mockito.when(accountDAO.saveAccount(any())).thenReturn(true);
-        Account user_test = new Account("nome","cognome","1223232312321", "test_2_2@test.it", "Test0232", 0);
+        Account user_test = new Account("nome","cognome","1223232312321", "test@test.it", "Test0232", 0);
 
         //accountDAO.saveAccount(account);
         assertTrue(accounts.registerAccount(user_test));
