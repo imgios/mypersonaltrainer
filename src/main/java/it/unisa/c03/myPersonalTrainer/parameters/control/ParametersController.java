@@ -21,9 +21,17 @@ import java.io.IOException;
  */
 @WebServlet(name = "ParametersController", value = "/parameters-controller")
 public class ParametersController extends HttpServlet {
-
-    private ParametersDAO parametersDAO = new ParametersDAOImpl();
-    private ParametersService service = new ParametersServiceImpl(parametersDAO);
+    
+    /**
+     * private ParametersDAO parametersDAO = new ParametersDAOImpl();
+     */
+    private ParametersDAO parametersDAO =
+            new ParametersDAOImpl();
+    /**
+     * ParametersService to use the service methods
+     */
+    private ParametersService service =
+            new ParametersServiceImpl(parametersDAO);
 
 
     protected void doPost(HttpServletRequest request,
