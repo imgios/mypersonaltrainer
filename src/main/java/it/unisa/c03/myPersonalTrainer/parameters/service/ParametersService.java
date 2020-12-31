@@ -8,7 +8,8 @@ import java.util.concurrent.ExecutionException;
 
 public interface ParametersService {
     /**
-     * this methods check if the parameters are acceptable; then enable to insert them into database.
+     * this methods check if the parameters are acceptable; then able to be insert into database.
+     * and create the parameters.
      *
      * @param weight
      * @param leanMass

@@ -10,12 +10,34 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class ParametersServiceImpl implements ParametersService {
+
+    /**
+     * the MIN_WEIGHT allowed
+     */
     private static final int MIN_WEIGHT = 40;
+    /**
+     * the MAX_WEIGHT allowed
+     */
     private static final int MAX_WEIGHT = 150;
+    /**
+     * the MIN_PERCENTAGE allowed
+     */
     private static final int MIN_PERCENTAGE = 10;
+    /**
+     * the MAX_PERCENTAGE allowed
+     */
     private static final int MAX_PERCENTAGE = 70;
+    /**
+     * the MIN_LENGHT for the WEIGHT allowed
+     */
     private static final int MIN_LENGHT_WEIGHT = 2;
+    /**
+     * the MAX_LENGHT for the WEIGHT allowed
+     */
     private static final int MAX_LENGHT_WEIGHT = 6;
+    /**
+     * the PERCENTAGE
+     */
     private static final int PERCENTAGE = 100;
 
 
@@ -29,7 +51,7 @@ public class ParametersServiceImpl implements ParametersService {
     /**
      * check the format parameters
      *
-     * @param weight   between 40 and 150 format alloed XXX.XX
+     * @param weight   between 40 and 150 format allowed XXX.XX
      * @param leanMass between 10% and 70%
      * @param fatMass  between 10% and 70%
      * @return the parameters, null if the parameters in input are not good
