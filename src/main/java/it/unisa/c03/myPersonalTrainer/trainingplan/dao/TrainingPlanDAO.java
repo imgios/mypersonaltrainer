@@ -3,9 +3,21 @@ package it.unisa.c03.myPersonalTrainer.trainingplan.dao;
 import it.unisa.c03.myPersonalTrainer.trainingplan.bean.TrainingPlan;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.concurrent.ExecutionException;
 
 public interface TrainingPlanDAO {
+
+    /**
+     * This method extracts trainingplans into database.
+     * @param email of the customer
+     * @return List of Training Plans
+     * @throws IOException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+    public Collection<TrainingPlan> getTrainingPlansByEmail(String email)
+            throws IOException, ExecutionException, InterruptedException;
 
     /**
      * This method add a new TrainingPlan
