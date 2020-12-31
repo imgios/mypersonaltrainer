@@ -10,10 +10,13 @@ package it.unisa.c03.myPersonalTrainer.account.dao;
  import it.unisa.c03.myPersonalTrainer.account.bean.Account;
  import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 
+ import java.util.Collection;
+ import java.util.List;
  import java.util.concurrent.ExecutionException;
  import java.io.IOException;
+ import java.util.stream.Collectors;
 
- public class AccountDAOImpl implements AccountDAO {
+public class AccountDAOImpl implements AccountDAO {
 
     /**
      * this function can check if the email is into the db.
@@ -52,8 +55,6 @@ package it.unisa.c03.myPersonalTrainer.account.dao;
             accountBean.setRole(Integer.parseInt(
                     String.valueOf(document.get("role"))));
         }
-
-
         return accountBean;
     }
 }

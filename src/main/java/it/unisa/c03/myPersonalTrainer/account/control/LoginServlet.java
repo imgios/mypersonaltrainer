@@ -57,6 +57,7 @@ public class LoginServlet extends HttpServlet {
                         if (accountService.verifyIsAdmin(utente)) {
                             System.out.println("Bentornato Personal Trainer "
                                     + testUtente.getName() + " !");
+                            System.out.println(testUtente.toString());//TEST
                             response.sendRedirect("adminDashboard.jsp");
                         } else {
                             System.out.println("Bentornato Utente "

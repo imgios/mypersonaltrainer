@@ -44,12 +44,13 @@ class AccountDAOImplTest {
         }
     }
 
+
     @Test
     void findAccountByEmail() throws InterruptedException, ExecutionException, IOException {
 
         AccountDAO dao = new AccountDAOImpl();
         Account accountToSearch = dao.findAccountByEmail("hismail@italy.com");
 
-        assertEquals(accountTest.getEmail(), accountToSearch.getEmail());
+        assertEquals(accountTest.getEmail(), dao.findAccountByEmail());
     }
 }

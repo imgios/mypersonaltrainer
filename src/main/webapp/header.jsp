@@ -5,17 +5,18 @@
     <meta charset="UTF-8">
     <title>myPersonalTrainer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/styles.css">
+    <!link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<%int validSession=1;%>
+<%int validSession=0;%>
 <%int role=1;%>
-<%if(validSession==0) { %>  <!--if(session.getAttribute("user")!=null) { %>-->
+<%if(validSession==1) { %>  <!--if(session.getAttribute("user")!=null) { %>-->
 <!--response.sendRedirect("login.jsp");-->
+<!----- SESSIONE SCADUTA TORNA AL LOGIN ----->
 <div class="wrapper">
     <div class="top_navbar">
-        <div class="hamburger">
+        <div class="hamburgerIn">
             <div class="one"></div>
             <div class="two"></div>
             <div class="three"></div>
@@ -36,7 +37,7 @@
         </div>
     </div>
 
-    <div class="sidebar">
+    <!--div class="sidebar">
         <ul>
             <li><a href="#">
                 <span class="title"> </span></a></li>
@@ -50,8 +51,9 @@
                 <span class="title"> </span>
             </a></li>
         </ul>
-    </div>
+    </div-->
 <%} else if (role==1){%>
+    <!----- HEADER PER CLIENTE ----->
 <div class="wrapper">
     <div class="top_navbar">
         <div class="hamburger">
@@ -91,6 +93,7 @@
         </ul>
     </div>
     <%}else if(role==1){%>
+    <!----- HEADER PER PERSONAL TRAINER ----->
     <div class="wrapper">
         <div class="top_navbar">
             <div class="hamburger">
@@ -99,6 +102,7 @@
                 <div class="three"></div>
             </div>
             <div class="top_menu">
+
                 <div class="logo"><img class="responsive_logo" src="images/void.png">
                 </div>
                 <div class="logo"><img class="responsive_logo" src="images/nlogo.png">
@@ -111,6 +115,7 @@
                         <li><a href="#"> Profilo Utente </a></li>
                     </ul>
                 </div>
+
             </div>
         </div>
 
@@ -134,15 +139,17 @@
         </div>
     <%}%>
 </div>
-    <!div>
-    <%@include file="footer.jsp"%>
-    </div>
 
-    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script-->
+    <!-----FOOTER DA INSERIRE----->
+    <div>
+
+    </div>
+    <!------FINE FOOTER------>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <!script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
 
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 

@@ -2,8 +2,10 @@ package it.unisa.c03.myPersonalTrainer.account.service;
 
         import it.unisa.c03.myPersonalTrainer.account.bean.Account;
         import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
+        import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 
         import java.io.IOException;
+        import java.util.Collection;
         import java.util.concurrent.ExecutionException;
 
 
@@ -11,37 +13,44 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * @exclude
-     * */
+     */
     private static final int MIN_EMAIL_LENGTH = 7;
     /**
      * @exclude
-     * */
+     */
     public static final int MAX_EMAIL_LENGTH = 25;
     /**
      * @exclude
-     * */
+     */
     public static final int MIN_PASSWORD_LENGTH = 1;
     /**
      * @exclude
-     * */
+     */
     public static final int MAX_PASSWORD_LENGTH = 30;
 
     /**
      * @exclude
-     * */
+     */
     private AccountDAO accountDAO;
+
     /**
      * Service constructor.
+     *
      * @param accountDao is required, because is the DAO that
-     * all the service methods will call.
-     * */
+     *                   all the service methods will call.
+     */
     public AccountServiceImpl(AccountDAO accountDao) {
         accountDAO = accountDao;
     }
 
+    public AccountServiceImpl() {
+
+    }
+
     /**
      * check the credential with the regular expression.
-     * @param clientMail email of the client
+     *
+     * @param clientMail  email of the client
      * @param newPassword new password to update
      * @return clientMail, new Passoword, after check
      * @throws IllegalArgumentException
@@ -50,10 +59,7 @@ public class AccountServiceImpl implements AccountService {
     public boolean checkCredentials(String clientMail,
                                     String newPassword)
             throws IllegalArgumentException {
-
-
         boolean result = false;
-
         // lunghezza email
         if (clientMail.length() < MIN_EMAIL_LENGTH
                 || clientMail.length() > MAX_EMAIL_LENGTH) {
@@ -81,6 +87,7 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * This service method checks if an account exists in the database.
+     *
      * @param email referring to the account to search for
      * @return true if the account exists, false if not
      */
@@ -104,7 +111,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     /**
-     *
      * @param account Account of user registred into the DataBase.
      * @return Return true if the following account is
      * a Personal Trainer's account.
@@ -118,5 +124,6 @@ public class AccountServiceImpl implements AccountService {
             return false;
         }
     }
-
 }
+
+

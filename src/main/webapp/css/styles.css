@@ -71,7 +71,7 @@ body{
 .wrapperIn .top_navbar .hamburgerIn div{
   width: 35px;
   height: 4px;
-  background: #000000;
+  background: #9fc5f8;
   margin: 5px 0;
 }
 /******/
@@ -80,7 +80,7 @@ body{
 }
 
 .wrapper .top_navbar .top_menu{
-  width: calc(100% - 70px);
+  width: calc(100% - 1px);/*70*/
   height: 100%;
   background: #9fc5f8;
   display: flex;
@@ -118,7 +118,7 @@ body{
   position: fixed;
   top: 70px;
   left: 10px;
-  background: #2C65AE;
+  background: #2c65ae;
   width: 200px;
   height: calc(100% - 80px);
   transition: all 0.3s ease;
@@ -157,7 +157,7 @@ body{
 }
 
 .wrapper .main_container{
-  width:(100% - 200px);
+  width(100% - 200px;); /*ATT*/
   margin-top: 70px;
   margin-left: 200px;
   margin-right: 70px;
@@ -192,27 +192,13 @@ body{
 }
 
 .wrapper.collapse .main_container{
-  width: (100% - 90px);
+  width(100% - 90px;);/*ATT :*/
   margin-left: 70px;
 }
 
 /*****CSS PER LOGIN*****/
 
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap');
-/*
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Jost', sans-serif;
-  outline: none;
-  color: #5c4b51;
-}
-
-body{
-  background: linear-gradient(to right, #f4b661, #f16160);
-}
-*/
+/**@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap');**/
 .wrapperLogin{
   min-height: 10vh;
   display: flex;
@@ -221,8 +207,12 @@ body{
 }
 
 .form{
-  width: 425px;
+  /*width: 425px;*/
+  /**/
+  align-content: center;
+  width: 100%;
   height: auto;
+  /**/
   background: #fff;
   padding: 35px 50px;
   border: 3px solid #9fc5f8;
@@ -237,8 +227,13 @@ body{
 }
 
 .form .input_wrap{
+  /**/
+  align-content: center;
+  width: 100%;
+  height: auto;
+  /**/
   margin-bottom: 20px;
-  width: 325px;
+  /*width: 325px;*/
   position: relative;
 }
 
@@ -250,11 +245,21 @@ body{
 .form .input_wrap label{
   display: block;
   margin-bottom: 5px;
+  /**/
+  align-content: center;
+  width: 100%;
+  height: auto;
+  /**/
 }
 
 .form .input_wrap input{
   padding: 15px;
+  /**/
+  align-content: center;
+  /*width: 35%;*/
+  height: auto;
   width: 100%;
+  /**/
   border: 1px solid transparent;
   font-size: 16px;
   border-radius: 3px;
@@ -278,7 +283,7 @@ body{
 
 .form .input_wrap .btn{
   text-transform: uppercase;
-  letter-spacing: 1px;
+  /*letter-spacing: 1px;*/
   color: #fff;
 }
 
@@ -287,7 +292,7 @@ body{
 }
 
 .form .input_wrap .btn.enabled{
-  background: #4360b5;
+  background: #2c65ae;
   cursor: pointer;
 }
 
@@ -297,286 +302,3 @@ body{
   color: #f74040;
   display: none;
 }
-
-
-
-
-
-footer {
-  bottom: 0;
-  width: 100%;
-  position: fixed;
-  height: auto;
-  background-color: #000000;
-}
-
-footer ul.footerleft{
-  margin-left: 150px;
-  margin-top: 10px;   /* 10 precedent value  dopo -200*/
-}
-footer ul.footerleft li{
-  display: inline;
-  margin-right: 25px;
-}
-footer a{
-  color: #ffffff;
-}
-
-footer a:hover{
-  color: #09ffc4;
-  text-decoration: none;
-}
-footer h5{
-  color: #ffffff;
-}
-footer p{
-  color: #ffffff;
-}
-/*
-footer h1:hover{
-    color: #09ffc4;
-    text-decoration: none;
-}
-*/
-#main {
-  overflow:auto;
-  padding-bottom: 200px;
-}
-
-.social:hover {
-  -webkit-transform: scale(1.0);
-  -webkit-transition-duration: 0.5s;
-}
-.social {
-  -webkit-transform: scale(0.8);
-  color: #222;
-
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  grid-gap: 10px;
-  background-color: #ffffff;
-  padding: 10px;
-}
-/***** FOOTER*/
-
-footer {
-  bottom: 0;
-  width: 100%;
-  position: fixed;
-  height: auto;
-  background-color: #000000;
-}
-
-footer ul.footerleft{
-  margin-left: 150px;
-  margin-top: 10px;   /* 10 precedent value  dopo -200*/
-}
-footer ul.footerleft li{
-  display: inline;
-  margin-right: 25px;
-}
-footer a{
-  color: #ffffff;
-}
-
-footer a:hover{
-  color: #09ffc4;
-  text-decoration: none;
-}
-footer h5{
-  color: #ffffff;
-}
-footer p{
-  color: #ffffff;
-}
-/*
-footer h1:hover{
-    color: #09ffc4;
-    text-decoration: none;
-}
-*/
-#main {
-  overflow:auto;
-  padding-bottom: 200px;
-}
-
-.social:hover {
-  -webkit-transform: scale(1.0);
-  -webkit-transition-duration: 0.5s;
-}
-.social {
-  -webkit-transform: scale(0.8);
-  color: #222;
-
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  grid-gap: 10px;
-  background-color: #ffffff;
-  padding: 10px;
-}
-
-
-/*html, body {height: 100%;}*/
-
-/*
-#wrap {min-height: 100%;}
-*/
-
-/* allineamento centrale canvas */
-/*
-canvas{
-    margin: 0 auto;
-}
-.chartContainer{
-    text-align: center;
-}
-myChart{
-    width: 80% !important;
-    height: 700px !important;
-    margin: 0;
-}
-.myChart {
-    text-align: center;
-    margin: 0 auto;
-}
-*/
-
-
-
-
-
-
-
-
-
-
-
-/****/
-/*html, body {height: 100%;}*/
-
-/*
-#wrap {min-height: 100%;}
-*/
-
-/* allineamento centrale canvas */
-/*
-canvas{
-    margin: 0 auto;
-}
-.chartContainer{
-    text-align: center;
-}
-myChart{
-    width: 80% !important;
-    height: 700px !important;
-    margin: 0;
-}
-.myChart {
-    text-align: center;
-    margin: 0 auto;
-}
-*/
-
-/*
-
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap');
-
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Jost', sans-serif;
-  outline: none;
-  color: #5c4b51;
-}
-
-body{
-  background: linear-gradient(to right, #f4b661, #f16160);
-}
-
-.wrapper{
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.form{
-  width: 425px;
-  height: auto;
-  background: #fff;
-  padding: 35px 50px;
-  border-radius: 2px;
-}
-
-.form .title{
-  text-align: center;
-  margin-bottom: 20px;
-  font-weight: 700;
-  font-size: 24px;
-}
-
-.form .input_wrap{
-  margin-bottom: 20px;
-  width: 325px;
-  position: relative;
-}
-
-.form .input_wrap:last-child{
-  margin-bottom: 0;
-}
-
-.form .input_wrap label{
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form .input_wrap input{
-  padding: 15px;
-  width: 100%;
-  border: 1px solid transparent;
-  font-size: 16px;
-  border-radius: 3px;
-}
-
-.form .input_wrap .input{
-  background: #f5f4f4;
-  padding-right: 35px;
-}
-
-
-.form .input_wrap .input:focus{
-  border-color: #1dbf73;
-}
-
-.form .input_wrap .input_field{
-  position: relative;
-}
-
-.form .input_wrap .btn{
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  color: #fff;
-}
-
-.form .input_wrap .btn.disabled{
-  background: #727272;
-}
-
-.form .input_wrap .btn.enabled{
-  background: #1dbf73;
-  cursor: pointer;
-}
-
-.form .input_wrap .error_msg{
-  font-size: 15px;
-  margin-bottom: 5px;
-  color: #f74040;
-  display: none;
-}*/

@@ -5,8 +5,7 @@ package it.unisa.c03.myPersonalTrainer.account.bean;
 /**
  * account class.
  */
-public class Account implements Serializable {
-
+public class Account implements Serializable{
     /**
      * user's name.
      */
@@ -42,6 +41,7 @@ public class Account implements Serializable {
 
     /**
      * method for get the name.
+     *
      * @return name of the user
      */
     public String getName() {
@@ -50,6 +50,7 @@ public class Account implements Serializable {
 
     /**
      * method for set the name.
+     *
      * @param newname name
      */
     public void setName(String newname) {
@@ -58,6 +59,7 @@ public class Account implements Serializable {
 
     /**
      * method for get the surname.
+     *
      * @return surname of account
      */
     public String getSurname() {
@@ -66,6 +68,7 @@ public class Account implements Serializable {
 
     /**
      * method for set the surname.
+     *
      * @param newsurname new surname
      */
     public void setSurname(String newsurname) {
@@ -74,11 +77,13 @@ public class Account implements Serializable {
 
     /**
      * method for get the phone.
+     *
      * @return phone phone
      */
     public String getPhone() {
         return phone;
     }
+
 
     /**
      * method for set the phone.
@@ -178,4 +183,5 @@ public class Account implements Serializable {
                 + ", ruolo=" + role
                 + '}';
     }
+
 }

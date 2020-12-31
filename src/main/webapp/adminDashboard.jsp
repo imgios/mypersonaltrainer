@@ -7,8 +7,9 @@ isPT = true allora procedi, altrimenti errore. >
     <title>myPersonalTrainer | myAccount</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css"/>
     <!--link rel="stylesheet" href="styles/reset.min.css"/>
-    <link rel="stylesheet" href="styles/style.css"/>
+
     <link rel="stylesheet" href="styles/header-11.css"/-->
 
 </head>
