@@ -21,7 +21,8 @@ import java.util.concurrent.ExecutionException;
  */
 @WebServlet(name = "ViewAvailabilityServlet",
         value = "/view-availability")
-public class ViewAvailabilityServlet extends HttpServlet {
+public class ViewAvailabilityServlet
+        extends HttpServlet {
     /**
      * AgendaDAO
      */
@@ -41,25 +42,32 @@ public class ViewAvailabilityServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        String data = request.getParameter("dataSelected");
+        String data =
+                request.getParameter("dataSelected");
         System.out.println(data);
 
         String res = "";
 
 
         try {
-            agendaService.checkAvailability(data, TIME_PASS);
-            ArrayList<Availability> list = (ArrayList<Availability>) agendaService.getAvailabilityByDate(data);
+            agendaService.checkAvailability(
+                    data, TIME_PASS);
+            ArrayList<Availability> list =
+                    (ArrayList<Availability>)
+                            agendaService.getAvailabilityByDate(data);
             if (list.size() == 0) {
 
-                res = new Gson().toJson(0);
+                res = new Gson().toJson(0); //non ci sono disponibilita
             } else {
                 res = new Gson().toJson(list);
                 System.out.println(list.size());
                 System.out.println(list);
             }
-        } catch (IllegalArgumentException | InterruptedException | ExecutionException e) {
-            res = new Gson().toJson("1" + e.getMessage());
+        } catch (IllegalArgumentException |
+                InterruptedException | ExecutionException e) {
+            res = new Gson().toJson(
+                    "1" + e.getMessage());
+            //formato non valido o data precedente
             System.out.println("1" + e.getMessage() + "\n\n" + res);
             response.getWriter().write(res);
             return;
