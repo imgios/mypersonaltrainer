@@ -9,6 +9,20 @@ import java.util.concurrent.ExecutionException;
 
 public interface AccountService {
 
+  /**
+   * This function allow to verify the credentials
+   * typed between form before the login.
+   * @param email
+   * @param password
+   * @return true if credentials are in the Database,
+   * false if the credentials aren't linked to an account s
+   * tored in the Database
+   * @throws IOException
+   * @throws ExecutionException
+   * @throws InterruptedException
+   */
+  boolean loginAccount(String email, String password)
+          throws IOException, ExecutionException, InterruptedException;
 
   /**
    * This function return the list of the account insert into the db.
@@ -61,4 +75,13 @@ public interface AccountService {
     boolean changePassword(String email, String password)
            throws IOException, ExecutionException, InterruptedException;
 
+    /**
+    *
+    * @param account Account of user registred into the DataBase.
+    * @return Return true if the following account is
+    * a Personal Trainer's account.
+    * @throws IllegalArgumentException
+    */
+    boolean verifyIsAdmin(Account account) throws IllegalArgumentException;
+    
 }

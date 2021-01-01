@@ -42,6 +42,28 @@ public class AccountServiceImpl implements AccountService {
     }
 
     /**
+    * Check the credential before login.
+    * @param email
+    * @param password
+    * @return
+    * @throws IOException
+    * @throws ExecutionException
+    * @throws InterruptedException
+    */
+
+    @Override
+    public boolean loginAccount(String email, String password)
+          throws IOException, ExecutionException, InterruptedException {
+      Account accountLogged;
+      accountLogged = accountDAO.findAccountByEmail(email);
+      if (accountLogged != null) {
+              return true;
+          } else {
+          return false;
+      }
+    }
+
+    /**
      * check the credential with the regular expression.
      * @param clientMail email of the client
      * @param newPassword new password to update
@@ -166,7 +188,21 @@ public class AccountServiceImpl implements AccountService {
             throw new IllegalArgumentException("email già presente"
                     + " nel DB, utilizza una nuova email");
         }
+    }
 
+    /**
+     * @param account Account of registred user into the DataBase.
+     * @return Return true if the following account is
+     * a Personal Trainer's account.
+     * @throws IllegalArgumentException
+     */
+    @Override
+    public boolean verifyIsAdmin(Account account) {
+        if (account.getRole() == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

@@ -119,8 +119,9 @@ public class AccountDAOImpl implements AccountDAO {
             accountBean.setPassword(
                     String.valueOf(document.get("password")));
             accountBean.setPhone(String.valueOf(document.get("phone")));
+            accountBean.setRole(Integer.parseInt(
+                    String.valueOf(document.get("role"))));
         }
-
 
         return accountBean;
     }

@@ -10,21 +10,13 @@ import java.util.List;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-
-
-
 import it.unisa.c03.myPersonalTrainer.account.service.AccountService;
 import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-
 import static org.mockito.Mockito.*;
-
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountServiceImplTest {
@@ -124,7 +116,6 @@ class AccountServiceImplTest {
 
         AccountService service  = new AccountServiceImpl(accountDAO);
         assertEquals(false, service.searchAccountByEmail("mailnot@italy.it"));
-
     }
 
 
@@ -142,8 +133,6 @@ class AccountServiceImplTest {
 
     @Test
     public void changePasswordFalse() throws IOException, ExecutionException, InterruptedException {
-
-
         /*
         Firestore connection = Mockito.mock(DBConnection.getConnection().getClass());
         CollectionReference collectionRef = Mockito.mock(CollectionReference.class);
@@ -164,7 +153,7 @@ class AccountServiceImplTest {
 
         when(connection.collection(anyString()).document(anyString()).update(anyString(),any()).isDone()).thenReturn(false);
         assertEquals(false, connection.collection("Account").document("documentId").update("password","newPassword1").isDone());
-*/
+        */
 
         AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
         when(accountDAO.updatePassword(anyString(),anyString())).thenReturn(false);
@@ -179,10 +168,6 @@ class AccountServiceImplTest {
         AccountService service  = new AccountServiceImpl(accountDAO);
         assertEquals(true, service.changePassword("cliente@gmail.com", "nuovaPassword45"));
     }
-
-
-
-
 
     @BeforeAll
     static void deleteAccountifExist() throws IOException, ExecutionException, InterruptedException {
@@ -204,8 +189,6 @@ class AccountServiceImplTest {
         }
     }
 
-
-
     @Test
     void registerAccountTrue() throws IOException, IllegalArgumentException,
         ExecutionException, InterruptedException {
@@ -225,8 +208,6 @@ class AccountServiceImplTest {
         assertTrue(accounts.registerAccount(user_test));
 
     }
-
-
 
     //inserimento prima del check
 
@@ -270,5 +251,41 @@ class AccountServiceImplTest {
             accountS.registerAccount(user_test);
             }
         );
+    }
+
+    @Test
+    void verifyIsAdminFalse() {
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        Account a = new Account("clientName", "clientSurname","332","hismail@italy.com","hispassword1",1);
+        a.setRole(0);
+        AccountService service  = new AccountServiceImpl(accountDAO);
+        assertEquals(false, service.verifyIsAdmin(a));
+    }
+
+    @Test
+    void verifyIsAdminTrue() {
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        Account a = new Account("clientName", "clientSurname","332","hismail@italy.com","hispassword1",0);
+        a.setRole(1);
+        AccountService service  = new AccountServiceImpl(accountDAO);
+        assertEquals(true, service.verifyIsAdmin(a));
+    }
+
+    @Test
+     void loginAccountTrue() throws IOException, ExecutionException, InterruptedException {
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        Account a = new Account("clientName", "clientSurname","332","hismail@italy.com","hispassword1",0);
+        when(accountDAO.findAccountByEmail(anyString())).thenReturn(a);
+        AccountService service  = new AccountServiceImpl(accountDAO);
+        assertEquals(true, service.loginAccount("hismail@italy.com", "hispassword1"));
+    }
+
+    @Test
+    void loginAccountFalse() throws IOException, ExecutionException, InterruptedException {
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        Account a = new Account("clientName", "clientSurname","332","hismail@italy.com","hispassword1",0);
+        when(accountDAO.findAccountByEmail(anyString())).thenReturn(null);
+        AccountService service  = new AccountServiceImpl(accountDAO);
+        assertEquals(false, service.loginAccount("hismail@italy.com", "hispasswod1"));
     }
 }
