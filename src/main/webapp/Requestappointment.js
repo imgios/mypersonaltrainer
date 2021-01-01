@@ -1,7 +1,24 @@
+$(document).ready(function(){
+    $("#datepicker").hide();
+    $("#cercadisponibilità").hide();
+    $("#listatempo").hide();
+
+});
+
+function showdataform()
+{
+    $("#datepicker").show();
+    $("#cercadisponibilità").show();
+}
+
+function showtime() {
+    $("#listatempo").show();
+
+}
+
 function ricaricalista()
 {
-
-    $('#container').load('#container');
+    $("#ricarica").load("#ricarica");
 }
 
 

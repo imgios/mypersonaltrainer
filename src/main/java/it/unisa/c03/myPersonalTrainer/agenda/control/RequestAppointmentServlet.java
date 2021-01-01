@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 @WebServlet(name = "RequestAppointmentServlet")
 public class RequestAppointmentServlet extends HttpServlet {
@@ -24,13 +25,22 @@ public class RequestAppointmentServlet extends HttpServlet {
         AgendaService service = new AgendaServiceImpl(dao);
 
         if (service.checkDate(data)) {
-            service.createAppointment(data, time, mail);
-            /*creare la jsp*/
-            response.sendRedirect(".jsp");
-            /*cancellare availability*/
+            try {
+                service.createAppointment(data, time, mail);
+                request.getSession().setAttribute("successToShow",
+                        "Appuntamento programmato");
+                response.sendRedirect("RequestAppointment.jsp");
+            } catch (ExecutionException e) {
+                request.getSession().setAttribute("errorToShow", "errore nel programmare l'appuntamento");
+                response.sendRedirect("RequestAppointment.jsp");
+            } catch (InterruptedException e) {
+                request.getSession().setAttribute("errorToShow", "errore nel programmare l'appuntamento");
+                response.sendRedirect("RequestAppointment.jsp");
+            }
 
         } else {
-
+            request.getSession().setAttribute("errorToShow", "errore nel programmare l'appuntamento");
+            response.sendRedirect("RequestAppointment.jsp");
         }
 
 

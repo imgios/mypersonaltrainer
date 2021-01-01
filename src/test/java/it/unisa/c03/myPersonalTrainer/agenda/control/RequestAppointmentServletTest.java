@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,7 +19,7 @@ class RequestAppointmentServletTest {
     HttpServletRequest request= Mockito.mock(HttpServletRequest.class);
     HttpServletResponse response=Mockito.mock(HttpServletResponse.class);
     @Test
-    void doPost() throws IOException, ServletException {
+    void doPost() throws IOException, ServletException, ExecutionException, InterruptedException {
         Mockito.when(request.getParameter("data")).thenReturn("2021-10-10");
         assertEquals("2021-10-10",request.getParameter("data"));
         Mockito.when(request.getParameter("time")).thenReturn("15");

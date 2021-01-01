@@ -15,11 +15,11 @@ public final class AgendaServiceImpl implements AgendaService {
     /**
      * max possible value for time.
      */
-    private static final int MAX = 24;
+    private static final int MAX = 19;
     /**
      * min possible value for time.
      */
-    private static final int MIN = 0;
+    private static final int MIN = 9;
     /**
      *variable initialization to execute CRUD operation.
      */
@@ -36,7 +36,7 @@ public final class AgendaServiceImpl implements AgendaService {
 
     @Override
     public boolean createAppointment(String date, String time, String mail)
-            throws IOException {
+            throws IOException, ExecutionException, InterruptedException {
         int num= Integer.valueOf(time);
         boolean datacheck = checkDate(date);
         boolean timecheck = num <= MAX && num >= MIN;
@@ -44,6 +44,7 @@ public final class AgendaServiceImpl implements AgendaService {
                 "\\w+([\\._\\-]?\\w+)*@\\w+([\\.\\-]?\\w+)*(\\.\\w+)+$");
         if (datacheck && timecheck && mailcheck) {
             Appointment appuntamento = new Appointment(date, time, mail);
+            dao.deleteAvailability(dao.findAvailabilityByDateAndTime(date,num));
             return dao.saveAppointment(appuntamento);
         }
         return false;

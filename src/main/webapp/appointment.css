@@ -1,11 +1,58 @@
 #listaappuntamento {
-    width: 50%;
-    height: 30%;
+    grid-column: 1;
+    grid-row: 1;
+    height: 250px;
+    width: content-box;
+    overflow-y: scroll;
     margin-top: 10px;
     margin-left: 20px;
-    overflow-y: scroll;
 }
 #appuntamenti{
-    width: content-box;
-    height: auto;
+height: max-content;
+}
+
+#richiediappuntamento{
+    margin-left: 20px;
+    grid-column: 1;
+    grid-row: 2;
+    top: 50%;
+    left: 50%;
+    width: fit-content;
+    height: fit-content;
+    background-color: dodgerblue;
+    color: white;
+    margin-bottom: 30px;
+}
+
+#container{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto auto;
+}
+
+#datepicker{
+    margin-top: 10px;
+    margin-left: 40%;
+    grid-column: 2;
+    grid-row: 1;
+}
+#cercadisponibilità{
+    top: 50%;
+    left: 50%;
+    margin-left: 40%;
+    grid-column: 2;
+    grid-row: 2;
+    height: fit-content;
+    width: fit-content;
+    background-color: dodgerblue;
+    color: white;
+}
+
+.list-group{
+
+    grid-column: 1;
+    grid-row: 3;
+    margin-left: 20px;
+    height: 250px;
+    overflow: scroll;
 }

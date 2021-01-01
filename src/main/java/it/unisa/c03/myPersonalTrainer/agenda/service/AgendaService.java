@@ -22,7 +22,7 @@ public interface AgendaService {
      * @param mail appointment's applicant
      * @return return true if the insertion is successful
      */
-    boolean createAppointment(String date, String time, String mail) throws IOException;
+    boolean createAppointment(String date, String time, String mail) throws IOException, ExecutionException, InterruptedException;
 
     /**
      *

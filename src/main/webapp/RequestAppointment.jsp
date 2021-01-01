@@ -14,18 +14,32 @@
 <html>
 <head>
     <title>Agenda</title>
-    <link rel="stylesheet" type="text/css" href="appointment.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="Requestappointment.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker({
+                altField : "#data",
+                dateFormat: "yy-mm-dd"
+            });
+        } );
+    </script>
+    <link rel="stylesheet" type="text/css" href="appointment.css">
+    <script src="Requestappointment.js"></script>
 </head>
 <body>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
+<div id="ricarica">
 <div id="container">
 <div id="listaappuntamento" class="card border-dark mb-3">
     <%
@@ -53,8 +67,42 @@
     <%}%>
     </tbody>
 </table>
+
+</div>
+    <button id="richiediappuntamento"  onclick="showdataform()"> Richiedi Appuntamento</button>
+    <div id="datepicker"></div>
+    <button id="cercadisponibilità" onclick="showtime()" > Ricerca</button>
+    <div id="listatempo">
+        <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+            <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+            <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+            <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+            <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+            <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+
+        </div>
+    </div>
 </div>
 </div>
-<div class="footer"><%@include file="footer.jsp"%></div>
+<div>
+    <input hidden id="data" type="text">
+    <% String error = (String) request.getSession().getAttribute("errorToShow");
+        if ( error != null)
+        {%>
+    <div class="alert alert-danger" role="alert"  id="errorDiv">
+        <p><%= error %> </p>
+    </div>
+    <%}%>
+
+<% String success = (String) request.getSession().getAttribute("successToShow");
+    if ( success != null)
+    {%>
+<div class="alert alert-success" role="alert"  id="errorDiv">
+    <p><%= success %> </p>
+</div>
+<%}%>
+</div>
+
 </body>
 </html>
