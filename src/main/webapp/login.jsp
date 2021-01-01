@@ -50,9 +50,8 @@
     </div>
 </div>
 
-<!-----FOOTER DA INSERIRE----->
+<!--FOOTER DA INSERIRE-->
 
-<!------FINE FOOTER------>
+<!--FINE FOOTER-->
 </body>
 </html>
-

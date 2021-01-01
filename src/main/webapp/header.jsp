@@ -1,5 +1,5 @@
-<!--------- NOTE PER UTILIZZARE L'HEADER ----->
-<!----- Momentaneo
+<!--NOTE PER UTILIZZARE L'HEADER-->
+<!--Momentaneo
 Prima di inserire qualisasi elemento nella vostra JSP, è
 necessario strutturarla partendo dai seguenti div riportati:
 <div class="wrapper">
@@ -18,7 +18,7 @@ Includere anche il CSS:
     <meta charset="UTF-8">
     <title>myPersonalTrainer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
+    <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -26,7 +26,7 @@ Includere anche il CSS:
 <%int role=1;%>
 <%if(validSession==1) { %>  <!--if(session.getAttribute("user")!=null) { %>-->
 <!--response.sendRedirect("login.jsp");-->
-<!----- SESSIONE SCADUTA TORNA AL LOGIN ----->
+<!--SESSIONE SCADUTA TORNA AL LOGIN-->
 <div class="wrapper">
     <div class="top_navbar">
         <div class="hamburgerIn">
@@ -66,7 +66,7 @@ Includere anche il CSS:
         </ul>
     </div-->
 <%} else if (role==1){%>
-    <!----- HEADER PER CLIENTE ----->
+    <!--HEADER PER CLIENTE-->
 <div class="wrapper">
     <div class="top_navbar">
         <div class="hamburger">
@@ -106,7 +106,7 @@ Includere anche il CSS:
         </ul>
     </div>
     <%}else if(role==1){%>
-    <!----- HEADER PER PERSONAL TRAINER ----->
+    <!--HEADER PER PERSONAL TRAINER-->
     <div class="wrapper">
         <div class="top_navbar">
             <div class="hamburger">
@@ -153,11 +153,11 @@ Includere anche il CSS:
     <%}%>
 </div>
 
-    <!-----FOOTER DA INSERIRE----->
+    <!--FOOTER DA INSERIRE-->
     <div>
 
     </div>
-    <!------FINE FOOTER------>
+    <!--FINE FOOTER-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

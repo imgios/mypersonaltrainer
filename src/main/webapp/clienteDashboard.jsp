@@ -13,7 +13,7 @@
 </head>
 <body>
 <body>
-<!----- HEADER START ----->
+<!--HEADER START-->
 <div id= "header">
     <%@include file="header.jsp"%>
 </div>
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-<!----- HEADER END ----->
+<!--HEADER END-->
 
 <script src="js/header-11.js"></script>
 

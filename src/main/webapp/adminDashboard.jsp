@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<!- inserire verifica che l'utente sia PT
-isPT = true allora procedi, altrimenti errore. >
+<!--inserire verifica che l'utente sia PT
+isPT = true allora procedi, altrimenti errore.-->
 <html>
 <head>
     <title>myPersonalTrainer | myAccount</title>
@@ -30,7 +30,5 @@ isPT = true allora procedi, altrimenti errore. >
     </div>
 </div>
 <!-- Header End -->
-<script src="js/header-11.js"></script>
-
 </body>
 </html>
