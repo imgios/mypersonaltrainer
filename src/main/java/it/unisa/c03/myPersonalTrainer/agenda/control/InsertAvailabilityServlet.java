@@ -43,7 +43,6 @@ public class InsertAvailabilityServlet
         response.setCharacterEncoding("UTF-8");
 
         String data = request.getParameter("dataSelected");
-        System.out.println("ho ricevuto " + data);
 
 
         String x = request.getParameter("timeSelected");
@@ -57,16 +56,16 @@ public class InsertAvailabilityServlet
                     agendaService.getAvailabilityByDateAndTime(
                             data, Integer.parseInt(x));
             System.out.println(prova);
-            if (prova == null) {
+            if (prova == null) { //si puo creare availability poiche non esiste gia
                 Availability avaiability =
                         new Availability(data, Integer.parseInt(x));
                 agendaService.createAvailability(avaiability);
                 res = new Gson().toJson(1);
-            } else {
+            } else {    //non si puo creare availability poiche esiste gia
                 res = new Gson().toJson(2);
             }
         } catch (IllegalArgumentException
-                | InterruptedException | ExecutionException e) {
+                | InterruptedException | ExecutionException e) { // se non ritorna 1 o 2,allora ritorna un messaggio di errore
             System.out.println(e.getMessage());
             res = new Gson().toJson(e.getMessage());
             response.getWriter().write(res);
