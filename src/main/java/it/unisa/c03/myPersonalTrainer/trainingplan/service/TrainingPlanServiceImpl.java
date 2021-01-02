@@ -31,6 +31,10 @@ public class TrainingPlanServiceImpl implements TrainingPlanService {
      */
     private TrainingPlanDAO trainingPlanDAO;
 
+    public TrainingPlanServiceImpl(){
+
+    }
+
     /**
      * .
      * @param trainingPlanDAO

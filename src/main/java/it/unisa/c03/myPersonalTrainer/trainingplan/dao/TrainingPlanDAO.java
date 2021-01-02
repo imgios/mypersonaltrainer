@@ -9,18 +9,18 @@ import java.util.concurrent.ExecutionException;
 public interface TrainingPlanDAO {
 
     /**
-     * This method extracts trainingplans into database.
+     * This method extracts training plans into database.
      * @param email of the customer
-     * @return List of Training Plans
+     * @return List of customer's training plan.
      * @throws IOException
      * @throws ExecutionException
      * @throws InterruptedException
      */
-    public Collection<TrainingPlan> getTrainingPlansByEmail(String email)
+    Collection<TrainingPlan> getTrainingPlansByEmail(String email)
             throws IOException, ExecutionException, InterruptedException;
 
     /**
-     * This method add a new TrainingPlan
+     * This method add a new TrainingPlan.
      * @param tp
      * @return boolean
      * @throws IOException
