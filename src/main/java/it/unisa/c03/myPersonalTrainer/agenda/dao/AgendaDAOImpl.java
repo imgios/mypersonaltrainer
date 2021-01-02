@@ -62,7 +62,7 @@ public class AgendaDAOImpl implements AgendaDAO {
                 .whereEqualTo("time", appuntamento.getTime()).
                         get().get().getDocuments();
         for (QueryDocumentSnapshot d : lqds) {
-            String id=d.getId();
+            String id = d.getId();
             connection.collection("Appointment").document(id).delete();
 
         }

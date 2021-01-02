@@ -1,9 +1,14 @@
 $(document).ready(function(){
-    $("#datepicker").hide();
-    $("#cercadisponibilità").hide();
-    $("#listatempo").hide();
 
 });
+
+
+
+function ricaricatempo()
+{
+    $("#ricaricaore").load("#listatempo");
+}
+
 
 function showdataform()
 {
@@ -34,4 +39,18 @@ function deleteappointmentfromDB(date,time,mail)
         }
 
     });
+}
+
+function caricaore() {
+    var datacosa=document.getElementById('data').value;
+    $.ajax({
+        "type":"POST",
+        "url":"RequestAppointment.jsp",
+        "data":{dataappuntamento:datacosa.toString()},
+        "success":function ()
+        {
+
+        }
+    })
+
 }

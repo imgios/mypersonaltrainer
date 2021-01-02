@@ -31,15 +31,18 @@ public class RequestAppointmentServlet extends HttpServlet {
                         "Appuntamento programmato");
                 response.sendRedirect("RequestAppointment.jsp");
             } catch (ExecutionException e) {
-                request.getSession().setAttribute("errorToShow", "errore nel programmare l'appuntamento");
+                request.getSession().setAttribute("errorToShow",
+                        "errore nel programmare l'appuntamento");
                 response.sendRedirect("RequestAppointment.jsp");
             } catch (InterruptedException e) {
-                request.getSession().setAttribute("errorToShow", "errore nel programmare l'appuntamento");
+                request.getSession().setAttribute("errorToShow",
+                        "errore nel programmare l'appuntamento");
                 response.sendRedirect("RequestAppointment.jsp");
             }
 
         } else {
-            request.getSession().setAttribute("errorToShow", "errore nel programmare l'appuntamento");
+            request.getSession().setAttribute("errorToShow",
+                    "errore nel programmare l'appuntamento");
             response.sendRedirect("RequestAppointment.jsp");
         }
 

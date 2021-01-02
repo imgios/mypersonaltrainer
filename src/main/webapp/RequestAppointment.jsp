@@ -3,7 +3,8 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAO" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAOImpl" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.agenda.service.AgendaService" %>
-<%@ page import="it.unisa.c03.myPersonalTrainer.agenda.service.AgendaServiceImpl" %><%--
+<%@ page import="it.unisa.c03.myPersonalTrainer.agenda.service.AgendaServiceImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.agenda.bean.Availability" %><%--
   Created by IntelliJ IDEA.
   User: Umberto
   Date: 29/12/2020
@@ -13,6 +14,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+
     <title>Agenda</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,6 +36,11 @@
                 dateFormat: "yy-mm-dd"
             });
         } );
+
+        function savetime(ele)
+        {
+            document.getElementById('time').value=document.getElementById(ele.id).innerHTML;
+        }
     </script>
     <link rel="stylesheet" type="text/css" href="appointment.css">
     <script src="Requestappointment.js"></script>
@@ -67,26 +74,38 @@
     <%}%>
     </tbody>
 </table>
-
+    <input  id="data" type="text">
+    <input id="time" name="time" type="text">
 </div>
     <button id="richiediappuntamento"  onclick="showdataform()"> Richiedi Appuntamento</button>
     <div id="datepicker"></div>
-    <button id="cercadisponibilità" onclick="showtime()" > Ricerca</button>
-    <div id="listatempo">
-        <div class="list-group" id="list-tab" role="tablist">
-            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
-            <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
-            <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
-            <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
-            <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
-            <a class="list-group-item list-group-item-action"  data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+    <button id="cercadisponibilità" onclick="caricaore()" > Ricerca</button>
 
-        </div>
-    </div>
 </div>
 </div>
 <div>
-    <input hidden id="data" type="text">
+    <div id="ricaricaore">
+        <%if (request.getParameter("dataappuntamento")!=null){
+            List<Availability> listore=service.getAvailabilityByDate(request.getParameter("dataappuntamento"));
+        %>
+        <table  id="ore" class="table">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <%for (Availability a:listore) {%>
+            <tr>
+                <td>
+                    <%System.out.println(a.getTime());%>
+                </td>
+            </tr>
+            <%}%>
+            </tbody>
+        <%}%>
+    </div>
+
     <% String error = (String) request.getSession().getAttribute("errorToShow");
         if ( error != null)
         {%>
@@ -103,6 +122,5 @@
 </div>
 <%}%>
 </div>
-
 </body>
 </html>
