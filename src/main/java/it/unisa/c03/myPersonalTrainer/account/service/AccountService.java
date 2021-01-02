@@ -53,6 +53,14 @@ public interface AccountService {
            throws InterruptedException, ExecutionException, IOException;
 
     /**
+     * This method return the account given its mail.
+     * @param email referring to the account to search for
+     * @return the Account if it exists, null if not
+     */
+    Account getAccountByEmail(String email)
+            throws InterruptedException, ExecutionException, IOException;
+
+    /**
     * This service method changes the password of an account.
     * @param email of the account
     * @param password updated
