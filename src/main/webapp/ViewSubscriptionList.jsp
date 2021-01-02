@@ -52,6 +52,7 @@
             </div>
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
+                    <div class="table-responsive-sm">
                     <table class="table table table-success table-hover">
                         <thead>
                         <tr>
@@ -74,6 +75,7 @@
                         <%}%>
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,6 +90,7 @@
             </div>
             <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
                 <div class="card-body">
+                    <div class="table-responsive-sm">
                     <table class="table table table-warning table-hover">
                         <thead>
                         <tr>
@@ -110,6 +113,7 @@
                         <%}%>
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -122,6 +126,7 @@
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                 <div class="card-body">
+                    <div class="table-responsive-sm">
                     <table class="table table table-danger table-hover">
                         <thead>
                         <tr>
@@ -144,6 +149,7 @@
                         <%}%>
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
