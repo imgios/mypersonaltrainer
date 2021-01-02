@@ -65,14 +65,22 @@
                         <tbody>
 
                         <% for(Subscription s : activeList) {
-                            Account a = accountService.getAccountByEmail(s.getCustomerMail()) ;%>
+                            Account a = accountService.getAccountByEmail(s.getCustomerMail());
+                        if(a == null)
+                        {
+                        %>
+                        <tr>
+                            <td>Account non trovato</td>
+                        </tr>
+                        <% } else{ %>
                         <tr>
                             <td><%=a.getName()%></td>
                             <td><%=a.getSurname()%></td>
                             <td><%=s.getCustomerMail()%></td>
                             <td><%=s.getExpDate()%></td>
                         </tr>
-                        <%}%>
+                        <%}
+                        }%>
                         </tbody>
                     </table>
                     </div>
@@ -103,14 +111,22 @@
                         <tbody>
 
                         <% for(Subscription s : expiringList) {
-                            Account a = accountService.getAccountByEmail(s.getCustomerMail()) ;%>
+                            Account a = accountService.getAccountByEmail(s.getCustomerMail());
+                            if(a == null)
+                            {
+                        %>
+                        <tr>
+                            <td>Account non trovato</td>
+                        </tr>
+                        <% } else{ %>
                         <tr>
                             <td><%=a.getName()%></td>
                             <td><%=a.getSurname()%></td>
                             <td><%=s.getCustomerMail()%></td>
                             <td><%=s.getExpDate()%></td>
                         </tr>
-                        <%}%>
+                        <%}
+                        }%>
                         </tbody>
                     </table>
                     </div>
@@ -139,14 +155,22 @@
                         <tbody>
 
                         <% for(Subscription s : expiredList) {
-                            Account a = accountService.getAccountByEmail(s.getCustomerMail()) ;%>
+                            Account a = accountService.getAccountByEmail(s.getCustomerMail());
+                            if(a == null)
+                            {
+                        %>
+                        <tr>
+                            <td>Account non trovato</td>
+                        </tr>
+                        <% } else{ %>
                         <tr>
                             <td><%=a.getName()%></td>
                             <td><%=a.getSurname()%></td>
                             <td><%=s.getCustomerMail()%></td>
                             <td><%=s.getExpDate()%></td>
                         </tr>
-                        <%}%>
+                        <%}
+                        }%>
                         </tbody>
                     </table>
                     </div>
