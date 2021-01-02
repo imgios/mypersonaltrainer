@@ -48,4 +48,11 @@ public interface SubscriptionService {
      */
     ArrayList<Subscription> getExpiredSubscriptions()
             throws InterruptedException, ExecutionException, IOException;
+
+    /**
+     * This service method shows all active Subscriptions.
+     * @return the list of active Subscriptions
+     */
+    ArrayList<Subscription> getActiveSubscriptions()
+            throws InterruptedException, ExecutionException, IOException;
 }

@@ -152,4 +152,28 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
         return listToReturn;
     }
+
+    /**
+     * This service method shows all active Subscriptions.
+     *
+     * @return the list of active Subscriptions
+     */
+    @Override
+    public ArrayList<Subscription> getActiveSubscriptions()
+            throws InterruptedException, ExecutionException, IOException {
+        //create the list to return
+        ArrayList<Subscription> listToReturn = new ArrayList<>();
+
+        //call dao to get all subs
+        ArrayList<Subscription> listDao = subscriptionDAO.getAllSubscriptions();
+
+        //filter each sub and add to list only expired subs
+        for (Subscription s : listDao) {
+            if (checkSubscriptionState(s.getCustomerMail()) == 1) {
+                listToReturn.add(s);
+            }
+        }
+
+        return listToReturn;
+    }
 }
