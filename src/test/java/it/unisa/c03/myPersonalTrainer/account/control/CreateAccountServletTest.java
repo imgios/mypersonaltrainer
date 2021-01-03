@@ -103,11 +103,9 @@ class CreateAccountServletTest {
     HttpSession session = Mockito.mock(HttpSession.class);
     Mockito.when(request.getSession()).thenReturn(session);
 
-
     doNothing().when(session).removeAttribute(anyString());
     doNothing().when(session).setAttribute(anyString(), any());
     doNothing().when(response).sendRedirect(anyString());
-
 
     new CreateAccountServlet().doPost(request,response);
 
