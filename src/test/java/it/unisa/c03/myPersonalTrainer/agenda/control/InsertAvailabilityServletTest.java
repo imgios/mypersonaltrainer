@@ -6,6 +6,7 @@ import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAOImpl;
 import it.unisa.c03.myPersonalTrainer.agenda.service.AgendaService;
 import it.unisa.c03.myPersonalTrainer.agenda.service.AgendaServiceImpl;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -24,18 +25,19 @@ import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AvailabilityControllerTest {
+class InsertAvailabilityServletTest {
     HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
     HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 
     AgendaDAO agendaDAO = Mockito.mock(AgendaDAO.class);
+    AgendaService agendaService = Mockito.mock(AgendaService.class);
 
-    // AgendaServiceImpl agendaService = new AgendaServiceImpl(agendaDAO);
-    AgendaService agendaService = new AgendaServiceImpl(agendaDAO);
+
 
     @Test
     void doPost() throws IOException, ExecutionException, InterruptedException {
         AgendaDAO agendaDAO = new AgendaDAOImpl();
+        agendaDAO.deleteAvailability(new Availability("2021-10-10", 18));
         Mockito.when(request.getParameter("dataSelected")).thenReturn("2021-10-10");
         Mockito.when(request.getParameter("timeSelected")).thenReturn("18");
         Mockito.when(agendaService.checkAvailability(anyString(), any())).thenReturn(true);
@@ -43,14 +45,16 @@ class AvailabilityControllerTest {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         Mockito.when(response.getWriter()).thenReturn(writer);
-        new AvailabilityController().doPost(request, response);
+        new InsertAvailabilityServlet().doPost(request, response);
         assertEquals("1", stringWriter.toString());
         agendaDAO.deleteAvailability(new Availability("2021-10-10", 18));
+
     }
 
-    @Test
+    /*@Test
     void doGet() throws IOException, ExecutionException, InterruptedException {
         AgendaDAO agendaDAO = new AgendaDAOImpl();
+        agendaDAO.deleteAvailability(new Availability("2021-10-10", 18));
         Mockito.when(request.getParameter("dataSelected")).thenReturn("2021-10-10");
         Mockito.when(request.getParameter("timeSelected")).thenReturn("18");
         Mockito.when(agendaService.checkAvailability(anyString(), any())).thenReturn(true);
@@ -58,10 +62,11 @@ class AvailabilityControllerTest {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         Mockito.when(response.getWriter()).thenReturn(writer);
-        new AvailabilityController().doGet(request, response);
+        new InsertAvailabilityServlet().doGet(request, response);
         assertEquals("1", stringWriter.toString());
         agendaDAO.deleteAvailability(new Availability("2021-10-10", 18));
-    }
+
+    }*/
 
 
     @Test
@@ -74,7 +79,7 @@ class AvailabilityControllerTest {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         Mockito.when(response.getWriter()).thenReturn(writer);
-        new AvailabilityController().doGet(request, response);
+        new InsertAvailabilityServlet().doGet(request, response);
         assertEquals("2", stringWriter.toString());
     }
 
@@ -89,7 +94,7 @@ class AvailabilityControllerTest {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         Mockito.when(response.getWriter()).thenReturn(writer);
-        new AvailabilityController().doPost(request, response);
+        new InsertAvailabilityServlet().doPost(request, response);
         assertEquals("2", stringWriter.toString());
     }
 
@@ -103,7 +108,7 @@ class AvailabilityControllerTest {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
-        new AvailabilityController().doGet(request, response);
+        new InsertAvailabilityServlet().doGet(request, response);
         assertFalse(stringWriter.toString().contains("1"));
     }
 
@@ -117,7 +122,7 @@ class AvailabilityControllerTest {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
-        new AvailabilityController().doPost(request, response);
+        new InsertAvailabilityServlet().doPost(request, response);
         assertFalse(stringWriter.toString().contains("1"));
     }
 }

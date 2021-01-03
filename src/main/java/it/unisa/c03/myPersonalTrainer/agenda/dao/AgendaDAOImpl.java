@@ -17,9 +17,9 @@ public class AgendaDAOImpl implements AgendaDAO {
     public boolean saveAppointment(Appointment appuntamento)
             throws IOException {
         Firestore connection = DBConnection.getConnection();
-           ApiFuture<DocumentReference> doc = connection.
-                   collection("Appointment").add(appuntamento);
-            return true;
+        ApiFuture<DocumentReference> doc = connection.
+                collection("Appointment").add(appuntamento);
+        return true;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class AgendaDAOImpl implements AgendaDAO {
         List<QueryDocumentSnapshot> docs = querySnap.get().getDocuments();
         Stream<Appointment> sa = docs.stream().map(queryDocumentSnapshot ->
                 queryDocumentSnapshot.toObject(Appointment.class));
-       appuntamenti = sa.collect(Collectors.toList());
+        appuntamenti = sa.collect(Collectors.toList());
         return appuntamenti;
     }
 
@@ -62,9 +62,8 @@ public class AgendaDAOImpl implements AgendaDAO {
                 .whereEqualTo("time", appuntamento.getTime()).
                         get().get().getDocuments();
         for (QueryDocumentSnapshot d : lqds) {
-            String id=d.getId();
+            String id = d.getId();
             connection.collection("Appointment").document(id).delete();
-
         }
         return true;
     }
@@ -84,6 +83,15 @@ public class AgendaDAOImpl implements AgendaDAO {
         return true;
     }
 
+    /**
+     * find an availability by date
+     *
+     * @param date to find availability.
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     * @throws ExecutionException
+     */
     @Override
     public List<Availability> findAvailabilityByDate(
             String date)
@@ -103,7 +111,15 @@ public class AgendaDAOImpl implements AgendaDAO {
         return dispo;
     }
 
-
+    /**
+     * remove an availability.
+     *
+     * @param availability the availability to remove.
+     * @return
+     * @throws IOException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     public boolean deleteAvailability(
             Availability availability)
             throws IOException, ExecutionException, InterruptedException {
@@ -121,7 +137,16 @@ public class AgendaDAOImpl implements AgendaDAO {
         return true;
     }
 
-
+    /**
+     * search an availability with this time and date.
+     *
+     * @param date
+     * @param time
+     * @return the availability, null if there isn't
+     * @throws IOException
+     * @throws InterruptedException
+     * @throws ExecutionException
+     */
     @Override
     public Availability findAvailabilityByDateAndTime(
             String date, int time)
@@ -142,7 +167,4 @@ public class AgendaDAOImpl implements AgendaDAO {
             return dispo.get(0);
         }
     }
-
-
-
 }

@@ -16,11 +16,13 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * this class controls the interaction between personal trainer and system.
- * return 1 if the insertion is done, 0 not done, 2 if the availability already exists
+ * return 1 if the insertion is done, 0 not done,
+ * 2 if the availability already exists
  */
-@WebServlet(name = "AvailabilityController",
+@WebServlet(name = "InsertAvailabilityServlet",
         value = "/availability-controller")
-public class AvailabilityController extends HttpServlet {
+public class InsertAvailabilityServlet
+        extends HttpServlet {
     /**
      * AgendaDAO
      */
@@ -41,7 +43,6 @@ public class AvailabilityController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         String data = request.getParameter("dataSelected");
-        System.out.println("ho ricevuto " + data);
 
 
         String x = request.getParameter("timeSelected");
@@ -51,17 +52,20 @@ public class AvailabilityController extends HttpServlet {
             System.out.println(
                     agendaService.checkAvailability(data, x));
 
-            Availability prova = agendaService.getAvailabilityByDateAndTime(data, Integer.parseInt(x));
+            Availability prova =
+                    agendaService.getAvailabilityByDateAndTime(
+                            data, Integer.parseInt(x));
             System.out.println(prova);
-            if (prova == null) {
+            if (prova == null) { //si puo creare availability poiche non esiste gia
                 Availability avaiability =
                         new Availability(data, Integer.parseInt(x));
                 agendaService.createAvailability(avaiability);
                 res = new Gson().toJson(1);
-            } else {
+            } else {    //non si puo creare availability poiche esiste gia
                 res = new Gson().toJson(2);
             }
-        } catch (IllegalArgumentException | InterruptedException | ExecutionException e) {
+        } catch (IllegalArgumentException
+                | InterruptedException | ExecutionException e) { // se non ritorna 1 o 2,allora ritorna un messaggio di errore
             System.out.println(e.getMessage());
             res = new Gson().toJson(e.getMessage());
             response.getWriter().write(res);

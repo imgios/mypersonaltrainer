@@ -21,12 +21,14 @@ public final class AgendaServiceImpl implements AgendaService {
      */
     private static final int MIN = 0;
     /**
-     *variable initialization to execute CRUD operation.
+     * variable initialization to execute CRUD operation.
      */
     private AgendaDAO dao;
+
     public AgendaServiceImpl(AgendaDAO agendaDAO) {
         dao = agendaDAO;
     }
+
     @Override
     public boolean checkDate(String date) {
         LocalDate data = LocalDate.parse(date);
@@ -37,7 +39,7 @@ public final class AgendaServiceImpl implements AgendaService {
     @Override
     public boolean createAppointment(String date, String time, String mail)
             throws IOException {
-        int num= Integer.valueOf(time);
+        int num = Integer.valueOf(time);
         boolean datacheck = checkDate(date);
         boolean timecheck = num <= MAX && num >= MIN;
         boolean mailcheck = mail.matches(
@@ -50,22 +52,23 @@ public final class AgendaServiceImpl implements AgendaService {
     }
 
     @Override
-    public boolean removeAppointment(Appointment appuntamento) throws InterruptedException, ExecutionException, IOException {
+    public boolean removeAppointment(
+            Appointment appuntamento)
+            throws InterruptedException, ExecutionException, IOException {
         dao.deleteappointment(appuntamento);
         return true;
     }
 
     @Override
-    public List<Appointment> findAppointmentByDate(String date) throws InterruptedException, ExecutionException, IOException {
+    public List<Appointment> findAppointmentByDate(
+            String date)
+            throws InterruptedException, ExecutionException, IOException {
         boolean datacheck = checkDate(date);
         if (datacheck) {
             return dao.findAppointmentByDate(date);
         }
         return null;
     }
-
-
-
 
 
 //AVAIL
@@ -81,7 +84,7 @@ public final class AgendaServiceImpl implements AgendaService {
     /**
      * define the agendaDao.
      */
-   // private AgendaDAO agendaDAO;
+    // private AgendaDAO agendaDAO;
 
     /**
      *  initialize an agendaDAO object.
@@ -192,13 +195,4 @@ public final class AgendaServiceImpl implements AgendaService {
             throws IOException, InterruptedException, ExecutionException {
         return dao.findAvailabilityByDateAndTime(date, time);
     }
-
-
-
-
-
-
-
-
-
 }
