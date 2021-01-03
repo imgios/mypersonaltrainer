@@ -74,7 +74,6 @@ public class AccountDAOImpl implements AccountDAO {
                     .map(queryDocumentSnapshot -> queryDocumentSnapshot
                             .toObject(Account.class))
                     .collect(Collectors.toList());
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -140,7 +139,6 @@ public class AccountDAOImpl implements AccountDAO {
         String id = getAccountDocumentIdByEmail(email);
 
         // Update an existing document thanks to its id
-
         DocumentReference docRef = DBConnection.getConnection()
                 .collection("Account").document(id);
 
@@ -148,7 +146,6 @@ public class AccountDAOImpl implements AccountDAO {
         ApiFuture<WriteResult> future = docRef.update("password", password);
 
         return true;
-
     }
 
     /**
@@ -161,9 +158,8 @@ public class AccountDAOImpl implements AccountDAO {
             throws IOException, ExecutionException, InterruptedException {
         // Create a reference to the account collection
         CollectionReference accounts = null;
-
+      
         accounts = DBConnection.getConnection().collection("Account");
-
 
         // Create a query against the collection.
         Query query = accounts.whereEqualTo("email", email);
@@ -178,9 +174,7 @@ public class AccountDAOImpl implements AccountDAO {
             id = id + document.getId();
         }
 
-
         return id;
     }
-
 
 }

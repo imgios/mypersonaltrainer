@@ -9,26 +9,26 @@ import java.util.concurrent.ExecutionException;
 
 public interface AccountService {
 
-    /**
-     * This function allow to verify the credentials
-     * typed between form before the login.
-     * @param email
-     * @param password
-     * @return true if credentials are in the Database,
-     * false if the credentials aren't linked to an account s
-     * tored in the Database
-     * @throws IOException
-     * @throws ExecutionException
-     * @throws InterruptedException
-     */
-    boolean loginAccount(String email, String password)
-            throws IOException, ExecutionException, InterruptedException;
+  /**
+   * This function allow to verify the credentials
+   * typed between form before the login.
+   * @param email
+   * @param password
+   * @return true if credentials are in the Database,
+   * false if the credentials aren't linked to an account s
+   * tored in the Database
+   * @throws IOException
+   * @throws ExecutionException
+   * @throws InterruptedException
+   */
+  boolean loginAccount(String email, String password)
+          throws IOException, ExecutionException, InterruptedException;
 
-    /**
-     * This function return the list of the account insert into the db.
-     * @return list of every account store
-     * @throws IOException exception
-     */
+  /**
+   * This function return the list of the account insert into the db.
+   * @return list of every account store
+   * @throws IOException exception
+   */
     Collection<Account> viewInfoAccount() throws IOException;
 
     /**
@@ -42,9 +42,9 @@ public interface AccountService {
      * @throws IOException //
      * @throws IllegalArgumentException //
      */
-    boolean registerAccount(Account utente)
-            throws IOException, IllegalArgumentException,
-            ExecutionException, InterruptedException;
+     boolean registerAccount(Account utente)
+             throws IOException, IllegalArgumentException,
+             ExecutionException, InterruptedException;
 
     /**
      * This function check the credentials of
@@ -55,16 +55,16 @@ public interface AccountService {
      * false when something is typing wrong.
      * @throws IllegalArgumentException //
      */
-    boolean checkCredentials(String clientMail, String newPassword)
+     boolean checkCredentials(String clientMail, String newPassword)
             throws IllegalArgumentException;
 
     /**
-     * This service method checks if an account exists in the database.
-     * @param email referring to the account to search for
-     * @return true if the account exists, false if not
-     */
+    * This service method checks if an account exists in the database.
+    * @param email referring to the account to search for
+    * @return true if the account exists, false if not
+    */
     boolean searchAccountByEmail(String email)
-            throws InterruptedException, ExecutionException, IOException;
+           throws InterruptedException, ExecutionException, IOException;
 
     /**
      * This method return the account given its mail.
@@ -75,21 +75,21 @@ public interface AccountService {
             throws InterruptedException, ExecutionException, IOException;
 
     /**
-     * This service method changes the password of an account.
-     * @param email of the account
-     * @param password updated
-     * @return true after the change has taken place
-     */
+    * This service method changes the password of an account.
+    * @param email of the account
+    * @param password updated
+    * @return true after the change has taken place
+    */
     boolean changePassword(String email, String password)
-            throws IOException, ExecutionException, InterruptedException;
+           throws IOException, ExecutionException, InterruptedException;
 
     /**
-     *
-     * @param account Account of user registred into the DataBase.
-     * @return Return true if the following account is
-     * a Personal Trainer's account.
-     * @throws IllegalArgumentException
-     */
+    *
+    * @param account Account of user registred into the DataBase.
+    * @return Return true if the following account is
+    * a Personal Trainer's account.
+    * @throws IllegalArgumentException
+    */
     boolean verifyIsAdmin(Account account) throws IllegalArgumentException;
 
 }

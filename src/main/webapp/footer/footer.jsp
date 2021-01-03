@@ -40,27 +40,28 @@
                     </li>
                 </ul>
             </div>
-            <!-- social se vogliamo
-                        <div class="text-center center-block">
-                            <a href="google.it"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
-                            <a href="google.it"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
-                            <a href="google.it"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
-                            <a href=""><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
-                        </div>
-                        <div class="nav navbar-nav navbar-right">
-                            <ul>
-                                <li>
-                                    <a href="">Link 4</a>
-                                </li>
-                                <li>
-                                    <a href="">Link 5</a>
-                                </li>
-                                <li>
-                                    Text
-                                </li>
-                            </ul>
-                        </div>
-                        -->
+<!-- social se vogliamo
+            <div class="text-center center-block">
+                <a href="google.it"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
+                <a href="google.it"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
+                <a href="google.it"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
+                <a href=""><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
+            </div>
+
+            <div class="nav navbar-nav navbar-right">
+                <ul>
+                    <li>
+                        <a href="">Link 4</a>
+                    </li>
+                    <li>
+                        <a href="">Link 5</a>
+                    </li>
+                    <li>
+                        Text
+                    </li>
+                </ul>
+            </div>
+            -->
         </div>
 
     </nav>
@@ -69,7 +70,7 @@
 
 <!-- script carimento bootstrapppppp-->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-<!--script src="https://code.jquery.com/jquery-3.4.1.min.js%22%3E"></script-->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js%22%3E"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>

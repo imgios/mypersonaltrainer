@@ -42,7 +42,7 @@ public class ParametersDAOImpl implements ParametersDAO {
     public ArrayList<Parameters> selectByMail(
             String email) throws
             InterruptedException, IOException, ExecutionException {
-        // Create a reference to the it.unisa.c03.myPersonalTrainer.it.unisa.c03.myPersonalTrainer.account collection
+        // Create a reference to the account collection
         CollectionReference parameters = null;
         parameters = DBConnection.getConnection().collection("Parameters");
 

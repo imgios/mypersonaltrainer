@@ -1,0 +1,11 @@
+#listaappuntamento {
+    width: 50%;
+    height: 30%;
+    margin-top: 10px;
+    margin-left: 20px;
+    overflow-y: scroll;
+}
+#appuntamenti{
+    width: content-box;
+    height: auto;
+}

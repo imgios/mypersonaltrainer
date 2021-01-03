@@ -42,25 +42,25 @@ public class AccountServiceImpl implements AccountService {
     }
 
     /**
-     * Check the credential before login.
-     * @param email
-     * @param password
-     * @return
-     * @throws IOException
-     * @throws ExecutionException
-     * @throws InterruptedException
-     */
+    * Check the credential before login.
+    * @param email
+    * @param password
+    * @return
+    * @throws IOException
+    * @throws ExecutionException
+    * @throws InterruptedException
+    */
 
     @Override
     public boolean loginAccount(String email, String password)
-            throws IOException, ExecutionException, InterruptedException {
-        Account accountLogged;
-        accountLogged = accountDAO.findAccountByEmail(email);
-        if (accountLogged != null) {
-            return true;
-        } else {
-            return false;
-        }
+          throws IOException, ExecutionException, InterruptedException {
+      Account accountLogged;
+      accountLogged = accountDAO.findAccountByEmail(email);
+      if (accountLogged != null) {
+              return true;
+          } else {
+          return false;
+      }
     }
 
     /**

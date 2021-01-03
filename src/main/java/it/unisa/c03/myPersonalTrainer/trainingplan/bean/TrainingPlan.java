@@ -54,7 +54,9 @@ public class TrainingPlan {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+
         TrainingPlan that = (TrainingPlan) o;
+
         if (!exercises.equals(that.exercises)) {
             return false;
         }
