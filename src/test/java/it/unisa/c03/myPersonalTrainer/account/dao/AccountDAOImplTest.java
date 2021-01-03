@@ -20,15 +20,16 @@ import static org.mockito.Mockito.when;
 
 class AccountDAOImplTest {
 
-    static Account accountTest ;
+    static Account accountTest;
     //AccountDAO dao = new AccountDAOImpl();
+
+
     @BeforeAll
     static void setUp() throws IOException {
 
         accountTest = new Account("Account Test", "Account Test","3401212123","cerca@utente.it","PasswordTest1",0);
         DBConnection.getConnection().collection("Account").add(accountTest);
     }
-
 
     @AfterAll
     static void clean() throws IOException, ExecutionException, InterruptedException {
@@ -40,15 +41,18 @@ class AccountDAOImplTest {
         }
     }
 
+
     @Test
     void findAccountByEmail() throws InterruptedException, ExecutionException, IOException {
 
         AccountDAO dao = new AccountDAOImpl();
         Account accountToSearch = dao.findAccountByEmail("cerca@utente.it");
+        //Account accountToSearch = dao.findAccountByEmail("hismail@italy.com");
 
         assertEquals(accountTest.getEmail(), accountToSearch.getEmail());
     }
 
+    
     @Test
     void updatePassword() throws IOException, ExecutionException, InterruptedException {
         AccountDAO dao = new AccountDAOImpl();
