@@ -4,33 +4,32 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAO" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAOImpl" %>
-<%@ page import="it.unisa.c03.myPersonalTrainer.account.bean.Account" %><%--
-  Created by IntelliJ IDEA.
-  User: giampieroferrara
-  Date: 28/12/20
-  Time: 11:39
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.bean.Account" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.service.AccountService" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.service.TrainingPlanService" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.service.TrainingPlanServiceImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAOImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.bean.TrainingPlan" %>
+<%@ page import="java.util.List" %>
 
-<!-- check if the user is log-->
+<!--check if the user is log-->
 <%
     //String client_email = (String) request.getSession().getAttribute("email");
     //System.out.println(client_email);
     // if (client_email == null){
     //  response.sendRedirect("index.jsp");   //login page che non ho al momento
     //}
-    //String email = "mail@io.it";
-    String email = "prova@io.it";
-    // String email = "test@utente.it";
+    String email = "prova@io.it"; //testing email
 %>
-<%  //check of the parameters
-    //devo prendere i parametri dalla sessione?
-%>
+<%  //check parameters %>
 <%
     String error = (String) request.getSession().getAttribute("error");
     String done = (String) request.getSession().getAttribute("done");
 %>
-
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -43,10 +42,16 @@
 <%
     ParametersDAO paramDao = new ParametersDAOImpl();
     ParametersService sparam = new ParametersServiceImpl(paramDao);
-    //  sparam.getByMail(email);
+    Account accountCustomer;
+    AccountDAO accountDao=new AccountDAOImpl();
+    AccountService serviceAccount = new AccountServiceImpl(accountDao);
+
+    TrainingPlanDAO trainingDAO=new TrainingPlanDAOImpl();
+    TrainingPlanService serviceTrainingPlan = new TrainingPlanServiceImpl();
+    List<TrainingPlan> trainingList = serviceTrainingPlan.getTrainingPlans(email); //list of Training Plan
+
     ArrayList<Parameters> list = sparam.getByMail(email);
-    //  for (Parameters param: list){
-    //    System.out.println(param);
+    accountCustomer=serviceAccount.getAccountByEmail(email);
 %>
 <% String passaggio ="";
     String dati = "";
@@ -54,99 +59,45 @@
     String massagrassa = "";
     for (Parameters param: list){
         passaggio = passaggio + param.getweight() + ",";
-        System.out.println(passaggio);
         dati = dati + "'" + param.getinsertionDate()+ "'" + ",";
-        System.out.println(dati);
         massamagra = massamagra + param.getfatMass() + ",";
-        System.out.println(massamagra);
         massagrassa = massagrassa + param.getleanMass() + ",";
-        System.out.println(massagrassa);
     }
-    Account accountCustomer = new Account("Gino", "Diamante", "1234567898", "prova@io.it", "Ciaotutti5!", 0);
 %>
-<!--
-<h1>ci sono i parametri nella console da stampare</h1>
-< %=param.getMailClient()+" , "+param.getweight()+", "+param.getfatMass()+", "+param.getleanMass() + " ," +param.getinsertionDate()%>
-< % }% >
--->
-<!-- inserimento script -->
+<!--inserimento script-->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 <div id = "main">
-<!--
-    <form>
-        <legend>Informazioni: </legend>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Name</label>
-                <input type="email" class="form-control" value="< %=accountCustomer.getName()%>" disabled>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Surname</label>
-                <input type="email" class="form-control" value="< %=accountCustomer.getSurname()%>" disabled>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Email</label>
-                <input type="email" class="form-control" value="< %=accountCustomer.getEmail()%>" disabled>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Phone</label>
-                <input type="email" class="form-control" value="< %=accountCustomer.getPhone()%>" disabled>
-            </div>
-        </div>
-    </form>
--->
+
     <div class="card">
         <h5 class="card-header"> <img src="images/user1.png"> <%=accountCustomer.getName()%> <%=accountCustomer.getSurname()%> <br></h5>
         <h7 class="card-header"> Informazioni</h7>
         <div class="card-body">
-            <p class="card-text">-->
-            <table class="table text-center">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Surname</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><%=accountCustomer.getName()%></td>
-                <td><%=accountCustomer.getSurname()%></td>
-                <td><%=accountCustomer.getEmail()%></td>
-                <td><%=accountCustomer.getPhone()%></td>
-            </tr>
-            </tbody>
-        </table>
-        </p>
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Name</label>
+                        <input type="email" class="form-control" value="<%=accountCustomer.getName()%>" disabled>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Surname</label>
+                        <input type="email" class="form-control" value="<%=accountCustomer.getSurname()%>" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Email</label>
+                        <input type="email" class="form-control" value="<%=accountCustomer.getEmail()%>" disabled>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Phone</label>
+                        <input type="email" class="form-control" value="<%=accountCustomer.getPhone()%>" disabled>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-<!--
-<div class="d-flex justify-content-justify">
-
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Surname</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>< %=accountCustomer.getName()%></td>
-            <td>< %=accountCustomer.getSurname()%></td>
-            <td>< %=accountCustomer.getEmail()%></td>
-            <td>< %=accountCustomer.getPhone()%></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
--->
+        <!--First Chart leanMass-->
         <div class="chart-container" style="position: relative; height:auto; width:80vw">
             <canvas id="myChart"></canvas>
             <script>
@@ -179,7 +130,7 @@
             </script>
         </div>
 
-        <!-- inserimento secondo diagramma massa grassa -->
+        <!--Second Chart fatMass -->
         <div>
             <div class="chart-container" style="position: relative; height:auto; width:80vw">
                 <canvas id="myChart2"></canvas>
@@ -215,7 +166,8 @@
         </div>
 
 
-        <div>        <!-- 120px -->
+        <div>
+            <!--Third Chart Weight-->
             <div class="chart-container" style="position: relative; height:auto; width:80vw">
                 <canvas id="myChart3"></canvas>
                 <script>
@@ -261,18 +213,12 @@
                 </tr>
                 </thead>
                 <tbody>
+                <%for (int i=trainingList.size()-1;i>=0;i--){%>
                 <tr>
-                    <td>< %=trainingPlan.getNome?()%></td>
-                    <td>< %=trainingPlan.getDate()%></td>
+                    <td><%=i+1%></td>
+                    <td><%=trainingList.get(i).getDate()%></td>
                 </tr>
-                <tr>
-                    <td>< %=trainingPlan.getNome?()%></td>
-                    <td>< %=trainingPlan.getDate()%></td>
-                </tr>
-                <tr>
-                    <td>< %=trainingPlan.getNome?()%></td>
-                    <td>< %=trainingPlan.getDate()%></td>
-                </tr>
+                <%}%>
                 </tbody>
             </table>
             </p>
