@@ -17,25 +17,27 @@
 </head>
 <body>
 
-<form>
+<form onsubmit="return stopsubmit(this);">
     <div class="form-group">
-        <label for="idweight">Il tuo weight</label>
-        <input class="form-control" id="idweight" name="weight" placeholder="Enter weight">
+        <label for="idweight">Il tuo peso</label> <label id="controlweight"></label>
+        <input class="form-control" id="idweight" onkeyup="validateWeight()" name="weight" placeholder="in kg">
     </div>
     <div class="form-group">
-        <label for="idfatMass">massa grassa</label>
-        <input class="form-control" id="idfatMass" name="fatMass">
+        <label for="idfatMass">La tua massa grassa</label> <label id="controlfatMass"></label>
+        <input class="form-control" id="idfatMass" onkeyup="validatefatMass()" name="fatMass"
+               placeholder="in percentuale">
     </div>
     <div class="form-group">
-        <label for="idleanMass">massa magra</label>
-        <input class="form-control" id="idleanMass" name="leanMass">
+        <label for="idleanMass">La tua massa magra</label> <label id="controlleanMass"></label>
+        <input class="form-control" id="idleanMass" onkeyup="validateLeanMass()" name="leanMass"
+               placeholder="in percentuale">
     </div>
     <button type="button" id="buttonSubmit" class="btn btn-primary">Submit</button>
 </form>
 
-<div class="alert alert-danger" role="alert" id="divError"> </div>
+<div class="alert alert-danger" role="alert" id="divError"></div>
 
-<div class="alert alert-success" role="alert" id="divSuccess"> </div>
+<div class="alert alert-success" role="alert" id="divSuccess"></div>
 
 </body>
 </html>
