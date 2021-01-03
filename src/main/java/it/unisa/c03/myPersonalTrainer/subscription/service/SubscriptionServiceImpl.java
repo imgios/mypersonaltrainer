@@ -6,6 +6,7 @@ import it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAO;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -101,5 +102,78 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
         return -1;
 
+    }
+
+    /**
+     * This service method shows all expiring Subscriptions.
+     *
+     * @return the list of expiring Subscriptions
+     */
+    @Override
+    public ArrayList<Subscription> getExpiringSubscriptions()
+            throws InterruptedException, ExecutionException, IOException {
+
+        //create the list to return
+        ArrayList<Subscription> listToReturn = new ArrayList<>();
+
+        //call dao to get all subs
+        ArrayList<Subscription> listDao = subscriptionDAO.getAllSubscriptions();
+
+        //filter each sub and add to list only expiring subs
+        for (Subscription s : listDao) {
+            if (checkSubscriptionState(s.getCustomerMail()) == 0) {
+                listToReturn.add(s);
+            }
+        }
+
+        return listToReturn;
+    }
+
+    /**
+     * This service method shows all expired Subscriptions.
+     *
+     * @return the list of expired Subscriptions
+     */
+    @Override
+    public ArrayList<Subscription> getExpiredSubscriptions()
+            throws InterruptedException, ExecutionException, IOException {
+        //create the list to return
+        ArrayList<Subscription> listToReturn = new ArrayList<>();
+
+        //call dao to get all subs
+        ArrayList<Subscription> listDao = subscriptionDAO.getAllSubscriptions();
+
+        //filter each sub and add to list only expired subs
+        for (Subscription s : listDao) {
+            if (checkSubscriptionState(s.getCustomerMail()) == -1) {
+                listToReturn.add(s);
+            }
+        }
+
+        return listToReturn;
+    }
+
+    /**
+     * This service method shows all active Subscriptions.
+     *
+     * @return the list of active Subscriptions
+     */
+    @Override
+    public ArrayList<Subscription> getActiveSubscriptions()
+            throws InterruptedException, ExecutionException, IOException {
+        //create the list to return
+        ArrayList<Subscription> listToReturn = new ArrayList<>();
+
+        //call dao to get all subs
+        ArrayList<Subscription> listDao = subscriptionDAO.getAllSubscriptions();
+
+        //filter each sub and add to list only expired subs
+        for (Subscription s : listDao) {
+            if (checkSubscriptionState(s.getCustomerMail()) == 1) {
+                listToReturn.add(s);
+            }
+        }
+
+        return listToReturn;
     }
 }

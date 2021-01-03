@@ -128,6 +128,28 @@ public class AccountServiceImpl implements AccountService {
     }
 
     /**
+     * This method return the account given its mail.
+     * @param email referring to the account to search for
+     * @return the Account if it exists, null if not
+     */
+    @Override
+    public Account getAccountByEmail(String email)
+            throws InterruptedException, ExecutionException, IOException {
+        Account account = new Account();
+        account = accountDAO.findAccountByEmail(email);
+
+        //the email exists in the DB
+        if (account.getEmail() != null) {
+            return account;
+        } else if (account.getEmail() == null) {
+            //the email doesn't exist in the DB
+            return null;
+        }
+
+        return null;
+    }
+
+    /**
      * This service method changes the password of an account.
      * @param email of the account
      * @param password updated

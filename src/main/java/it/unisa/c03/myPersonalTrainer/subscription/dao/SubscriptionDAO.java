@@ -3,6 +3,7 @@ package it.unisa.c03.myPersonalTrainer.subscription.dao;
 import it.unisa.c03.myPersonalTrainer.subscription.bean.Subscription;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public interface SubscriptionDAO {
@@ -25,5 +26,12 @@ public interface SubscriptionDAO {
      * @throws InterruptedException
      */
     Subscription getSubscriptionbyEmail(String clientMail)
+            throws IOException, ExecutionException, InterruptedException;
+
+    /**
+     * This method retrieves all subscriptions saved in db.
+     * @return subscription list
+     */
+    ArrayList<Subscription> getAllSubscriptions()
             throws IOException, ExecutionException, InterruptedException;
 }
