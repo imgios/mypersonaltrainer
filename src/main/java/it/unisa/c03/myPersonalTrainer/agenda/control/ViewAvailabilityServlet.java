@@ -16,8 +16,9 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * this class controls the interaction between personal trainer and system.
- * return 1 if the insertion is done, 0 not done, 2 if the availability already exists
+ * this class controls the interaction between personal trainer and system to view personal trainer availability.
+ * return 1+"Message" if there is an error in the date input , 0 if there aren't availability, else return the
+ * availability list for this date.
  */
 @WebServlet(name = "ViewAvailabilityServlet",
         value = "/view-availability")
@@ -52,6 +53,9 @@ public class ViewAvailabilityServlet
                 request.getParameter("dataSelected");
         System.out.println(data);
 
+        /**
+         * stringa che verra' data in output in formato json
+         */
         String res = "";
 
 
