@@ -35,7 +35,7 @@
 <html>
 <head>
     <title>Progressi Cliente</title>
-    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -189,7 +189,7 @@
 
 <!--  inserimento footer -->
 <!-- <div id="footer"> -->
-        <%@ include file="footer/footer.jsp"%>
+        <%@ include file="footer.jsp"%>
       <!--      </div> -->
 
 
