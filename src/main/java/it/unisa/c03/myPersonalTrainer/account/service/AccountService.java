@@ -91,5 +91,5 @@ public interface AccountService {
     * @throws IllegalArgumentException
     */
     boolean verifyIsAdmin(Account account) throws IllegalArgumentException;
-    
+
 }

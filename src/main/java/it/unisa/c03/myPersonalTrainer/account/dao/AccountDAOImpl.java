@@ -70,11 +70,10 @@ public class AccountDAOImpl implements AccountDAO {
         try {
             accountBean = accounts.get()
                     .getDocuments()
-                            .stream()
+                    .stream()
                     .map(queryDocumentSnapshot -> queryDocumentSnapshot
                             .toObject(Account.class))
-                                        .collect(Collectors.toList());
-
+                    .collect(Collectors.toList());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -140,15 +139,13 @@ public class AccountDAOImpl implements AccountDAO {
         String id = getAccountDocumentIdByEmail(email);
 
         // Update an existing document thanks to its id
+        DocumentReference docRef = DBConnection.getConnection()
+                .collection("Account").document(id);
 
-            DocumentReference docRef = DBConnection.getConnection()
-                    .collection("Account").document(id);
+        // Update password field
+        ApiFuture<WriteResult> future = docRef.update("password", password);
 
-            // Update password field
-            ApiFuture<WriteResult> future = docRef.update("password", password);
-
-            return true;
-
+        return true;
     }
 
     /**
@@ -161,9 +158,8 @@ public class AccountDAOImpl implements AccountDAO {
             throws IOException, ExecutionException, InterruptedException {
         // Create a reference to the account collection
         CollectionReference accounts = null;
-
-            accounts = DBConnection.getConnection().collection("Account");
-
+      
+        accounts = DBConnection.getConnection().collection("Account");
 
         // Create a query against the collection.
         Query query = accounts.whereEqualTo("email", email);
@@ -173,14 +169,12 @@ public class AccountDAOImpl implements AccountDAO {
 
         String id = "";
 
-            for (DocumentSnapshot document
-                    : querySnapshot.get().getDocuments()) {
-                id = id + document.getId();
-            }
-
+        for (DocumentSnapshot document
+                : querySnapshot.get().getDocuments()) {
+            id = id + document.getId();
+        }
 
         return id;
     }
-
 
 }
