@@ -24,13 +24,14 @@ class AccountDAOImplTest {
     //AccountDAO dao = new AccountDAOImpl();
 
 
+    /*
     @BeforeAll
     static void setUp() throws IOException {
-
         accountTest = new Account("Account Test", "Account Test","3401212123","cerca@utente.it","PasswordTest1",0);
         DBConnection.getConnection().collection("Account").add(accountTest);
     }
-
+    */
+    /*
     @AfterAll
     static void clean() throws IOException, ExecutionException, InterruptedException {
         List<QueryDocumentSnapshot> lqds = DBConnection.getConnection().collection("Account").whereEqualTo("email","cerca@utente.it").get().get().getDocuments();
@@ -40,7 +41,7 @@ class AccountDAOImplTest {
             document.getReference().delete();
         }
     }
-
+    */
 
     @Test
     void findAccountByEmail() throws InterruptedException, ExecutionException, IOException {
@@ -48,15 +49,14 @@ class AccountDAOImplTest {
         AccountDAO dao = new AccountDAOImpl();
         Account accountToSearch = dao.findAccountByEmail("cerca@utente.it");
         //Account accountToSearch = dao.findAccountByEmail("hismail@italy.com");
-
-        assertEquals(accountTest.getEmail(), accountToSearch.getEmail());
+        assertEquals("cerca@utente.it", accountToSearch.getEmail());
     }
 
-    
+
     @Test
     void updatePassword() throws IOException, ExecutionException, InterruptedException {
         AccountDAO dao = new AccountDAOImpl();
-        assertEquals(true, dao.updatePassword(accountTest.getEmail(),"changedPassword56"));
+        assertEquals(true, dao.updatePassword("cerca@utente.it","changedPassword56"));
     }
 
 
