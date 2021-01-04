@@ -56,8 +56,10 @@ public class LoginServlet extends HttpServlet {
                     if (email.equals(testUtente.getEmail())
                             && password.equals(testUtente.getPassword())) {
                         if (accountService.verifyIsAdmin(utente)) {
+                            request.getSession().setAttribute("ptMail",email);
                             response.sendRedirect("adminDashboard.jsp");
                         } else {
+                            request.getSession().setAttribute("clienteMail",email);
                             response.sendRedirect("clienteDashboard.jsp");
                         }
                     } else {
