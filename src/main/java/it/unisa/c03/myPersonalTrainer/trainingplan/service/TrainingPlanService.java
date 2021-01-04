@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public interface TrainingPlanService {
-
      /**
       * This method asks to DAO TrainingPlans.
       * @param email of the customer
@@ -38,5 +37,4 @@ public interface TrainingPlanService {
       * @throws IOException
       */
      boolean createTrainingPlan(TrainingPlan trainingPlan) throws IOException;
-
 }
