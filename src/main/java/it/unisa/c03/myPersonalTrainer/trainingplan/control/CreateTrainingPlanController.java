@@ -61,8 +61,6 @@ public class CreateTrainingPlanController extends
                             + "\n" + recoveryTime
                             + "\t\t\t\t" + recoveryTimeSecond;
                     request.getSession().setAttribute("exercises", firstEx);
-                    String prova = (String) (request.getSession()
-                            .getAttribute("exercises"));
                 } else {
                     String notFirstEx = "\n\n" + exerciseName
                             + "\t" + exercise
@@ -74,8 +72,6 @@ public class CreateTrainingPlanController extends
                             + "\t\t\t\t" + recoveryTimeSecond;
                     exercises += notFirstEx;
                     request.getSession().setAttribute("exercises", exercises);
-                    String prova = (String)
-                            (request.getSession().getAttribute("exercises"));
                 }
                 request.getSession()
                         .setAttribute("success", "Inserimento effettuato, "
