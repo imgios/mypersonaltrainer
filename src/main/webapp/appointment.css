@@ -56,3 +56,16 @@ height: max-content;
     height: 250px;
     overflow: scroll;
 }
+#ricaricaore{
+    height: 250px;
+    width: 20%;
+}
+#prenota{
+    margin-top: 10px;
+    margin-left: 20px;
+    width: fit-content;
+    height: fit-content;
+    background-color: dodgerblue;
+    color: white;
+    margin-bottom: 30px;
+}

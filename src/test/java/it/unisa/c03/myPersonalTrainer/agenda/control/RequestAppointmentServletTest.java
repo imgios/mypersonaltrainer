@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -24,6 +25,7 @@ class RequestAppointmentServletTest {
     HttpServletRequest request= Mockito.mock(HttpServletRequest.class);
     HttpServletResponse response=Mockito.mock(HttpServletResponse.class);
     Availability availability=Mockito.mock(Availability.class);
+    HttpSession session=Mockito.mock(HttpSession.class);
     @Test
     void doPost() throws IOException, ServletException, ExecutionException, InterruptedException {
         Mockito.when(availability.getDate()).thenReturn("2021-10-10");
@@ -34,6 +36,7 @@ class RequestAppointmentServletTest {
         Mockito.when(request.getParameter("mailutente")).thenReturn("prova@gmail.com");
         Mockito.when(service.createAppointment(Mockito.anyString(),Mockito.anyString(),Mockito.anyString())).thenReturn(true);
         assertTrue(service.createAppointment(request.getParameter("data"),request.getParameter("time"),request.getParameter("mailutente")));
+        Mockito.when(request.getSession()).thenReturn(session);
 new RequestAppointmentServlet().doPost(request,response);
 /*
 new RequestAppointmentServlet().doGet(request,response);

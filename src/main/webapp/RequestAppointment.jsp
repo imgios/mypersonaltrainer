@@ -74,53 +74,31 @@
     <%}%>
     </tbody>
 </table>
-    <input  id="data" type="text">
-    <input id="time" name="time" type="text">
+
 </div>
     <button id="richiediappuntamento"  onclick="showdataform()"> Richiedi Appuntamento</button>
     <div id="datepicker"></div>
     <button id="cercadisponibilità" onclick="caricaore()" > Ricerca</button>
 
 </div>
-</div>
+
 <div>
     <div id="ricaricaore">
-        <%if (request.getParameter("dataappuntamento")!=null){
-            List<Availability> listore=service.getAvailabilityByDate(request.getParameter("dataappuntamento"));
-        %>
-        <table  id="ore" class="table">
-            <thead>
-            <tr>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <%for (Availability a:listore) {%>
-            <tr>
-                <td>
-                    <%System.out.println(a.getTime());%>
-                </td>
-            </tr>
-            <%}%>
-            </tbody>
-        <%}%>
-    </div>
+        <div class="list-group" id="listaore" role="tablist">
 
-    <% String error = (String) request.getSession().getAttribute("errorToShow");
-        if ( error != null)
-        {%>
+        </div>
+        <button id="prenota" onclick="prenota(<%= "'"+mail+"'"%>)" > Prenota Appuntamento</button>
+    </div>
+    <input  id="data" hidden type="text">
+    <input id="time" hidden name="time" type="text">
+
+
     <div class="alert alert-danger" role="alert"  id="errorDiv">
-        <p><%= error %> </p>
     </div>
-    <%}%>
 
-<% String success = (String) request.getSession().getAttribute("successToShow");
-    if ( success != null)
-    {%>
-<div class="alert alert-success" role="alert"  id="errorDiv">
-    <p><%= success %> </p>
+    <div class="alert alert-success" role="alert"  id="SuccessDiv">
+    </div>
 </div>
-<%}%>
 </div>
 </body>
 </html>

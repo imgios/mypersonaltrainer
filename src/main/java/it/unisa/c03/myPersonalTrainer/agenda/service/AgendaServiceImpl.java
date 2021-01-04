@@ -3,7 +3,6 @@ package it.unisa.c03.myPersonalTrainer.agenda.service;
 import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
 import it.unisa.c03.myPersonalTrainer.agenda.bean.Availability;
 import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAO;
-import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAOImpl;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -37,27 +36,30 @@ public final class AgendaServiceImpl implements AgendaService {
     @Override
     public boolean createAppointment(String date, String time, String mail)
             throws IOException, ExecutionException, InterruptedException {
-        int num= Integer.valueOf(time);
+        int num = Integer.valueOf(time);
         boolean datacheck = checkDate(date);
         boolean timecheck = num <= MAX && num >= MIN;
         boolean mailcheck = mail.matches(
                 "\\w+([\\._\\-]?\\w+)*@\\w+([\\.\\-]?\\w+)*(\\.\\w+)+$");
         if (datacheck && timecheck && mailcheck) {
             Appointment appuntamento = new Appointment(date, time, mail);
-            dao.deleteAvailability(dao.findAvailabilityByDateAndTime(date,num));
+            dao.deleteAvailability(dao.
+                    findAvailabilityByDateAndTime(date, num));
             return dao.saveAppointment(appuntamento);
         }
         return false;
     }
 
     @Override
-    public boolean removeAppointment(Appointment appuntamento) throws InterruptedException, ExecutionException, IOException {
+    public boolean removeAppointment(Appointment appuntamento) throws
+            InterruptedException, ExecutionException, IOException {
         dao.deleteappointment(appuntamento);
         return true;
     }
 
     @Override
-    public List<Appointment> findAppointmentByDate(String date) throws InterruptedException, ExecutionException, IOException {
+    public List<Appointment> findAppointmentByDate(String date) throws
+            InterruptedException, ExecutionException, IOException {
         boolean datacheck = checkDate(date);
         if (datacheck) {
             return dao.findAppointmentByDate(date);
@@ -79,12 +81,12 @@ public final class AgendaServiceImpl implements AgendaService {
      * define the max time to make availability.
      */
     private static final int MAX_TIME = 19;
-    /**
-     * define the agendaDao.
-     */
+  //  /**
+    // * define the agendaDao.
+     //*/
    // private AgendaDAO agendaDAO;
 
-    /**
+    /*/**
      *  initialize an agendaDAO object.
      * @param agendaDAO
      */

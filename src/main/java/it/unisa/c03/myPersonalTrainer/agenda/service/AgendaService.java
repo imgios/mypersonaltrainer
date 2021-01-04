@@ -22,21 +22,24 @@ public interface AgendaService {
      * @param mail appointment's applicant
      * @return return true if the insertion is successful
      */
-    boolean createAppointment(String date, String time, String mail) throws IOException, ExecutionException, InterruptedException;
+    boolean createAppointment(String date, String time, String mail) throws
+            IOException, ExecutionException, InterruptedException;
 
     /**
      *
      * @param appuntamneto appointment to delete
      * @return true if the appointment is successfully deleted
      */
-    boolean removeAppointment(Appointment appuntamneto) throws InterruptedException, ExecutionException, IOException;
+    boolean removeAppointment(Appointment appuntamneto) throws
+            InterruptedException, ExecutionException, IOException;
 
     /**
      *
      * @param date
      * @return return a list of appointments fixed on that date
      */
-    List<Appointment> findAppointmentByDate(String date) throws InterruptedException, ExecutionException, IOException;
+    List<Appointment> findAppointmentByDate(String date) throws
+            InterruptedException, ExecutionException, IOException;
 
 
     /**

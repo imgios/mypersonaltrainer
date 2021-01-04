@@ -1,5 +1,6 @@
 package it.unisa.c03.myPersonalTrainer.agenda.control;
 
+import com.google.gson.Gson;
 import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAO;
 import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAOImpl;
 import it.unisa.c03.myPersonalTrainer.agenda.service.AgendaService;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-@WebServlet(name = "RequestAppointmentServlet")
+@WebServlet(name = "RequestAppointmentServlet", value = "/RequestAppointmentServlet")
 public class RequestAppointmentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws
@@ -27,23 +28,18 @@ public class RequestAppointmentServlet extends HttpServlet {
         if (service.checkDate(data)) {
             try {
                 service.createAppointment(data, time, mail);
-                request.getSession().setAttribute("successToShow",
-                        "Appuntamento programmato");
-                response.sendRedirect("RequestAppointment.jsp");
+                response.getWriter().write(new Gson().toJson(true));
             } catch (ExecutionException e) {
-                request.getSession().setAttribute("errorToShow",
-                        "errore nel programmare l'appuntamento");
-                response.sendRedirect("RequestAppointment.jsp");
+                response.getWriter().write(new Gson().toJson(false));
+
             } catch (InterruptedException e) {
-                request.getSession().setAttribute("errorToShow",
-                        "errore nel programmare l'appuntamento");
-                response.sendRedirect("RequestAppointment.jsp");
+                response.getWriter().write(new Gson().toJson(false));
+
             }
 
         } else {
-            request.getSession().setAttribute("errorToShow",
-                    "errore nel programmare l'appuntamento");
-            response.sendRedirect("RequestAppointment.jsp");
+            response.getWriter().write(new Gson().toJson(false));
+
         }
 
 
