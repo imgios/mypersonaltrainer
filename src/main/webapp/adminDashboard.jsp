@@ -1,7 +1,15 @@
 <%@ page language="java" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<!--inserire verifica che l'utente sia PT
+
+<!-- verifica che l'utente sia PT
 isPT = true allora procedi, altrimenti errore.-->
+<%
+    String emailAdmin = (String) request.getSession().getAttribute("ptMail");
+    if(emailAdmin == null)
+        response.sendRedirect("login.jsp");
+%>
+
+
 <html>
 <head>
     <title>myPersonalTrainer | myAccount</title>
