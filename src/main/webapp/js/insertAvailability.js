@@ -31,13 +31,16 @@ $(document).ready(function () {
             if (data == 1) {
                 $('#divSuccess').empty().append("<p>Inserimento effettuato!</p>");
                 $('#divSuccess').show();
+                $("p").css({"font-style": "oblique", " font-variant": "small-caps"});
 
             } else if (data == 2) {
-                $('#divError').empty().append("<p>Data gia presente, non puoi inserirla</p>");
+                $('#divError').empty().append("<p>Disponibilita' gia inseririta!</p>");
                 $('#divError').show();
+                $("p").css({"font-weight": "bold", " font-style": "italic"});
             } else {
                 $('#divError').empty().append("<p>" + data + "</p>");
                 $('#divError').show();
+                $("p").css({"font-weight": "bold", " font-style": "italic"});
             }
         });
         $('#divError').empty();
