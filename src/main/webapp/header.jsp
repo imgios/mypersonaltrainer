@@ -9,8 +9,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    <meta charset="UTF-8">
     <title>myPersonalTrainer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" -->
@@ -33,11 +31,6 @@
 
 <div class="wrapper">
     <div class="top_navbar">
-        <div class="hamburgerIn">
-            <div class="one"></div>
-            <div class="two"></div>
-            <div class="three"></div>
-        </div>
         <div class="top_menu">
             <div class="logo"><img class="responsive_logo" src="./img/void.png">
             </div>
@@ -100,7 +93,7 @@
         </div>
 
         <div class="sidebar-header">
-            <h3>myPersonalTrainer</h3>
+            <h5>myPersonalTrainer</h5>
             <p>Dashboard Cliente</p>
         </div>
 
@@ -177,7 +170,7 @@
             </div>
 
             <div class="sidebar-header">
-                <h3>myPersonalTrainer</h3>
+                <h5>myPersonalTrainer</h5>
                 <p>Dashboard Personal Trainer</p>
             </div>
 
