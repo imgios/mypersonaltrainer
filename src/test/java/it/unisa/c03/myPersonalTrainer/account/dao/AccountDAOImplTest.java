@@ -18,34 +18,13 @@ import static org.mockito.Mockito.when;
 
 class AccountDAOImplTest {
 
-    Account accountTest;
-
-
-    @BeforeEach
-     void setUp() throws IOException {
-        accountTest = new Account("Account Test", "Account Test","3401212123","cerca@utente.it","PasswordTest1",0);
-        DBConnection.getConnection().collection("Account").add(accountTest);
-    }
-
-
-    @AfterEach
-     void clean() throws IOException, ExecutionException, InterruptedException {
-        List<QueryDocumentSnapshot> lqds = DBConnection.getConnection().collection("Account").whereEqualTo("email","cerca@utente.it").get().get().getDocuments();
-
-        for(QueryDocumentSnapshot document : lqds)
-        {
-            document.getReference().delete();
-        }
-    }
-
 
     @Test
     void findAccountByEmail() throws InterruptedException, ExecutionException, IOException {
 
         AccountDAO dao = new AccountDAOImpl();
-        Account accountToSearch = dao.findAccountByEmail("cerca@utente.it");
-        //Account accountToSearch = dao.findAccountByEmail("hismail@italy.com");
-        assertEquals(accountTest.getEmail(), accountToSearch.getEmail());
+        Account accountToSearch = dao.findAccountByEmail("email@testing.com");
+        assertEquals("email@testing.com", accountToSearch.getEmail());
     }
 
 
@@ -53,18 +32,9 @@ class AccountDAOImplTest {
     void updatePassword() throws IOException, ExecutionException, InterruptedException {
         AccountDAO dao = new AccountDAOImpl();
 
-        assertEquals(true, dao.updatePassword(accountTest.getEmail(),"changedPassword56"));
+        assertEquals(true, dao.updatePassword("email@testing.com","changedPassword56"));
     }
 
-
-    /* da inserire per vedere se effettivamente ce l'account o meno
-    @BeforeAll
-    static void searchifexistaccount() throws IOException {
-
-        accountTest = new Account("Account Test", "Account Test","3401212123","cerca@utente.it","PasswordTest1",0);
-        DBConnection.getConnection().collection("Account").add(accountTest);
-    }
-    */
 
 
     @AfterAll
