@@ -15,11 +15,16 @@
 
     <%@include file="header.jsp"%>
 
+    <style>
+        #logindiv {
+            margin-top: 200px;
+        }
+    </style>
 
 </head>
 <body>
 
-<div class="login_form">
+<div class="login_form" id="logindiv">
 <div class="container">
             <div class="main_container">
                 <div class="item">
@@ -53,7 +58,7 @@
                 </div>
             </div>
     </div>
-</div>
+
 
 <!--FOOTER DA INSERIRE-->
 <%@include file="footer.jsp"%>
