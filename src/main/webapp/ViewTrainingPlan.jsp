@@ -21,22 +21,31 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <%TrainingPlanService tp = new TrainingPlanServiceImpl();
-    Collection<TrainingPlan> t = tp.getTrainingPlans("provatest@prova.io"); %>
+<%
+    TrainingPlanService tp = new TrainingPlanServiceImpl();
+    Collection<TrainingPlan> t = tp.getTrainingPlans("clientemail@prova.io");
+%>
 <section>
     <h2>Le mie schede</h2>
-<%for(TrainingPlan b : t){ %>
+    <%for (TrainingPlan b : t) { %>
     <details>
         <summary>
-            <%=b.getDate()%>
-            <button type="button">Download PDF!</button>
+            <form action="download-training-plan" method="post">
+                <%=b.getDate()%>
+                <input type="hidden" name="date" value=<%=b.getDate()%>>
+
+                <% request.getSession().setAttribute("exerc", b.getExercises()); %>
+
+                <button type="submit">Download PDF!</button>
+            </form>
         </summary>
         <p>
             <%= b.getExercises()%>
         </p>
     </details>
-<%}%>
-    </section>
+    <%}%>
+
+</section>
 </ul>
 </body>
 </html>
