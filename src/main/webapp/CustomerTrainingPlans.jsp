@@ -46,9 +46,10 @@
 <body>
 <%TrainingPlanService tp = new TrainingPlanServiceImpl();
 Collection<TrainingPlan> t = tp.getTrainingPlans("provatest@prova.io");
+//devo settare da lenght al contrario
 int i = 0;%>
 <section>
-<table id="t01">
+<table id="t01" action="/ViewTrainingPlan">
     <tr>
         <th>Numero Scheda</th>
         <th>Data</th>
@@ -59,7 +60,7 @@ int i = 0;%>
     <tr>
         <td><p><%=++i%></p></td>
         <td><%=b.getDate()%></td>
-        <td>link</td>
+        <td><button type="submit" id="View" name="vtp" value="viewtp">Vai alla scheda...</button></td>
         <td>button</td>
     </tr>
 <%}%>
