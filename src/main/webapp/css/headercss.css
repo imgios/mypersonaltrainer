@@ -1,4 +1,12 @@
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+/*@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"; */
+
+/* seconda parte di css */
+
+html {
+  font-size: 80%;
+}
+
+
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -41,6 +49,7 @@ a, a:hover, a:focus {
   margin: 40px 0;
 }
 */
+
 /*
 .navbar-header{
   background: #9fc5f8;
