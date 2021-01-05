@@ -15,16 +15,10 @@
 
     <%@include file="header.jsp"%>
 
-    <style>
-        #logindiv {
-            margin-top: 200px;
-        }
-    </style>
-
 </head>
 <body>
 
-<div class="login_form" id="logindiv">
+<div class="login_form">
 <div class="container">
             <div class="main_container">
                 <div class="item">
