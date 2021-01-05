@@ -52,8 +52,6 @@ public class ViewAvailabilityServlet
          */
         String data =
                 request.getParameter("dataSelected");
-        System.out.println(data);
-
         /**
          * stringa che verra' data in output in formato json
          */
@@ -72,15 +70,12 @@ public class ViewAvailabilityServlet
             } else { //ritorna le disponibilita' per la data scelta
                 list.sort(Comparator.comparing(Availability::getTime));
                 res = new Gson().toJson(list);
-                System.out.println(list.size());
-                System.out.println(list);
             }
         } catch (IllegalArgumentException |
-                InterruptedException | ExecutionException e) {
-            res = new Gson().toJson( //ritorna il valore 1+il messaggio del relativo errore. 1 e' un valore sentinella.
+                InterruptedException | ExecutionException e) { //ritorna il valore 1+il messaggio del relativo errore. 1 e' un valore sentinella.
+            res = new Gson().toJson(
                     "1" + e.getMessage());
             //formato non valido o data precedente
-            System.out.println("1" + e.getMessage() + "\n\n" + res);
             response.getWriter().write(res);
             return;
         }
