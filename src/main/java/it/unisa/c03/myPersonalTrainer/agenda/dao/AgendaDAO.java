@@ -35,7 +35,8 @@ public interface AgendaDAO {
      * @param appuntamento appointment to delete
      * @return true if the appointment is deleted
      */
-    boolean deleteappointment(Appointment appuntamento) throws IOException, ExecutionException, InterruptedException;
+    boolean deleteappointment(Appointment appuntamento) throws
+            IOException, ExecutionException, InterruptedException;
 
 
     /**
