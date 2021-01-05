@@ -39,7 +39,7 @@
             <div>
                 <img class="responsive_item_account" src="./img/user1.png">
                 <ul>
-                    <li><a href="#"> Logout </a></li>
+                    <li><a href="<%=request.getContextPath()%>/LogoutServlet"> Logout </a></li>
                     <li>&nbsp</li>
                     <li><a href="#"> Profilo Utente </a></li>
                 </ul>
@@ -79,7 +79,7 @@
             <div>
                 <img class="responsive_item_account" src="./img/user1.png">
                 <ul>
-                    <li><a href="#"> Logout </a></li>
+                    <li><a href="<%=request.getContextPath()%>/LogoutServlet"> Logout </a></li>
                     <li>&nbsp</li>
                     <li><a href="#"> Profilo Utente </a></li>
                 </ul>
@@ -132,7 +132,7 @@
                 <div>
                     <img class="responsive_item_account" src="./img/user1.png">
                     <ul>
-                        <li><a href="#"> Logout </a></li>
+                        <li><a href="<%=request.getContextPath()%>/LogoutServlet"> Logout </a></li>
                         <li>&nbsp</li>
                         <li><a href="#"> Profilo Utente </a></li>
                     </ul>
