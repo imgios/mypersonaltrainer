@@ -10,7 +10,7 @@
 <head>
     <title>Title</title>
 
-    <%@ include file="header.jsp"%>
+    <%@ include file="navbar.jsp"%>
 </head>
 <body>
 <!--

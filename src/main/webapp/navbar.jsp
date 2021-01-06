@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>myPersonalTrainer</title>
 
     <!-- Bootstrap -->
     <meta charset="utf-8">
@@ -81,14 +81,23 @@
             .sidebar a {font-size: 18px;}
         }
     </style>
+
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <button class="openbtn" onclick="openNav()">☰</button>
-    <a class="navbar-brand" href="#">Navbar</a>
 
-    <!--
+<%int role=0;%>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <% if (role == 0) { %>
+    <button class="openbtn" onclick="openNav()">☰</button>
+    <% } if (role == 1) { %>
+    <button class="openbtn" onclick="openNavPT()">☰</button>
+    <% } %>
+    <a class="navbar-brand" href="#">myPT</a>          <!--testo da poter anche eliminare -->
+
+<!--
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -127,30 +136,67 @@
     </div>
     -->
 </nav>
-
-<div id="mySidebar" class="sidebar">
+<!-- controllo blando per vedere se le navbar funzionano -->
+<% if (role == 0) { %>
+<!-- navbar cliente -->
+<div id="mySidebarCliente" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+    <a href="#">Dashboard</a>
+    <a href="#">Statistiche</a>
+    <a href="#">Agenda</a>
+    <a href="#">Cronologia Schede</a>
 </div>
+<%
+    }
+%>
+
+ <% if (role == 1) { %>
+ <!-- navbar pt  -->
+<div id="mySidebarPT" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNavPT()">×</a>
+    <a href="#">Dashboard</a>
+    <a href="#">Agenda</a>
+    <a href="#">Clienti</a>
+    <a href="#">Schede</a>
+    <a href="#">Pagamenti</a>
+</div>
+
+<%
+}
+%>
 
 <div id="main">
     <h1>Prova</h1>
 </div>
 
+
+
+<!-- script controllo sidebar -->
 <script>
     function openNav() {
-        document.getElementById("mySidebar").style.width = "250px";
+        document.getElementById("mySidebarCliente").style.width = "250px";
         document.getElementById("main").style.marginLeft = "250px";
     }
 
     function closeNav() {
-        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("mySidebarCliente").style.width = "0";
         document.getElementById("main").style.marginLeft= "0";
     }
 </script>
+
+<script>
+  function openNavPT() {
+    document.getElementById("mySidebarPT").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+  }
+
+  function closeNavPT() {
+    document.getElementById("mySidebarPT").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+  }
+</script>
+
+
 
 </body>
 </html>
