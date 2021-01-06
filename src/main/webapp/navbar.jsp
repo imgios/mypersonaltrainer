@@ -104,7 +104,7 @@
 <body>
 
 
-<%int role=1;%>
+<%int role=2;%>
 
 <% if(role == 0) {%>
                         <!-- Homepage nessuno loggato -->
@@ -137,7 +137,7 @@
         <li><a class="nav-item nav-link mx-1" href="#"><i class="fas fa-user"></i>Profilo</a></li>
         <li><a class="nav-item nav-link mx-1" href="< %=request.getContextPath()%>/LogoutServlet"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
     -->
-        <li><a href="#"><i class="fas fa-user"></i>Profilo</a></li>
+        <li><a href="#"><i class="fas fa-user"></i>Profilo &nbsp;</a></li>
         <li><a href="<%=request.getContextPath()%>/LogoutServlet"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
     </ul>
 </nav>
@@ -167,7 +167,7 @@
     </div>
 
     <ul class="navbar-nav ml-auto">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profilo</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profilo &nbsp;</a></li>
         <li><a href="<%=request.getContextPath()%>/LogoutServlet"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
 </nav>
