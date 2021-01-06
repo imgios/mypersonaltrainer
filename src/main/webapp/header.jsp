@@ -41,7 +41,7 @@
                 <ul>
                     <li><a href="<%=request.getContextPath()%>/LogoutServlet"> Logout </a></li>
                     <li>&nbsp</li>
-                    <li><a href="#"> Profilo Utente </a></li>
+                    <li><a href="<%=request.getContextPath()%>/AccountProfile.jsp"> Profilo Utente </a></li>
                 </ul>
             </div>
         </div>
@@ -81,7 +81,7 @@
                 <ul>
                     <li><a href="<%=request.getContextPath()%>/LogoutServlet"> Logout </a></li>
                     <li>&nbsp</li>
-                    <li><a href="#"> Profilo Utente </a></li>
+                    <li><a href="<%=request.getContextPath()%>/AccountProfile.jsp"> Profilo Utente </a></li>
                 </ul>
             </div>
         </div>
@@ -134,7 +134,7 @@
                     <ul>
                         <li><a href="<%=request.getContextPath()%>/LogoutServlet"> Logout </a></li>
                         <li>&nbsp</li>
-                        <li><a href="#"> Profilo Utente </a></li>
+                        <li><a href="<%=request.getContextPath()%>/LogoutServlet"> Profilo Utente </a></li>
                     </ul>
                 </div>
             </div>
@@ -272,3 +272,57 @@
 
 </body>
 </html>
+
+<-- Backup navbar -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <% if (role == 0) { %>
+    <div class="navbar-nav mr-auto">
+        <button class="openbtn" onclick="openNav()">☰</button>
+    </div>
+    <% } if (role == 1) { %>
+    <button class="openbtn" onclick="openNavPT()">☰</button>
+    <% } %>
+
+
+    <div class="navbar-nav mx-auto">
+        <img class="logo" src="./img/nlogo.png">
+    </div>
+
+
+
+    <ul class="navbar-nav ml-auto">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+
+</nav>
+
+<!-- controllo blando per vedere se le navbar funzionano -->
+<% if (role == 0) { %>
+<!-- navbar cliente -->
+<div id="mySidebarCliente" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="#">Dashboard</a>
+    <a href="#">Statistiche</a>
+    <a href="#">Agenda</a>
+    <a href="#">Cronologia Schede</a>
+</div>
+<%
+    }
+%>
+
+<% if (role == 1) { %>
+<!-- navbar pt  -->
+<div id="mySidebarPT" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNavPT()">×</a>
+    <a href="#">Dashboard</a>
+    <a href="#">Agenda</a>
+    <a href="#">Clienti</a>
+    <a href="#">Schede</a>
+    <a href="#">Pagamenti</a>
+</div>
+
+<%
+    }
+%>
