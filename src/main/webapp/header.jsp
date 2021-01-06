@@ -20,7 +20,7 @@
     <!-- <link rel="stylesheet" href="./css/headercss.css"> -->
 
 </head>
-
+<!-- non usare questo errato -->
 
 <body>
 <%int validSession=0;%>

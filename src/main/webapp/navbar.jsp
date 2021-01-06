@@ -133,6 +133,10 @@
     </div>
 
     <ul class="navbar-nav ml-auto">
+       <!-- inserimento dello spazio tra i tasti, il logo si sposta dal centro però (?)
+        <li><a class="nav-item nav-link mx-1" href="#"><i class="fas fa-user"></i>Profilo</a></li>
+        <li><a class="nav-item nav-link mx-1" href="< %=request.getContextPath()%>/LogoutServlet"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+    -->
         <li><a href="#"><i class="fas fa-user"></i>Profilo</a></li>
         <li><a href="<%=request.getContextPath()%>/LogoutServlet"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
     </ul>

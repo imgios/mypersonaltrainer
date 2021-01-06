@@ -18,11 +18,10 @@
 </head>
 <body>
 
-<!-- inserimento del footer -->
 <!-- footer -->
 <footer class="footer">
 
-    <nav class="navbar navbar-default navbar-custom">
+    <nav class="navbar navbar-default navbar-custom_footer">
 
         <div class="container-fluid">
 
