@@ -9,21 +9,20 @@ isPT = true allora procedi, altrimenti errore.-->
         response.sendRedirect("login.jsp");
 %>
 
-
 <html>
 <head>
     <title>myPersonalTrainer | myAccount</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/footer.css"/>
     <!--link rel="stylesheet" href="styles/reset.min.css"/>
 
     <link rel="stylesheet" href="styles/header-11.css"/-->
 
+    <!--inserimento navbar -->
+    <%@ include file="navbar.jsp"%>
 </head>
 <body>
-<div id= "header">
-    <%@include file="header.jsp"%>
     <div class="wrapper">
         <div class="main_container">
             <div class="item">
@@ -36,7 +35,7 @@ isPT = true allora procedi, altrimenti errore.-->
             </div>
         </div>
     </div>
-</div>
+
 <!-- Header End -->
 </body>
 </html>
