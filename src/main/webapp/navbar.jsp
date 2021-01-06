@@ -23,6 +23,10 @@
             font-family: "Lato", sans-serif;
         }
 
+        .bg-primary {
+            background-color: #9fc5f8!important;
+        }
+
         .sidebar {
             height: 100%;
             width: 0;
@@ -30,7 +34,7 @@
             z-index: 1;
             top: 0;
             left: 0;
-            background-color: #9fc5f8;
+            background-color: #007bff;
             overflow-x: hidden;
             transition: 0.5s;
             padding-top: 60px;
@@ -40,13 +44,13 @@
             padding: 8px 8px 8px 32px;
             text-decoration: none;
             font-size: 25px;
-            color: #818181;
+            color: #f1f1f1;
             display: block;
             transition: 0.3s;
         }
 
         .sidebar a:hover {
-            color: #f1f1f1;
+            color: #818181;
         }
 
         .sidebar .closebtn {
@@ -75,6 +79,22 @@
             padding: 16px;
         }
 
+        .navbar-nav a {
+            color: white;
+        }
+
+        /*
+        #logo {
+            width: auto;
+            height: auto;
+        }
+        */
+
+        .logo {
+            width: 80px;
+            height: auto;
+        }
+
         /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
         @media screen and (max-height: 450px) {
             .sidebar {padding-top: 15px;}
@@ -91,12 +111,24 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <% if (role == 0) { %>
-    <button class="openbtn" onclick="openNav()">☰</button>
+    <div class="navbar-nav mr-auto">
+        <button class="openbtn" onclick="openNav()">☰</button>
+    </div>
     <% } if (role == 1) { %>
     <button class="openbtn" onclick="openNavPT()">☰</button>
     <% } %>
-    <a class="navbar-brand" href="#">myPT</a>          <!--testo da poter anche eliminare -->
 
+
+    <div class="navbar-nav mx-auto">
+        <img class="logo" src="./img/nlogo.png">
+    </div>
+
+
+
+    <ul class="navbar-nav ml-auto">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
 <!--
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
