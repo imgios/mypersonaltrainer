@@ -42,8 +42,8 @@
             document.getElementById('time').value=document.getElementById(ele.id).innerHTML;
         }
     </script>
-    <link rel="stylesheet" type="text/css" href="appointment.css">
-    <script src="Requestappointment.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/appointment.css">
+    <script src="js/Requestappointment.js"></script>
 </head>
 <body>
 <div id="ricarica">

@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class AgendaDAOImpl implements AgendaDAO {
+
     @Override
     public boolean saveAppointment(Appointment appuntamento)
             throws IOException {

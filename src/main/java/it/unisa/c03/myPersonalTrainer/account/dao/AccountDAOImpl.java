@@ -19,7 +19,6 @@ import java.io.IOException;
 
 
 public class AccountDAOImpl implements AccountDAO {
-
     /**
      * this function save the account into the db.
      * @param utente describe the user
