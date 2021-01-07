@@ -30,9 +30,6 @@
 </head>
 <body>
 
-
-
-
 <%
     String clienteMail = (String) request.getSession().getAttribute("clienteMail");
     String adminMail = (String) request.getSession().getAttribute("ptMail");
