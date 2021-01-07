@@ -1,5 +1,12 @@
 <%@ page language="java" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+
+<%
+    String emailCliente = (String) request.getSession().getAttribute("clienteMail");
+    if(emailCliente == null)
+        response.sendRedirect("login.jsp");
+%>
+
 <html>
 <head>
     <title>myPersonalTrainer | myAccount</title>

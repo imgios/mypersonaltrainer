@@ -41,7 +41,6 @@ public interface AccountDAO {
      String getAccountDocumentIdByEmail(String email)
              throws IOException, ExecutionException, InterruptedException;
 
-
     /**
      * This function read the saved accounts into the db.
      * @return List of the accounts

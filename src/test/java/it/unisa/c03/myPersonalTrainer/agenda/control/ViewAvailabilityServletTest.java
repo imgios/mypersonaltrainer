@@ -72,12 +72,12 @@ class ViewAvailabilityServletTest {
     void doPostList() throws IOException, ServletException, ExecutionException, InterruptedException {
 
         ArrayList<Availability> list = new ArrayList<Availability>();
-        Availability availability = new Availability("2021-09-23", 11);
+        Availability availability = new Availability("2021-12-12", 10);
         list.add(availability);
 
-        Mockito.when(request.getParameter("dataSelected")).thenReturn("2021-09-23");
-        Mockito.when(agendaService.checkAvailability("2021-09-23", "15")).thenReturn(false);
-        Mockito.when(agendaService.getAvailabilityByDate("2021-09-23")).thenReturn(list);
+        Mockito.when(request.getParameter("dataSelected")).thenReturn("2021-12-12");
+        Mockito.when(agendaService.checkAvailability("2021-12-12", "10")).thenReturn(true);
+        Mockito.when(agendaService.getAvailabilityByDate("2021-12-12")).thenReturn(list);
 
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
@@ -105,7 +105,4 @@ class ViewAvailabilityServletTest {
         new ViewAvailabilityServlet().doGet(request, response);
         assertEquals("0", stringWriter.toString());
     }
-
-
-
 }

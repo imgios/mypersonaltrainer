@@ -1,7 +1,7 @@
 package it.unisa.c03.myPersonalTrainer.agenda.control;
 
 import com.google.gson.Gson;
-import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
+import it.unisa.c03.myPersonalTrainer.agenda.bean.Availability;
 import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAO;
 import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAOImpl;
 import it.unisa.c03.myPersonalTrainer.agenda.service.AgendaService;
@@ -13,35 +13,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-@WebServlet(name = "RemoveAppointmentServlet",
-        value = "/RemoveAppointmentServlet")
-public class RemoveAppointmentServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response)
+@WebServlet(name = "HoursServlet", value = "/HoursServlet")
+public class HoursServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request, response);
+        AgendaDAO dao = new AgendaDAOImpl();
+        String data = request.getParameter("dataappuntamento");
+        AgendaService service = new AgendaServiceImpl(dao);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        try {
+            PrintWriter out=response.getWriter();
+            List<Availability> ore = service.getAvailabilityByDate(data);
+            out.print(new Gson().toJson(ore));
+            out.flush();
+
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse
-            response) throws ServletException, IOException {
-        String data = request.getParameter("dataapp");
-        String time = request.getParameter("ora");
-        String mail = request.getParameter("mail");
-        Appointment appointment = new Appointment(data, time, mail);
-        AgendaDAO dao = new AgendaDAOImpl();
-        AgendaService service = new AgendaServiceImpl(dao);
-        response.setContentType("application/json");
-        try {
-            response.getWriter().write(new Gson().toJson(service.
-                    removeAppointment(appointment)));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doPost(request,response);
 
     }
 }

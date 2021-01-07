@@ -1,5 +1,6 @@
 package it.unisa.c03.myPersonalTrainer.agenda.control;
 
+import com.google.gson.Gson;
 import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAO;
 import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAOImpl;
 import it.unisa.c03.myPersonalTrainer.agenda.service.AgendaService;
@@ -11,8 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
-@WebServlet(name = "RequestAppointmentServlet")
+@WebServlet(name = "RequestAppointmentServlet", value = "/RequestAppointmentServlet")
 public class RequestAppointmentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws
@@ -24,12 +26,19 @@ public class RequestAppointmentServlet extends HttpServlet {
         AgendaService service = new AgendaServiceImpl(dao);
 
         if (service.checkDate(data)) {
-            service.createAppointment(data, time, mail);
-            /*creare la jsp*/
-            response.sendRedirect(".jsp");
-            /*cancellare availability*/
+            try {
+                service.createAppointment(data, time, mail);
+                response.getWriter().write(new Gson().toJson(true));
+            } catch (ExecutionException e) {
+                response.getWriter().write(new Gson().toJson(false));
+
+            } catch (InterruptedException e) {
+                response.getWriter().write(new Gson().toJson(false));
+
+            }
 
         } else {
+            response.getWriter().write(new Gson().toJson(false));
 
         }
 

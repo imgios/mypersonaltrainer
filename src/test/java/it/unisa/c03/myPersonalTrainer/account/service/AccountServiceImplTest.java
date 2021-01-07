@@ -133,28 +133,6 @@ class AccountServiceImplTest {
 
     @Test
     public void changePasswordFalse() throws IOException, ExecutionException, InterruptedException {
-        /*
-        Firestore connection = Mockito.mock(DBConnection.getConnection().getClass());
-        CollectionReference collectionRef = Mockito.mock(CollectionReference.class);
-
-        when(connection.collection(anyString())).thenReturn(collectionRef);
-
-        Query query = Mockito.mock(Query.class);
-
-        when(collectionRef.whereEqualTo(anyString(),anyString())).thenReturn(query);
-
-
-        DocumentReference docRef = Mockito.mock(DocumentReference.class);
-        when(collectionRef.document(anyString())).thenReturn(docRef);
-
-        ApiFuture<WriteResult> api = Mockito.mock(ApiFuture.class);
-        when(docRef.update(anyString(),any())).thenReturn(api);
-
-
-        when(connection.collection(anyString()).document(anyString()).update(anyString(),any()).isDone()).thenReturn(false);
-        assertEquals(false, connection.collection("Account").document("documentId").update("password","newPassword1").isDone());
-        */
-
         AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
         when(accountDAO.updatePassword(anyString(),anyString())).thenReturn(false);
         AccountService service  = new AccountServiceImpl(accountDAO);
