@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutionException;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class ChangePasswordControllerTest {
+class ChangePasswordServletTest {
 
     HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
     HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
@@ -42,7 +42,7 @@ class ChangePasswordControllerTest {
         Mockito.when(accountService.searchAccountByEmail(anyString())).thenReturn(true);
         Mockito.when(accountService.changePassword(anyString(),anyString())).thenReturn(true);
 
-        new ChangePasswordController().doPost(request, response);
+        new ChangePasswordServlet().doPost(request, response);
 
     }
 
@@ -72,7 +72,7 @@ class ChangePasswordControllerTest {
 
 
 
-        new ChangePasswordController().doPost(request, response);
+        new ChangePasswordServlet().doPost(request, response);
     }
 
     @Test
@@ -88,6 +88,6 @@ class ChangePasswordControllerTest {
         Mockito.when(request.getSession()).thenReturn(session);
 
 
-        new ChangePasswordController().doPost(request, response);
+        new ChangePasswordServlet().doPost(request, response);
     }
 }

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 @WebServlet(name = "ChangePassword", value = "/ChangePassword")
-public class ChangePasswordController extends HttpServlet {
+public class ChangePasswordServlet extends HttpServlet {
 
     /**
      * @exclude
