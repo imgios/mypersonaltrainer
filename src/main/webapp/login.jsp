@@ -7,6 +7,18 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
+<!-- inserimento controllo della sessione, se loggato non visualizza il login ma la propria pagina cliente -->
+<%
+    String utente = (String) request.getSession().getAttribute("clienteMail");
+    String pt = (String) request.getSession().getAttribute("ptMail");
+%>
+<% if (utente != null){
+        response.sendRedirect("./clienteDashboard.jsp");
+    } else if (pt != null){
+            response.sendRedirect("./adminDashboard.jsp");
+    }
+%>
 <head>
 
     <%@include file="meta.jsp"%>
@@ -18,7 +30,6 @@
     <title>Login Account</title>
 </head>
 <body>
-
 <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
     <div class="card card0 border-0">
         <div class="row d-flex">

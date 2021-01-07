@@ -40,7 +40,7 @@
                 %>
                  <h5 class="card-title">Errore!</h5>
                  <p class="card-text">Non hai effettuato il login all'interno del sito.</p>
-                 <a href="#" class="btn btn-primary">Go somewhere</a>
+                 <a href="./login.jsp" class="btn btn-primary">Login</a>
 
                      <%
                      } else if (cliente != null){
@@ -48,7 +48,7 @@
 
                      <h5 class="card-title">Errore!</h5>
                      <p class="card-text">Non puoi accedere a questa pagina, non sei un PT.</p>
-                     <a href="#" class="btn btn-primary">Go somewhere</a>
+                     <a href="./login.jsp" class="btn btn-primary">Home</a>
 
                      <%
                         } else if (admin != null){
@@ -56,7 +56,7 @@
 
                      <h5 class="card-title">Errore!</h5>
                      <p class="card-text">Non puoi accedere a questa pagina, non sei utente.</p>
-                     <a href="#" class="btn btn-primary">Go somewhere</a>
+                     <a href="./login.jsp" class="btn btn-primary">Home</a>
 
 
                      <%
@@ -69,7 +69,7 @@
      </div>
  </div>
 
- 
+
  <%@include file="footer.jsp"%>
 
 </body>
