@@ -28,10 +28,11 @@
                 </div>
             </div>
             <div class="col-lg-6">
+                <!--
                 <form class="card2 card border-0 px-4 py-5">
-
+                -->
                     <!-- controllo servlet inserimento -->
-                    <form action="/LoginServlet" method="post" onsubmit="return validation();">
+                    <form class="card2 card border-0 px-4 py-5" action="<%=request.getContextPath()%>/LoginServlet" method="post">
                     <div class="row px-3"> <label class="mb-1">
                         <h6 class="mb-0 text-sm">Email</h6>
                      <input class="mb-4" type="text" id="idEmail" name="email" placeholder="Inserisci un indirizzo email"> </label> </div>
@@ -40,7 +41,8 @@
                         <input type="password" id="idPassword" name="password" placeholder="Inserisci password"> </label> </div>
                     <div class="row mb-3 px-3"> <button type="submit" id="login_btn" class="btn btn-blue text-center">Login</button> </div>
                     </form>
-                </form>
+               <!--
+                </form> -->
                 </div>
             </div>
         </div>
