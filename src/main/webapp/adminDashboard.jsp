@@ -14,10 +14,7 @@ isPT = true allora procedi, altrimenti errore.-->
     <title>myPersonalTrainer | myAccount</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/footer.css"/>
-    <!--link rel="stylesheet" href="styles/reset.min.css"/>
 
-    <link rel="stylesheet" href="styles/header-11.css"/-->
 
     <!--inserimento navbar -->
     <%@ include file="navbar.jsp"%>
@@ -36,6 +33,9 @@ isPT = true allora procedi, altrimenti errore.-->
         </div>
     </div>
 
-<!-- Header End -->
+    <!--FOOTER DA INSERIRE-->
+    <%@include file="footer.jsp"%>
+    <!--FINE FOOTER-->
+
 </body>
 </html>
