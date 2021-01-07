@@ -1,10 +1,22 @@
-<%@ page language="java" pageEncoding="ISO-8859-1"%>
+<%@ page import="it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.subscription.service.SubscriptionService" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.subscription.service.SubscriptionServiceImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAOImpl" %>
+<%@ page language="java" pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 
 <%
     String emailCliente = (String) request.getSession().getAttribute("clienteMail");
-    if(emailCliente == null)
+    if (emailCliente == null) {
         response.sendRedirect("login.jsp");
+    } else {
+
+       /* SubscriptionDAO subscriptionDAO = new SubscriptionDAOImpl();
+        SubscriptionService subService = new SubscriptionServiceImpl(subscriptionDAO);
+        int state = subService.checkSubscriptionState(emailCliente);
+        if (state == 0) {
+            subService.checkIfSent(emailCliente);
+        }*/
 %>
 
 <html>
@@ -16,30 +28,36 @@
     <!--link rel="stylesheet" href="styles/reset.min.css"/>
     <link rel="stylesheet" href="styles/footer.css"/>
     <link rel="stylesheet" href="styles/header-11.css"/-->
-<!-- inserimento navbar -->
-    <%@ include file="navbar.jsp"%>
+    <!-- inserimento navbar -->
+    <%@ include file="navbar.jsp" %>
 
 </head>
 <body>
 <body>
 
-    <div class="wrapper">
-        <div class="main_container">
-            <div class="item">
-                <div class="welcomeMessage">
-                    Benvenuto, Cliente
-                </div>
-            </div>
-
-            <div class="item">
-
+<div class="wrapper">
+    <div class="main_container">
+        <div class="item">
+            <div class="welcomeMessage">
+                Benvenuto, Cliente
             </div>
         </div>
+        <% SubscriptionDAO subscriptionDAO = new SubscriptionDAOImpl();
+            SubscriptionService subService = new SubscriptionServiceImpl(subscriptionDAO);
+            int state = subService.checkSubscriptionState(emailCliente);
+            if (state == 0) {
+                subService.checkIfSent(emailCliente);
+            }
+        %>
+        <div class="item">
+
+        </div>
     </div>
+</div>
 
 <!--HEADER END-->
 
 
-
 </body>
+    <% } %>
 </html>
