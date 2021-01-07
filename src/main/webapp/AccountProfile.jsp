@@ -1,5 +1,24 @@
+<%@ page import="it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAOImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.subscription.service.SubscriptionService" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.subscription.service.SubscriptionServiceImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.subscription.bean.Subscription" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.service.AccountService" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.bean.Account" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
+<%
+    String emailCliente = (String) request.getSession().getAttribute("clienteMail");
+    //String emailAdmin = (String) request.getSession().getAttribute("ptMail");
+
+    if(emailCliente == null)
+        response.sendRedirect("login.jsp");
+    else{
+%>
 <head>
     <title>Profilo Utente</title>
 
@@ -15,6 +34,8 @@
     <script src="js/profileScript.js"></script>
     <script src="js/controlChangePassword.js"></script>
 
+
+    <%@ include file="navbar.jsp"%>
 
 </head>
 <body>
@@ -32,12 +53,30 @@
                 <button class="list-group-item list-group-item-action active" id="list-profile-btn" data-bs-toggle="list" role="tab" aria-controls="profile" onclick="showProfile()">Profilo</button>
                 <button class="list-group-item list-group-item-action" id="list-password-btn" data-bs-toggle="list" role="tab" aria-controls="password" onclick="showPassword()">Cambia Password</button>
                 <button class="list-group-item list-group-item-action" id="list-abbonamento-btn" data-bs-toggle="list" role="tab" aria-controls="abbonamento" onclick="showAbbonamento()">Abbonamento
+                    <%
+                        SubscriptionDAO subscriptionDAO = new SubscriptionDAOImpl();
+                        SubscriptionService subService = new SubscriptionServiceImpl(subscriptionDAO);
+                        //check the Subscription state
+                        int state = subService.checkSubscriptionState(emailCliente);
+                        if(state == 1){
+                    %>
                     <span class="badge rounded-pill bg-success text-white">Attivo</span></button>
+                <% } else if (state == 0) {%>
+                <span class="badge rounded-pill bg-warning text-white">In scadenza</span></button>
+                <% } else if (state == -1) {%>
+                <span class="badge rounded-pill bg-danger text-white">Scaduto</span></button>
+                <% } %>
             </div>
         </div>
         <div class="col-sm-8">
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="scritta-profile" role="tabpanel">
+
+                    <%
+                        AccountDAO accountDao = new AccountDAOImpl();
+                        AccountService accountService = new AccountServiceImpl(accountDao);
+                        Account account = accountService.getAccountByEmail(emailCliente);
+                    %>
 
                     <div id="testoProfilo" class="card">
                         <div class="card-body">
@@ -46,28 +85,28 @@
                             <div class="input-group mb-3">
                                 <label class="col-sm-5">Email</label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1" value="<%=account.getEmail()%>" readonly>
                                 </div>
                             </div>
 
                             <div class="input-group mb-3">
                                 <label class="col-sm-5">Nome</label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1" value="<%=account.getName()%>" readonly>
                                 </div>
                             </div>
 
                             <div class="input-group mb-3">
                                 <label class="col-sm-5">Cognome</label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1" value="<%=account.getSurname()%>" readonly>
                                 </div>
                             </div>
 
                             <div class="input-group mb-3">
                                 <label class="col-sm-5">Telefono</label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1" value="<%=account.getPhone()%>" readonly>
                                 </div>
                             </div>
 
@@ -84,24 +123,26 @@
                         <div class="card-body">
                             <h3>Il tuo Abbonamento</h3>
 
+                            <% Subscription sub = subService.searchSubscriptionByEmail(emailCliente); %>
+
                             <div class="input-group mb-3">
                                 <label class="col-sm-5">Email</label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1" value="<%=sub.getCustomerMail()%>" readonly>
                                 </div>
                             </div>
 
                             <div class="input-group mb-3">
                                 <label class="col-sm-5">Scadenza</label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1" value="<%=sub.getExpDate()%>" readonly>
                                 </div>
                             </div>
 
                             <div class="input-group mb-3">
                                 <label class="col-sm-5">Prezzo</label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1" value="<%=sub.getPrice()%>" readonly>
                                 </div>
                             </div>
 
@@ -167,5 +208,10 @@
 
 </div>
 
+<!--FOOTER DA INSERIRE-->
+<%@include file="footer.jsp"%>
+<!--FINE FOOTER-->
+
 </body>
+<% }%>
 </html>
