@@ -27,89 +27,14 @@
 
     <link rel="stylesheet" href="css/navbar.css"/>
 
-    <!--
-    <style>
-        body {
-            font-family: "Lato", sans-serif;
-        }
-
-        .bg-primary {
-            background-color: #9fc5f8!important;
-        }
-
-        .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #007bff;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-        }
-
-        .sidebar a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #f1f1f1;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidebar a:hover {
-            color: #818181;
-        }
-
-        .sidebar .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-
-        .openbtn {
-            font-size: 20px;
-            cursor: pointer;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-        }
-
-        .openbtn:hover {
-            background-color: #9fc5f8;
-        }
-
-        #main {
-            transition: margin-left .5s;
-            padding: 16px;
-        }
-
-        .navbar-nav a {
-            color: white;
-        }
-
-
-        .logo {
-            width: 80px;
-            height: auto;
-        }
-
-        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-        @media screen and (max-height: 450px) {
-            .sidebar {padding-top: 15px;}
-            .sidebar a {font-size: 18px;}
-        }
-    </style>
-  -->
 </head>
 <body>
 
-
+<!--inserire controllo per capire che attore sta interagendo con il sito
+0 utente
+1 pt
+manca il valore quando non c'è per la barra vuota.
+-->
 <%int role=1;%>
 
 <% if(role == 0) {%>

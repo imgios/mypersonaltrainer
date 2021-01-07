@@ -109,7 +109,7 @@ isPT = true allora procedi, altrimenti errore. -->
 <!-- visualizza messaggio nella pagina di jsp-->
 <!-- Div in basso per errori -->
 <div>
-    <% String error = (String) request.getSession().getAttribute("errorToShow");
+    <% String error = (String) request.getSession().getAttribute("errorMessage");
         if ( error != null)
         {%>
     <div class="alert alert-danger" role="alert"  id="errorDiv">
@@ -117,7 +117,7 @@ isPT = true allora procedi, altrimenti errore. -->
     </div>
     <%}%>
 
-    <% String success = (String) request.getSession().getAttribute("successToShow");
+    <% String success = (String) request.getSession().getAttribute("successMessage");
         if ( success != null)
         {%>
     <div class="alert alert-success" role="alert"  id="errorDiv">

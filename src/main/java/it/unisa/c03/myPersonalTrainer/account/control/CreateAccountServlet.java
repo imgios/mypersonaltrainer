@@ -111,21 +111,21 @@ public class CreateAccountServlet extends HttpServlet {
          */
 
         if (controlcredential && control) {
-            request.getSession().removeAttribute("errorToShow");
-            request.getSession().setAttribute("successToShow",
+            request.getSession().removeAttribute("errorMessage");
+            request.getSession().setAttribute("successMessage",
                     "Inserimento riuscito");
             response.sendRedirect("CreateAccount.jsp");
         } else if (controlcredential && !control) {
-            request.getSession().removeAttribute("successToShow");
-            request.getSession().setAttribute("errorToShow", errors);
+            request.getSession().removeAttribute("successMessage");
+            request.getSession().setAttribute("errorMessage", errors);
             response.sendRedirect("CreateAccount.jsp");
         } else if (!controlcredential && !control) {
-            request.getSession().removeAttribute("successToShow");
-            request.getSession().setAttribute("errorToShow", errors);
+            request.getSession().removeAttribute("successMessage");
+            request.getSession().setAttribute("errorMessage", errors);
             response.sendRedirect("CreateAccount.jsp");
         } else if (!controlcredential && control) {
-            request.getSession().removeAttribute("successToShow");
-            request.getSession().setAttribute("errorToShow", errors);
+            request.getSession().removeAttribute("successMessage");
+            request.getSession().setAttribute("errorMessage", errors);
             response.sendRedirect("CreateAccount.jsp");
         }
 
