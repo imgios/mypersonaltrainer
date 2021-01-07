@@ -59,10 +59,11 @@ body {
     background-color: #9fc5f8;
 }
 
+/* div nella navbar animazione
 #main {
     transition: margin-left .5s;
     padding: 16px;
-}
+}*/
 
 .navbar-nav a {
     color: white;
