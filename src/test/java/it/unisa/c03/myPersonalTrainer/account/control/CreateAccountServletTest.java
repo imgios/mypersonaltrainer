@@ -107,8 +107,9 @@ class CreateAccountServletTest {
     doNothing().when(session).setAttribute(anyString(), any());
     doNothing().when(response).sendRedirect(anyString());
 
-    new CreateAccountServlet().doPost(request,response);
 
+    //new CreateAccountServlet().doPost(request,response);
+      new CreateAccountServlet().doGet(request,response);
   }
   
 

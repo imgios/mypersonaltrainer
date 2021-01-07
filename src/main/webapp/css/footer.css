@@ -1,9 +1,14 @@
 /*****FOOTER CSS*****/
 
+/*
 .navbar-default{
  background-color: #000000;
 }
+*/
 
+.navbar-custom_footer{
+    background-color: #000000;
+}
 
 footer {
     bottom: 0;
@@ -12,7 +17,10 @@ footer {
     /*
     height: 80px;
     */
+    /*
     height: 11%;
+     */
+    height: auto;
     background-color: #000000;
     color: black;
 }
@@ -107,3 +115,7 @@ myChart{
 }
 */
 
+
+.login_form{
+    padding-top: 200px;
+}

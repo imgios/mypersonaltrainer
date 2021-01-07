@@ -10,18 +10,19 @@
 <head>
     <title>Title</title>
 
-
+    <%@ include file="navbar.jsp"%>
 </head>
 <body>
-
+<!--
     <header class="header">
-    <%@ include file="header.jsp"%>
+    < %@ include file="header.jsp"%>
     </header>
 
 
     <footer class = "footer">
-    <%@ include file="footer.jsp"%>
+    < %@ include file="footer.jsp"%>
     </footer>
-
+-->
 </body>
+    <%@ include file="footer.jsp"%>
 </html>

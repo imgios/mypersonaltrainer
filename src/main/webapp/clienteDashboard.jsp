@@ -12,18 +12,17 @@
     <title>myPersonalTrainer | myAccount</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/footer.css"/>
     <!--link rel="stylesheet" href="styles/reset.min.css"/>
-    <link rel="stylesheet" href="styles/style.css"/>
+    <link rel="stylesheet" href="styles/footer.css"/>
     <link rel="stylesheet" href="styles/header-11.css"/-->
+<!-- inserimento navbar -->
+    <%@ include file="navbar.jsp"%>
 
 </head>
 <body>
 <body>
-<!--HEADER START-->
-<div id= "header">
-    <%@include file="header.jsp"%>
-</div>
+
     <div class="wrapper">
         <div class="main_container">
             <div class="item">
@@ -40,7 +39,7 @@
 
 <!--HEADER END-->
 
-<script src="js/header-11.js"></script>
+
 
 </body>
 </html>

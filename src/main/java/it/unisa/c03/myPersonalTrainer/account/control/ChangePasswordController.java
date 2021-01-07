@@ -39,8 +39,6 @@ public class ChangePasswordController extends HttpServlet {
                        HttpServletResponse response)
             throws ServletException, IOException {
 
-        //TO DO: Check if user is logged with session attribute.
-        // if not, redirect on the homepage
 
         //Get parameters form the request form
         String clientMail = request.getParameter("email");
@@ -76,12 +74,24 @@ public class ChangePasswordController extends HttpServlet {
                      * tutto ok, cambiaPassword
                      * altrimenti scrivi errore: questa non è la tua mail
                      * */
-                    service.changePassword(clientMail, newPassword);
+                    String emailInSession = (String) request.getSession().getAttribute("clienteMail");
+                    if (clientMail.equals(emailInSession)) {
+                        //check if the mail entered is equals to the user's mail in session
+                        service.changePassword(clientMail, newPassword);
 
-                    request.getSession().removeAttribute("errorToShow");
-                    request.getSession().setAttribute("successToShow",
-                            "Password modificata!");
-                    response.sendRedirect("AccountProfile.jsp");
+                        request.getSession().removeAttribute("errorToShow");
+                        request.getSession().setAttribute("successToShow",
+                                "Password modificata!");
+                        response.sendRedirect("AccountProfile.jsp");
+                    } else {
+                        //if the email isnt the right one in session
+                        request.getSession().removeAttribute("successToShow");
+                        request.getSession().setAttribute("errorToShow",
+                                "Attenzione, questa non è la tua email!");
+                        response.sendRedirect("AccountProfile.jsp");
+                    }
+
+
                 } else if (!(service.searchAccountByEmail(clientMail))) {
                     // if mail doesn't exist in the DB
                     request.getSession().removeAttribute("successToShow");
