@@ -45,23 +45,40 @@
 </head>
 <body>
 <%TrainingPlanService tp = new TrainingPlanServiceImpl();
-Collection<TrainingPlan> t = tp.getTrainingPlans("provatest@prova.io");
-//devo settare da lenght al contrario
-int i = 0;%>
+Collection<TrainingPlan> t = tp.getTrainingPlans("provatest@prova.io");%>
 <section>
-<table id="t01" action="/ViewTrainingPlan">
+<table id="t01">
     <tr>
         <th>Numero Scheda</th>
         <th>Data</th>
-        <th>Vai alla Scheda</th>
+        <th>Scheda</th>
         <th>Download</th>
     </tr>
     <%for(TrainingPlan b : t){ %>
     <tr>
-        <td><p><%=++i%></p></td>
+
+        <td><p>1</p></td>
         <td><%=b.getDate()%></td>
-        <td><button type="submit" id="View" name="vtp" value="viewtp">Vai alla scheda...</button></td>
-        <td>button</td>
+        <td>
+
+            <form action="ViewTrainingPlan.jsp" method="post">
+                    <% request.getSession().setAttribute("exerc", b.getExercises()); %>
+                <button type="submit">Visualizza</button>
+            </form>
+
+
+        </td>
+
+
+        <td>
+            <form action="download-training-plan" method="post">
+                <input type="hidden" name="date" value=<%=b.getDate()%>>
+                <% request.getSession().setAttribute("exerc", b.getExercises()); %>
+                <button type="submit">Download PDF!</button>
+            </form>
+
+        </td>
+
     </tr>
 <%}%>
 </table>

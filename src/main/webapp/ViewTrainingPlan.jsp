@@ -16,6 +16,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<p>ciao</p>
+<%String s = (String) request.getSession().getAttribute("exerc");%>
+<%=s%>
+
 </body>
 </html>
