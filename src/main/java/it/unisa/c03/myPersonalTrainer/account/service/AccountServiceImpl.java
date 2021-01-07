@@ -5,7 +5,7 @@ import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 
 import java.io.IOException;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 
@@ -39,6 +39,10 @@ public class AccountServiceImpl implements AccountService {
      * */
     public AccountServiceImpl(AccountDAO accountDao) {
         accountDAO = accountDao;
+    }
+
+    public AccountServiceImpl() {
+
     }
 
     /**
@@ -169,7 +173,7 @@ public class AccountServiceImpl implements AccountService {
      * @throws IOException exception
      */
     @Override
-    public Collection<Account> viewInfoAccount() throws IOException {
+    public ArrayList<Account> viewInfoAccount() throws IOException, ExecutionException, InterruptedException {
         AccountDAO p = new AccountDAOImpl();
         return p.getAccounts();
     }
