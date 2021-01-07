@@ -30,14 +30,16 @@
 </head>
 <body>
 
-<!--inserire controllo per capire che attore sta interagendo con il sito
-0 utente
-1 pt
-manca il valore quando non c'è per la barra vuota.
--->
-<%int role=1;%>
 
-<% if(role == 0) {%>
+
+
+<%
+    String clienteMail = (String) request.getSession().getAttribute("clienteMail");
+    String adminMail = (String) request.getSession().getAttribute("ptMail");
+
+    if(clienteMail == null && adminMail == null)
+    {
+%>
                         <!-- Homepage nessuno loggato -->
 <nav class="navbar navbar-expand-lg navbar-custom_navbar">
 <!--
@@ -47,9 +49,9 @@ manca il valore quando non c'è per la barra vuota.
         <img class="logo" src="./img/nlogo.png">
     </div>
 </nav>
-<% }%>
+<% } else if (clienteMail != null) {%>
 
-<% if(role == 1) {%>
+
                         <!-- NAVBAR CLIENTE -->
 <!--
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -77,9 +79,8 @@ manca il valore quando non c'è per la barra vuota.
     <a href="#">Cronologia Schede</a>
 </div>
 
-<% }%>
+<% } else if (adminMail != null) {%>
 
-<% if(role == 2) {%>
                             <!-- NAVBAR PT -->
 <!--
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -110,11 +111,6 @@ manca il valore quando non c'è per la barra vuota.
 
 <% }%>
 
-<!--
-<div id="main">
-    <h1>Prova</h1>
-</div>
--->
 
 
 
