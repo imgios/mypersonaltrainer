@@ -19,6 +19,7 @@ public interface SubscriptionDAO {
     /**
      * This method searches in the database for a customer's
      * subscription, given his email.
+     *
      * @param clientMail customer mail
      * @return the Subscription.
      * @throws IOException
@@ -30,8 +31,26 @@ public interface SubscriptionDAO {
 
     /**
      * This method retrieves all subscriptions saved in db.
+     *
      * @return subscription list
      */
     ArrayList<Subscription> getAllSubscriptions()
+            throws IOException, ExecutionException, InterruptedException;
+
+    /**
+     * This DAO method looks for the document id of subscription.
+     * @param email of the account
+     * @return the document Id
+     */
+    String getSubscriptionDocumentIdByEmail(String email)
+            throws IOException, ExecutionException, InterruptedException;
+
+    /**
+     * This DAO method marks that the client received the notification.
+     *
+     * @param email client's subscription mail.
+     * @return true after the change has taken place
+     */
+    boolean updateSentNotification(String email)
             throws IOException, ExecutionException, InterruptedException;
 }
