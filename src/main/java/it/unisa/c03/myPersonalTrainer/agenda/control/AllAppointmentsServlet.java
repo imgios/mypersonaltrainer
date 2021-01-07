@@ -23,7 +23,7 @@ public class AllAppointmentsServlet extends HttpServlet {
                           HttpServletResponse response)
             throws ServletException, IOException {
         AgendaDAO dao = new AgendaDAOImpl();
-        AgendaService service=new AgendaServiceImpl(dao);
+        AgendaService service = new AgendaServiceImpl(dao);
         List<Appointment> lista = null;
         String data = request.getParameter("data");
         response.setContentType("application/json");
@@ -31,7 +31,9 @@ public class AllAppointmentsServlet extends HttpServlet {
         try {
             PrintWriter out = response.getWriter();
             lista = service.findAppointmentByDate(data);
-            if (lista==null) out.print(new Gson().toJson(0));
+            if (lista == null) {
+                out.print(new Gson().toJson(0));
+            }
             out.print(new Gson().toJson(lista));
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();

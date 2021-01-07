@@ -38,6 +38,7 @@ class InsertAvailabilityServletTest {
     void doPost() throws IOException, ExecutionException, InterruptedException {
         AgendaDAO agendaDAO = new AgendaDAOImpl();
         agendaDAO.deleteAvailability(new Availability("2021-10-10", 18));
+        agendaDAO.deleteAvailability(new Availability("2021-10-10", 18));
         Mockito.when(request.getParameter("dataSelected")).thenReturn("2021-10-10");
         Mockito.when(request.getParameter("timeSelected")).thenReturn("18");
         Mockito.when(agendaService.checkAvailability(anyString(), any())).thenReturn(true);
