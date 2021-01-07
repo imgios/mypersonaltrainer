@@ -8,6 +8,9 @@ import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -55,5 +58,12 @@ class AccountDAOImplTest {
         assertTrue(adao.saveAccount(utente));
     }
 
+    @Test
+    void getsAccounts() throws IOException, ExecutionException, InterruptedException {
+        AccountDAO dao = new AccountDAOImpl();
+        ArrayList<Account> voidList = new ArrayList<>();
+        ArrayList<Account> listToReturn = dao.getAccounts();
+        assertNotEquals(voidList.size(),listToReturn.size());
+    }
 
 }
