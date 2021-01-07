@@ -43,6 +43,25 @@
                 </form>
                 <!--
                  </form> -->
+
+                <!-- inserimento messaggi di errore -->
+                <div>
+                    <% String error = (String) request.getSession().getAttribute("errorInsertLogin");
+                        if ( error != null)
+                        {%>
+                    <div class="alert alert-danger" role="alert"  id="errorDiv">
+                        <p><%= error %> </p>
+                    </div>
+                    <%}%>
+
+                    <% String success = (String) request.getSession().getAttribute("successInsertLogin");
+                        if ( success != null)
+                        {%>
+                    <div class="alert alert-success" role="alert"  id="errorDiv">
+                        <p><%= success %> </p>
+                    </div>
+                    <%}%>
+                </div>
             </div>
         </div>
     </div>
