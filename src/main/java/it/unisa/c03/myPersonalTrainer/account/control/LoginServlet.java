@@ -105,13 +105,13 @@ public class LoginServlet extends HttpServlet {
                          */
                         if (accountService.verifyIsAdmin(utente)) {
                             request.getSession().setAttribute("ptMail",email);
-                            response.sendRedirect("adminDashboard.jsp");
+                            response.sendRedirect("AdminDashboard.jsp");
                         } else {
                             request.getSession().setAttribute("clienteMail",email);
-                            response.sendRedirect("clienteDashboard.jsp");
+                            response.sendRedirect("CustomerDashboard.jsp");
                         }
                     } else {
-                        response.sendRedirect("login.jsp");
+                        response.sendRedirect("Login.jsp");
                     }
                 }
             }
@@ -123,15 +123,15 @@ public class LoginServlet extends HttpServlet {
         if (verifiedCredential && !control) {
             request.getSession().removeAttribute("successInsertLogin");
             request.getSession().setAttribute("errorInsertLogin", errors);
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("Login.jsp");
         } else if (!verifiedCredential && !control) {
             request.getSession().removeAttribute("successInsertLogin");
             request.getSession().setAttribute("errorInsertLogin", errors);
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("Login.jsp");
         } else if (!verifiedCredential && control) {
             request.getSession().removeAttribute("successInsertLogin");
             request.getSession().setAttribute("errorInsertLogin", errors);
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("Login.jsp");
         }
     }
     /**

@@ -35,7 +35,16 @@
 <html>
 <head>
     <title>Progressi Cliente</title>
+
+    <%@include file="meta.jsp"%>
+    <%@include file="head.jsp"%>
+    <%@include file="navbar.jsp"%>
+
+
+    <!--
     <link href="css/footer.css" rel="stylesheet" type="text/css">
+    -->
+
 </head>
 <body>
 
@@ -226,10 +235,12 @@
         </div>
     </div>
 </div>
+
+
+
 <!--  inserimento footer -->
-<!-- <div id="footer"> -->
-<%@ include file="footer/footer.jsp"%>
-<!--</div> -->
+<%@include file="footer.jsp"%>
+
 </body>
 
 </html>

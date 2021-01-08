@@ -150,7 +150,7 @@ isPT = true allora procedi, altrimenti errore. -->
 
 
 <!-- inserimento del file js -->
-<script type="text/javascript" src="./js/controlregistration.js"></script>
+<script type="text/javascript" src="js/controlRegistration.js"></script>
 
 <!--  inserimento footer -->
 <%@ include file="footer.jsp"%>

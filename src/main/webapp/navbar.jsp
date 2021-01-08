@@ -70,10 +70,10 @@
 
 <div id="mySidebarCliente" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <a href="#">Dashboard</a>
-    <a href="#">Statistiche</a>
-    <a href="#">Agenda</a>
-    <a href="#">Cronologia Schede</a>
+    <a href="./CustomerDashboard.jsp">Dashboard</a>
+    <a href="./ViewProgress.jsp">Statistiche</a>
+    <a href="./RequestAppointment.jsp">Agenda</a>
+    <a href="./CustomerTrainingPlans.jsp">Cronologia Schede</a>
 </div>
 
 <% } else if (adminMail != null) {%>
@@ -99,11 +99,11 @@
 
 <div id="mySidebarPT" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNavPT()">×</a>
-    <a href="#">Dashboard</a>
+    <a href="./AdminDashboard.jsp">Dashboard</a>
     <a href="#">Agenda</a>
-    <a href="#">Clienti</a>
+    <a href="./CustomersList.jsp">Clienti</a>
     <a href="#">Schede</a>
-    <a href="#">Pagamenti</a>
+    <a href="./ViewSubscriptionList.jsp">Abbonamenti</a>
 </div>
 
 <% }%>

@@ -24,7 +24,7 @@ public class LogoutServlet extends HttpServlet {
         if(session!=null) //If session is not null
         {
             session.invalidate(); //removes all session attributes bound to the session
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Login.jsp");
             requestDispatcher.forward(request, response);
             System.out.println("Logout effettuato con successo");
         }

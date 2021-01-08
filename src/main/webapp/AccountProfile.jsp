@@ -12,11 +12,11 @@
 <html>
 
 <%
-    String emailCliente = (String) request.getSession().getAttribute("clienteMail");
+    String emailClientee = (String) request.getSession().getAttribute("clienteMail");
     //String emailAdmin = (String) request.getSession().getAttribute("ptMail");
 
-    if(emailCliente == null)
-        response.sendRedirect("login.jsp");
+    if(emailClientee == null)
+        response.sendRedirect("Login.jsp");
     else{
 %>
 <head>
@@ -42,7 +42,7 @@
     <script src="js/controlChangePassword.js"></script>
 
     <!--
-    <%@ include file="navbar.jsp"%>
+    < %@ include file="navbar.jsp"%>
     -->
 
 </head>
@@ -65,7 +65,7 @@
                         SubscriptionDAO subscriptionDAO = new SubscriptionDAOImpl();
                         SubscriptionService subService = new SubscriptionServiceImpl(subscriptionDAO);
                         //check the Subscription state
-                        int state = subService.checkSubscriptionState(emailCliente);
+                        int state = subService.checkSubscriptionState(emailClientee);
                         if(state == 1){
                     %>
                     <span class="badge rounded-pill bg-success text-white">Attivo</span></button>
@@ -83,7 +83,7 @@
                     <%
                         AccountDAO accountDao = new AccountDAOImpl();
                         AccountService accountService = new AccountServiceImpl(accountDao);
-                        Account account = accountService.getAccountByEmail(emailCliente);
+                        Account account = accountService.getAccountByEmail(emailClientee);
                     %>
 
                     <div id="testoProfilo" class="card">
@@ -131,7 +131,7 @@
                         <div class="card-body">
                             <h3>Il tuo Abbonamento</h3>
 
-                            <% Subscription sub = subService.searchSubscriptionByEmail(emailCliente); %>
+                            <% Subscription sub = subService.searchSubscriptionByEmail(emailClientee); %>
 
                             <div class="input-group mb-3">
                                 <label class="col-sm-5">Email</label>
