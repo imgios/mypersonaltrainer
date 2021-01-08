@@ -27,6 +27,8 @@
 
     <link rel="stylesheet" href="css/login.css"/>
 
+
+
     <title>Login Account</title>
 </head>
 <body>
@@ -43,13 +45,13 @@
                 <form class="card2 card border-0 px-4 py-5">
                 -->
                 <!-- controllo servlet inserimento -->
-                <form class="card2 card border-0 px-4 py-5" action="<%=request.getContextPath()%>/LoginServlet" method="post">
+                <form class="card2 card border-0 px-4 py-5" action="<%=request.getContextPath()%>/LoginServlet" method="post" onsubmit="return stopsubmit(this);">
                     <div class="row px-3"> <label class="mb-1">
-                        <h6 class="mb-0 text-sm">Email</h6>
-                        <input class="mb-4" type="text" id="idEmail" name="email" placeholder="Inserisci un indirizzo email"> </label> </div>
+                        <label for="idEmail"><h6 class="mb-0 text-sm">Email</h6></label> <label id="controlEmail"></label>
+                        <input class="mb-4" type="email" id="idEmail" name="email" onkeyup="validateEmail()" placeholder="Inserisci un indirizzo email"> </label> </div>
                     <div class="row px-3"> <label class="mb-1">
-                        <h6 class="mb-0 text-sm">Password</h6>
-                        <input type="password" id="idPassword" name="password" placeholder="Inserisci password"> </label> </div>
+                        <label for="idPassword"><h6 class="mb-0 text-sm">Password</h6></label><label id="controlPassword"></label>
+                        <input type="password" id="idPassword" name="password" onkeyup="validatePassword()" placeholder="Inserisci password"> </label> </div>
                     <div class="row mb-3 px-3"> <button type="submit" id="login_btn" class="btn btn-blue text-center">Login</button> </div>
                 </form>
                 <!--
@@ -78,6 +80,11 @@
     </div>
 </div>
 </div>
+
+
+
+
+<script type="text/javascript" src="js/loginControl.js"></script>
 
 <%@include file="footer.jsp"%>
 </body>

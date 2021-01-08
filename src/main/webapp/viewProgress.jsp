@@ -200,15 +200,13 @@
     </div>
 
 <!--  inserimento footer -->
-<!-- <div id="footer"> -->
-        <%@ include file="footer.jsp"%>
+<!-- <div id="footer">
+        < %@ include file="footer.jsp"%>-->
       <!--      </div> -->
 
 
+<%@include file="footer.jsp"%>
 </body>
 
-
-
-<%@include file="footer.jsp"%>
 
 </html>
