@@ -15,8 +15,7 @@ import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.*;
 
 class SubscriptionServiceImplTest {
 
@@ -143,4 +142,16 @@ class SubscriptionServiceImplTest {
 
 
 
+   /* void sendEmail() throws EmailException {
+        SubscriptionDAO subscriptionDAO = Mockito.mock(SubscriptionDAO.class);
+        SubscriptionService pservice = Mockito.mock(SubscriptionServiceImpl.class);
+
+        //doNothing().when(new SubscriptionServiceImpl(subscriptionDAO)).sendEmail(anyString(),any());
+
+        verify(pservice,times(1)).sendEmail(anyString(),any());
+
+        //verify(pservice).sendEmail(anyString(),any());
+
+
+    }*/
 }
