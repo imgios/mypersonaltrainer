@@ -40,10 +40,7 @@
     <!-- JavaScript -->
     <script src="js/profileScript.js"></script>
     <script src="js/controlChangePassword.js"></script>
-
-    <!--
-    <%@ include file="navbar.jsp"%>
-    -->
+    
 
 </head>
 <body>
