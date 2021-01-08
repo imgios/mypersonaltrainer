@@ -8,14 +8,7 @@
 <html lang="en">
 
 <head>
-
     <title>Clienti</title>
-
-    <%@include file="meta.jsp"%>
-    <%@include file="head.jsp"%>
-    <%@include file="navbar.jsp"%>
-
-
 </head>
 
 <body style="background-color:powderblue;">
@@ -25,17 +18,12 @@
 
         <%AccountService accounts = new AccountServiceImpl();
         Collection<Account> p = accounts.viewInfoAccount(); %>
-
         <%for(Account a : p) {%>
         <li class="list-group-item d-flex justify-content-between align-items-center">
-                <%=a.getName()+" "+a.getSurname()+", "+a.getEmail()+", "+a.getPhone()%>
+                <%=a.getName()+" "+a.getSurname()+", "+a.getEmail()+", "+a.getPhone()+", "+a.getRole()%>
             <span class="badge bg-primary rounded-pill">!</span><% }%>
     </ul>
 </div>
-
-
-
-<%@include file="footer.jsp"%>
 
 </body>
 </html>
