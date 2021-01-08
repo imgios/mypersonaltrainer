@@ -46,7 +46,7 @@ public class downloadTrainingPlanServlet extends
                     "https://raw.githubusercontent.com/imgios/mypersonaltrainer/main/.github/logo.png";
             */
             /*
-            * inserimento del logo più piccolo di dimensione. vedere se il link 
+            * inserimento del logo più piccolo di dimensione. vedere se il link cambia quando si passa in main, nel caso aggiornare url immagine
              */
             String filename = "https://github.com/imgios/mypersonaltrainer/blob/develop/src/main/webapp/img/logo_fattura.png?raw=true";
 
