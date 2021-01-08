@@ -140,7 +140,9 @@ public class LoginServlet extends HttpServlet {
                             request.getSession().setAttribute("clienteMail",email);
                             response.sendRedirect("customerDashboard.jsp");
                         }
-                    } else {
+                    } else if(!(password.equals(testUtente.getPassword()))) {
+                        request.getSession().removeAttribute("successInsertLogin");
+                        request.getSession().setAttribute("errorInsertLogin", "Password errata!");
                         response.sendRedirect("login.jsp");
                     }
                 }
