@@ -7,6 +7,7 @@ import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 import it.unisa.c03.myPersonalTrainer.account.service.AccountService;
 import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
+import it.unisa.c03.myPersonalTrainer.trainingplan.bean.TrainingPlan;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -43,9 +44,11 @@ public class DownloadTrainingPlanServlet extends
                           HttpServletResponse response)
             throws IOException, ServletException {
         String date = request.getParameter("date");
-        String exerc = (String)
-                request.getSession().getAttribute("exerc");
+
         String emailCliente = (String) request.getSession().getAttribute("clienteMail");
+
+        String exercises = request.getParameter("exercises");
+        System.out.println("ecco " + exercises + "\n" + date);
 
 
         try {
@@ -73,7 +76,7 @@ public class DownloadTrainingPlanServlet extends
 
             doc.add(new Paragraph(" "));
             p = new Paragraph(
-                    "La tua Scheda\n " + exerc);
+                    "La tua Scheda\n " + exercises);
             p.setAlignment(Element.ALIGN_CENTER);
             doc.add(p);
 
