@@ -2,6 +2,8 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.service.TrainingPlanService" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.service.TrainingPlanServiceImpl" %>
 <%@ page import="java.util.Collection" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAOImpl" %>
 <%--
   Created by IntelliJ IDEA.
   User: em
@@ -18,12 +20,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="js/insertTrainingPlan.js"></script>
+
     <style>
 
         #t01 {
             text-align: center;
-            margin-left:auto;
-            margin-right:auto;
+            margin-left: auto;
+            margin-right: auto;
             table-layout: fixed;
             width: 800px;
             font-family: Arial, Helvetica, sans-serif;
@@ -35,9 +39,13 @@
             padding: 8px;
         }
 
-        #t01 tr:nth-child(even){background-color: #f2f2f2;}
+        #t01 tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
 
-        #t01 tr:hover {background-color: #ddd;}
+        #t01 tr:hover {
+            background-color: #ddd;
+        }
 
         #t01 th {
             text-align: center;
@@ -64,37 +72,47 @@
     </style>
 </head>
 <body>
-<%TrainingPlanService tp = new TrainingPlanServiceImpl();
-Collection<TrainingPlan> t = tp.getTrainingPlans("provatest@prova.io");
-int i = t.size();%>
+<%
+    TrainingPlanDAO trainingPlanDAO = new TrainingPlanDAOImpl();
+    TrainingPlanService tp = new TrainingPlanServiceImpl(trainingPlanDAO);
+    Collection<TrainingPlan> t = tp.getTrainingPlans("provatest@prova.io");
+
+    int i = t.size();%>
 <section>
-<table id="t01">
-    <tr>
-        <th>#</th>
-        <th>Data</th>
-        <th>Scheda</th>
-        <th>Download</th>
-    </tr>
-    <%for(TrainingPlan b : t){%>
-    <tr>
-        <td><%=i--%></td>
-        <td><%=b.getDate()%></td>
-        <td>
-            <form action="ViewTrainingPlan.jsp" method="post">
-                    <% request.getSession().setAttribute("exerc", b.getExercises()); %>
-                <button class="button" type="submit">Visualizza</button>
-            </form>
-        </td>
-        <td>
-            <form action="download-training-plan" method="post">
-                <input type="hidden" name="date" value=<%=b.getDate()%>>
-                <% request.getSession().setAttribute("exerc", b.getExercises()); %>
-                <button class="button" type="submit">Download PDF!</button>
-            </form>
-        </td>
-    </tr>
-<%}%>
-</table>
+    <table id="t01">
+        <tr>
+            <th>#</th>
+            <th>Data</th>
+            <th>Scheda</th>
+            <th>Download</th>
+        </tr>
+        <%for (TrainingPlan b : t) {%>
+        <tr>
+            <td><%=i--%>
+            </td>
+            <td><%=b.getDate()%>
+            </td>
+            <td>
+                <form action="ViewTrainingPlan.jsp" method="post">
+                    <% request.getSession().setAttribute("daMostrare", b.getDate()); %>
+                    <button class="button" type="submit">Visualizza</button>
+                </form>
+            </td>
+            <td>
+                <form action="download-training-plan" method="post">
+                    <input type="hidden" name="date" value=<%=b.getDate()%>>
+                    <input type="hidden" name="exercises" value="<%=b.getExercises()%>">
+                    <button class="button" type="submit">Download PDF!</button>
+                </form>
+            </td>
+        </tr>
+        <%}%>
+    </table>
 </section>
+
+
+<div class="alert alert-success" role="alert" id="divSuccess"></div>
+
+
 </body>
 </html>
