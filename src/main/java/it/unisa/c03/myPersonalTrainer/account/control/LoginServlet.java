@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutionException;
 
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
@@ -61,6 +63,34 @@ public class LoginServlet extends HttpServlet {
              * instead we return customer to Login page(with an alert).
              */
             if (verifiedCredential) {
+
+                // Password encoding MD5
+                String passwordToHash = password;
+                String generatedPassword = null;
+                try {
+                    // Create MessageDigest instance for MD5
+                    MessageDigest md = MessageDigest.getInstance("MD5");
+                    //Add password bytes to digest
+                    md.update(passwordToHash.getBytes());
+                    //Get the hash's bytes
+                    byte[] bytes = md.digest();
+                    //This bytes[] has bytes in decimal format;
+                    //Convert it to hexadecimal format
+                    StringBuilder sb = new StringBuilder();
+                    for(int i=0; i< bytes.length ;i++)
+                    {
+                        sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+                    }
+                    //Get complete hashed password in hex format
+                    generatedPassword = sb.toString();
+                }
+                catch (NoSuchAlgorithmException e)
+                {
+                    e.printStackTrace();
+                }
+
+                password = generatedPassword;
+
                 control = accountService.loginAccount(email, password);
                 /*
                  * Now we'll analize that loginAccount method after
