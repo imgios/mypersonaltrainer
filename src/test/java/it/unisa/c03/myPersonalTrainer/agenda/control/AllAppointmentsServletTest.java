@@ -38,6 +38,15 @@ class AllAppointmentsServletTest {
 
 
     @Test
+    void doPostnulllist() throws IOException, ServletException {
+        Mockito.when(request.getParameter("data")).thenReturn("2120-09-25");
+        Mockito.when(response.getWriter()).thenReturn(out);
+        new AllAppointmentsServlet().doPost(request,response);
+
+    }
+
+
+    @Test
     void doPost() throws IOException, ServletException {
         Mockito.when(request.getParameter("data")).thenReturn("2021-09-25");
         Mockito.when(response.getWriter()).thenReturn(out);

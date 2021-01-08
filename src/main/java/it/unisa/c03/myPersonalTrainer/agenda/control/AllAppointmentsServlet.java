@@ -31,7 +31,7 @@ public class AllAppointmentsServlet extends HttpServlet {
         try {
             PrintWriter out = response.getWriter();
             lista = service.findAppointmentByDate(data);
-            if (lista == null) {
+            if (lista.size()==0) {
                 out.print(new Gson().toJson(0));
             }
             out.print(new Gson().toJson(lista));

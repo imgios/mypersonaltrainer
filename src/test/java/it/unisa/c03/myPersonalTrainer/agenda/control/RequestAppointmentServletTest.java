@@ -62,6 +62,21 @@ class RequestAppointmentServletTest {
     }
 
     @Test
+    void doPostBeforeDate() throws IOException, ServletException, ExecutionException, InterruptedException {
+        Mockito.when(availability.getDate()).thenReturn("2001-09-23");
+        Mockito.when(request.getParameter("data")).thenReturn("2001-09-23");
+        assertEquals("2001-09-23",request.getParameter("data"));
+        Mockito.when(dao.deleteAvailability(any())).thenReturn(true);
+        Mockito.when(request.getParameter("time")).thenReturn("11");
+        Mockito.when(request.getParameter("mailutente")).thenReturn("prova@gmail.com");
+        Mockito.when(service.createAppointment(Mockito.anyString(),Mockito.anyString(),Mockito.anyString())).thenReturn(true);
+        assertTrue(service.createAppointment(request.getParameter("data"),request.getParameter("time"),request.getParameter("mailutente")));
+        Mockito.when(request.getSession()).thenReturn(session);
+        Mockito.when(response.getWriter()).thenReturn(writer);
+        new RequestAppointmentServlet().doPost(request,response);
+    }
+
+    @Test
     void doGet() throws InterruptedException, ExecutionException, IOException, ServletException {
         Mockito.when(availability.getDate()).thenReturn("2021-09-23");
         Mockito.when(request.getParameter("data")).thenReturn("2021-09-23");

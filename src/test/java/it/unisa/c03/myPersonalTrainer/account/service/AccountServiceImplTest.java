@@ -38,6 +38,9 @@ class AccountServiceImplTest {
         IllegalArgumentException exception =  assertThrows(IllegalArgumentException.class , () -> {
             service.checkCredentials(mail,password) ;
         });
+        IllegalArgumentException exception2 =  assertThrows(IllegalArgumentException.class , () -> {
+            service.checkCredentials("p@llllllllllllllllllllllllllllllllllllllllll.it",password) ;
+        });
         assertEquals(message,exception.getMessage());
     }
 
@@ -71,6 +74,10 @@ class AccountServiceImplTest {
 
         IllegalArgumentException exception =  assertThrows(IllegalArgumentException.class , () -> {
             service.checkCredentials(mail,password) ;
+        });
+
+        IllegalArgumentException exception2 =  assertThrows(IllegalArgumentException.class , () -> {
+            service.checkCredentials(mail,"passwordpasswordpasswordpasswordpassword") ;
         });
         assertEquals(message,exception.getMessage());
     }
@@ -113,7 +120,6 @@ class AccountServiceImplTest {
         Account a = new Account();
         a.setEmail(null);
         Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(a);
-
         AccountService service  = new AccountServiceImpl(accountDAO);
         assertEquals(false, service.searchAccountByEmail("mailnot@italy.it"));
     }

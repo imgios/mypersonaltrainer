@@ -10,6 +10,8 @@ import static org.mockito.ArgumentMatchers.anyString;
 
 
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 import it.unisa.c03.myPersonalTrainer.account.service.AccountService;
 import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
 import java.io.IOException;
@@ -55,13 +57,14 @@ class CreateAccountServletTest {
 
   }
 
+  @Test
   void doPostFalse() throws IOException, ServletException, ExecutionException, InterruptedException {
 
     Mockito.when(request.getParameter("username")).thenReturn("TestUsername");
     assertEquals("TestUsername", request.getParameter("username"));
     Mockito.when(request.getParameter("surname")).thenReturn("TestSurname");
     Mockito.when(request.getParameter("phone")).thenReturn("0000000000");
-    Mockito.when(request.getParameter("email")).thenReturn("test@test.it");
+    Mockito.when(request.getParameter("email")).thenReturn("test@test.pt");
     Mockito.when(request.getParameter("password")).thenReturn("Test001");
     Mockito.when(request.getParameter("role")).thenReturn("0");
     Account user = new Account(request.getParameter("username"), request.getParameter("surname"),
@@ -70,17 +73,17 @@ class CreateAccountServletTest {
 
     Mockito.when(accountService.registerAccount(Mockito.any())).thenReturn(false);
 
-    assertThrows(IllegalArgumentException.class, () -> {
-      accountService.registerAccount(user);
-    });
+
+      HttpSession session = Mockito.mock(HttpSession.class);
+      Mockito.when(request.getSession()).thenReturn(session);
+
+      doNothing().when(session).removeAttribute(anyString());
+      doNothing().when(session).setAttribute(anyString(), any());
+      doNothing().when(response).sendRedirect(anyString());
+
+    new CreateAccountServlet().doPost(request,response);
 
 
-    HttpSession session = Mockito.mock(HttpSession.class);
-    Mockito.when(request.getSession()).thenReturn(session);
-
-    doNothing().when(session).removeAttribute(anyString());
-    doNothing().when(session).setAttribute(anyString(), any());
-    doNothing().when(response).sendRedirect(anyString());
   }
 
 
