@@ -63,6 +63,7 @@ class AgendaServiceImplTestAvailability {
     void checkAvailabilityPass() throws IllegalArgumentException {
         String data = "2021-10-05";
         String time = "15";
+        agendaService.checkAvailability(data, time);
         assertTrue(agendaService.checkAvailability(data, time));
     }
 

@@ -18,6 +18,17 @@ class AgendaServiceImplTest {
     AgendaDAO dao= Mockito.mock(AgendaDAO.class);
 
     @Test
+    void failcreateAppointment() throws InterruptedException, ExecutionException, IOException {
+        AgendaService service=new AgendaServiceImpl(dao);
+        assertFalse(service.createAppointment("2021-12-22","21","prova@gmail.com"));
+        assertFalse(service.createAppointment("2021-12-22","7","prova@gmail.com"));
+        assertFalse(service.createAppointment("2021-12-22","13","prova@gmail.com"));
+        assertFalse(service.createAppointment("2021-12-22","13","provagmail.com"));
+
+    }
+
+
+    @Test
     void createAppointment() throws IOException, ExecutionException, InterruptedException {
         AgendaService service=new AgendaServiceImpl(dao);
         Mockito.when(dao.saveAppointment(any())).thenReturn(true);
