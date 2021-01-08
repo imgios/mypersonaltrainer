@@ -92,7 +92,7 @@
     </div>
 
     <ul class="navbar-nav ml-auto">
-        <li><a href="#"><i class="fas fa-user"></i> Profilo &nbsp;</a></li>
+        <li><a href="./PTProfile.jsp"><i class="fas fa-user"></i> Profilo &nbsp;</a></li>
         <li><a href="<%=request.getContextPath()%>/LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
 </nav>
