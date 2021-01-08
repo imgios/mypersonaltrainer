@@ -1,8 +1,11 @@
 package it.unisa.c03.myPersonalTrainer.account.dao;
 
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
+import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
+
 import java.io.IOException;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public interface AccountDAO {
@@ -46,6 +49,8 @@ public interface AccountDAO {
      * @return List of the accounts
      * @throws IOException
      */
-    Collection<Account> getAccounts() throws IOException;
+    ArrayList<Account> getAccounts()
+            throws IOException, ExecutionException,
+            InterruptedException ;
 
 }

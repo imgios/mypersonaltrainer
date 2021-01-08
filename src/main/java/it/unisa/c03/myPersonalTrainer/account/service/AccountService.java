@@ -4,7 +4,7 @@ package it.unisa.c03.myPersonalTrainer.account.service;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 
 import java.io.IOException;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public interface AccountService {
@@ -29,7 +29,7 @@ public interface AccountService {
    * @return list of every account store
    * @throws IOException exception
    */
-    Collection<Account> viewInfoAccount() throws IOException;
+    ArrayList<Account> viewInfoAccount() throws IOException, ExecutionException, InterruptedException;
 
     /**
      * This function give the possibility to register a

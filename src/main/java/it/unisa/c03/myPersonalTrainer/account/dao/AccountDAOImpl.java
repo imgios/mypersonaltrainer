@@ -2,20 +2,20 @@ package it.unisa.c03.myPersonalTrainer.account.dao;
 import com.google.api.core.ApiFuture;
 
 
-import com.google.cloud.firestore.CollectionReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.Query;
-import com.google.cloud.firestore.QuerySnapshot;
-import com.google.cloud.firestore.WriteResult;
+import com.google.cloud.firestore.*;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
+import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
-import java.util.Collection;
+import it.unisa.c03.myPersonalTrainer.subscription.bean.Subscription;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
 import java.io.IOException;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.*;
 
 
 public class AccountDAOImpl implements AccountDAO {
@@ -52,32 +52,23 @@ public class AccountDAOImpl implements AccountDAO {
      * @return list of the accounts
      */
     @Override
-    public Collection<Account> getAccounts() {
+    public ArrayList<Account> getAccounts()
+            throws IOException, ExecutionException, InterruptedException {
 
-        // Create a reference to the account collection
-        CollectionReference db = null;
+        CollectionReference accounts = null;
 
-        try {
-            db = DBConnection.getConnection().collection("Account");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        accounts = DBConnection.getConnection().collection("Account");
 
-        ApiFuture<QuerySnapshot> accounts = db.get();
+        Query query = accounts.whereEqualTo("role", 0);
 
-        List<Account> accountBean = null;
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
 
-        try {
-            accountBean = accounts.get()
-                    .getDocuments()
-                    .stream()
-                    .map(queryDocumentSnapshot -> queryDocumentSnapshot
-                            .toObject(Account.class))
-                    .collect(Collectors.toList());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        ArrayList<Account> accountBean = new ArrayList<>();
+
+        for (DocumentSnapshot document
+                : querySnapshot.get().getDocuments()) {
+            Account a = document.toObject(Account.class);
+            accountBean.add(a);
         }
 
         return accountBean;
