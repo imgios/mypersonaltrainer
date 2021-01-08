@@ -12,30 +12,29 @@
 <html>
 
 <%
-    String emailCliente = (String) request.getSession().getAttribute("clienteMail");
+    String emailClientee = (String) request.getSession().getAttribute("clienteMail");
     //String emailAdmin = (String) request.getSession().getAttribute("ptMail");
 
-    if(emailCliente == null)
+    if(emailClientee == null)
         response.sendRedirect("login.jsp");
     else{
 %>
 <head>
     <title>Profilo Utente</title>
 
-    <!-- Bootstrap -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <%@include file="meta.jsp"%>
+    <%@include file="head.jsp"%>
+    <%@include file="navbar.jsp"%>
+
 
     <!-- JavaScript -->
     <script src="js/profileScript.js"></script>
     <script src="js/controlChangePassword.js"></script>
 
-
-    <%@ include file="navbar.jsp"%>
+    <!--
+    < %@ include file="navbar.jsp"%>
+    -->
 
 </head>
 <body>
@@ -57,7 +56,7 @@
                         SubscriptionDAO subscriptionDAO = new SubscriptionDAOImpl();
                         SubscriptionService subService = new SubscriptionServiceImpl(subscriptionDAO);
                         //check the Subscription state
-                        int state = subService.checkSubscriptionState(emailCliente);
+                        int state = subService.checkSubscriptionState(emailClientee);
                         if(state == 1){
                     %>
                     <span class="badge rounded-pill bg-success text-white">Attivo</span></button>
@@ -75,7 +74,7 @@
                     <%
                         AccountDAO accountDao = new AccountDAOImpl();
                         AccountService accountService = new AccountServiceImpl(accountDao);
-                        Account account = accountService.getAccountByEmail(emailCliente);
+                        Account account = accountService.getAccountByEmail(emailClientee);
                     %>
 
                     <div id="testoProfilo" class="card">
@@ -123,7 +122,7 @@
                         <div class="card-body">
                             <h3>Il tuo Abbonamento</h3>
 
-                            <% Subscription sub = subService.searchSubscriptionByEmail(emailCliente); %>
+                            <% Subscription sub = subService.searchSubscriptionByEmail(emailClientee); %>
 
                             <div class="input-group mb-3">
                                 <label class="col-sm-5">Email</label>
@@ -208,7 +207,7 @@
 
 </div>
 
-<!--FOOTER DA INSERIRE-->
+<!--FOOTER -->
 <%@include file="footer.jsp"%>
 <!--FINE FOOTER-->
 

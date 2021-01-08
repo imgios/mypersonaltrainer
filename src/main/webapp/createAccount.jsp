@@ -11,7 +11,9 @@
 <!-- inserire verifica che l'utente sia PT
 isPT = true allora procedi, altrimenti errore. -->
 <!-- da aggiustare quando sarà presente il login -->
+
 <%
+    /*  prima versione di testa senza inserimento nella sessione
     Account utente = new Account("Mario","Rossi","12312312","email@email.it","password",1);
     if (utente.getRole() == 1){
         System.out.println("sei un Personal Trainer, puoi accedere alla pagina.");
@@ -21,27 +23,39 @@ isPT = true allora procedi, altrimenti errore. -->
         response.sendRedirect("index.jsp"); //riporta sulla pagina di errore o sulla home per esempio
         return;
     }
+     */
+
+    String personaltrainer = (String) request.getSession().getAttribute("ptMail");
+    if (personaltrainer == null){
+      response.sendRedirect("./error.jsp");
+    }
+
 %>
+
 
 <html>
 <head>
-    <!-- script bootstrap prima del caricamento -->
+
+    <%@include file="meta.jsp"%>
+    <%@include file="head.jsp"%>
+    <%@include file="navbar.jsp"%>
+
+    <!-- script bootstrap prima del caricamento
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+    -->
     <!--
     <link rel="stylesheet" href="css/footer.css"/>
     <link rel="stylesheet" href="css/header.css"/>
     -->
 
-    <!--  inserimento header -->
-    <%@ include file="navbar.jsp"%>
-
+    <!--  inserimento header
+    < %@ include file="navbar.jsp"%>
+    -->
     <title>Creazione Account</title>
 </head>
 <body>
-
 
 <h1>myPersonalTrainer</h1>
 
@@ -109,7 +123,7 @@ isPT = true allora procedi, altrimenti errore. -->
 <!-- visualizza messaggio nella pagina di jsp-->
 <!-- Div in basso per errori -->
 <div>
-    <% String error = (String) request.getSession().getAttribute("errorToShow");
+    <% String error = (String) request.getSession().getAttribute("errorMessage");
         if ( error != null)
         {%>
     <div class="alert alert-danger" role="alert"  id="errorDiv">
@@ -117,7 +131,7 @@ isPT = true allora procedi, altrimenti errore. -->
     </div>
     <%}%>
 
-    <% String success = (String) request.getSession().getAttribute("successToShow");
+    <% String success = (String) request.getSession().getAttribute("successMessage");
         if ( success != null)
         {%>
     <div class="alert alert-success" role="alert"  id="errorDiv">
@@ -136,7 +150,7 @@ isPT = true allora procedi, altrimenti errore. -->
 
 
 <!-- inserimento del file js -->
-<script type="text/javascript" src="./js/controlregistration.js"></script>
+<script type="text/javascript" src="js/controlRegistration.js"></script>
 
 <!--  inserimento footer -->
 <%@ include file="footer.jsp"%>

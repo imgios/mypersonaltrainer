@@ -1,61 +1,84 @@
-<%@ page language="java" pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: giampieroferrara
+  Date: 07/01/21
+  Time: 10:54
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
+<!-- inserimento controllo della sessione, se loggato non visualizza il login ma la propria pagina cliente -->
+<%
+    String utente = (String) request.getSession().getAttribute("clienteMail");
+    String pt = (String) request.getSession().getAttribute("ptMail");
+%>
+<% if (utente != null){
+        response.sendRedirect("./customerDashboard.jsp");
+    } else if (pt != null){
+            response.sendRedirect("./adminDashboard.jsp");
+    }
+%>
 <head>
-    <title>myPersonalTrainer | Login</title>
-    <meta charset="utf-8">
-    <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
 
-    <link rel="stylesheet" href="css/footer.css"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
+    <%@include file="meta.jsp"%>
+    <%@include file="head.jsp"%>
     <%@include file="navbar.jsp"%>
 
+    <link rel="stylesheet" href="css/login.css"/>
+
+    <title>Login Account</title>
 </head>
 <body>
-
-<div class="login_form">
-<div class="container">
-            <div class="main_container">
-                <div class="item">
-                    <div class="welcomeMessage">
-                         Benvenuto, accedi alla tua Area Personale
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="wrapperLogin">
-                        <div class="form">
-                            <form method="post" action="LoginServlet" onsubmit="return validation();">
-                                <div class="input_wrap">
-                                    <label for="idEmail">Email: </label>
-                                    <div class="input_field">
-                                        <input type="text" id="idEmail" name="email" placeholder="Inserisci la tua email" required> <!-- class="input" id="input_text"-->
-                                    </div>
-                                </div>
-                                <div class="input_wrap">
-                                    <label for="idPassword">Password: </label>
-                                    <div class="input_field">
-                                        <input type="password" id="idPassword" name="password" placeholder="Inserisci la tua password" required> <!--class="input" id="input_password"-->
-                                    </div>
-                                </div>
-                                <div class="input_wrap">
-                                    <span class="error_msg">Incorrect username or password. Please try again</span>
-                                    <input type="submit" id="login_btn" class="btn enabled" value="Accedi">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+<div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+    <div class="card card0 border-0">
+        <div class="row d-flex">
+            <div class="col-lg-6">
+                <div class="card1 pb-5">
+                    <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img src="./img/loginimage.jpg" class="image"> </div>
                 </div>
             </div>
+            <div class="col-lg-6">
+                <!--
+                <form class="card2 card border-0 px-4 py-5">
+                -->
+                <!-- controllo servlet inserimento -->
+                <form class="card2 card border-0 px-4 py-5" action="<%=request.getContextPath()%>/LoginServlet" method="post">
+                    <div class="row px-3"> <label class="mb-1">
+                        <h6 class="mb-0 text-sm">Email</h6>
+                        <input class="mb-4" type="text" id="idEmail" name="email" placeholder="Inserisci un indirizzo email"> </label> </div>
+                    <div class="row px-3"> <label class="mb-1">
+                        <h6 class="mb-0 text-sm">Password</h6>
+                        <input type="password" id="idPassword" name="password" placeholder="Inserisci password"> </label> </div>
+                    <div class="row mb-3 px-3"> <button type="submit" id="login_btn" class="btn btn-blue text-center">Login</button> </div>
+                </form>
+                <!--
+                 </form> -->
+
+                <!-- inserimento messaggi di errore -->
+                <div>
+                    <% String error = (String) request.getSession().getAttribute("errorInsertLogin");
+                        if ( error != null)
+                        {%>
+                    <div class="alert alert-danger" role="alert"  id="errorDiv">
+                        <p><%= error %> </p>
+                    </div>
+                    <%}%>
+
+                    <% String success = (String) request.getSession().getAttribute("successInsertLogin");
+                        if ( success != null)
+                        {%>
+                    <div class="alert alert-success" role="alert"  id="errorDiv">
+                        <p><%= success %> </p>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+</div>
 
-
-<!--FOOTER DA INSERIRE-->
 <%@include file="footer.jsp"%>
-<!--FINE FOOTER-->
 </body>
 </html>

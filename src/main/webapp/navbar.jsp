@@ -27,92 +27,16 @@
 
     <link rel="stylesheet" href="css/navbar.css"/>
 
-    <!--
-    <style>
-        body {
-            font-family: "Lato", sans-serif;
-        }
-
-        .bg-primary {
-            background-color: #9fc5f8!important;
-        }
-
-        .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #007bff;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-        }
-
-        .sidebar a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #f1f1f1;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidebar a:hover {
-            color: #818181;
-        }
-
-        .sidebar .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-
-        .openbtn {
-            font-size: 20px;
-            cursor: pointer;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-        }
-
-        .openbtn:hover {
-            background-color: #9fc5f8;
-        }
-
-        #main {
-            transition: margin-left .5s;
-            padding: 16px;
-        }
-
-        .navbar-nav a {
-            color: white;
-        }
-
-
-        .logo {
-            width: 80px;
-            height: auto;
-        }
-
-        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-        @media screen and (max-height: 450px) {
-            .sidebar {padding-top: 15px;}
-            .sidebar a {font-size: 18px;}
-        }
-    </style>
-  -->
 </head>
 <body>
 
+<%
+    String clienteMail = (String) request.getSession().getAttribute("clienteMail");
+    String adminMail = (String) request.getSession().getAttribute("ptMail");
 
-<%int role=1;%>
-
-<% if(role == 0) {%>
+    if(clienteMail == null && adminMail == null)
+    {
+%>
                         <!-- Homepage nessuno loggato -->
 <nav class="navbar navbar-expand-lg navbar-custom_navbar">
 <!--
@@ -122,9 +46,9 @@
         <img class="logo" src="./img/nlogo.png">
     </div>
 </nav>
-<% }%>
+<% } else if (clienteMail != null) {%>
 
-<% if(role == 1) {%>
+
                         <!-- NAVBAR CLIENTE -->
 <!--
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -139,22 +63,21 @@
     </div>
 
     <ul class="navbar-nav ml-auto">
-        <li><a href="./AccountProfile.jsp"><i class="fas fa-user"></i>Profilo &nbsp;</a></li>
+        <li><a href="accountProfile.jsp"><i class="fas fa-user"></i>Profilo &nbsp;</a></li>
         <li><a href="<%=request.getContextPath()%>/LogoutServlet"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
     </ul>
 </nav>
 
 <div id="mySidebarCliente" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <a href="#">Dashboard</a>
-    <a href="#">Statistiche</a>
-    <a href="#">Agenda</a>
-    <a href="#">Cronologia Schede</a>
+    <a href="customerDashboard.jsp">Dashboard</a>
+    <a href="viewProgress.jsp">Statistiche</a>
+    <a href="requestAppointment.jsp">Agenda</a>
+    <a href="customerTrainingPlans.jsp">Cronologia Schede</a>
 </div>
 
-<% }%>
+<% } else if (adminMail != null) {%>
 
-<% if(role == 2) {%>
                             <!-- NAVBAR PT -->
 <!--
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -169,27 +92,22 @@
     </div>
 
     <ul class="navbar-nav ml-auto">
-        <li><a href="#"><i class="fas fa-user"></i> Profilo &nbsp;</a></li>
+        <!--<li><a href="./PTProfile.jsp"><i class="fas fa-user"></i> Profilo &nbsp;</a></li> -->
         <li><a href="<%=request.getContextPath()%>/LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
 </nav>
 
 <div id="mySidebarPT" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNavPT()">×</a>
-    <a href="#">Dashboard</a>
+    <a href="adminDashboard.jsp">Dashboard</a>
     <a href="#">Agenda</a>
-    <a href="#">Clienti</a>
+    <a href="customersList.jsp">Clienti</a>
     <a href="#">Schede</a>
-    <a href="#">Pagamenti</a>
+    <a href="viewSubscriptionList.jsp">Abbonamenti</a>
 </div>
 
 <% }%>
 
-<!--
-<div id="main">
-    <h1>Prova</h1>
-</div>
--->
 
 
 

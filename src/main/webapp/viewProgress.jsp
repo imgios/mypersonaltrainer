@@ -3,7 +3,9 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAO" %>
-<%@ page import="it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAOImpl" %><%--
+<%@ page import="it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAOImpl" %>
+
+<%--
   Created by IntelliJ IDEA.
   User: giampieroferrara
   Date: 28/12/20
@@ -35,7 +37,17 @@
 <html>
 <head>
     <title>Progressi Cliente</title>
+
+    <%@include file="meta.jsp"%>
+    <%@include file="head.jsp"%>
+    <%@include file="navbar.jsp"%>
+
+
+
+    <!--
     <link href="css/footer.css" rel="stylesheet" type="text/css">
+    -->
+
 </head>
 <body>
 
@@ -47,7 +59,8 @@
   //  for (Parameters param: list){
     //    System.out.println(param);
 %>
-<% String passaggio ="";
+<%
+    String passaggio ="";
     String dati = "";
     String massamagra = "";
     String massagrassa = "";
@@ -62,7 +75,6 @@
         massagrassa = massagrassa + param.getleanMass() + ",";
         System.out.println(massagrassa);
     }
-
 %>
 <!--
 <h1>ci sono i parametri nella console da stampare</h1>
@@ -194,5 +206,9 @@
 
 
 </body>
+
+
+
+<%@include file="footer.jsp"%>
 
 </html>

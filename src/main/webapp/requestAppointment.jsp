@@ -16,8 +16,18 @@
 <head>
 
     <title>Agenda</title>
+
+    <!--
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    -->
+
+
+
+    <%@include file="meta.jsp"%>
+    <%@include file="head.jsp"%>
+    <%@include file="navbar.jsp"%>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -42,8 +52,8 @@
             document.getElementById('time').value=document.getElementById(ele.id).innerHTML;
         }
     </script>
-    <link rel="stylesheet" type="text/css" href="appointment.css">
-    <script src="Requestappointment.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/appointment.css">
+    <script src="js/requestAppointment.js"></script>
 </head>
 <body>
 <div id="ricarica">
@@ -68,7 +78,7 @@
     <tr>
         <td><%= a.getDate()%> </td>
         <td><%= a.getTime()%> </td>
-        <td><button onclick="deleteappointmentfromDB(<%= "'"+a.getDate()+"'"%>,<%= "'"+a.getTime()+"'"%>,<%="'"+mail+"'"%>)"><img src="img/cestino.png"  width="25px" height="25px"></button></td>
+        <td><button onclick="deleteappointmentfromDB(<%= "'"+a.getDate()+"'"%>,<%= "'"+a.getTime()+"'"%>,<%="'"+mail+"'"%>)"><i class="far fa-trash-alt"></i></button></td>
 
     </tr>
     <%}%>
@@ -100,5 +110,9 @@
     </div>
 </div>
 </div>
+
+<!--
+< %@include file="footer.jsp"%>
+-->
 </body>
 </html>

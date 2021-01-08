@@ -8,7 +8,14 @@
 <html lang="en">
 
 <head>
+
     <title>Clienti</title>
+
+    <%@include file="meta.jsp"%>
+    <%@include file="head.jsp"%>
+    <%@include file="navbar.jsp"%>
+
+
 </head>
 
 <body style="background-color:powderblue;">
@@ -25,6 +32,10 @@
             <span class="badge bg-primary rounded-pill">!</span><% }%>
     </ul>
 </div>
+
+
+
+<%@include file="footer.jsp"%>
 
 </body>
 </html>

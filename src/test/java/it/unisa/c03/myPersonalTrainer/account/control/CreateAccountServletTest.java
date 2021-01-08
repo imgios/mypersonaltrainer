@@ -55,6 +55,7 @@ class CreateAccountServletTest {
 
   }
 
+  @Test
   void doPostFalse() throws IOException, ServletException, ExecutionException, InterruptedException {
 
     Mockito.when(request.getParameter("username")).thenReturn("TestUsername");

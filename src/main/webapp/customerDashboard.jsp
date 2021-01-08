@@ -4,23 +4,32 @@
 <%
     String emailCliente = (String) request.getSession().getAttribute("clienteMail");
     if(emailCliente == null)
-        response.sendRedirect("login.jsp");
+       // response.sendRedirect("login.jsp");
+          response.sendRedirect("error.jsp");
 %>
 
 <html>
 <head>
+
+    <%@include file="meta.jsp"%>
+    <%@include file="head.jsp"%>
+    <%@include file="navbar.jsp"%>
+
     <title>myPersonalTrainer | myAccount</title>
+    <!--
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" href="css/footer.css"/>
+      -->
     <!--link rel="stylesheet" href="styles/reset.min.css"/>
     <link rel="stylesheet" href="styles/footer.css"/>
     <link rel="stylesheet" href="styles/header-11.css"/-->
-<!-- inserimento navbar -->
-    <%@ include file="navbar.jsp"%>
+    <!-- inserimento navbar
+    < % @ include file="navbar.jsp"%>
+     -->
 
 </head>
-<body>
 <body>
 
     <div class="wrapper">
@@ -40,6 +49,8 @@
 <!--HEADER END-->
 
 
+
+    <%@ include file="footer.jsp"%>
 
 </body>
 </html>
