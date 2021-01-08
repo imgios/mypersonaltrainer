@@ -12,39 +12,25 @@
 <html>
 
 <%
-    String emailClientee = (String) request.getSession().getAttribute("clienteMail");
-    //String emailAdmin = (String) request.getSession().getAttribute("ptMail");
+    String emailAdmin = (String) request.getSession().getAttribute("ptMail");
 
-    if(emailClientee == null)
-        response.sendRedirect("Login.jsp");
+    if(emailAdmin == null)
+        response.sendRedirect("login.jsp");
     else{
 %>
 <head>
     <title>Profilo Utente</title>
 
-    <!-- Bootstrap
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    -->
+
     <%@include file="meta.jsp"%>
     <%@include file="head.jsp"%>
     <%@include file="navbar.jsp"%>
 
-    <!--
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    -->
 
     <!-- JavaScript -->
     <script src="js/profileScript.js"></script>
     <script src="js/controlChangePassword.js"></script>
-    
 
-    <!--
-    < %@ include file="navbar.jsp"%>
-    -->
 
 </head>
 <body>
@@ -61,20 +47,7 @@
 
                 <button class="list-group-item list-group-item-action active" id="list-profile-btn" data-bs-toggle="list" role="tab" aria-controls="profile" onclick="showProfile()">Profilo</button>
                 <button class="list-group-item list-group-item-action" id="list-password-btn" data-bs-toggle="list" role="tab" aria-controls="password" onclick="showPassword()">Cambia Password</button>
-                <button class="list-group-item list-group-item-action" id="list-abbonamento-btn" data-bs-toggle="list" role="tab" aria-controls="abbonamento" onclick="showAbbonamento()">Abbonamento
-                    <%
-                        SubscriptionDAO subscriptionDAO = new SubscriptionDAOImpl();
-                        SubscriptionService subService = new SubscriptionServiceImpl(subscriptionDAO);
-                        //check the Subscription state
-                        int state = subService.checkSubscriptionState(emailClientee);
-                        if(state == 1){
-                    %>
-                    <span class="badge rounded-pill bg-success text-white">Attivo</span></button>
-                <% } else if (state == 0) {%>
-                <span class="badge rounded-pill bg-warning text-white">In scadenza</span></button>
-                <% } else if (state == -1) {%>
-                <span class="badge rounded-pill bg-danger text-white">Scaduto</span></button>
-                <% } %>
+
             </div>
         </div>
         <div class="col-sm-8">
@@ -84,7 +57,7 @@
                     <%
                         AccountDAO accountDao = new AccountDAOImpl();
                         AccountService accountService = new AccountServiceImpl(accountDao);
-                        Account account = accountService.getAccountByEmail(emailClientee);
+                        Account account = accountService.getAccountByEmail(emailAdmin);
                     %>
 
                     <div id="testoProfilo" class="card">
@@ -126,43 +99,7 @@
 
                 </div>
 
-                <div class="tab-pane fade show active" id="scritta-abbonamento" role="tabpanel">
 
-                    <div id="testoAbbonamento" class="card">
-                        <div class="card-body">
-                            <h3>Il tuo Abbonamento</h3>
-
-                            <% Subscription sub = subService.searchSubscriptionByEmail(emailClientee); %>
-
-                            <div class="input-group mb-3">
-                                <label class="col-sm-5">Email</label>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1" value="<%=sub.getCustomerMail()%>" readonly>
-                                </div>
-                            </div>
-
-                            <div class="input-group mb-3">
-                                <label class="col-sm-5">Scadenza</label>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1" value="<%=sub.getExpDate()%>" readonly>
-                                </div>
-                            </div>
-
-                            <div class="input-group mb-3">
-                                <label class="col-sm-5">Prezzo</label>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1" value="<%=sub.getPrice()%>" readonly>
-                                </div>
-                            </div>
-
-
-
-
-                        </div>
-
-                    </div>
-
-                </div>
 
                 <div class="tab-pane fade show active" id="scritta-password" role="tabpanel">
 
