@@ -83,7 +83,6 @@ class SubscriptionServiceImplTest {
         Mockito.when(subDao.getAllSubscriptions()).thenReturn(listToReturn);
         Mockito.when(subDao.getSubscriptionbyEmail(anyString())).thenReturn(new Subscription("subs@looking.com", "2022-01-05", "30"));
 
-
         SubscriptionService subService = new SubscriptionServiceImpl(subDao);
         ArrayList<Subscription> listToReturnService = subService.getActiveSubscriptions();
 
@@ -92,31 +91,20 @@ class SubscriptionServiceImplTest {
 
     @Test
     void checkIfSent() throws EmailException, InterruptedException, ExecutionException, IOException {
-        Subscription s = new Subscription("subs@looking.com", "2022-01-05", "30");
+        Subscription s = new Subscription("marcosica99@libero.it", "2021-07-08", "30");
 
         SubscriptionDAO subDao = Mockito.mock(SubscriptionDAO.class);
-        Mockito.when(subDao.getSubscriptionbyEmail(anyString())).thenReturn(new Subscription("subs@looking.com", "2021-03-01", "30"));
-        SubscriptionService subService = new SubscriptionServiceImpl(subDao);
+        Mockito.when(subDao.getSubscriptionbyEmail(anyString())).thenReturn(s);
+        SubscriptionService subService1 = new SubscriptionServiceImpl(subDao);
+        SubscriptionService subService = Mockito.mock(SubscriptionServiceImpl.class);
 
+        Subscription subscription = Mockito.mock(Subscription.class);
+        Mockito.when(subscription.getSentNotification()).thenReturn(0);
 
-        /*Mockito.when(subService2.searchSubscriptionByEmail(anyString())).thenReturn(subscription);
+        doNothing().when(subService).sendEmail((isA(String.class)), isA(Subscription.class));
 
+        subService1.checkIfSent("marcosica99@libero.it");
 
-        doNothing().when(subService2).sendEmail(isA(String.class), isA(Subscription.class));
-
-*/
-
-        /*
-        Subscription subscription = new Subscription();
-        subscription.setSentNotification(0);
-
-        Mockito.when(subService1.searchSubscriptionByEmail(anyString())).thenReturn(subscription);
-
-        assertEquals(0, subscription.getSentNotification());
-        doNothing().when(subService1).sendEmail(isA(String.class), isA(Subscription.class));
-        Mockito.when(subDao.updateSentNotification(anyString())).thenReturn(true);
-
-        assertTrue(subService1.changeSentNotification(anyString()));*/
     }
 
 
