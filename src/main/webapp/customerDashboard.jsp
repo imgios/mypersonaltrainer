@@ -4,7 +4,7 @@
 <%
     String emailCliente = (String) request.getSession().getAttribute("clienteMail");
     if(emailCliente == null)
-       // response.sendRedirect("Login.jsp");
+       // response.sendRedirect("login.jsp");
           response.sendRedirect("error.jsp");
 %>
 

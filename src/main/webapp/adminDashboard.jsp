@@ -6,7 +6,7 @@ isPT = true allora procedi, altrimenti errore.-->
 <%
     String emailAdmin = (String) request.getSession().getAttribute("ptMail");
     if(emailAdmin == null)
-        //response.sendRedirect("Login.jsp");
+        //response.sendRedirect("login.jsp");
           response.sendRedirect("error.jsp");
 %>
 

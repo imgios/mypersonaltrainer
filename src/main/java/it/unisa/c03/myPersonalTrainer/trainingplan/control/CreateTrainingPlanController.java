@@ -78,7 +78,7 @@ public class CreateTrainingPlanController extends
                                 + "puoi continuare ad inserire esercizi "
                                 + "o cliccare su Crea Scheda");
 
-                response.sendRedirect("CreateTrainingPlan.jsp");
+                response.sendRedirect("createTrainingPlan.jsp");
             } else if (action.equals("addtp")) {
 
                 String exercises = (String) request.getSession()
@@ -86,7 +86,7 @@ public class CreateTrainingPlanController extends
                 if (exercises == null) {
                     request.getSession().setAttribute("noEx",
                             "Inserisci almeno un esercizio per creare una scheda!");
-                    response.sendRedirect("CreateTrainingPlan.jsp");
+                    response.sendRedirect("createTrainingPlan.jsp");
                 } else {
                     TrainingPlan trainingPlan =
                             new TrainingPlan(exercises, "clientemail@prova.io");
@@ -94,13 +94,13 @@ public class CreateTrainingPlanController extends
                     request.getSession().removeAttribute("exercises");
                     request.getSession().setAttribute("success",
                             "Scheda creata con successo");
-                    response.sendRedirect("CreateTrainingPlan.jsp");
+                    response.sendRedirect("createTrainingPlan.jsp");
                 }
             }
         } catch (IllegalArgumentException e) {
 
             request.getSession().setAttribute("error", e.getMessage());
-            response.sendRedirect("CreateTrainingPlan.jsp");
+            response.sendRedirect("createTrainingPlan.jsp");
         }
     }
 

@@ -63,17 +63,17 @@
     </div>
 
     <ul class="navbar-nav ml-auto">
-        <li><a href="./AccountProfile.jsp"><i class="fas fa-user"></i>Profilo &nbsp;</a></li>
+        <li><a href="accountProfile.jsp"><i class="fas fa-user"></i>Profilo &nbsp;</a></li>
         <li><a href="<%=request.getContextPath()%>/LogoutServlet"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
     </ul>
 </nav>
 
 <div id="mySidebarCliente" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <a href="./CustomerDashboard.jsp">Dashboard</a>
-    <a href="./ViewProgress.jsp">Statistiche</a>
-    <a href="./RequestAppointment.jsp">Agenda</a>
-    <a href="./CustomerTrainingPlans.jsp">Cronologia Schede</a>
+    <a href="customerDashboard.jsp">Dashboard</a>
+    <a href="viewProgress.jsp">Statistiche</a>
+    <a href="requestAppointment.jsp">Agenda</a>
+    <a href="customerTrainingPlans.jsp">Cronologia Schede</a>
 </div>
 
 <% } else if (adminMail != null) {%>
@@ -99,11 +99,11 @@
 
 <div id="mySidebarPT" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNavPT()">×</a>
-    <a href="./AdminDashboard.jsp">Dashboard</a>
+    <a href="adminDashboard.jsp">Dashboard</a>
     <a href="#">Agenda</a>
-    <a href="./CustomersList.jsp">Clienti</a>
+    <a href="customersList.jsp">Clienti</a>
     <a href="#">Schede</a>
-    <a href="./ViewSubscriptionList.jsp">Abbonamenti</a>
+    <a href="viewSubscriptionList.jsp">Abbonamenti</a>
 </div>
 
 <% }%>

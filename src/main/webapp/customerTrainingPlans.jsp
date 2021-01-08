@@ -89,7 +89,7 @@ int i = t.size();%>
         <td><%=i--%></td>
         <td><%=b.getDate()%></td>
         <td>
-            <form action="ViewTrainingPlan.jsp" method="post">
+            <form action="viewTrainingPlan.jsp" method="post">
                     <% request.getSession().setAttribute("exerc", b.getExercises()); %>
                 <button class="button" type="submit">Visualizza</button>
             </form>

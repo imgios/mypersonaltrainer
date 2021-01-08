@@ -14,9 +14,9 @@
     String pt = (String) request.getSession().getAttribute("ptMail");
 %>
 <% if (utente != null){
-        response.sendRedirect("./CustomerDashboard.jsp");
+        response.sendRedirect("./customerDashboard.jsp");
     } else if (pt != null){
-            response.sendRedirect("./AdminDashboard.jsp");
+            response.sendRedirect("./adminDashboard.jsp");
     }
 %>
 <head>

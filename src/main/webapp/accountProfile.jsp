@@ -16,7 +16,7 @@
     //String emailAdmin = (String) request.getSession().getAttribute("ptMail");
 
     if(emailClientee == null)
-        response.sendRedirect("Login.jsp");
+        response.sendRedirect("login.jsp");
     else{
 %>
 <head>
