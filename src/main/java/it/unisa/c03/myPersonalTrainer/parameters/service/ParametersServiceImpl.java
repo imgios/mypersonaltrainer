@@ -62,8 +62,12 @@ public class ParametersServiceImpl implements ParametersService {
             String weight, String leanMass, String fatMass)
             throws IllegalArgumentException, IOException {
 
-        if (weight != null
-                && weight.length() < MIN_LENGHT_WEIGHT
+        if (weight == null || leanMass == null || fatMass == null) {
+            throw new IllegalArgumentException(
+                    "valori mancanti");
+        }
+
+        if (weight.length() < MIN_LENGHT_WEIGHT
                 || weight.length() > MAX_LENGHT_WEIGHT) {
             throw new IllegalArgumentException(
                     "lunghezza peso non valida");
@@ -73,6 +77,7 @@ public class ParametersServiceImpl implements ParametersService {
             throw new NumberFormatException(
                     "formato peso non valido");
         }
+
         if (!fatMass.matches(
                 "([0-9]+\\%){1,2}$")) {
             throw new NumberFormatException(
@@ -84,6 +89,11 @@ public class ParametersServiceImpl implements ParametersService {
                     "formato massa magra non valido");
         }
         double weightD = Double.parseDouble(weight);
+
+        if (weightD < MIN_WEIGHT || weightD > MAX_WEIGHT) {
+            throw new NumberFormatException(
+                    "valore peso non valido");
+        }
 
         double leanMassD =
                 Double.parseDouble(leanMass.substring(
