@@ -1,10 +1,13 @@
 package it.unisa.c03.myPersonalTrainer.trainingplan.control;
 
+import it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAO;
+import it.unisa.c03.myPersonalTrainer.trainingplan.service.TrainingPlanService;
 import it.unisa.c03.myPersonalTrainer.trainingplan.service.TrainingPlanServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,6 +28,7 @@ class CreateTrainingPlanControllerTest {
     @Test
     void doPostexercisesNull() throws IOException {
 
+
         Mockito.when(request.getParameter("action")).thenReturn("addex");
 
         Mockito.when(request.getParameter("exercise")).thenReturn("exerciseNamw");
@@ -35,15 +39,15 @@ class CreateTrainingPlanControllerTest {
 
         Mockito.when(request.getSession()).thenReturn(session);
 
-
         Mockito.when(trainingPlanService.checkExercise("exercise", "5", "6", "7")).thenReturn(true);
 
-        Mockito.when(request.getSession()
+        Mockito.when(session
                 .getAttribute("exercises")).thenReturn(null);
 
-        new CreateTrainingPlanController().doPost(request, response);
+        doNothing().when(session).setAttribute("success", "tuttobene");
 
-        assertNotEquals("ciao", request.getSession().getAttribute("exercises"));
+
+        new CreateTrainingPlanController().doPost(request, response);
     }
 
 
@@ -63,29 +67,51 @@ class CreateTrainingPlanControllerTest {
 
         Mockito.when(trainingPlanService.checkExercise("exercise", "5", "6", "7")).thenReturn(true);
 
-       Mockito.when(request.getSession()
+        Mockito.when(session
                 .getAttribute("exercises")).thenReturn("someString");
 
+        doNothing().when(session).setAttribute("success", "tuttobene");
+
+
         new CreateTrainingPlanController().doPost(request, response);
-
-        assertNotEquals(null, request.getSession().getAttribute("exercises"));
-        System.out.println(session.getAttribute("exercises"));
-
     }
 
 
     @Test
     void doPostActionaddtpNull() throws IOException {
 
-        Mockito.when(request.getParameter("action")).thenReturn("other");
+        Mockito.when(request.getParameter("action")).thenReturn("addtp");
 
         HttpSession session = Mockito.mock(HttpSession.class);
 
         Mockito.when(request.getSession()).thenReturn(session);
 
-        Mockito.when(request.getSession()
-                .getAttribute("exercises")).thenReturn("someString");
+        Mockito.when(session
+                .getAttribute("exercises")).thenReturn(null);
 
+        doNothing().when(session).setAttribute("noEx", "nontuttobene");
+
+
+
+        new CreateTrainingPlanController().doPost(request, response);
+
+        System.out.println(request.getSession().getAttribute("noEx"));
+    }
+    @Test
+    void doPostActionaddtpNotNull() throws IOException {
+
+        Mockito.when(request.getParameter("action")).thenReturn("addtp");
+
+        HttpSession session = Mockito.mock(HttpSession.class);
+
+        Mockito.when(request.getSession()).thenReturn(session);
+
+        Mockito.when(session
+                .getAttribute("exercises")).thenReturn("someesercizi");
+
+        doNothing().when(session).setAttribute("exercises", "someeserciziplus");
+
+        doNothing().when(session).setAttribute("success", "tuttobene");
 
         new CreateTrainingPlanController().doPost(request, response);
 
@@ -93,7 +119,53 @@ class CreateTrainingPlanControllerTest {
     }
 
 
+
     @Test
-    void doGet() {
+    void doPostCatchExc() throws IOException {
+
+        TrainingPlanDAO trainingPlanDAO = Mockito.mock(TrainingPlanDAO.class);
+        TrainingPlanService trainingPlanService = new TrainingPlanServiceImpl(trainingPlanDAO);
+
+        Mockito.when(request.getParameter("action")).thenReturn("addex");
+
+        Mockito.when(request.getParameter("exercise")).thenReturn("exerciseName");
+        Mockito.when(request.getParameter("repetitions")).thenReturn("5as");
+        Mockito.when(request.getParameter("series")).thenReturn("6");
+        Mockito.when(request.getParameter("recoveryTime")).thenReturn("7");
+        HttpSession session = Mockito.mock(HttpSession.class);
+
+        Mockito.when(request.getSession()).thenReturn(session);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            trainingPlanService.checkExercise("exerciseName", "5as", "6", "7");
+        });
+        assertEquals("invalid repetitions format", exception.getMessage());
+
+        new CreateTrainingPlanController().doPost(request, response);
+    }
+
+    @Test
+    void doGet() throws ServletException, IOException {
+
+
+        TrainingPlanDAO trainingPlanDAO = Mockito.mock(TrainingPlanDAO.class);
+        TrainingPlanService trainingPlanService = new TrainingPlanServiceImpl(trainingPlanDAO);
+
+        Mockito.when(request.getParameter("action")).thenReturn("addex");
+
+        Mockito.when(request.getParameter("exercise")).thenReturn("exerciseName");
+        Mockito.when(request.getParameter("repetitions")).thenReturn("5as");
+        Mockito.when(request.getParameter("series")).thenReturn("6");
+        Mockito.when(request.getParameter("recoveryTime")).thenReturn("7");
+        HttpSession session = Mockito.mock(HttpSession.class);
+
+        Mockito.when(request.getSession()).thenReturn(session);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            trainingPlanService.checkExercise("exerciseName", "5as", "6", "7");
+        });
+        assertEquals("invalid repetitions format", exception.getMessage());
+
+        new CreateTrainingPlanController().doGet(request, response);
     }
 }
