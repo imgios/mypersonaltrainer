@@ -2,6 +2,11 @@ package it.unisa.c03.myPersonalTrainer.trainingplan.control;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
+import it.unisa.c03.myPersonalTrainer.account.bean.Account;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
+import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
+import it.unisa.c03.myPersonalTrainer.account.service.AccountService;
+import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -11,24 +16,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 /**
  * this class enable to download a training plan in pdf.
  */
 @WebServlet(name = "DownloadTrainingPlanServlet",
         value = "/download-training-plan")
-public class downloadTrainingPlanServlet extends
+public class DownloadTrainingPlanServlet extends
         HttpServlet {
     private static final
     long serialVersionUID = 1L;
 
     Document doc;
 
-    public downloadTrainingPlanServlet(Document document) {
+    public DownloadTrainingPlanServlet(Document document) {
         this.doc = document;
     }
 
-    public downloadTrainingPlanServlet() {
+    public DownloadTrainingPlanServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,6 +45,8 @@ public class downloadTrainingPlanServlet extends
         String date = request.getParameter("date");
         String exerc = (String)
                 request.getSession().getAttribute("exerc");
+        String emailClientee = (String) request.getSession().getAttribute("clienteMail");
+
 
         try {
             doc = new Document();
@@ -59,7 +67,7 @@ public class downloadTrainingPlanServlet extends
             doc.add(p);
 
             p = new Paragraph(
-                    "Al cliente  <nome cliente dalla sessione>");
+                    "Al cliente " + emailClientee);
             p.setAlignment(Element.ALIGN_CENTER);
             doc.add(p);
 
