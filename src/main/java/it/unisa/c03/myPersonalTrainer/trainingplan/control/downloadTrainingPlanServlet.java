@@ -22,6 +22,12 @@ public class downloadTrainingPlanServlet extends
     private static final
     long serialVersionUID = 1L;
 
+    Document doc;
+
+    public downloadTrainingPlanServlet(Document document) {
+        this.doc = document;
+    }
+
     public downloadTrainingPlanServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -35,7 +41,7 @@ public class downloadTrainingPlanServlet extends
                 request.getSession().getAttribute("exerc");
 
         try {
-            Document doc = new Document();
+            doc = new Document();
             ByteArrayOutputStream baos =
                     new ByteArrayOutputStream();
             PdfWriter.getInstance(doc, baos);
