@@ -18,12 +18,11 @@
 
 <!--check if the user is log-->
 <%
-    //String client_email = (String) request.getSession().getAttribute("email");
-    //System.out.println(client_email);
-    // if (client_email == null){
+    String email = (String) request.getParameter("email");
+    System.out.println(email);
+    if (email == null){
     //  response.sendRedirect("index.jsp");   //login page che non ho al momento
-    //}
-    String email = "prova@io.it"; //testing email
+    }
 %>
 <%  //check parameters %>
 <%
@@ -34,7 +33,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Progressi Cliente</title>
+    <title>myPersonalTrainer | Informazioni Cliente</title>
 
     <%@include file="meta.jsp"%>
     <%@include file="head.jsp"%>
@@ -52,6 +51,7 @@
     ParametersDAO paramDao = new ParametersDAOImpl();
     ParametersService sparam = new ParametersServiceImpl(paramDao);
     Account accountCustomer;
+
     AccountDAO accountDao=new AccountDAOImpl();
     AccountService serviceAccount = new AccountServiceImpl(accountDao);
 
