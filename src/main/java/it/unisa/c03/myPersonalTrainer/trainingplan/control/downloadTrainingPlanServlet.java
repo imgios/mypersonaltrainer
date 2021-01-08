@@ -45,7 +45,7 @@ public class DownloadTrainingPlanServlet extends
         String date = request.getParameter("date");
         String exerc = (String)
                 request.getSession().getAttribute("exerc");
-        String emailClientee = (String) request.getSession().getAttribute("clienteMail");
+        String emailCliente = (String) request.getSession().getAttribute("clienteMail");
 
 
         try {
@@ -67,7 +67,7 @@ public class DownloadTrainingPlanServlet extends
             doc.add(p);
 
             p = new Paragraph(
-                    "Al cliente " + emailClientee);
+                    "Al cliente " + emailCliente);
             p.setAlignment(Element.ALIGN_CENTER);
             doc.add(p);
 
