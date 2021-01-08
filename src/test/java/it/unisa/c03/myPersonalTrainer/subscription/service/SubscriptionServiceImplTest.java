@@ -40,17 +40,12 @@ class SubscriptionServiceImplTest {
         SubscriptionDAO subDao = Mockito.mock(SubscriptionDAO.class);
 
         ArrayList<Subscription> listToReturn = new ArrayList<>();
-<<<<<<< HEAD
+
         Subscription s = new Subscription("subs@looking.com","2021-01-16","30");
         listToReturn.add(s);
         Mockito.when(subDao.getAllSubscriptions()).thenReturn(listToReturn);
         Mockito.when(subDao.getSubscriptionbyEmail(anyString())).thenReturn(new Subscription("subs@looking.com","2021-01-16","30"));
-=======
-        Subscription s = new Subscription("subs@looking.com","2021-01-08","30");
-        listToReturn.add(s);
-        Mockito.when(subDao.getAllSubscriptions()).thenReturn(listToReturn);
-        Mockito.when(subDao.getSubscriptionbyEmail(anyString())).thenReturn(new Subscription("subs@looking.com","2021-01-08","30"));
->>>>>>> feature/VerifyAppointments
+
 
 
         SubscriptionService subService = new SubscriptionServiceImpl(subDao);

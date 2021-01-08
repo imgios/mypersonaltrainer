@@ -52,13 +52,12 @@ class LoginServletTest {
     @Test
     void doPostFalse() throws ServletException, IOException {
         Mockito.when(request.getParameter("email")).thenReturn("cliente@gmail.com");
-        Mockito.when(request.getParameter("password")).thenReturn("nuovaPassword1");
+        Mockito.when(request.getParameter("password")).thenReturn("nuovapassword+");
 
         Mockito.when(accountService.checkCredentials(anyString(),anyString())).thenThrow(new IllegalArgumentException());
         assertThrows(IllegalArgumentException.class, () -> {
             accountService.checkCredentials("prova@gmail.com","password3");
         } );
-
         HttpSession session = Mockito.mock(HttpSession.class);
         Mockito.when(request.getSession()).thenReturn(session);
 
@@ -66,8 +65,6 @@ class LoginServletTest {
         doNothing().when(session).removeAttribute(anyString());
         doNothing().when(session).setAttribute(anyString(),any());
         doNothing().when(response).sendRedirect(anyString());
-
-
 
 
 
