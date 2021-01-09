@@ -108,7 +108,29 @@ class ChangePasswordServletTest {
         HttpSession session = Mockito.mock(HttpSession.class);
         Mockito.when(request.getSession()).thenReturn(session);
 
-        Mockito.when(session.getAttribute(anyString())).thenReturn("cliente@gmail.com");
+        Mockito.when(session.getAttribute("clienteMail")).thenReturn("cliente@gmail.com");
+
+
+        doNothing().when(session).removeAttribute(anyString());
+        doNothing().when(session).setAttribute(anyString(),any());
+        doNothing().when(response).sendRedirect(anyString());
+
+        new ChangePasswordServlet().doPost(request, response);
+
+    }
+
+    @Test
+    void doPostSessionfalse() throws ServletException, IOException, ExecutionException, InterruptedException {
+
+        Mockito.when(request.getParameter("email")).thenReturn("cliente2@gmail.com");
+        Mockito.when(request.getParameter("password")).thenReturn("nuovaPassword1");
+
+
+
+        HttpSession session = Mockito.mock(HttpSession.class);
+        Mockito.when(request.getSession()).thenReturn(session);
+
+        Mockito.when(session.getAttribute("clienteMail")).thenReturn("cliente@gmail.com");
 
 
         doNothing().when(session).removeAttribute(anyString());
