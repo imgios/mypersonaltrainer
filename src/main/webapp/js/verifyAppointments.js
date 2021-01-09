@@ -5,7 +5,6 @@ $(document).ready(function (){
 
 
 
-
 function seeAppointments() {
     $("#appuntamenti").show();
     document.getElementById('giornoscelto').innerHTML ="Appuntamenti del:"+document.getElementById('data').value;

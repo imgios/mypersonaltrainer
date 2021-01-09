@@ -100,9 +100,9 @@
 <div id="mySidebarPT" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNavPT()">×</a>
     <a href="adminDashboard.jsp">Dashboard</a>
-    <a href="#">Agenda</a>
+    <a href="verifyAppointments.jsp">Agenda</a>
     <a href="customersList.jsp">Clienti</a>
-    <a href="#">Schede</a>
+    <a href="createTrainingPlan.jsp">Schede</a>
     <a href="viewSubscriptionList.jsp">Abbonamenti</a>
 </div>
 

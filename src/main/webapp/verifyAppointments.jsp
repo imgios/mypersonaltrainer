@@ -26,7 +26,7 @@
     </script>
 
     <link rel="stylesheet" type="text/css" href="css/VerifyAppointments.css">
-    <script src="js/VerifyAppointments.js"></script>
+    <script src="js/verifyAppointments.js"></script>
 
         </head>
     <body>
