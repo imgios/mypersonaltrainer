@@ -23,8 +23,9 @@
 
     <!-- inserimento import head and meta data -->
     <%@include file="./meta.jsp"%>
-    <%@include file="./head.jsp"%>
-
+    <!--
+    < %@include file="./head.jsp"%>
+    -->
     <link rel="stylesheet" href="css/navbar.css"/>
 
 </head>
