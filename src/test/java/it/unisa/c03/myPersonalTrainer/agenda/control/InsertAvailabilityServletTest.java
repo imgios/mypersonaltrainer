@@ -73,7 +73,7 @@ class InsertAvailabilityServletTest {
     @Test
     void doGetDateAleradyExists() throws IOException, ExecutionException, InterruptedException {
         AgendaDAO agendaDAO = new AgendaDAOImpl();
-        Mockito.when(request.getParameter("dataSelected")).thenReturn("2021-01-08");
+        Mockito.when(request.getParameter("dataSelected")).thenReturn("2121-01-08");
         Mockito.when(request.getParameter("timeSelected")).thenReturn("15");
         Mockito.when(agendaService.checkAvailability(anyString(), any())).thenReturn(true);
         Mockito.when(agendaService.createAvailability(any())).thenReturn(true);
@@ -88,7 +88,7 @@ class InsertAvailabilityServletTest {
     @Test
     void doPostDateAleradyExists() throws IOException, ExecutionException, InterruptedException {
         AgendaDAO agendaDAO = new AgendaDAOImpl();
-        Mockito.when(request.getParameter("dataSelected")).thenReturn("2021-01-08");
+        Mockito.when(request.getParameter("dataSelected")).thenReturn("2121-01-08");
         Mockito.when(request.getParameter("timeSelected")).thenReturn("15");
         Mockito.when(agendaService.checkAvailability(anyString(), any())).thenReturn(true);
         Mockito.when(agendaService.createAvailability(any())).thenReturn(true);

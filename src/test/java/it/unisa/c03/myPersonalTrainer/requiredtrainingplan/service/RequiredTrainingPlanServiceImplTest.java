@@ -94,9 +94,9 @@ class RequiredTrainingPlanServiceImplTest {
 
         RequiredTrainingPlanService requires = new RequiredTrainingPlanServiceImpl(requiredDAO);
 
-        Mockito.when(requiredDAO.findAccountByEmail(anyString())).thenReturn(require);
+        Mockito.when(requiredDAO.findAccountByEmail(anyString())).thenReturn(null);
         Mockito.when(requiredDAO.storeRequest(any())).thenReturn(true);
-        RequiredTrainingPlan user_test = new RequiredTrainingPlan("test_1@test.it", 0);
+        RequiredTrainingPlan user_test = new RequiredTrainingPlan("test@test.it", 0);
 
         assertTrue(requires.registerRequest(user_test));
 
