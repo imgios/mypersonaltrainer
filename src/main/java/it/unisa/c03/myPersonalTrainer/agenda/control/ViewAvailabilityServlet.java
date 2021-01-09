@@ -17,8 +17,10 @@ import java.util.Comparator;
 import java.util.concurrent.ExecutionException;
 
 /**
- * this class controls the interaction between personal trainer and system to view personal trainer availability.
- * return 1+"Message" if there is an error in the date input , 0 if there aren't availability, else return the
+ * this class controls the interaction between personal
+ * trainer and system to view personal trainer availability.
+ * return 1+"Message" if there is an error in the date input ,
+ * 0 if there aren't availability, else return the
  * availability list for this date.
  */
 @WebServlet(name = "ViewAvailabilityServlet",
@@ -36,13 +38,14 @@ public class ViewAvailabilityServlet
     private AgendaService agendaService =
             new AgendaServiceImpl(agendaDAO);
 
+    /**
+     *parametro fittizio per effettuare solo il check sulla data.
+     */
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws IOException {
 
-        /**
-         *parametro fittizio per effettuare solo il check sulla data.
-         */
+
         final String TIME_PASS = "15";
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -66,13 +69,14 @@ public class ViewAvailabilityServlet
                             agendaService.getAvailabilityByDate(data);
             if (list.size() == 0) {
 
-                res = new Gson().toJson(0); //non ci sono disponibilita per quella data.
+                res = new Gson().toJson(0);
+                //non ci sono disponibilita per quella data.
             } else { //ritorna le disponibilita' per la data scelta
                 list.sort(Comparator.comparing(Availability::getTime));
                 res = new Gson().toJson(list);
             }
-        } catch (IllegalArgumentException |
-                InterruptedException | ExecutionException e) { //ritorna il valore 1+il messaggio del relativo errore. 1 e' un valore sentinella.
+        } catch (IllegalArgumentException
+            | InterruptedException | ExecutionException e) { //ritorna il valore 1+il messaggio del relativo errore. 1 e' un valore sentinella.
             res = new Gson().toJson(
                     "1" + e.getMessage());
             //formato non valido o data precedente

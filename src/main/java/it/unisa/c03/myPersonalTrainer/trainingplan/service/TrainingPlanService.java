@@ -15,7 +15,7 @@ public interface TrainingPlanService {
       * @throws ExecutionException
       * @throws IOException
       */
-     public List<TrainingPlan> getTrainingPlans(String email) throws InterruptedException, ExecutionException, IOException;
+     List<TrainingPlan> getTrainingPlans(String email) throws InterruptedException, ExecutionException, IOException;
 
      /**
       * This method checks TrainingPlan entries.

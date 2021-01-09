@@ -60,11 +60,7 @@ public class AccountServiceImpl implements AccountService {
           throws IOException, ExecutionException, InterruptedException {
       Account accountLogged;
       accountLogged = accountDAO.findAccountByEmail(email);
-      if (accountLogged != null) {
-              return true;
-          } else {
-          return false;
-      }
+        return accountLogged != null;
     }
 
     /**
@@ -173,7 +169,8 @@ public class AccountServiceImpl implements AccountService {
      * @throws IOException exception
      */
     @Override
-    public ArrayList<Account> viewInfoAccount() throws IOException, ExecutionException, InterruptedException {
+    public ArrayList<Account> viewInfoAccount()
+            throws IOException, ExecutionException, InterruptedException {
         AccountDAO p = new AccountDAOImpl();
         return p.getAccounts();
     }
@@ -224,11 +221,7 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     public boolean verifyIsAdmin(Account account) {
-        if (account.getRole() == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return account.getRole() == 1;
     }
 
 }

@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-@WebServlet(name = "RequestAppointmentServlet", value = "/RequestAppointmentServlet")
+@WebServlet(name = "RequestAppointmentServlet",
+        value = "/RequestAppointmentServlet")
 public class RequestAppointmentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws

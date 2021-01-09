@@ -24,12 +24,12 @@ import java.util.concurrent.ExecutionException;
 public class InsertAvailabilityServlet
         extends HttpServlet {
     /**
-     * AgendaDAO
+     * AgendaDAO.
      */
     private AgendaDAO agendaDAO =
             new AgendaDAOImpl();
     /**
-     * AgendaService to use the service methods
+     * AgendaService to use the service methods.
      */
     private AgendaService agendaService =
             new AgendaServiceImpl(agendaDAO);
@@ -56,7 +56,8 @@ public class InsertAvailabilityServlet
                     agendaService.getAvailabilityByDateAndTime(
                             data, Integer.parseInt(x));
             System.out.println(prova);
-            if (prova == null) { //si puo creare availability poiche non esiste gia
+            if (prova == null) {
+                //si puo creare availability poiche non esiste gia
                 Availability avaiability =
                         new Availability(data, Integer.parseInt(x));
                 agendaService.createAvailability(avaiability);

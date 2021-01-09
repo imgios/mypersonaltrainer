@@ -97,7 +97,6 @@ public class RequiredTrainingPlanServiceImpl implements
         RequiredTrainingPlan ricerca;
         ricerca = requiredTrainingPlanDAO
                 .findAccountByEmail(requiredTrainingPlan.getEmail());
-        
         if (ricerca == null) {
 
             return requiredTrainingPlanDAO.storeRequest(requiredTrainingPlan);
