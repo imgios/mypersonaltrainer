@@ -28,10 +28,10 @@
     <link rel="stylesheet" href="css/login.css"/>
 
 
-
     <title>Login Account</title>
 </head>
 <body>
+<main>
 <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
     <div class="card card0 border-0">
         <div class="row d-flex">
@@ -83,6 +83,7 @@
 
 
 
+</main>
 
 <script type="text/javascript" src="js/loginControl.js"></script>
 
