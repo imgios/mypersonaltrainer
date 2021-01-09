@@ -21,7 +21,7 @@
     String email = (String) request.getParameter("email");
     System.out.println(email);
     if (email == null){
-    //  response.sendRedirect("index.jsp");   //login page che non ho al momento
+        response.sendRedirect("index.jsp");   //login page che non ho al momento
     }
 %>
 <%  //check parameters %>
@@ -231,16 +231,13 @@
                 </tbody>
             </table>
             </p>
-            <a href="#" class="btn btn-primary">Crea Nuova Scheda</a>
+            <a href="http://localhost:8080/myPersonalTrainer_war/createTrainingPlan.jsp" class="btn btn-primary">Crea Nuova Scheda</a>
         </div>
     </div>
 </div>
-
-
 
 <!--  inserimento footer -->
 <%@include file="footer.jsp"%>
 
 </body>
-
 </html>
