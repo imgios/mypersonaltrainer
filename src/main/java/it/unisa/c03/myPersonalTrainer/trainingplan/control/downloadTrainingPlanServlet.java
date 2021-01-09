@@ -2,13 +2,6 @@ package it.unisa.c03.myPersonalTrainer.trainingplan.control;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
-import it.unisa.c03.myPersonalTrainer.account.bean.Account;
-import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
-import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
-import it.unisa.c03.myPersonalTrainer.account.service.AccountService;
-import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
-import it.unisa.c03.myPersonalTrainer.trainingplan.bean.TrainingPlan;
-
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +17,7 @@ import java.util.concurrent.ExecutionException;
  */
 @WebServlet(name = "DownloadTrainingPlanServlet",
         value = "/download-training-plan")
-public class DownloadTrainingPlanServlet extends
+ class DownloadTrainingPlanServlet extends
         HttpServlet {
     private static final
     long serialVersionUID = 1L;
