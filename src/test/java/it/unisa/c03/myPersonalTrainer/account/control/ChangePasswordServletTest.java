@@ -132,6 +132,6 @@ class ChangePasswordServletTest {
         Mockito.when(request.getSession()).thenReturn(session);
 
 
-        new ChangePasswordServlet().doPost(request, response);
+        new ChangePasswordServlet().doGet(request, response);
     }
 }
