@@ -19,17 +19,6 @@ import static org.mockito.Mockito.*;
 
 class SubscriptionServiceImplTest {
 
-    /*
-    @Test
-    void createSubscription() {
-    }
-
-    @Test
-    void searchSubscriptionByEmail() {
-    }
-
-     */
-
     @Test
     void checkSubscriptionState() throws InterruptedException, ExecutionException, IOException {
         SubscriptionDAO subDao = Mockito.mock(SubscriptionDAO.class);
@@ -38,7 +27,6 @@ class SubscriptionServiceImplTest {
         assertEquals(1, subService.checkSubscriptionState("subs@looking.com"));
     }
 
-    //va cambiata la data ogni volta, deve essere al massimo distante 10 giorni per essere in scadenza
     @Test
     void getExpiringSubscriptions() throws InterruptedException, ExecutionException, IOException {
         SubscriptionDAO subDao = Mockito.mock(SubscriptionDAO.class);
@@ -104,7 +92,6 @@ class SubscriptionServiceImplTest {
         doNothing().when(subService).sendEmail((isA(String.class)), isA(Subscription.class));
 
         subService1.checkIfSent("marcosica99@libero.it");
-
     }
 
 
@@ -127,19 +114,4 @@ class SubscriptionServiceImplTest {
         Mockito.when(subscriptionDAO.updateSentNotification(any())).thenReturn(false);
         assertEquals(false, pservice.changeSentNotification(any()));
     }
-
-
-
-   /* void sendEmail() throws EmailException {
-        SubscriptionDAO subscriptionDAO = Mockito.mock(SubscriptionDAO.class);
-        SubscriptionService pservice = Mockito.mock(SubscriptionServiceImpl.class);
-
-        //doNothing().when(new SubscriptionServiceImpl(subscriptionDAO)).sendEmail(anyString(),any());
-
-        verify(pservice,times(1)).sendEmail(anyString(),any());
-
-        //verify(pservice).sendEmail(anyString(),any());
-
-
-    }*/
 }

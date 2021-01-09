@@ -59,7 +59,7 @@ public class ChangePasswordController extends HttpServlet {
         if (!checkResult) {
             request.getSession().removeAttribute("successToShow");
             request.getSession().setAttribute("errorToShow", errors);
-            response.sendRedirect("AccountProfile.jsp");
+            response.sendRedirect("accountProfile.jsp");
         } else if (checkResult) {
             // if result is true, it means that email and password have
             // the right format.
@@ -82,13 +82,13 @@ public class ChangePasswordController extends HttpServlet {
                         request.getSession().removeAttribute("errorToShow");
                         request.getSession().setAttribute("successToShow",
                                 "Password modificata!");
-                        response.sendRedirect("AccountProfile.jsp");
+                        response.sendRedirect("accountProfile.jsp");
                     } else {
                         //if the email isnt the right one in session
                         request.getSession().removeAttribute("successToShow");
                         request.getSession().setAttribute("errorToShow",
                                 "Attenzione, questa non è la tua email!");
-                        response.sendRedirect("AccountProfile.jsp");
+                        response.sendRedirect("accountProfile.jsp");
                     }
 
 
@@ -97,7 +97,7 @@ public class ChangePasswordController extends HttpServlet {
                     request.getSession().removeAttribute("successToShow");
                     request.getSession().setAttribute("errorToShow",
                             "Attenzione, questa non è la tua email!");
-                    response.sendRedirect("AccountProfile.jsp");
+                    response.sendRedirect("accountProfile.jsp");
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

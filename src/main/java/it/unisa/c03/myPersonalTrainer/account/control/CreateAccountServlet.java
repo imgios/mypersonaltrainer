@@ -114,19 +114,19 @@ public class CreateAccountServlet extends HttpServlet {
             request.getSession().removeAttribute("errorToShow");
             request.getSession().setAttribute("successToShow",
                     "Inserimento riuscito");
-            response.sendRedirect("CreateAccount.jsp");
+            response.sendRedirect("createAccount.jsp");
         } else if (controlcredential && !control) {
             request.getSession().removeAttribute("successToShow");
             request.getSession().setAttribute("errorToShow", errors);
-            response.sendRedirect("CreateAccount.jsp");
+            response.sendRedirect("createAccount.jsp");
         } else if (!controlcredential && !control) {
             request.getSession().removeAttribute("successToShow");
             request.getSession().setAttribute("errorToShow", errors);
-            response.sendRedirect("CreateAccount.jsp");
+            response.sendRedirect("createAccount.jsp");
         } else if (!controlcredential && control) {
             request.getSession().removeAttribute("successToShow");
             request.getSession().setAttribute("errorToShow", errors);
-            response.sendRedirect("CreateAccount.jsp");
+            response.sendRedirect("createAccount.jsp");
         }
 
         //
@@ -135,12 +135,12 @@ public class CreateAccountServlet extends HttpServlet {
         else if (control == false){
             request.getSession().removeAttribute("successToShow");
             request.getSession().setAttribute("errorToShow", errors);
-            response.sendRedirect("CreateAccount.jsp");
+            response.sendRedirect("createAccount.jsp");
         }
         else if (control == false){
             request.getSession().removeAttribute("successToShow");
             request.getSession().setAttribute("errorToShow", errors);
-            response.sendRedirect("CreateAccount.jsp");
+            response.sendRedirect("createAccount.jsp");
         }
        */
         /*
