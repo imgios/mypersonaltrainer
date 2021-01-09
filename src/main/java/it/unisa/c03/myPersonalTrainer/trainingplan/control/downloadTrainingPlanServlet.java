@@ -48,7 +48,6 @@ public class DownloadTrainingPlanServlet extends
         String emailCliente = (String) request.getSession().getAttribute("clienteMail");
 
         String exercises = request.getParameter("exercises");
-        System.out.println("ecco " + exercises + "\n" + date);
 
 
         try {
