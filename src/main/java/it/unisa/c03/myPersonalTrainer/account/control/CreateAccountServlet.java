@@ -109,15 +109,6 @@ public class CreateAccountServlet extends HttpServlet {
                         new SubscriptionServiceImpl(subDao);
                 subService.createSubscription(utente.getEmail());
 
-                if (control) {
-                    System.out.println("boolean true inserito");
-                    System.out.println("valore inserito inserito");
-                    System.out.println("Salvataggio nuovo utente");
-                } else {
-                    System.out.println("boolean false non inserimento");
-                }
-            } else {
-                System.out.println("le credenziali non sono valide.");
             }
         } catch (IllegalArgumentException
                 | ExecutionException | InterruptedException exception) {

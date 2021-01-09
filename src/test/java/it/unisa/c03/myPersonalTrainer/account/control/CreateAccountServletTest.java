@@ -31,7 +31,7 @@ class CreateAccountServletTest {
 
 
   @Test
-  void doPostPass() throws IOException, ServletException, ExecutionException, InterruptedException {
+  void doPostCatchIAE() throws IOException, ServletException, ExecutionException, InterruptedException {
    Mockito.when(request.getParameter("username")).thenReturn("TestUsername");
    assertEquals("TestUsername", request.getParameter("username"));
    Mockito.when(request.getParameter("surname")).thenReturn("TestSurname");
@@ -56,6 +56,60 @@ class CreateAccountServletTest {
      new CreateAccountServlet().doPost(request,response);
 
   }
+
+    @Test
+    void doPostCredTrue() throws IOException, ServletException, ExecutionException, InterruptedException {
+        Mockito.when(request.getParameter("username")).thenReturn("TestUsername");
+        assertEquals("TestUsername", request.getParameter("username"));
+        Mockito.when(request.getParameter("surname")).thenReturn("TestSurname");
+        Mockito.when(request.getParameter("phone")).thenReturn("0000000000");
+        Mockito.when(request.getParameter("email")).thenReturn("test@test.it");
+        Mockito.when(request.getParameter("password")).thenReturn("Test0011111");
+        Mockito.when(request.getParameter("role")).thenReturn("0");
+        Account user = new Account (request.getParameter("username"),request.getParameter("surname"), request.getParameter("phone"), request.getParameter("email"), request.getParameter("passowrd"), request.getIntHeader("role"));
+
+
+        HttpSession session = Mockito.mock(HttpSession.class);
+        Mockito.when(request.getSession()).thenReturn(session);
+
+        doNothing().when(session).removeAttribute(anyString());
+        doNothing().when(session).setAttribute(anyString(),any());
+        doNothing().when(response).sendRedirect(anyString());
+
+
+        Mockito.when(accountService.registerAccount(Mockito.any())).thenReturn(true);
+
+        assertTrue(accountService.registerAccount(user));
+        new CreateAccountServlet().doPost(request,response);
+
+    }
+
+    @Test
+    void doPostCredFalse() throws IOException, ServletException, ExecutionException, InterruptedException {
+        Mockito.when(request.getParameter("username")).thenReturn("TestUsername");
+        assertEquals("TestUsername", request.getParameter("username"));
+        Mockito.when(request.getParameter("surname")).thenReturn("TestSurname");
+        Mockito.when(request.getParameter("phone")).thenReturn("0000000000");
+        Mockito.when(request.getParameter("email")).thenReturn("a");
+        Mockito.when(request.getParameter("password")).thenReturn("Test0011111");
+        Mockito.when(request.getParameter("role")).thenReturn("0");
+        Account user = new Account (request.getParameter("username"),request.getParameter("surname"), request.getParameter("phone"), request.getParameter("email"), request.getParameter("passowrd"), request.getIntHeader("role"));
+
+
+        HttpSession session = Mockito.mock(HttpSession.class);
+        Mockito.when(request.getSession()).thenReturn(session);
+
+        doNothing().when(session).removeAttribute(anyString());
+        doNothing().when(session).setAttribute(anyString(),any());
+        doNothing().when(response).sendRedirect(anyString());
+
+
+        Mockito.when(accountService.registerAccount(Mockito.any())).thenReturn(true);
+
+        assertTrue(accountService.registerAccount(user));
+        new CreateAccountServlet().doPost(request,response);
+
+    }
 
   @Test
   void doPostFalse() throws IOException, ServletException, ExecutionException, InterruptedException {
