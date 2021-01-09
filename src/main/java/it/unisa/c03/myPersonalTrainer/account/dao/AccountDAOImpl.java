@@ -1,21 +1,11 @@
 package it.unisa.c03.myPersonalTrainer.account.dao;
 import com.google.api.core.ApiFuture;
-
-
 import com.google.cloud.firestore.*;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
-import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
-import it.unisa.c03.myPersonalTrainer.subscription.bean.Subscription;
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.io.IOException;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.*;
 
 
 public class AccountDAOImpl implements AccountDAO {
@@ -149,7 +139,6 @@ public class AccountDAOImpl implements AccountDAO {
             throws IOException, ExecutionException, InterruptedException {
         // Create a reference to the account collection
         CollectionReference accounts = null;
-      
         accounts = DBConnection.getConnection().collection("Account");
 
         // Create a query against the collection.
@@ -157,15 +146,12 @@ public class AccountDAOImpl implements AccountDAO {
 
         // retrieve  query results asynchronously using query.get()
         ApiFuture<QuerySnapshot> querySnapshot = query.get();
-
         String id = "";
-
         for (DocumentSnapshot document
                 : querySnapshot.get().getDocuments()) {
             id = id + document.getId();
         }
-
         return id;
     }
-
 }
+

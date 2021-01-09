@@ -6,10 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
 import java.util.concurrent.ExecutionException;
 
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
@@ -17,7 +15,6 @@ import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 import it.unisa.c03.myPersonalTrainer.account.service.AccountService;
 import it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
-import it.unisa.c03.myPersonalTrainer.subscription.bean.Subscription;
 import it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAO;
 import it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAOImpl;
 import it.unisa.c03.myPersonalTrainer.subscription.service.SubscriptionService;
@@ -61,15 +58,13 @@ public class CreateAccountServlet extends HttpServlet {
             //This bytes[] has bytes in decimal format;
             //Convert it to hexadecimal format
             StringBuilder sb = new StringBuilder();
-            for(int i=0; i< bytes.length ;i++)
-            {
+            for (int i = 0; i < bytes.length; i++) {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
             //Get complete hashed password in hex format
             generatedPassword = sb.toString();
         }
-        catch (NoSuchAlgorithmException e)
-        {
+        catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
 

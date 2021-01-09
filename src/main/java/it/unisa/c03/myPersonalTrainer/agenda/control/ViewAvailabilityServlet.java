@@ -71,8 +71,8 @@ public class ViewAvailabilityServlet
                 list.sort(Comparator.comparing(Availability::getTime));
                 res = new Gson().toJson(list);
             }
-        } catch (IllegalArgumentException |
-                InterruptedException | ExecutionException e) { //ritorna il valore 1+il messaggio del relativo errore. 1 e' un valore sentinella.
+        } catch (IllegalArgumentException
+            | InterruptedException | ExecutionException e) { //ritorna il valore 1+il messaggio del relativo errore. 1 e' un valore sentinella.
             res = new Gson().toJson(
                     "1" + e.getMessage());
             //formato non valido o data precedente
