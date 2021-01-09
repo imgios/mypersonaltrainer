@@ -169,7 +169,8 @@ public class AccountServiceImpl implements AccountService {
      * @throws IOException exception
      */
     @Override
-    public ArrayList<Account> viewInfoAccount() throws IOException, ExecutionException, InterruptedException {
+    public ArrayList<Account> viewInfoAccount()
+            throws IOException, ExecutionException, InterruptedException {
         AccountDAO p = new AccountDAOImpl();
         return p.getAccounts();
     }

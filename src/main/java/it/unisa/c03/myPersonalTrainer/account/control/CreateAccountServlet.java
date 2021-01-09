@@ -59,12 +59,12 @@ public class CreateAccountServlet extends HttpServlet {
             //Convert it to hexadecimal format
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < bytes.length; i++) {
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+                sb.append(Integer.toString((bytes[i] & 0xff)
+                        + 0x100, 16).substring(1));
             }
             //Get complete hashed password in hex format
             generatedPassword = sb.toString();
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
 
@@ -105,7 +105,8 @@ public class CreateAccountServlet extends HttpServlet {
 
                 // subscription registration
                 SubscriptionDAO subDao = new SubscriptionDAOImpl();
-                SubscriptionService subService = new SubscriptionServiceImpl(subDao);
+                SubscriptionService subService =
+                        new SubscriptionServiceImpl(subDao);
                 subService.createSubscription(utente.getEmail());
 
                 if (control) {

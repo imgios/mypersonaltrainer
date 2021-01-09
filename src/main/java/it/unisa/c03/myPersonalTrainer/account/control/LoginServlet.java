@@ -78,12 +78,12 @@ public class LoginServlet extends HttpServlet {
                     //Convert it to hexadecimal format
                     StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < bytes.length; i++) {
-                        sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+                        sb.append(Integer.toString((bytes[i] & 0xff)
+                                + 0x100, 16).substring(1));
                     }
                     //Get complete hashed password in hex format
                     generatedPassword = sb.toString();
-                }
-                catch (NoSuchAlgorithmException e) {
+                } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 }
 
@@ -135,12 +135,16 @@ public class LoginServlet extends HttpServlet {
                             request.getSession().setAttribute("ptMail", email);
                             response.sendRedirect("adminDashboard.jsp");
                         } else {
-                            request.getSession().setAttribute("clienteMail", email);
+                            request.getSession().
+                                    setAttribute("clienteMail", email);
                             response.sendRedirect("customerDashboard.jsp");
                         }
                     } else if (!(password.equals(testUtente.getPassword()))) {
-                        request.getSession().removeAttribute("successInsertLogin");
-                        request.getSession().setAttribute("errorInsertLogin", "Password errata!");
+                        request.getSession().
+                                removeAttribute("successInsertLogin");
+                        request.getSession().
+                                setAttribute("errorInsertLogin",
+                                        "Password errata!");
                         response.sendRedirect("login.jsp");
                     }
                 }
