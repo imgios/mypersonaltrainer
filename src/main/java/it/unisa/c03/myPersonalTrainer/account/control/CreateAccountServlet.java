@@ -19,6 +19,7 @@ import it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAO;
 import it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAOImpl;
 import it.unisa.c03.myPersonalTrainer.subscription.service.SubscriptionService;
 import it.unisa.c03.myPersonalTrainer.subscription.service.SubscriptionServiceImpl;
+import org.apache.commons.mail.EmailException;
 
 /**
  * servlet for creating account.
@@ -109,6 +110,10 @@ public class CreateAccountServlet extends HttpServlet {
                         new SubscriptionServiceImpl(subDao);
                 subService.createSubscription(utente.getEmail());
 
+                //notifica la registrazione con email
+                accountService.sendEmail(email, password);
+
+
                 if (control) {
                     System.out.println("boolean true inserito");
                     System.out.println("valore inserito inserito");
@@ -119,8 +124,7 @@ public class CreateAccountServlet extends HttpServlet {
             } else {
                 System.out.println("le credenziali non sono valide.");
             }
-        } catch (IllegalArgumentException
-                | ExecutionException | InterruptedException exception) {
+        } catch (IllegalArgumentException | ExecutionException | InterruptedException | EmailException exception) {
             errors = errors + exception.getMessage();
         }
 
