@@ -27,6 +27,39 @@ class ParametersServiceImplTest {
         });
         assertEquals("lunghezza peso non valida", exception.getMessage());
     }
+    @Test
+    void lenghtWeightNotValidMax() throws IOException {
+        String weight = "180";
+        String fatMass = "30%";
+        String leanMass = "55%";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            pservice.createParameters(weight, leanMass, fatMass);
+        });
+        assertEquals("valore peso non valido", exception.getMessage());
+    }
+
+    @Test
+    void lenghtWeightNotValidMin() throws IOException {
+        String weight = "20";
+        String fatMass = "30%";
+        String leanMass = "55%";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            pservice.createParameters(weight, leanMass, fatMass);
+        });
+        assertEquals("valore peso non valido", exception.getMessage());
+    }
+
+
+    @Test
+    void valuesNull() throws IOException {
+        String weight = null;
+        String fatMass = null;
+        String leanMass = null;
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            pservice.createParameters(weight, leanMass, fatMass);
+        });
+        assertEquals("valori mancanti", exception.getMessage());
+    }
 
     @Test
     void formatWeightNotValid() throws IOException {
@@ -49,6 +82,18 @@ class ParametersServiceImplTest {
         });
         assertEquals("lunghezza massa grassa non valida", exception.getMessage());
     }
+
+    @Test
+    void lenghtFatMassNotValidMax() throws IOException {
+        String weight = "50";
+        String fatMass = "99%";
+        String leanMass = "55%";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            pservice.createParameters(weight, leanMass, fatMass);
+        });
+        assertEquals("lunghezza massa grassa non valida", exception.getMessage());
+    }
+
 
     @Test
     void formatfatMassNotValid() throws IOException {
@@ -77,6 +122,17 @@ class ParametersServiceImplTest {
         String weight = "50";
         String fatMass = "30%";
         String leanMass = "5%";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            pservice.createParameters(weight, leanMass, fatMass);
+        });
+        assertEquals("lunghezza massa magra non valida", exception.getMessage());
+    }
+
+    @Test
+    void lenghtleanMassNotValidMax() throws IOException {
+        String weight = "50";
+        String fatMass = "30%";
+        String leanMass = "99%";
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             pservice.createParameters(weight, leanMass, fatMass);
         });

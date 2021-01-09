@@ -88,9 +88,13 @@ class AgendaServiceImplTestAvailability {
 
     @Test
     void removeAvailability() throws InterruptedException, ExecutionException, IOException {
-
         Mockito.when(agendaDAO.deleteAvailability(any())).thenReturn(true);
         assertEquals(true, agendaService.removeAvailability(any()));
+    }
+    @Test
+    void removeAvailabilityFalse() throws InterruptedException, ExecutionException, IOException {
+        Mockito.when(agendaDAO.deleteAvailability(any())).thenReturn(false);
+        assertEquals(false, agendaService.removeAvailability(any()));
     }
 
     @Test

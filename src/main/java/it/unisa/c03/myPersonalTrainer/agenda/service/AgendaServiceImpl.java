@@ -83,15 +83,6 @@ public final class AgendaServiceImpl implements AgendaService {
     /**
      * define the agendaDao.
      */
-    // private AgendaDAO agendaDAO;
-
-    /*/**
-     *  initialize an agendaDAO object.
-     * @param agendaDAO
-     */
-    /*public AgendaServiceImpl(AgendaDAO agendaDAO) {
-        this.agendaDAO = agendaDAO;
-    }*/
 
     /**
      * this class check if the data and the time format
