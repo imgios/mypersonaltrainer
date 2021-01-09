@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>myPersonalTrainer - La mia scheda</title>
+    <title>myPersonalTrainer | La mia scheda</title>
 
     <%@include file="meta.jsp"%>
     <%@include file="head.jsp"%>
@@ -25,11 +25,16 @@
 </head>
 
 <body>
-<h1>La mia scheda</h1>
-<%String s = (String) request.getSession().getAttribute("exerc");%>
-<%=s%>
 
+<%String s = request.getParameter("exercises");%>
 
+        <div class="card bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">myPersonalTrainer</div>
+            <div class="card-body">
+                <h5 class="card-title">La tua scheda</h5>
+                <p class="card-text"><%=s%></p>
+            </div>
+        </div>
 
 <%@include file="footer.jsp"%>
 
