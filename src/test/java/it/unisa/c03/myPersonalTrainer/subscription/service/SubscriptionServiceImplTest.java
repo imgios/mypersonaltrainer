@@ -79,7 +79,7 @@ class SubscriptionServiceImplTest {
 
     @Test
     void checkIfSent() throws EmailException, InterruptedException, ExecutionException, IOException {
-        Subscription s = new Subscription("marcosica99@libero.it", "2021-07-08", "30");
+        Subscription s = new Subscription("mypt.gps.is@gmail.com", "2021-07-08", "30");
 
         SubscriptionDAO subDao = Mockito.mock(SubscriptionDAO.class);
         Mockito.when(subDao.getSubscriptionbyEmail(anyString())).thenReturn(s);
@@ -91,7 +91,24 @@ class SubscriptionServiceImplTest {
 
         doNothing().when(subService).sendEmail((isA(String.class)), isA(Subscription.class));
 
-        subService1.checkIfSent("marcosica99@libero.it");
+        subService1.checkIfSent("mypt.gps.is@gmail.com");
+    }
+
+    @Test
+    void checkIfSent1() throws EmailException, InterruptedException, ExecutionException, IOException {
+        Subscription s = new Subscription("mypt.gps.is@gmail.com", "2021-07-08", "30");
+
+        SubscriptionDAO subDao = Mockito.mock(SubscriptionDAO.class);
+        Mockito.when(subDao.getSubscriptionbyEmail(anyString())).thenReturn(s);
+        SubscriptionService subService1 = new SubscriptionServiceImpl(subDao);
+        SubscriptionService subService = Mockito.mock(SubscriptionServiceImpl.class);
+
+        Subscription subscription = Mockito.mock(Subscription.class);
+        Mockito.when(subscription.getSentNotification()).thenReturn(1);
+
+        doNothing().when(subService).sendEmail((isA(String.class)), isA(Subscription.class));
+
+        subService1.checkIfSent("mypt.gps.is@gmail.com");
     }
 
 
