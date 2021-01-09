@@ -29,7 +29,8 @@ public interface AccountService {
    * @return list of every account store
    * @throws IOException exception
    */
-    ArrayList<Account> viewInfoAccount() throws IOException, ExecutionException, InterruptedException;
+    ArrayList<Account> viewInfoAccount()
+            throws IOException, ExecutionException, InterruptedException;
 
     /**
      * This function give the possibility to register a

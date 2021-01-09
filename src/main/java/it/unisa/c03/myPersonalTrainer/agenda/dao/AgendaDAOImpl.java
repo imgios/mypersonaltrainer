@@ -85,7 +85,7 @@ public class AgendaDAOImpl implements AgendaDAO {
     }
 
     /**
-     * find an availability by date
+     * find an availability by date.
      *
      * @param date to find availability.
      * @return
@@ -120,6 +120,7 @@ public class AgendaDAOImpl implements AgendaDAO {
      * @throws IOException
      * @throws ExecutionException
      * @throws InterruptedException
+     * @return true
      */
     public boolean deleteAvailability(
             Availability availability)

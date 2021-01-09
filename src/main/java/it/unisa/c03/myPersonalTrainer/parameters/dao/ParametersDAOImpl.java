@@ -7,7 +7,6 @@ import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QuerySnapshot;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
-import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 
 import java.io.IOException;
 import java.util.ArrayList;
