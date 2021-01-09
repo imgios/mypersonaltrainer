@@ -52,7 +52,7 @@ class CreateAccountServletTest {
 
     Mockito.when(accountService.registerAccount(Mockito.any())).thenReturn(true);
 
-      assertTrue(accountService.registerAccount(user));
+    assertTrue(accountService.registerAccount(user));
      new CreateAccountServlet().doPost(request,response);
 
   }
@@ -164,9 +164,7 @@ class CreateAccountServletTest {
     doNothing().when(session).setAttribute(anyString(), any());
     doNothing().when(response).sendRedirect(anyString());
 
-
-    //new CreateAccountServlet().doPost(request,response);
-      new CreateAccountServlet().doGet(request,response);
+    new CreateAccountServlet().doGet(request,response);
   }
   
 

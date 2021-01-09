@@ -34,7 +34,6 @@ class ChangePasswordServletTest {
 
         Mockito.when(accountService.checkCredentials(anyString(),anyString())).thenReturn(true);
 
-
         HttpSession session = Mockito.mock(HttpSession.class);
         Mockito.when(request.getSession()).thenReturn(session);
 
@@ -57,7 +56,6 @@ class ChangePasswordServletTest {
 
         Mockito.when(accountService.checkCredentials(anyString(),anyString())).thenReturn(true);
 
-
         HttpSession session = Mockito.mock(HttpSession.class);
         Mockito.when(request.getSession()).thenReturn(session);
 
@@ -76,9 +74,6 @@ class ChangePasswordServletTest {
     void doPostFalse() throws ServletException, IOException {
         Mockito.when(request.getParameter("email")).thenReturn("cliente@gmail.com");
         Mockito.when(request.getParameter("password")).thenReturn("nuovaPassword1");
-
-        //Mockito.when(accountService.checkCredentials(anyString(),anyString())).thenReturn(false);
-
         Mockito.when(accountService.checkCredentials(anyString(),anyString())).thenThrow(new IllegalArgumentException());
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -87,12 +82,9 @@ class ChangePasswordServletTest {
 
         HttpSession session = Mockito.mock(HttpSession.class);
         Mockito.when(request.getSession()).thenReturn(session);
-
-
         doNothing().when(session).removeAttribute(anyString());
         doNothing().when(session).setAttribute(anyString(),any());
         doNothing().when(response).sendRedirect(anyString());
-
 
         new ChangePasswordServlet().doPost(request, response);
     }
@@ -103,13 +95,10 @@ class ChangePasswordServletTest {
         Mockito.when(request.getParameter("email")).thenReturn("cliente@gmail.com");
         Mockito.when(request.getParameter("password")).thenReturn("nuovaPassword1");
 
-
-
         HttpSession session = Mockito.mock(HttpSession.class);
         Mockito.when(request.getSession()).thenReturn(session);
 
         Mockito.when(session.getAttribute("clienteMail")).thenReturn("cliente@gmail.com");
-
 
         doNothing().when(session).removeAttribute(anyString());
         doNothing().when(session).setAttribute(anyString(),any());
@@ -143,7 +132,6 @@ class ChangePasswordServletTest {
 
     @Test
     void doGet() throws ServletException, IOException {
-        //new ChangePasswordController().doGet(request, response);
 
         Mockito.when(request.getParameter("email")).thenReturn("cliente@gmail.com");
         Mockito.when(request.getParameter("password")).thenReturn("nuovaPassword1");
@@ -153,7 +141,6 @@ class ChangePasswordServletTest {
         HttpSession session = Mockito.mock(HttpSession.class);
         Mockito.when(request.getSession()).thenReturn(session);
 
-
-        new ChangePasswordServlet().doPost(request, response);
+        new ChangePasswordServlet().doGet(request, response);
     }
 }
