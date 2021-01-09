@@ -31,6 +31,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     -->
 
+
 </head>
 <body>
 
@@ -51,6 +52,8 @@
     AccountService accountService = new AccountServiceImpl(accountDao);
 
 %>
+
+<main>
 
 <div class="bs-example">
     <div class="accordion" id="accordionExample">
@@ -192,6 +195,7 @@
     </div>
 </div>
 
+</main>
 
 
 <%@include file="footer.jsp"%>

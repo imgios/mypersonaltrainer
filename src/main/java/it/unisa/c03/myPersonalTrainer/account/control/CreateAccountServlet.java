@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.concurrent.ExecutionException;
 
@@ -46,10 +48,35 @@ public class CreateAccountServlet extends HttpServlet {
         String password = request.getParameter("password");
         int role = 0;
 
+        // Password encoding MD5
+        String passwordToHash = password;
+        String generatedPassword = null;
+        try {
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            //Add password bytes to digest
+            md.update(passwordToHash.getBytes());
+            //Get the hash's bytes
+            byte[] bytes = md.digest();
+            //This bytes[] has bytes in decimal format;
+            //Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++)
+            {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            //Get complete hashed password in hex format
+            generatedPassword = sb.toString();
+        }
+        catch (NoSuchAlgorithmException e)
+        {
+            e.printStackTrace();
+        }
+
         //creazione nuovo oggetto
 
         Account utente = new Account(name, surname, phone,
-                email, password, role);
+                email, generatedPassword, role);
 
         //verifica informazioni acquisite dalla servlet
         //System.out.println("---------------------------");
@@ -129,51 +156,7 @@ public class CreateAccountServlet extends HttpServlet {
             response.sendRedirect("createAccount.jsp");
         }
 
-        //
-        //email o credenziali non valide
-      /*
-        else if (control == false){
-            request.getSession().removeAttribute("successToShow");
-            request.getSession().setAttribute("errorToShow", errors);
-            response.sendRedirect("createAccount.jsp");
-        }
-        else if (control == false){
-            request.getSession().removeAttribute("successToShow");
-            request.getSession().setAttribute("errorToShow", errors);
-            response.sendRedirect("createAccount.jsp");
-        }
-       */
-        /*
-        control = accountService.RegisterAccount(utente);
 
-        if(control == true){
-            System.out.println("boolean true inserito");
-            System.out.println("valore inserito inserito");
-
-            PrintWriter out = response.getWriter();
-            out.println("<html><body>");
-            out.println("<h1>hai salvato il nuovo utente, grande</h1>");
-            out.println("</body></html>");
-        }else{
-            System.out.println("boolean false inserito");
-            System.out.println("t'attacchi belllo");
-
-            PrintWriter out = response.getWriter();
-            out.println("<html><body>");
-            out.println("<h1>non c'è niente di bello da vedere</h1>");
-            out.println("</body></html>");
-        }
-        */
-
-        /*
-        AccountDAO accountDAO = new AccountDAOImpl();
-        accountDAO.saveAccount(utente);
-        Hello----stampa messaggio di funzionamento
-         PrintWriter out = response.getWriter();
-         out.println("<html><body>");
-         out.println("<h1>ciao, guarda il log</h1>");
-         out.println("</body></html>");
-        */
     }
 
     protected void doGet(HttpServletRequest request,

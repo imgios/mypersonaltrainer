@@ -20,9 +20,15 @@ footer {
     /*
     height: 11%;
      */
-    height: auto;
+    /*
+    height: 136px;
+    */
+    height: fit-content;
     background-color: #000000;
     color: black;
+    /*
+    min-height: 80%;
+    */
 }
 
 footer ul.footerleft{
@@ -37,6 +43,7 @@ footer ul.footerleft li{
 
 footer a{
     color: #ffffff;
+    font-size: small;
 }
 
 footer a:hover{
@@ -45,9 +52,11 @@ footer a:hover{
 }
 footer h5{
     color: #ffffff;
+    font-size: small;
 }
 footer p{
     color: #ffffff;
+    font-size: small;
 }
 /*
 footer h1:hover{
@@ -115,7 +124,8 @@ myChart{
 }
 */
 
-
+/*
 .login_form{
     padding-top: 200px;
 }
+ */
