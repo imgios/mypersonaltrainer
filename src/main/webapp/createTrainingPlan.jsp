@@ -17,9 +17,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     -->
 
-    <%@include file="meta.jsp"%>
-    <%@include file="head.jsp"%>
-    <%@include file="navbar.jsp"%>
+    <%@include file="meta.jsp" %>
+    <%@include file="head.jsp" %>
+    <%@include file="navbar.jsp" %>
 
     <script src="js/insertTrainingPlan.js"></script>
 </head>
@@ -44,7 +44,8 @@
         <div class="form-group col-md-6">
 
             <label for="idrecoveryTime">recoveryTime in second</label><label id="controlrecoveryTime"></label>
-            <input class="form-control" id="idrecoveryTime" name="recoveryTime" onkeyup="validaterecoveryTime()" placeholder="in secondi">
+            <input class="form-control" id="idrecoveryTime" name="recoveryTime" onkeyup="validaterecoveryTime()"
+                   placeholder="in secondi">
         </div>
 
     </div>
@@ -87,7 +88,7 @@
 }%>
 
 
-<%@include file="footer.jsp"%>
+<%@include file="footer.jsp" %>
 
 </body>
 </html>
