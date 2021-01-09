@@ -52,13 +52,8 @@
             document.getElementById('time').value=document.getElementById(ele.id).innerHTML;
         }
     </script>
-<<<<<<< HEAD:src/main/webapp/requestAppointment.jsp
     <link rel="stylesheet" type="text/css" href="./css/appointment.css">
     <script src="js/requestAppointment.js"></script>
-=======
-    <link rel="stylesheet" type="text/css" href="css/appointment.css">
-    <script src="js/Requestappointment.js"></script>
->>>>>>> feature/VerifyAppointments:src/main/webapp/RequestAppointment.jsp
 </head>
 <body>
 <div id="ricarica">
@@ -115,13 +110,6 @@
     </div>
 </div>
 </div>
-<<<<<<< HEAD:src/main/webapp/requestAppointment.jsp
-
-<!--
-< %@include file="footer.jsp"%>
--->
-=======
 <%@include file="footer.jsp"%>
->>>>>>> feature/VerifyAppointments:src/main/webapp/RequestAppointment.jsp
 </body>
 </html>
