@@ -100,7 +100,6 @@ public class CreateAccountServlet extends HttpServlet {
                     .checkCredentials(email, password);
             if (controlcredential) {
                 System.out.println("credenziali OK");
-
                 control = accountService.registerAccount(utente);
 
                 // subscription registration
