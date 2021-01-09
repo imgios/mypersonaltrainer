@@ -67,8 +67,6 @@ class LoginServletTest {
         doNothing().when(response).sendRedirect(anyString());
 
 
-
-
         new LoginServlet().doPost(request, response);
     }
 
@@ -82,7 +80,6 @@ class LoginServletTest {
         Mockito.when(accountService.checkCredentials(anyString(),anyString())).thenReturn(true);
         HttpSession session = Mockito.mock(HttpSession.class);
         Mockito.when(request.getSession()).thenReturn(session);
-
 
         new LoginServlet().doPost(request, response);
     }

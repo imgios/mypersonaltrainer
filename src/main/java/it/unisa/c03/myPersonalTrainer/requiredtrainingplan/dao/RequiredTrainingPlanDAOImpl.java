@@ -14,8 +14,10 @@ import java.io.IOException;
 public class RequiredTrainingPlanDAOImpl implements RequiredTrainingPlanDAO {
 
     /**
-     * this function save the account into the db.
-     * @param requiredTrainingPlan describe the user
+     * this function store the email of the account
+     * into the RequiredTrainingPlan document.
+     * @param requiredTrainingPlan Object that
+     * describe the requiredTrainingPlan.
      * @throws IOException
      * @return
      */
@@ -34,15 +36,17 @@ public class RequiredTrainingPlanDAOImpl implements RequiredTrainingPlanDAO {
     }
 
     /**
-     * this function can check if the email is into the db.
-     * @param email is the pk to find the user into the db
-     * @return the Account given its mail
+     * this function can check if the email is into the
+     * RequiredTrainingPlan document so this user has yet a TrainngPlan request.
+     * @param email is the pk to find the user into the
+     * RequiredTrainingPlan document.
+     * @return the RequiredTrainingPlan given its mail.
      */
     @Override
     public RequiredTrainingPlan findAccountByEmail(String email)
             throws IOException, ExecutionException, InterruptedException {
 
-        // Create a reference to the account collection
+        // Create a reference to the requestTrainingPlan collection
         CollectionReference requestedTrainingPlans = null;
 
         requestedTrainingPlans = DBConnection.getConnection()
@@ -72,7 +76,8 @@ public class RequiredTrainingPlanDAOImpl implements RequiredTrainingPlanDAO {
     }
 
     /**
-     * This DAO method changes the password of an account.
+     * This DAO method changes the status of an account
+     * into RequiredTrainingPlan.
      * @param email of the account
      * @param status updated
      * @return true after the change has taken place

@@ -31,7 +31,6 @@ class ChangePasswordServletTest {
 
         Mockito.when(accountService.checkCredentials(anyString(),anyString())).thenReturn(true);
 
-
         HttpSession session = Mockito.mock(HttpSession.class);
         Mockito.when(request.getSession()).thenReturn(session);
 
