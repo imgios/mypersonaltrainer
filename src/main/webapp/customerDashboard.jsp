@@ -29,12 +29,10 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <div class="height: 100px">
-                        <div class="d-flex justify-content-center">
-                            <img src="images/void.png" class="img-fluid" alt="Responsive image">
-                        </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Example textarea</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
-                    <div class="col"><div class="d-flex justify-content-center">Column</div></div>
                     <div class="w-100"></div>
                     <div class="col">
                         <div class="row justify-content-md-center">
@@ -61,11 +59,6 @@
                                     }%>
                                 </form>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary">Visualizza le schede precedenti</button>
                         </div>
                     </div>
                 </div>
