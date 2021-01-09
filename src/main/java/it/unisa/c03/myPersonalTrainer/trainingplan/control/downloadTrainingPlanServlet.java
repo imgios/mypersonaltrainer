@@ -2,7 +2,6 @@ package it.unisa.c03.myPersonalTrainer.trainingplan.control;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -11,18 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 /**
  * this class enable to download a training plan in pdf.
  */
 @WebServlet(name = "DownloadTrainingPlanServlet",
         value = "/download-training-plan")
-public class downloadTrainingPlanServlet extends
+ class DownloadTrainingPlanServlet extends
         HttpServlet {
     private static final
     long serialVersionUID = 1L;
 
-    public downloadTrainingPlanServlet() {
+    Document doc;
+
+    public DownloadTrainingPlanServlet(Document document) {
+        this.doc = document;
+    }
+
+    public DownloadTrainingPlanServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,11 +37,14 @@ public class downloadTrainingPlanServlet extends
                           HttpServletResponse response)
             throws IOException, ServletException {
         String date = request.getParameter("date");
-        String exerc = (String)
-                request.getSession().getAttribute("exerc");
+
+        String emailCliente = (String) request.getSession().getAttribute("clienteMail");
+
+        String exercises = request.getParameter("exercises");
+
 
         try {
-            Document doc = new Document();
+            doc = new Document();
             ByteArrayOutputStream baos =
                     new ByteArrayOutputStream();
             PdfWriter.getInstance(doc, baos);
@@ -60,13 +69,13 @@ public class downloadTrainingPlanServlet extends
             doc.add(p);
 
             p = new Paragraph(
-                    "Al cliente  <nome cliente dalla sessione>");
+                    "Al cliente " + emailCliente);
             p.setAlignment(Element.ALIGN_CENTER);
             doc.add(p);
 
             doc.add(new Paragraph(" "));
             p = new Paragraph(
-                    "La tua Scheda\n " + exerc);
+                    "La tua Scheda\n " + exercises);
             p.setAlignment(Element.ALIGN_CENTER);
             doc.add(p);
 

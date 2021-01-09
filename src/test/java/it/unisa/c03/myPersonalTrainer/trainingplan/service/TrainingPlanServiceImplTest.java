@@ -30,6 +30,21 @@ class TrainingPlanServiceImplTest {
         assertEquals("invalid exercise", exception.getMessage());
     }
 
+    @Test
+    void checkExerciseexerciseNull() {
+
+        String exercise, repetitions, series, recoveryTime;
+        exercise = null;
+        repetitions = null;
+        series = null;
+        recoveryTime = null;
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            trainingPlanService.checkExercise(exercise, repetitions, series, recoveryTime);
+        });
+        assertEquals("valori mancanti", exception.getMessage());
+    }
+
 
     @Test
     void checkExerciseExcersNotLenght() {
@@ -47,12 +62,42 @@ class TrainingPlanServiceImplTest {
     }
 
     @Test
+    void checkExerciseExcersNotLenght25() {
+
+        String exercise, repetitions, series, recoveryTime;
+        exercise = "praaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        repetitions = "3";
+        series = "6";
+        recoveryTime = "5";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            trainingPlanService.checkExercise(exercise, repetitions, series, recoveryTime);
+        });
+        assertEquals("invalid exercise length", exception.getMessage());
+    }
+
+    @Test
     void checkExerciseSeriesNotLenght() {
 
         String exercise, repetitions, series, recoveryTime;
         exercise = "prova";
         repetitions = "3";
         series = "888888";
+        recoveryTime = "5";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            trainingPlanService.checkExercise(exercise, repetitions, series, recoveryTime);
+        });
+        assertEquals("invalid series length", exception.getMessage());
+    }
+
+    @Test
+    void checkExerciseSeriesNotLenghtMin() {
+
+        String exercise, repetitions, series, recoveryTime;
+        exercise = "prova";
+        repetitions = "3";
+        series = "";
         recoveryTime = "5";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -109,6 +154,21 @@ class TrainingPlanServiceImplTest {
     }
 
     @Test
+    void checkExerciseRepetitionsNotLenghtMin() {
+
+        String exercise, repetitions, series, recoveryTime;
+        exercise = "Prova";
+        repetitions = "";
+        series = "15";
+        recoveryTime = "5";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            trainingPlanService.checkExercise(exercise, repetitions, series, recoveryTime);
+        });
+        assertEquals("invalid repetitions length", exception.getMessage());
+    }
+
+    @Test
     void checkExerciseTimeNotFormat() {
 
         String exercise, repetitions, series, recoveryTime;
@@ -127,12 +187,10 @@ class TrainingPlanServiceImplTest {
     void checkExercisePass() {
 
         String exercise, repetitions, series, recoveryTime;
-        exercise = "Prova";
+        exercise = "Addomaniali alti";
         repetitions = "52";
         series = "15";
         recoveryTime = "51";
-
-
         assertTrue(trainingPlanService.checkExercise(exercise, repetitions, series, recoveryTime));
     }
 
@@ -152,11 +210,28 @@ class TrainingPlanServiceImplTest {
         assertEquals("invalid recoveryTime length", exception.getMessage());
     }
 
+
+    @Test
+    void checkExerciseTimeNotLenghtMin() {
+
+        String exercise, repetitions, series, recoveryTime;
+        exercise = "Prova";
+        repetitions = "52";
+        series = "15";
+        recoveryTime = "";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            trainingPlanService.checkExercise(exercise, repetitions, series, recoveryTime);
+        });
+        assertEquals("invalid recoveryTime length", exception.getMessage());
+    }
+
     @Test
     void createTrainingPlan() throws IOException {
         Mockito.when(trainingPlanDAO.insertTrainingPlan(any())).thenReturn(true);
         assertEquals(true, trainingPlanService.createTrainingPlan(any()));
     }
+
     @Test
     void createTrainingPlanFals() throws IOException {
         Mockito.when(trainingPlanDAO.insertTrainingPlan(any())).thenReturn(false);

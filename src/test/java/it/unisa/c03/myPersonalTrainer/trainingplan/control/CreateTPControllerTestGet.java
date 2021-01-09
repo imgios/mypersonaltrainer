@@ -19,14 +19,14 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 
-class CreateTrainingPlanControllerTest {
+class CreateTrainingPlanControllerTestGet {
 
     HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
     HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
     TrainingPlanServiceImpl trainingPlanService = Mockito.mock(TrainingPlanServiceImpl.class);
 
     @Test
-    void doPostexercisesNull() throws IOException {
+    void doGetexercisesNull() throws IOException, ServletException {
 
 
         Mockito.when(request.getParameter("action")).thenReturn("addex");
@@ -47,12 +47,12 @@ class CreateTrainingPlanControllerTest {
         doNothing().when(session).setAttribute("success", "tuttobene");
 
 
-        new CreateTrainingPlanController().doPost(request, response);
+        new CreateTrainingPlanController().doGet(request, response);
     }
 
 
     @Test
-    void doPostexercisesNotNull() throws IOException {
+    void doGetexercisesNotNull() throws IOException, ServletException {
 
         Mockito.when(request.getParameter("action")).thenReturn("addex");
 
@@ -73,12 +73,12 @@ class CreateTrainingPlanControllerTest {
         doNothing().when(session).setAttribute("success", "tuttobene");
 
 
-        new CreateTrainingPlanController().doPost(request, response);
+        new CreateTrainingPlanController().doGet(request, response);
     }
 
 
     @Test
-    void doPostActionaddtpNull() throws IOException {
+    void doGetActionaddtpNull() throws IOException, ServletException {
 
         Mockito.when(request.getParameter("action")).thenReturn("addtp");
 
@@ -93,12 +93,12 @@ class CreateTrainingPlanControllerTest {
 
 
 
-        new CreateTrainingPlanController().doPost(request, response);
+        new CreateTrainingPlanController().doGet(request, response);
 
         System.out.println(request.getSession().getAttribute("noEx"));
     }
     @Test
-    void doPostActionaddtpNotNull() throws IOException {
+    void doGetActionaddtpNotNull() throws IOException, ServletException {
 
         Mockito.when(request.getParameter("action")).thenReturn("addtp");
 
@@ -113,7 +113,7 @@ class CreateTrainingPlanControllerTest {
 
         doNothing().when(session).setAttribute("success", "tuttobene");
 
-        new CreateTrainingPlanController().doPost(request, response);
+        new CreateTrainingPlanController().doGet(request, response);
 
         System.out.println(request.getSession().getAttribute("noEx"));
     }
@@ -121,7 +121,7 @@ class CreateTrainingPlanControllerTest {
 
 
     @Test
-    void doPostCatchExc() throws IOException {
+    void doGettCatchExc() throws IOException, ServletException {
 
         TrainingPlanDAO trainingPlanDAO = Mockito.mock(TrainingPlanDAO.class);
         TrainingPlanService trainingPlanService = new TrainingPlanServiceImpl(trainingPlanDAO);
@@ -141,7 +141,7 @@ class CreateTrainingPlanControllerTest {
         });
         assertEquals("invalid repetitions format", exception.getMessage());
 
-        new CreateTrainingPlanController().doPost(request, response);
+        new CreateTrainingPlanController().doGet(request, response);
     }
 
     @Test

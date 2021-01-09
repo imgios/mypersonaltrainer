@@ -8,8 +8,8 @@ function validateNameEx() {
     var exercise = document.getElementById("idexercise").value;
 
 
-    if (!exercise.match("^[a-zA-Z]+$")) {
-        producePrompt("<span class='badge badge-pill badge-danger'>Input accetta solo lettere per l'esercizio</span>", "controlexercise", "red");
+    if (!exercise.match("[a-zA-Z\\s]+")) {
+        producePrompt("<span class='badge badge-pill badge-danger'>Solo lettere per il nome dell'esercizio l'esercizio</span>", "controlexercise", "red");
         return false;
     }
 
