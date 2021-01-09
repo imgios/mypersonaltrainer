@@ -15,9 +15,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.anyString;
@@ -120,24 +118,21 @@ class RequiredTrainingPlanServiceImplTest {
         }
     }
 
-   /* @Test
+    @Test
     void registerAccountFalse() throws IOException, IllegalArgumentException,
             ExecutionException, InterruptedException {
 
-        RequiredTrainingPlan user = new RequiredTrainingPlan("trainerino@testing.com", 1);
+        RequiredTrainingPlan require = new RequiredTrainingPlan("test25@test.it", 0);
 
-        RequiredTrainingPlanDAO accountDAO = Mockito.mock(RequiredTrainingPlanDAO.class);
-        RequiredTrainingPlanService accountS = new RequiredTrainingPlanServiceImpl(accountDAO);
+        RequiredTrainingPlanDAO requiredDAO = Mockito.mock(RequiredTrainingPlanDAO.class);
 
-        Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(user);
+        RequiredTrainingPlanService requires = new RequiredTrainingPlanServiceImpl(requiredDAO);
 
-        RequiredTrainingPlan user_test = new RequiredTrainingPlan("trainerino@testing.com", 1);
+        Mockito.when(requiredDAO.findAccountByEmail(anyString())).thenReturn(null);
+        Mockito.when(requiredDAO.storeRequest(any())).thenReturn(false);
+        RequiredTrainingPlan user_test = new RequiredTrainingPlan("test1@test.it", 0);
 
-        // assertFalse(accountS.registerAccount(user_test));
-        assertThrows(IllegalArgumentException.class, () -> {
-                    accountS.registerRequest(user_test);
-                }
-        );
-    }*/
+        assertFalse(requires.registerRequest(user_test));
 
+    }
 }
