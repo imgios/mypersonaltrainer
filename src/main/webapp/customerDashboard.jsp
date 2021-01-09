@@ -1,3 +1,8 @@
+<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanService" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAOImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanServiceImpl" %>
 <%@ page language="java" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 
@@ -16,39 +21,56 @@
     <%@include file="navbar.jsp"%>
 
     <title>myPersonalTrainer | myAccount</title>
-    <!--
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="css/footer.css"/>
-      -->
-    <!--link rel="stylesheet" href="styles/reset.min.css"/>
-    <link rel="stylesheet" href="styles/footer.css"/>
-    <link rel="stylesheet" href="styles/header-11.css"/-->
-    <!-- inserimento navbar
-    < % @ include file="navbar.jsp"%>
-     -->
-
 </head>
-<body>
+        <div class="welcomeMessage">
+            Benvenuto, Cliente
+        </div>
 
-    <div class="wrapper">
-        <div class="main_container">
-            <div class="item">
-                <div class="welcomeMessage">
-                    Benvenuto, Cliente
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="height: 100px">
+                        <div class="d-flex justify-content-center">
+                            <img src="images/void.png" class="img-fluid" alt="Responsive image">
+                        </div>
+                    </div>
+                    <div class="col"><div class="d-flex justify-content-center">Column</div></div>
+                    <div class="w-100"></div>
+                    <div class="col">
+                        <div class="row justify-content-md-center">
+                            <div class="row align-items-end">
+                                <form action="<%=request.getContextPath()%>/ManageRequiredTrainingPlanServlet" method="post" onsubmit="return stopsubmit(this);">
+                                    <% String email = "trainerino@testing.com";
+                                        RequiredTrainingPlan requireTest;
+                                        RequiredTrainingPlanDAO requiredTrainingPlanDao = new RequiredTrainingPlanDAOImpl();
+                                        RequiredTrainingPlanService requiredTrainingPlanService = new RequiredTrainingPlanServiceImpl(requiredTrainingPlanDao);
+
+                                        boolean checked = requiredTrainingPlanService.searchAccountByEmail(email);
+                                        System.out.println("la mail è:"+email);
+                                        System.out.println("Cheked è"+checked);
+                                        if(!checked) { %>
+                                    <button type="submit" class="btn btn-primary">Richiedi una Nuova Scheda</button>
+                                    <% System.out.println("la mail aricontrollata è:"+email);} else {%>
+                                    <%requireTest=requiredTrainingPlanService.getAccountByEmail(email);
+                                        System.out.println("la mail aricontrollata è:"+email);
+                                        if(requireTest.getRequired()==1) { %>
+                                    <button type="submit" class="btn btn-primary" disabled>Richiedi una Nuova Scheda</button>
+                                    <% } else {%>
+                                    <button type="submit" class="btn btn-primary">Richiedi una Nuova Scheda</button>
+                                    <% }
+                                    }%>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">Visualizza le schede precedenti</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="item">
-
-            </div>
         </div>
-    </div>
-
-<!--HEADER END-->
-
-
 
     <%@ include file="footer.jsp"%>
 
