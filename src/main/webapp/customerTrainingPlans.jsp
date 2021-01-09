@@ -25,90 +25,54 @@
     <%@include file="head.jsp"%>
     <%@include file="navbar.jsp"%>
 
-
-    <!-- sto style va messo in un css fuori dalla jsp se necessario! -->
-    <style>
-
-        #t01 {
-            text-align: center;
-            margin-left:auto;
-            margin-right:auto;
-            table-layout: fixed;
-            width: 800px;
-            font-family: Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-        }
-
-        #t01 td, #customers th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        #t01 tr:nth-child(even){background-color: #f2f2f2;}
-
-        #t01 tr:hover {background-color: #ddd;}
-
-        #t01 th {
-            text-align: center;
-            padding-top: 12px;
-            padding-bottom: 12px;
-            background-color: #1e90ff;
-            color: white;
-        }
-
-        .button {
-            font-size: 12px;
-            background-color: #1e90ff;
-            border-radius: 12px;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-
-    </style>
 </head>
 <body>
-<%TrainingPlanService tp = new TrainingPlanServiceImpl();
-Collection<TrainingPlan> t = tp.getTrainingPlans("provatest@prova.io");
-int i = t.size();%>
-<section>
-<table id="t01">
-    <tr>
-        <th>#</th>
-        <th>Data</th>
-        <th>Scheda</th>
-        <th>Download</th>
-    </tr>
-    <%for(TrainingPlan b : t){%>
-    <tr>
-        <td><%=i--%></td>
-        <td><%=b.getDate()%></td>
-        <td>
-            <form action="viewTrainingPlan.jsp" method="post">
-                    <% request.getSession().setAttribute("exerc", b.getExercises()); %>
-                <button class="button" type="submit">Visualizza</button>
-            </form>
-        </td>
-        <td>
-            <form action="download-training-plan" method="post">
-                <input type="hidden" name="date" value=<%=b.getDate()%>>
-                <% request.getSession().setAttribute("exerc", b.getExercises()); %>
-                <button class="button" type="submit">Download PDF!</button>
-            </form>
-        </td>
-    </tr>
-<%}%>
-</table>
-</section>
-
-
+<%  TrainingPlanService tp = new TrainingPlanServiceImpl();
+    Collection<TrainingPlan> trainingPlanList = tp.getTrainingPlans("provatest@prova.io");
+    int i = trainingPlanList.size();
+%>
+<div class="card">
+    <div class="card-body">
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th class="table-primary" scope="col">#</th>
+                <th class="table-primary" scope="col">Data</th>
+                <th class="table-primary" scope="col"> </th>
+                <th class="table-primary" scope="col"> </th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for(TrainingPlan t : trainingPlanList) {
+            %>
+            <tr>
+                <th scope="row"><%=i--%></th>
+                <td><%=t.getDate()%></td>
+                <td>
+                    <div class="col text-right">
+                        <form action="viewTrainingPlan.jsp?exercises=<%=t.getExercises()%>" method="post">
+                            <button type="submit" class="btn btn-sm btn-outline-primary">Visualizza</button>
+                        </form>
+                    </div>
+                </td>
+                <td>
+                    <div class="col text-right">
+                    <form action="download-training-plan" method="post">
+                        <input type="hidden" name="date" value=<%=t.getDate()%>>
+                        <input type="hidden" name="exercises" value="<%=t.getExercises()%>">
+                        <button class="btn btn-sm btn-outline-primary" type="submit">Download PDF!</button>
+                    </form>
+                    </div>
+                </td>
+            </tr>
+            <%
+            }
+            %>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <%@include file="footer.jsp"%>
-
 </body>
 </html>
