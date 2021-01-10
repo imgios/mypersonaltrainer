@@ -57,14 +57,14 @@
 </head>
 <body>
 <div id="ricarica">
-<div id="container">
+<div class="conteiner" id="container">
 <div id="listaappuntamento" class="card border-dark mb-3">
     <%
         AgendaDAO dao= new AgendaDAOImpl();
         AgendaService service =new AgendaServiceImpl(dao);
-        String mail="prova@gmail.com";
+        String mail= (String) request.getSession().getAttribute("clienteMail");
 
-        List<Appointment> list=dao.findAppointmetsByEmail("prova@gmail.com");%>
+        List<Appointment> list=dao.findAppointmetsByEmail(mail);%>
 <table  id="appuntamenti" class="table">
     <thead>
     <tr>
