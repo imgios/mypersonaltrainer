@@ -42,6 +42,7 @@
     <%@include file="head.jsp"%>
     <%@include file="navbar.jsp"%>
 
+    <link rel="stylesheet" href="css/viewProgress.css"/>
 
 </head>
 <body>
@@ -72,14 +73,17 @@
     }
 %>
 <!--
-<h1>ci sono i parametri nella console da stampare</h1>
+
 < %=param.getMailClient()+" , "+param.getweight()+", "+param.getfatMass()+", "+param.getleanMass() + " ," +param.getinsertionDate()%>
 < % }% >
 -->
 <!-- inserimento script -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
-    <div id = "main">
+<main>
+
+    <!-- <div id = "main"> -->
+
     <div>
 <div class="chart-container" style="position: relative; height:auto; width:80vw">
     <canvas id="myChart"></canvas>
@@ -102,6 +106,7 @@
     },
 
     // Configuration options go here
+      /*
         options: {
             layout: {
                 padding: {
@@ -112,12 +117,14 @@
                 }
             }
         }
+       */
     });
     </script>
  </div>
+</div>
 
 <!-- inserimento secondo diagramma massa grassa -->
-<div>
+    <div>
     <div class="chart-container" style="position: relative; height:auto; width:80vw">
     <canvas id="myChart2"></canvas>
     <script>
@@ -138,6 +145,7 @@
                 }]
             },
             // Configuration options go here
+          /*
             options: {
                 layout: {
                     padding: {
@@ -148,13 +156,15 @@
                     }
                 }
             }
+           */
         });
     </script>
     </div>
-</div>
+        <!--
+ </div> -->
 
 
-    <div>        <!-- 120px -->
+     <div>      <!-- 120px -->
         <div class="chart-container" style="position: relative; height:auto; width:80vw">
             <canvas id="myChart3"></canvas>
             <script>
@@ -175,6 +185,7 @@
                         }]
                     },
                     // Configuration options go here
+                  /*
                     options: {
                         layout: {
                             padding: {
@@ -185,18 +196,21 @@
                             }
                         }
                     }
+                   */
                 });
             </script>
         </div>
-    </div>
-</div>
-    </div>
+  </div>
 
-<!--  inserimento footer -->
-<!-- <div id="footer">
-        < %@ include file="footer.jsp"%>-->
-      <!--      </div> -->
+        <!--
+     </div>
 
+         </div> -->
+
+
+
+
+</main>
 
 <%@include file="footer.jsp"%>
 </body>
