@@ -50,7 +50,6 @@
 
     AccountDAO accountDao = new AccountDAOImpl();
     AccountService accountService = new AccountServiceImpl(accountDao);
-
 %>
 
 <main>
