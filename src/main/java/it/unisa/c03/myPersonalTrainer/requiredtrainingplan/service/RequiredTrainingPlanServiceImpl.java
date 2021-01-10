@@ -23,7 +23,8 @@ public class RequiredTrainingPlanServiceImpl implements
     }
 
     /**
-     * This service method checks if an account exists in the database.
+     * This service method checks if an account exists
+     * in the RequiredTrainingPlan.
      * @param email referring to the account to search for
      * @return true if the account exists, false if not
      */
@@ -39,17 +40,17 @@ public class RequiredTrainingPlanServiceImpl implements
         //the email exists yet in the DB
         if (requiredTrainingPlan.getEmail() != null) {
             result = true;
-        } else if (requiredTrainingPlan.getEmail() == null) {
+        }/* else if (requiredTrainingPlan.getEmail() == null) {
             //the email doesn't exist in the DB
             result = false;
-        }
+        }*/
         return result;
     }
 
     /**
      * This method return the account given its mail.
      * @param email referring to the account to search for
-     * @return the Account if it exists, null if not
+     * @return the RequiredTrainingPlan if it exists, null if not
      */
     @Override
     public RequiredTrainingPlan getAccountByEmail(String email)
@@ -70,7 +71,7 @@ public class RequiredTrainingPlanServiceImpl implements
     }
 
     /**
-     * This service method changes the password of an account.
+     * This service method changes the status of an account.
      * @param email of the account
      * @param status updated
      * @return true after the change has taken place
@@ -83,9 +84,11 @@ public class RequiredTrainingPlanServiceImpl implements
     }
 
     /**
-     * this function register the account.
-     * @param requiredTrainingPlan user into the db.
-     * @return utente user mem into the db.
+     * this function register the account into RequiredTrainingPlan.
+     * @param requiredTrainingPlan user into the
+     * RequiredTrainingPlan.
+     * @return utente user mem into the
+     * RequiredTrainingPlan.
      * @throws IOException
      * @throws IllegalArgumentException
      */

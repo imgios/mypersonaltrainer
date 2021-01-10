@@ -112,11 +112,11 @@ public class Subscription {
      */
     @Override
     public String toString() {
-        return "Subscription{" +
-                "customerMail='" + customerMail + '\'' +
-                ", expDate='" + expDate + '\'' +
-                ", price='" + price + '\'' +
-                ", sentNotification=" + sentNotification +
-                '}';
+        return "Subscription{"
+            + "customerMail='" + customerMail + '\''
+            + ", expDate='" + expDate + '\''
+            + ", price='" + price + '\''
+            + ", sentNotification=" + sentNotification
+            + '}';
     }
 }

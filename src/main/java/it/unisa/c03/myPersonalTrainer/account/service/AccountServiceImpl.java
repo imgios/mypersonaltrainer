@@ -42,7 +42,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     public AccountServiceImpl() {
-
     }
 
     /**

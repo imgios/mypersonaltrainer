@@ -79,7 +79,7 @@
 <div id = "main">
 
     <div class="card">
-        <h5 class="card-header"> <img src="images/user1.png"> <%=accountCustomer.getName()%> <%=accountCustomer.getSurname()%> <br></h5>
+        <h5 class="card-header"> <i class="fas fa-user"></i> <%=accountCustomer.getName()%> <%=accountCustomer.getSurname()%> <br></h5>
         <h7 class="card-header"> Informazioni</h7>
         <div class="card-body">
             <form>

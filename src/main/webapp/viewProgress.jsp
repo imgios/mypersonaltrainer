@@ -43,11 +43,6 @@
     <%@include file="navbar.jsp"%>
 
 
-
-    <!--
-    <link href="css/footer.css" rel="stylesheet" type="text/css">
-    -->
-
 </head>
 <body>
 
@@ -83,8 +78,6 @@
 -->
 <!-- inserimento script -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
-<h4>inserimento header</h4>
 
     <div id = "main">
     <div>
