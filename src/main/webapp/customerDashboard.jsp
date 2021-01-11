@@ -16,7 +16,7 @@
     // response.sendRedirect("login.jsp");
     {
         response.sendRedirect("error.jsp");
-    }
+    } else{
 %>
 
 <html>
@@ -86,4 +86,5 @@
 <%@ include file="footer.jsp" %>
 
 </body>
+<% }%>
 </html>
