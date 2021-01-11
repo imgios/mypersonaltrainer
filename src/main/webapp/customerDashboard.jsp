@@ -13,6 +13,11 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.parameters.service.ParametersServiceImpl" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.bean.Account" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.service.AccountService" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl" %>
 <%@ page language="java" pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 
@@ -34,6 +39,7 @@
 
 
             <%
+                //cambiare quando finito
                 String utente_dashboard = "prova@io.it";
 
     ParametersDAO paramDao = new ParametersDAOImpl();
@@ -61,9 +67,7 @@
     <title>myPersonalTrainer | myAccount</title>
 </head>
 
-<div class="welcomeMessage">
-    Benvenuto, Cliente
-</div>
+
 <%
     SubscriptionDAO subscriptionDAO = new SubscriptionDAOImpl();
     SubscriptionService subService = new SubscriptionServiceImpl(subscriptionDAO);
@@ -73,7 +77,17 @@
     }
 %>
 
+<%
+    AccountDAO adao = new AccountDAOImpl();
+    AccountService aserv = new AccountServiceImpl(adao);
+    Account utente_sess = aserv.getAccountByEmail(emailCliente);
+%>
 <main>
+
+    <div class="welcomeMessage">
+        Benvenuto, <%=utente_sess.getName()%>
+    </div>
+
     <!-- Content Row -->
     <div class="row">
 
