@@ -54,6 +54,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         Subscription subBean = new Subscription();
         subBean.setCustomerMail(customerMail);
         subBean.setPrice("30");
+        subBean.setSentNotification(0);
 
         //setting the date one month later
         LocalDate local = LocalDate.now();
