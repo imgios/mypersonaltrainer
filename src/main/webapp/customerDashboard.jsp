@@ -64,6 +64,28 @@
     <link rel="stylesheet" href="css/viewProgress.css"/>
 
     <title>myPersonalTrainer | myAccount</title>
+
+    <style>
+        .border-left-primary {
+            border-left: .25rem solid #4e73df!important;
+        }
+        .py-2 {
+            padding-bottom: .5rem!important;
+        }
+
+        .py-2 {
+            padding-top: .5rem!important;
+        }
+        .border-left-success {
+            border-left: .25rem solid #1cc88a!important;
+        }
+        .border-left-info {
+            border-left: .25rem solid #36b9cc!important;
+        }
+        .border-left-warning {
+            border-left: .25rem solid #ffc107!important;
+        }
+    </style>
 </head>
 
 
@@ -105,7 +127,7 @@
                                 <a href="./requestAppointment.jsp" style="color: #4e73df">Prenota Appuntamento</a></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            <i class="far fa-calendar-alt fa-2x"></i>
                         </div>
                     </div>
                 </div>
@@ -123,7 +145,7 @@
 
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <i class="fas fa-chart-line fa-2x"></i>
                         </div>
                     </div>
                 </div>
@@ -138,18 +160,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1"><a href="#" style="color: #36b9cc">Richiedi scheda</a>
                             </div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                </div>
-                                <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <div class="progress-bar bg-info" role="progressbar"
-                                             style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                             aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -167,10 +178,9 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 <a href="./accountProfile.jsp" style="color: #ffc107">Abbonamento</a></div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Consulta lo stato</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            <i class="fas fa-bell fa-2x"></i>
                         </div>
                     </div>
                 </div>
