@@ -9,13 +9,6 @@
 <html>
 <head>
     <title>Nuova Scheda Allenamento</title>
-    <!--
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    -->
 
     <%@include file="meta.jsp" %>
     <%@include file="head.jsp" %>
@@ -25,7 +18,10 @@
 </head>
 <body>
 
-<form id="formID" action="createTP-controller" onsubmit="return stopsubmit(this);">
+<%    String email = (String) request.getParameter("email");
+%>
+
+    <form id="formID" action="createTP-controller" onsubmit="return stopsubmit(this);">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="idexercise">exercise</label><label id="controlexercise"></label>

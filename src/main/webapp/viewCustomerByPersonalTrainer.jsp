@@ -210,7 +210,6 @@
             </div>
         </div>
 
-
     <div class="card text-right">
         <div class="card-body">
             <p class="card-text">
@@ -231,8 +230,9 @@
                 </tbody>
             </table>
             </p>
-            <a href="http://localhost:8080/myPersonalTrainer_war/createTrainingPlan.jsp" class="btn btn-primary">Crea Nuova Scheda</a>
-        </div>
+                <form action="createTrainingPlan.jsp?exercises=<%=email%>" method="post">
+                    <button type="submit" class="btn btn-sm btn-outline-primary">Crea nuova scheda</button>
+                </form>
     </div>
 </div>
 
