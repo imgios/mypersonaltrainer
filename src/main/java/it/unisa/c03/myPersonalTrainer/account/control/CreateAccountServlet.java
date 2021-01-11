@@ -38,7 +38,6 @@ public class CreateAccountServlet extends HttpServlet {
                           HttpServletResponse response)
             throws ServletException, IOException {
 
-        //valori passati dalla form jsp
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
         String phone = request.getParameter("phone");
@@ -69,16 +68,9 @@ public class CreateAccountServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        //creazione nuovo oggetto
-
         Account utente = new Account(name, surname, phone,
                 email, generatedPassword, role);
 
-        //verifica informazioni acquisite dalla servlet
-        //System.out.println("---------------------------");
-        //System.out.println(utente);
-
-        //richiamo della funzione per registrare un nuovo account
         AccountDAO accountDao = new AccountDAOImpl();
         AccountService accountService = new AccountServiceImpl(accountDao);
 
@@ -92,8 +84,8 @@ public class CreateAccountServlet extends HttpServlet {
          */
         boolean control = false;
 
-        /*permette di stampare l'errore a
-        video una volta catturato dall'eccezione */
+       /* need to print the message of error
+            into the page */
         String errors = "";
 
         try {
@@ -101,7 +93,6 @@ public class CreateAccountServlet extends HttpServlet {
                     .checkCredentials(email, password);
             if (controlcredential) {
                 System.out.println("credenziali OK");
-
                 control = accountService.registerAccount(utente);
 
                 // subscription registration
@@ -113,35 +104,16 @@ public class CreateAccountServlet extends HttpServlet {
                 //notifica la registrazione con email
                 accountService.sendEmail(email, password);
 
-
-                if (control) {
-                    System.out.println("boolean true inserito");
-                    System.out.println("valore inserito inserito");
-                    System.out.println("Salvataggio nuovo utente");
-                } else {
-                    System.out.println("boolean false non inserimento");
-                }
-            } else {
-                System.out.println("le credenziali non sono valide.");
             }
         } catch (IllegalArgumentException | ExecutionException | InterruptedException | EmailException exception) {
             errors = errors + exception.getMessage();
         }
 
-        /*
-        l'errore catturato tramite un avviso e il send redirect può
-        essere visualizzato a video
-        ho individuato tre casi di errore per visualizzare a schermo
-        gestione errore
-         if result is false, it means that there's an error to show
-        memorizzazzione okay e informazioni non presenti
-         */
-
         if (controlcredential && control) {
             request.getSession().removeAttribute("errorMessage");
             request.getSession().setAttribute("successMessage",
                     "Inserimento riuscito");
-            response.sendRedirect("createAccount.jsp");
+            response.sendRedirect("customerDashboard.jsp");
         } else if (controlcredential && !control) {
             request.getSession().removeAttribute("successMessage");
             request.getSession().setAttribute("errorMessage", errors);
@@ -150,13 +122,7 @@ public class CreateAccountServlet extends HttpServlet {
             request.getSession().removeAttribute("successMessage");
             request.getSession().setAttribute("errorMessage", errors);
             response.sendRedirect("createAccount.jsp");
-        } else if (!controlcredential && control) {
-            request.getSession().removeAttribute("successMessage");
-            request.getSession().setAttribute("errorMessage", errors);
-            response.sendRedirect("createAccount.jsp");
         }
-
-
     }
 
     protected void doGet(HttpServletRequest request,

@@ -162,10 +162,6 @@ public class LoginServlet extends HttpServlet {
             request.getSession().removeAttribute("successInsertLogin");
             request.getSession().setAttribute("errorInsertLogin", errors);
             response.sendRedirect("login.jsp");
-        } else if (!verifiedCredential && control) {
-            request.getSession().removeAttribute("successInsertLogin");
-            request.getSession().setAttribute("errorInsertLogin", errors);
-            response.sendRedirect("login.jsp");
         }
     }
     /**
