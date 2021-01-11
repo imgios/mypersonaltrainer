@@ -2,6 +2,7 @@ package it.unisa.c03.myPersonalTrainer.account.service;
 
 
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
+import org.apache.commons.mail.EmailException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -91,6 +92,16 @@ public interface AccountService {
     * a Personal Trainer's account.
     * @throws IllegalArgumentException
     */
-    boolean verifyIsAdmin(Account account) throws IllegalArgumentException;
+    boolean verifyIsAdmin(Account account)
+            throws IllegalArgumentException;
+
+  /**
+   * This method send an Email with new account credentials.
+   * @param account
+   * @param pw
+   * @throws EmailException
+   */
+   void sendEmail(String account, String pw)
+          throws EmailException;
 
 }

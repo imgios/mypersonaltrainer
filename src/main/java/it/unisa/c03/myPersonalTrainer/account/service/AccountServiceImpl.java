@@ -3,6 +3,10 @@ package it.unisa.c03.myPersonalTrainer.account.service;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,6 +31,8 @@ public class AccountServiceImpl implements AccountService {
      * @exclude
      * */
     public static final int MAX_PASSWORD_LENGTH = 30;
+
+    private static final int PORT = 465;
 
     /**
      * @exclude
@@ -221,6 +227,29 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public boolean verifyIsAdmin(Account account) {
         return account.getRole() == 1;
+    }
+
+    /**
+     * This method send an Email with new account credentials.
+     * @param account
+     * @param pw
+     * @throws EmailException
+     */
+    public void sendEmail(String account, String pw)
+            throws EmailException {
+        Email email = new SimpleEmail();
+        email.setHostName("smtp.gmail.com");
+        email.setSmtpPort(PORT);
+        email.setAuthenticator(new DefaultAuthenticator
+                ("mypt.gps.is@gmail.com", "mypt2021"));
+        email.setSSLOnConnect(true);
+        email.setFrom("mypt.gps.is@gmail.com");
+        email.setSubject("Registrazione myPersonalTrainer");
+        email.setMsg("Benvenuto/a in myPersonalTrainer. "
+                + "La sua password per accedere al sistema è: "
+                + pw);
+        email.addTo(account);
+        email.send();
     }
 
 }

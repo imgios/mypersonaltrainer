@@ -6,6 +6,8 @@ import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -272,4 +274,15 @@ class AccountServiceImplTest {
         AccountService service  = new AccountServiceImpl(accountDAO);
         assertEquals(false, service.loginAccount("hismail@italy.com", "hispasswod1"));
     }
+
+    @Test
+    void viewInfoAccount() throws IOException, ExecutionException, InterruptedException{
+        AccountDAO accDAO = Mockito.mock(AccountDAO.class);
+        ArrayList<Account> listToReturn = new ArrayList<>();
+        Account a = new Account("Mario", "Rossi", "3338741652", "mrossi80@gmail.com", "Fisciano", 0);
+        listToReturn.add(a);
+        Mockito.when(accDAO.getAccounts()).thenReturn(listToReturn);
+        assertEquals(listToReturn.size(), listToReturn.size());
+    }
+
 }
