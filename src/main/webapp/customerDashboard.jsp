@@ -27,7 +27,7 @@
     // response.sendRedirect("login.jsp");
     {
         response.sendRedirect("error.jsp");
-    } else{
+    } else {
 %>
 
 <html>
@@ -65,27 +65,8 @@
 
     <title>myPersonalTrainer | myAccount</title>
 
-    <style>
-        .border-left-primary {
-            border-left: .25rem solid #4e73df!important;
-        }
-        .py-2 {
-            padding-bottom: .5rem!important;
-        }
+    <link rel="stylesheet" href="css/dashboard.css"/>
 
-        .py-2 {
-            padding-top: .5rem!important;
-        }
-        .border-left-success {
-            border-left: .25rem solid #1cc88a!important;
-        }
-        .border-left-info {
-            border-left: .25rem solid #36b9cc!important;
-        }
-        .border-left-warning {
-            border-left: .25rem solid #ffc107!important;
-        }
-    </style>
 </head>
 
 
@@ -152,6 +133,7 @@
             </div>
         </div>
 
+
         <!-- Richiedi nuova scheda -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-info shadow h-100 py-2">
@@ -170,6 +152,7 @@
             </div>
         </div>
 
+
         <!-- Abbonamento -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
@@ -187,7 +170,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="main-panel">
         <div class="content-wrapper">
@@ -219,6 +201,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-lg-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">

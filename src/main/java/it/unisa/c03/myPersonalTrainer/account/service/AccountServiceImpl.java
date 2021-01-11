@@ -194,7 +194,7 @@ public class AccountServiceImpl implements AccountService {
 
         AccountDAO accountDAO = new AccountDAOImpl();
 
-        System.out.println("CONTROLLO EMAIL PRIMA DELL'INSERIMENTO NEL DB");
+        //System.out.println("CONTROLLO EMAIL PRIMA DELL'INSERIMENTO NEL DB");
 
         // System.out.println(utente.getEmail());
         // System.out.println(accountDAO.findAccountByEmail(utente.getEmail()));
@@ -203,16 +203,16 @@ public class AccountServiceImpl implements AccountService {
         ricerca = accountDAO.findAccountByEmail(utente.getEmail());
 
         //stampa delle due email
-        System.out.println(utente.getEmail());
-        System.out.println(ricerca.getEmail());
+        //System.out.println(utente.getEmail());
+        //System.out.println(ricerca.getEmail());
 
         //if (utente.getEmail() != ricerca.getEmail()){
         if (ricerca.getEmail() == null) {
-            System.out.println("email non presente, la inserisco nel DB");
+          //  System.out.println("email non presente, la inserisco nel DB");
             accountDAO.saveAccount(utente);
             return true;
         } else {
-            System.out.println("email già presente");
+            //System.out.println("email già presente");
             throw new IllegalArgumentException("email già presente"
                     + " nel DB, utilizza una nuova email");
         }

@@ -9,6 +9,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 
 
+import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
@@ -128,8 +129,10 @@ class CreateAccountServletTest {
 
   }
 
+
+
   @AfterAll
-  static void afterinseraccounttest() throws IOException, ExecutionException, InterruptedException {
+  static void AfterInserDeleteAccountSubscription() throws IOException, ExecutionException, InterruptedException {
     List<QueryDocumentSnapshot> lqds = DBConnection
         .getConnection().collection("Account").whereEqualTo("email","account@test.it").get().get().getDocuments();
 
@@ -137,7 +140,17 @@ class CreateAccountServletTest {
     {
       document.getReference().delete();
     }
+
+    List<QueryDocumentSnapshot> lista_sub = DBConnection
+        .getConnection().collection("Subscription").whereEqualTo("customerMail", "account@test.it").get().get().getDocuments();
+
+    for(QueryDocumentSnapshot document : lista_sub)
+    {
+      document.getReference().delete();
+    }
+
   }
+
 
 
     @Test
