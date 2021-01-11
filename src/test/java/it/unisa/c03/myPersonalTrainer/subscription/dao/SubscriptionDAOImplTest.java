@@ -64,10 +64,10 @@ class SubscriptionDAOImplTest {
         assertNotEquals(voidList.size(), listToReturn.size());
     }
 
-
     @Test
     void updatePassword() throws IOException, ExecutionException, InterruptedException {
         SubscriptionDAO subDao = new SubscriptionDAOImpl();
         assertEquals(true, subDao.updateSentNotification("marcosica99@libero.it"));
     }
+
 }
