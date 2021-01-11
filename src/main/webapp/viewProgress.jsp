@@ -21,12 +21,14 @@
     response.sendRedirect("./error.jsp");
     } else {
 %>
-<%
+<!--
+< %
     //String email = "mail@io.it";
     //String email = "prova@io.it";
     // String email = "test@utente.it";
     //String email_utente="prova@io.it";
-%>
+% >
+-->
 
 <!--
 < %
@@ -207,11 +209,7 @@ String done = (String) request.getSession().getAttribute("done");
      </div>
          </div> -->
 
-
-
 </main>
-
-
 
 <%
     }
