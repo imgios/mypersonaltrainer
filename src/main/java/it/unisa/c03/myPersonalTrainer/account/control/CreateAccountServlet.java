@@ -19,7 +19,6 @@ import it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAO;
 import it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAOImpl;
 import it.unisa.c03.myPersonalTrainer.subscription.service.SubscriptionService;
 import it.unisa.c03.myPersonalTrainer.subscription.service.SubscriptionServiceImpl;
-import org.apache.commons.mail.EmailException;
 
 /**
  * servlet for creating account.
@@ -101,11 +100,9 @@ public class CreateAccountServlet extends HttpServlet {
                         new SubscriptionServiceImpl(subDao);
                 subService.createSubscription(utente.getEmail());
 
-                //notifica la registrazione con email
-                accountService.sendEmail(email, password);
-
             }
-        } catch (IllegalArgumentException | ExecutionException | InterruptedException | EmailException exception) {
+        } catch (IllegalArgumentException
+                | ExecutionException | InterruptedException exception) {
             errors = errors + exception.getMessage();
         }
 
@@ -113,7 +110,7 @@ public class CreateAccountServlet extends HttpServlet {
             request.getSession().removeAttribute("errorMessage");
             request.getSession().setAttribute("successMessage",
                     "Inserimento riuscito");
-            response.sendRedirect("customerDashboard.jsp");
+            response.sendRedirect("adminDashboard.jsp");
         } else if (controlcredential && !control) {
             request.getSession().removeAttribute("successMessage");
             request.getSession().setAttribute("errorMessage", errors);
