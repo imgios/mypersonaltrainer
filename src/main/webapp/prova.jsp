@@ -1,3 +1,9 @@
+<%@ page import="it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAOImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.parameters.service.ParametersService" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.parameters.service.ParametersServiceImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters" %>
+<%@ page import="java.util.ArrayList" %>
 <%--
   Created by IntelliJ IDEA.
   User: Michele
@@ -5,8 +11,36 @@
   Time: 11:28
   To change this template use File | Settings | File Templates.
 --%>
+<%
+    //String utente_dashboard = (String) request.getSession().getAttribute("clienteMail");
+    String utente_dashboard = "prova@io.it";
+%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
+<%
+    ParametersDAO paramDao = new ParametersDAOImpl();
+    ParametersService sparam = new ParametersServiceImpl(paramDao);
+    //  sparam.getByMail(email);
+    ArrayList<Parameters> list = sparam.getByMail(utente_dashboard);
+    //  for (Parameters param: list){
+    //    System.out.println(param);
+%>
+
+<%
+    String passaggio ="";
+    String dati = "";
+
+    for (Parameters param: list){
+    passaggio = passaggio + param.getweight() + ",";
+    // System.out.println(passaggio);
+    dati = dati + "'" + param.getinsertionDate()+ "'" + ",";
+    // System.out.println(dati);
+    }
+%>
+    <link rel="stylesheet" href="css/viewProgress.css"/>
+
 <head>
     <title>Dashboard</title>
 
@@ -17,6 +51,7 @@
 
 <body>
 
+<main>
 <!-- Content Row -->
 <div class="row">
 
@@ -111,7 +146,8 @@
             <div class="col-lg-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Basic Table</h4>
+                        <h4 class="card-title">non toccare questa</h4>
+
                         <p class="card-description"> Add class <code>.table</code> </p>
                         <table class="table">
                             <thead>
@@ -165,19 +201,63 @@
                             </tr>
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
+                        <p> le tue statistiche di allenamento</p>
+                            <!-- inserimento grafici -->
 
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
+                        <div class="chart-container" style="position: relative; height:auto; width:auto">
+                            <canvas id="myChart"></canvas>
+                            <script>
+                              var ctx = document.getElementById('myChart').getContext('2d');
+                              var chart = new Chart(ctx, {
+                                // The type of chart we want to create
+                                type: 'line',
 
+                                // The data for our dataset
+                                data: {
+                                  labels: [<%=dati%>],
+                                  datasets: [{
+                                    label: 'Peso',
+                                    backgroundColor: 'rgb(74, 104, 254)',
+                                    borderColor: 'rgb(9,217,245)',
+                                    data: [<%=passaggio%>]
+
+                                  }]
+                                },
+
+                                // Configuration options go here
+                                /*
+                                options: {
+                                  layout: {
+                                    padding: {
+                                      left: 300,
+                                      right: 0,
+                                      top: 0,
+                                      bottom: 0
+                                    }
+                                  }
+                                }
+                                 */
+                              });
+                            </script>
+                        </div>
                     </div>
                 </div>
             </div>
 
+        </div>
+    </div>
+</div>
 
+</main>
+<%@include file="footer.jsp"%>
 </body>
 </html>
