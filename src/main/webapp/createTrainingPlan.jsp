@@ -20,7 +20,7 @@
 
 <%    String email = (String) request.getParameter("email");
 %>
-
+<main>
     <form id="formID" action="createTP-controller" onsubmit="return stopsubmit(this);">
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -83,6 +83,8 @@
 <% request.getSession().removeAttribute("noEx");
 }%>
 
+
+</main>
 
 <%@include file="footer.jsp" %>
 
