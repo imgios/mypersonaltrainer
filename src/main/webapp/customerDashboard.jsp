@@ -38,28 +38,28 @@
     <%@include file="navbar.jsp" %>
 
 
-            <%
-                //cambiare quando finito
-                String utente_dashboard = "prova@io.it";
-
-    ParametersDAO paramDao = new ParametersDAOImpl();
-    ParametersService sparam = new ParametersServiceImpl(paramDao);
-    //  sparam.getByMail(email);
-    ArrayList<Parameters> list = sparam.getByMail(utente_dashboard);
-    //  for (Parameters param: list){
-    //    System.out.println(param);
-%>
     <%
-    String passaggio ="";
-    String dati = "";
+        //cambiare quando finito
+        String utente_dashboard = "prova@io.it";
 
-    for (Parameters param: list){
-    passaggio = passaggio + param.getweight() + ",";
-    // System.out.println(passaggio);
-    dati = dati + "'" + param.getinsertionDate()+ "'" + ",";
-    // System.out.println(dati);
-    }
-%>
+        ParametersDAO paramDao = new ParametersDAOImpl();
+        ParametersService sparam = new ParametersServiceImpl(paramDao);
+        //  sparam.getByMail(email);
+        ArrayList<Parameters> list = sparam.getByMail(utente_dashboard);
+        //  for (Parameters param: list){
+        //    System.out.println(param);
+    %>
+    <%
+        String passaggio ="";
+        String dati = "";
+
+        for (Parameters param: list){
+            passaggio = passaggio + param.getweight() + ",";
+            // System.out.println(passaggio);
+            dati = dati + "'" + param.getinsertionDate()+ "'" + ",";
+            // System.out.println(dati);
+        }
+    %>
 
     <link rel="stylesheet" href="css/viewProgress.css"/>
 
@@ -82,16 +82,21 @@
     AccountService aserv = new AccountServiceImpl(adao);
     Account utente_sess = aserv.getAccountByEmail(emailCliente);
 %>
+
+<%
+    String s = request.getParameter("exercises");
+%>
+
 <main>
 
     <div class="welcomeMessage">
-        Benvenuto, <%=utente_sess.getName()%>
+      <h5>Benvenuto, <%=utente_sess.getName()%> </h5>
     </div>
 
     <!-- Content Row -->
     <div class="row">
 
-        <!-- Earnings (Monthly) Card Example -->
+        <!-- Prenota Appuntamento -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
@@ -108,7 +113,7 @@
             </div>
         </div>
 
-        <!-- Earnings (Monthly) Card Example -->
+        <!-- Statistiche -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
@@ -126,7 +131,7 @@
             </div>
         </div>
 
-        <!-- Earnings (Monthly) Card Example -->
+        <!-- Richiedi nuova scheda -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
@@ -155,7 +160,7 @@
             </div>
         </div>
 
-        <!-- Pending Requests Card Example -->
+        <!-- Abbonamento -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
                 <div class="card-body">
@@ -181,69 +186,34 @@
                 <div class="col-lg-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">non toccare questa</h4>
+                            <h4 class="card-title">Scheda Allenamento</h4>
 
-                            <p class="card-description"> Add class <code>.table</code> </p>
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>Profile</th>
-                                    <th>VatNo.</th>
-                                    <th>Created</th>
-                                    <th>Status</th>
+                                    <th>Esercizio</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>Jacob</td>
-                                    <td>53275531</td>
-                                    <td>12 May 2017</td>
-                                    <td>
-                                        <label class="badge badge-danger">Pending</label>
-                                    </td>
+                                    <td><%=s%></td>
                                 </tr>
-                                <tr>
-                                    <td>Messsy</td>
-                                    <td>53275532</td>
-                                    <td>15 May 2017</td>
-                                    <td>
-                                        <label class="badge badge-warning">In progress</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>John</td>
-                                    <td>53275533</td>
-                                    <td>14 May 2017</td>
-                                    <td>
-                                        <label class="badge badge-info">Fixed</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Peter</td>
-                                    <td>53275534</td>
-                                    <td>16 May 2017</td>
-                                    <td>
-                                        <label class="badge badge-success">Completed</label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Dave</td>
-                                    <td>53275535</td>
-                                    <td>20 May 2017</td>
-                                    <td>
-                                        <label class="badge badge-warning">In progress</label>
-                                    </td>
-                                </tr>
+
                                 </tbody>
                             </table>
 
+                            <a class="btn btn-primary" href="#" role="button">Schede di Allenamento precedenti</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <p> le tue statistiche di allenamento</p>
+                            <h4 class="card-title">Status Allenamento</h4>
                             <!-- inserimento grafici -->
 
                             <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
