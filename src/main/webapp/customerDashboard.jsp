@@ -63,7 +63,6 @@
 
     <link rel="stylesheet" href="css/viewProgress.css"/>
 
-
     <title>myPersonalTrainer | myAccount</title>
 </head>
 
@@ -90,7 +89,7 @@
 <main>
 
     <div class="welcomeMessage">
-      <h5>Benvenuto, <%=utente_sess.getName()%> </h5>
+        <h5> &nbsp; Benvenuto, <b><i><%=utente_sess.getName()%></i></b> </h5>
     </div>
 
     <!-- Content Row -->
@@ -267,9 +266,6 @@
 
 
 
-
-
-
 <!-- da guardare -->
 <!--
 <div class="container">
@@ -319,10 +315,7 @@
 
 
 
-
-
 <%@ include file="footer.jsp" %>
-
 </body>
 <% }%>
 </html>
