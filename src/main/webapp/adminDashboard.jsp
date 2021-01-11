@@ -1,50 +1,56 @@
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.service.AccountService" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.bean.Account" %>
 <%@ page language="java" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 
-<!-- verifica che l'utente sia PT
-isPT = true allora procedi, altrimenti errore.-->
 <%
     String emailAdmin = (String) request.getSession().getAttribute("ptMail");
-    if(emailAdmin == null)
-        //response.sendRedirect("login.jsp");
-          response.sendRedirect("error.jsp");
+    if(emailAdmin == null) {
+        response.sendRedirect("error.jsp");
+    } else {
 %>
 
 <html>
 <head>
-    <title>myPersonalTrainer | myAccount</title>
+    <title>myPT | Account</title>
 
     <%@include file="meta.jsp"%>
     <%@include file="head.jsp"%>
     <%@include file="navbar.jsp"%>
 
-   <!--
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    -->
-
-    <!--inserimento navbar
-    < %@ include file="navbar.jsp"%>
-    -->
 </head>
 <body>
-    <div class="wrapper">
-        <div class="main_container">
-            <div class="item">
-                <div class="welcomeMessage">
-                    Benvenuto, Admin
-                </div>
-            </div>
-            <div class="item">
 
-            </div>
-        </div>
-    </div>
+<%
+    AccountDAO a_dao = new AccountDAOImpl();
+    AccountService a_serv = new AccountServiceImpl(a_dao);
+    Account admin_sess = a_serv.getAccountByEmail(emailAdmin);
+%>
+
+<main>
+
+<div class="welcomeMessage">
+    <h5> &nbsp; Benvenuto, <b><i><%=admin_sess.getName()%></i></b> </h5>
+</div>
 
 
-    <!--FOOTER -->
+
+
+
+
+
+
+
+
+</main>
+
     <%@include file="footer.jsp"%>
-    <!--FINE FOOTER-->
-
 </body>
+
+<%
+    }
+%>
 </html>
