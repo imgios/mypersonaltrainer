@@ -139,6 +139,13 @@ public class LoginServlet extends HttpServlet {
                                     setAttribute("clienteMail", email);
                             response.sendRedirect("customerDashboard.jsp");
                         }
+                    } else if (!(email.equals(testUtente.getEmail()))) {
+                        request.getSession().
+                                removeAttribute("successInsertLogin");
+                        request.getSession().
+                                setAttribute("errorInsertLogin",
+                                        "Email errata!");
+                        response.sendRedirect("login.jsp");
                     } else if (!(password.equals(testUtente.getPassword()))) {
                         request.getSession().
                                 removeAttribute("successInsertLogin");
