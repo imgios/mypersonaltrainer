@@ -6,11 +6,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     -->
-
     <%@include file="meta.jsp"%>
-  <!--  < %@include file="head.jsp"%> -->
+    <%@include file="head.jsp"%>
     <%@include file="navbar.jsp"%>
-
+    <!--
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -24,9 +23,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    -->
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script>
         $(function () {
             $("#datepicker").datepicker({
@@ -35,44 +37,45 @@
             });
         });
     </script>
+
     <script src="js/viewAvailability.js"></script>
 
 
 </head>
 <body>
-<br>
-<br>
-<br>
-<div class="grid-container" align="center">
-    <div id="datepicker"></div>
-</div>
 
-<input id="iddataSelected" hidden type="text">
-<br>
-<br>
-<div class="grid-container" align="center">
-    <form>
-        <button type="button" class="btn btn-primary" id="sendDate">Visualizza disponibilia'</button>
-    </form>
-</div>
+<main>
 
+<!-- <div class="grid-container" align="center">
 
+</div> -->
 <div class="container">
     <div class="row justify-content-md-center">
-        <div class="row justify-content-md-center">
-            <div class="col col-lg-3">
-            </div>
+
+        <div class="col">
+            <div id="datepicker"></div>
+        <input id="iddataSelected" hidden type="text">
+            <br>
+                <form>
+                    <button type="button" class="btn btn-primary" id="sendDate">Visualizza disponibilità</button>
+                </form>
+
+        </div>
+
+
+        <!--<div class="row justify-content-md-center">-->
+            <div class="col">
             <div class="alert alert-success" role="alert" id="divSuccess"></div>
             <div class="alert alert-danger" role="alert" id="divError"></div>
             <div class="alert alert-primary" role="alert" id="divList"></div>
-            <div class="col col-lg-3">
+            <!-- <div class="col col-lg-3"></div> -->
             </div>
         </div>
-    </div>
+
+
 </div>
 
-
-
+</main>
 
 <%@include file="footer.jsp"%>
 

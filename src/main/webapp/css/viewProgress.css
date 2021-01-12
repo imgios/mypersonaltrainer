@@ -1,0 +1,10 @@
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 80vh;
+  width: 80vw;
+}
+
+/*
+add responsive layout for chart.js
+ */

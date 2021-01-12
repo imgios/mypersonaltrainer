@@ -88,8 +88,11 @@ public class CreateTrainingPlanController extends
                             "Inserisci almeno un esercizio per creare una scheda!");
                     response.sendRedirect("createTrainingPlan.jsp");
                 } else {
+
+                    String mail = request.getParameter("email");
+
                     TrainingPlan trainingPlan =
-                            new TrainingPlan(exercises, "clientemail@prova.io");
+                            new TrainingPlan(exercises, mail);
                     trainingPlanService.createTrainingPlan(trainingPlan);
                     request.getSession().removeAttribute("exercises");
                     request.getSession().setAttribute("success",

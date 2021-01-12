@@ -19,6 +19,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 
+/*
 class CreateTrainingPlanControllerTestGet {
 
     HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
@@ -169,3 +170,5 @@ class CreateTrainingPlanControllerTestGet {
         new CreateTrainingPlanController().doGet(request, response);
     }
 }
+
+*/

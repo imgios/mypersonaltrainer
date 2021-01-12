@@ -39,8 +39,9 @@
 </head>
 <body>
 
+<main>
 <div>
-    <h1>Gestisci Profilo</h1>
+    <h3>Gestisci Profilo</h3>
 </div>
 
 <div class="container">
@@ -49,7 +50,7 @@
         <div class="col-sm-4">
             <div class="list-group" id="list-tab" role="tablist">
 
-                <button class="list-group-item list-group-item-action active" id="list-profile-btn" data-bs-toggle="list" role="tab" aria-controls="profile" onclick="showProfile()">Profilo</button>
+                <button class="list-group-item list-group-item-action list-group-item-primary" id="list-profile-btn" data-bs-toggle="list" role="tab" aria-controls="profile" onclick="showProfile()">Profilo</button>
                 <button class="list-group-item list-group-item-action" id="list-password-btn" data-bs-toggle="list" role="tab" aria-controls="password" onclick="showPassword()">Cambia Password</button>
                 <button class="list-group-item list-group-item-action" id="list-abbonamento-btn" data-bs-toggle="list" role="tab" aria-controls="abbonamento" onclick="showAbbonamento()">Abbonamento
                     <%
@@ -207,9 +208,10 @@
 
 </div>
 
-<!--FOOTER -->
+
+</main>
+
 <%@include file="footer.jsp"%>
-<!--FINE FOOTER-->
 
 </body>
 <% }%>

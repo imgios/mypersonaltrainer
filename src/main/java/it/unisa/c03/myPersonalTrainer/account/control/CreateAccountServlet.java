@@ -92,7 +92,7 @@ public class CreateAccountServlet extends HttpServlet {
             controlcredential = accountService
                     .checkCredentials(email, password);
             if (controlcredential) {
-                System.out.println("credenziali OK");
+                //System.out.println("credenziali OK");
                 control = accountService.registerAccount(utente);
 
                 // subscription registration
@@ -101,8 +101,8 @@ public class CreateAccountServlet extends HttpServlet {
                         new SubscriptionServiceImpl(subDao);
                 subService.createSubscription(utente.getEmail());
 
-                //notifica la registrazione con email
-                accountService.sendEmail(email, password);
+                //Notifica di creazione
+                accountService.sendEmail(email,password);
 
             }
         } catch (IllegalArgumentException | ExecutionException | InterruptedException | EmailException exception) {
@@ -113,7 +113,7 @@ public class CreateAccountServlet extends HttpServlet {
             request.getSession().removeAttribute("errorMessage");
             request.getSession().setAttribute("successMessage",
                     "Inserimento riuscito");
-            response.sendRedirect("customerDashboard.jsp");
+            response.sendRedirect("adminDashboard.jsp");
         } else if (controlcredential && !control) {
             request.getSession().removeAttribute("successMessage");
             request.getSession().setAttribute("errorMessage", errors);

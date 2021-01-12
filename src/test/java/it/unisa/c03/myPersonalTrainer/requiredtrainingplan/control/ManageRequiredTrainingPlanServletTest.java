@@ -253,6 +253,7 @@ class CreateAccountServletTest {
 
     }
 
+    /*
     @AfterAll
     static void afterinseraccounttest() throws IOException, ExecutionException, InterruptedException {
         List<QueryDocumentSnapshot> lqds = DBConnection
@@ -263,6 +264,8 @@ class CreateAccountServletTest {
             document.getReference().delete();
         }
     }
+    */
+
 
 
     @Test

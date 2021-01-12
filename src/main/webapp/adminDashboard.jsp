@@ -1,50 +1,128 @@
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.service.AccountService" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.account.bean.Account" %>
 <%@ page language="java" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 
-<!-- verifica che l'utente sia PT
-isPT = true allora procedi, altrimenti errore.-->
 <%
     String emailAdmin = (String) request.getSession().getAttribute("ptMail");
-    if(emailAdmin == null)
-        //response.sendRedirect("login.jsp");
-          response.sendRedirect("error.jsp");
+    if(emailAdmin == null) {
+        response.sendRedirect("error.jsp");
+    } else {
 %>
 
 <html>
 <head>
-    <title>myPersonalTrainer | myAccount</title>
+    <title>myPT | Account</title>
 
     <%@include file="meta.jsp"%>
     <%@include file="head.jsp"%>
     <%@include file="navbar.jsp"%>
 
-   <!--
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    -->
 
-    <!--inserimento navbar
-    < %@ include file="navbar.jsp"%>
-    -->
+    <link rel="stylesheet" href="css/dashboard.css"/>
+
 </head>
 <body>
-    <div class="wrapper">
-        <div class="main_container">
-            <div class="item">
-                <div class="welcomeMessage">
-                    Benvenuto, Admin
+
+<%
+    AccountDAO a_dao = new AccountDAOImpl();
+    AccountService a_serv = new AccountServiceImpl(a_dao);
+    Account admin_sess = a_serv.getAccountByEmail(emailAdmin);
+%>
+
+<main>
+
+<div class="welcomeMessage">
+    <h5> &nbsp; Benvenuto, <b><i><%=admin_sess.getName()%></i></b> </h5>
+</div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Registra Cliente -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                <a href="./createAccount.jsp" style="color: #4e73df">Crea Account</a></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="far fa-calendar-alt fa-2x"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="item">
+        </div>
 
+        <!-- Visualizza Agenda -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                <a href="./verifyAppointments.jsp" style="color: #1cc88a"> Visualizza Agenda</a></div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-chart-line fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Pagamenti -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1"><a href="./viewSubscriptionList.jsp" style="color: #36b9cc">Stato Abbonamenti</a>
+                            </div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Crea Scheda -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                <a href="./createTrainingPlan.jsp" style="color: #ffc107">Nuova Scheda</a></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-bell fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
 
-    <!--FOOTER -->
-    <%@include file="footer.jsp"%>
-    <!--FINE FOOTER-->
 
+</main>
+
+    <%@include file="footer.jsp"%>
 </body>
+
+<%
+    }
+%>
 </html>

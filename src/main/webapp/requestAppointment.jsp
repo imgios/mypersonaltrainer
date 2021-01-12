@@ -58,7 +58,9 @@
 </head>
 
 <body>
+
 <main>
+
 <div id="ricarica">
 <div class="container">
     <div class="row">

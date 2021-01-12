@@ -6,8 +6,11 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
+import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
+
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.io.IOException;
 
@@ -126,6 +129,37 @@ public class RequiredTrainingPlanDAOImpl implements RequiredTrainingPlanDAO {
             id = id + document.getId();
         }
         return id;
+    }
+
+
+    /**
+     * This method gets all requestes.
+     * @return
+     * @throws IOException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+    public ArrayList<RequiredTrainingPlan> getAllRequests()
+            throws IOException, ExecutionException, InterruptedException {
+
+        CollectionReference accounts = null;
+
+        accounts = DBConnection.getConnection().collection("RequiredTrainingPlan");
+
+        Query query = accounts.whereEqualTo("required", 1);
+
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+
+        ArrayList<RequiredTrainingPlan> rtpBean = new ArrayList<>();
+
+        for (DocumentSnapshot document
+                : querySnapshot.get().getDocuments()) {
+            RequiredTrainingPlan a = document.toObject(RequiredTrainingPlan.class);
+            rtpBean.add(a);
+        }
+
+        return rtpBean;
+
     }
 
 }

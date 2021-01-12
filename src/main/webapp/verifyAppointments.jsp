@@ -35,6 +35,7 @@
     </script>
 
         </head>
+
     <body>
 
     <main>
@@ -71,9 +72,10 @@
                 </div>-->
             </div>
         </div>
+
     </main>
 
-        <%@include file="footer.jsp"%>
+    <%@include file="footer.jsp"%>
 
     </body>
 </html>

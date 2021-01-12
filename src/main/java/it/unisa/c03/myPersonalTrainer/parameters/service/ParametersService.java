@@ -14,12 +14,13 @@ public interface ParametersService {
      * @param weight
      * @param leanMass
      * @param fatMass
-     * @return
+     * @param email client mail
+     * @return client parameter.
      * @throws IllegalArgumentException
      * @throws IOException
      */
     Parameters createParameters(String weight, String leanMass,
-                                String fatMass)
+                                String fatMass,String email)
             throws IllegalArgumentException, IOException;
 
     /**

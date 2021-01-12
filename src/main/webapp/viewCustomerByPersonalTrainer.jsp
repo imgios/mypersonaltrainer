@@ -47,6 +47,8 @@
 </head>
 <body>
 
+<main>
+
 <%
     ParametersDAO paramDao = new ParametersDAOImpl();
     ParametersService sparam = new ParametersServiceImpl(paramDao);
@@ -62,7 +64,9 @@
     ArrayList<Parameters> list = sparam.getByMail(email);
     accountCustomer=serviceAccount.getAccountByEmail(email);
 %>
-<% String passaggio ="";
+
+<%
+    String passaggio ="";
     String dati = "";
     String massamagra = "";
     String massagrassa = "";
@@ -75,6 +79,7 @@
 %>
 <!--inserimento script-->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
 
 <div id = "main">
 
@@ -106,6 +111,7 @@
             </form>
         </div>
     </div>
+
         <!--First Chart leanMass-->
         <div class="chart-container" style="position: relative; height:auto; width:80vw">
             <canvas id="myChart"></canvas>
@@ -210,7 +216,6 @@
             </div>
         </div>
 
-
     <div class="card text-right">
         <div class="card-body">
             <p class="card-text">
@@ -231,10 +236,14 @@
                 </tbody>
             </table>
             </p>
-            <a href="http://localhost:8080/myPersonalTrainer_war/createTrainingPlan.jsp" class="btn btn-primary">Crea Nuova Scheda</a>
-        </div>
+                <form action="createTrainingPlan.jsp?exercises=<%=email%>" method="post">
+                    <button type="submit" class="btn btn-sm btn-outline-primary">Crea nuova scheda</button>
+                </form>
     </div>
 </div>
+</div>
+
+</main>
 
 <!--  inserimento footer -->
 <%@include file="footer.jsp"%>

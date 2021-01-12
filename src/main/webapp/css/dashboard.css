@@ -1,0 +1,19 @@
+.border-left-primary {
+  border-left: .25rem solid #4e73df!important;
+}
+.py-2 {
+  padding-bottom: .5rem!important;
+}
+
+.py-2 {
+  padding-top: .5rem!important;
+}
+.border-left-success {
+  border-left: .25rem solid #1cc88a!important;
+}
+.border-left-info {
+  border-left: .25rem solid #36b9cc!important;
+}
+.border-left-warning {
+  border-left: .25rem solid #ffc107!important;
+}

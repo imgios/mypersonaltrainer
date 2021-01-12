@@ -9,17 +9,18 @@
   Time: 17:08
   To change this template use File | Settings | File Templates.
 --%>
+
+<%
+    String utente_email_sess = (String) request.getSession().getAttribute("clienteMail");
+
+    if (utente_email_sess == null) {
+        response.sendRedirect("./error.jsp");
+    }else {
+%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>myPersonalTrainer - Le tue schede</title>
-    <!--
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    -->
 
     <%@include file="meta.jsp"%>
     <%@include file="head.jsp"%>
@@ -27,10 +28,15 @@
 
 </head>
 <body>
-<%  TrainingPlanService tp = new TrainingPlanServiceImpl();
-    Collection<TrainingPlan> trainingPlanList = tp.getTrainingPlans("provatest@prova.io");
+
+<main>
+
+<%
+    TrainingPlanService tp = new TrainingPlanServiceImpl();
+    Collection<TrainingPlan> trainingPlanList = tp.getTrainingPlans(utente_email_sess);
     int i = trainingPlanList.size();
 %>
+
 <div class="card">
     <div class="card-body">
         <table class="table table-sm">
@@ -57,7 +63,7 @@
                 </td>
                 <td>
                     <div class="col text-right">
-                        <form action="download-training-plan" method="post">
+                        <form action="<%=request.getContextPath()%>/DownloadSchedaServlet" method="post">
                             <input type="hidden" name="date" value=<%=t.getDate()%>>
                             <input type="hidden" name="exercises" value="<%=t.getExercises()%>">
                             <button class="btn btn-sm btn-outline-primary" type="submit">Download PDF!</button>
@@ -73,6 +79,14 @@
     </div>
 </div>
 
+</main>
+
 <%@include file="footer.jsp"%>
+
+<%
+    }
+%>
+
 </body>
 </html>
+
