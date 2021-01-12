@@ -47,10 +47,11 @@ public class ParametersController
         String mm = request.getParameter("leanMass");
         String mg = request.getParameter("fatMass");
         String res = "";
+        String mail = (String) request.getSession().getAttribute("clienteMail");
 
         try {
             Parameters p =
-                    service.createParameters(weight, mm, mg);
+                    service.createParameters(weight, mm, mg, mail);
 
             if (p != null) {
                 if (service.insertParametersDB(p)) {
