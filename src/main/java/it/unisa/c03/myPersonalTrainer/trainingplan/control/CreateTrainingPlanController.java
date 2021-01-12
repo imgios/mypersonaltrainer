@@ -89,7 +89,7 @@ public class CreateTrainingPlanController extends
                     response.sendRedirect("createTrainingPlan.jsp");
                 } else {
                     TrainingPlan trainingPlan =
-                            new TrainingPlan(exercises, "clientemail@prova.io");
+                            new TrainingPlan(exercises, "controlloemail@test.it");
                     trainingPlanService.createTrainingPlan(trainingPlan);
                     request.getSession().removeAttribute("exercises");
                     request.getSession().setAttribute("success",

@@ -25,6 +25,8 @@ class RequiredTrainingPlanDAOImplTest {
     static RequiredTrainingPlan requireTrainingPlanTest ;
     static RequiredTrainingPlan requireTrainingPlanTest2;
     //AccountDAO dao = new AccountDAOImpl();
+
+
     @BeforeAll
     static void setUp() throws IOException {
 
@@ -33,7 +35,6 @@ class RequiredTrainingPlanDAOImplTest {
         requireTrainingPlanTest2 = new RequiredTrainingPlan("email@testing.com",0);
         DBConnection.getConnection().collection("RequiredTrainingPlan").add(requireTrainingPlanTest2);
     }
-
 
     @AfterAll
     static void clean() throws IOException, ExecutionException, InterruptedException {
@@ -44,7 +45,6 @@ class RequiredTrainingPlanDAOImplTest {
             document.getReference().delete();
         }
     }
-
 
     @Test
     void findTheAccountByEmail() throws InterruptedException, ExecutionException, IOException {
@@ -63,10 +63,20 @@ class RequiredTrainingPlanDAOImplTest {
     }
 
 
-
     @AfterAll
     static void afterinsertaccount() throws IOException, ExecutionException, InterruptedException {
         List<QueryDocumentSnapshot> lqds = DBConnection.getConnection().collection("RequiredTrainingPlan").whereEqualTo("email","email@testing.com").get().get().getDocuments();
+
+        for(QueryDocumentSnapshot document : lqds)
+        {
+            document.getReference().delete();
+        }
+    }
+
+
+    @AfterAll
+    static void afterinssub() throws IOException, ExecutionException, InterruptedException {
+        List<QueryDocumentSnapshot> lqds = DBConnection.getConnection().collection("RequiredTrainingPlan").whereEqualTo("email","admin@admin.it").get().get().getDocuments();
 
         for(QueryDocumentSnapshot document : lqds)
         {

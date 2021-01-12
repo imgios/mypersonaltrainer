@@ -148,7 +148,6 @@ class CreateAccountServletTest {
     {
       document.getReference().delete();
     }
-
   }
 
 
@@ -164,7 +163,6 @@ class CreateAccountServletTest {
         Mockito.when(request.getParameter("role")).thenReturn("0");
         Account user = new Account (request.getParameter("username"),request.getParameter("surname"), request.getParameter("phone"), request.getParameter("email"), request.getParameter("passowrd"), request.getIntHeader("role"));
 
-
         HttpSession session = Mockito.mock(HttpSession.class);
         Mockito.when(request.getSession()).thenReturn(session);
 
@@ -172,13 +170,13 @@ class CreateAccountServletTest {
         doNothing().when(session).setAttribute(anyString(),any());
         doNothing().when(response).sendRedirect(anyString());
 
-
         Mockito.when(accountService.registerAccount(Mockito.any())).thenReturn(true);
 
         assertTrue(accountService.registerAccount(user));
         new CreateAccountServlet().doPost(request,response);
 
     }
+
 
   @Test
   void doPostFalse() throws IOException, ServletException, ExecutionException, InterruptedException {
@@ -196,7 +194,6 @@ class CreateAccountServletTest {
 
     Mockito.when(accountService.registerAccount(Mockito.any())).thenReturn(false);
 
-
       HttpSession session = Mockito.mock(HttpSession.class);
       Mockito.when(request.getSession()).thenReturn(session);
 
@@ -205,14 +202,11 @@ class CreateAccountServletTest {
       doNothing().when(response).sendRedirect(anyString());
 
     new CreateAccountServlet().doPost(request,response);
-
-
   }
 
 
   @Test
   void doGet() throws IOException, ServletException, ExecutionException, InterruptedException {
-
     Mockito.when(request.getParameter("username")).thenReturn("TestUsername");
     //assertEquals("TestUsername", request.getParameter("username"));
     Mockito.when(request.getParameter("surname")).thenReturn("TestSurname");

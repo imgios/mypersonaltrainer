@@ -1,8 +1,13 @@
 package it.unisa.c03.myPersonalTrainer.trainingplan.control;
 
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAO;
 import it.unisa.c03.myPersonalTrainer.trainingplan.service.TrainingPlanService;
 import it.unisa.c03.myPersonalTrainer.trainingplan.service.TrainingPlanServiceImpl;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -25,10 +30,24 @@ class CreateTrainingPlanControllerTest {
     HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
     TrainingPlanServiceImpl trainingPlanService = Mockito.mock(TrainingPlanServiceImpl.class);
 
+
+    @AfterAll
+    static void afterinserttp() throws IOException, ExecutionException, InterruptedException {
+
+        List<QueryDocumentSnapshot> lqds = DBConnection
+            .getConnection().collection("TrainingPlan").whereEqualTo("email","giampieroferrara@test.it").get().get().getDocuments();
+
+        for(QueryDocumentSnapshot document : lqds)
+        {
+            document.getReference().delete();
+        }
+    }
+
+
+
+
     @Test
     void doPostexercisesNull() throws IOException {
-
-
         Mockito.when(request.getParameter("action")).thenReturn("addex");
 
         Mockito.when(request.getParameter("exercise")).thenReturn("exerciseNamw");
@@ -55,7 +74,6 @@ class CreateTrainingPlanControllerTest {
     void doPostexercisesNotNull() throws IOException {
 
         Mockito.when(request.getParameter("action")).thenReturn("addex");
-
         Mockito.when(request.getParameter("exercise")).thenReturn("exerciseNamw");
         Mockito.when(request.getParameter("repetitions")).thenReturn("5");
         Mockito.when(request.getParameter("series")).thenReturn("6");
@@ -91,7 +109,7 @@ class CreateTrainingPlanControllerTest {
 
         doNothing().when(session).setAttribute("noEx", "nontuttobene");
 
-
+        doNothing().when(session).setAttribute("clienteMail", "giampieroferrara@test.it");
 
         new CreateTrainingPlanController().doPost(request, response);
 
@@ -110,9 +128,12 @@ class CreateTrainingPlanControllerTest {
         Mockito.when(session
                 .getAttribute("exercises")).thenReturn("someesercizi");
 
+
         doNothing().when(session).setAttribute("exercises", "someeserciziplus");
 
         doNothing().when(session).setAttribute("success", "tuttobene");
+
+        doNothing().when(session).setAttribute("clienteMail", "giampieroferrara@test.it");
 
         new CreateTrainingPlanController().doPost(request, response);
 
@@ -145,6 +166,7 @@ class CreateTrainingPlanControllerTest {
         new CreateTrainingPlanController().doPost(request, response);
     }
 
+    /*
     @Test
     void doGet() throws ServletException, IOException {
 
@@ -169,4 +191,6 @@ class CreateTrainingPlanControllerTest {
 
         new CreateTrainingPlanController().doGet(request, response);
     }
+    */
+
 }
