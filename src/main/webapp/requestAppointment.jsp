@@ -58,7 +58,9 @@
 </head>
 
 <body>
+
 <main>
+
 <div id="ricarica">
 <div class="conteiner" id="container">
 <div id="listaappuntamento" class="card border-dark mb-3">
@@ -110,6 +112,9 @@
     </div>
 </div>
 </div>
+
+</main>
+
 <%@include file="footer.jsp"%>
 
 </body>

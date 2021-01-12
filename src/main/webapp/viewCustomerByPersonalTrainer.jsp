@@ -111,6 +111,7 @@
             </form>
         </div>
     </div>
+
         <!--First Chart leanMass-->
         <div class="chart-container" style="position: relative; height:auto; width:80vw">
             <canvas id="myChart"></canvas>

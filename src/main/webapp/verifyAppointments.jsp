@@ -35,6 +35,7 @@
     </script>
 
         </head>
+
     <body>
 
     <main>
@@ -58,9 +59,10 @@
 
             <button id="inseriscidisponibilità">Programma Disponibilità</button>
         </div>
+
     </main>
 
-        <%@include file="footer.jsp"%>
+    <%@include file="footer.jsp"%>
 
     </body>
 </html>
