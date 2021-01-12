@@ -19,6 +19,7 @@ import it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAO;
 import it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAOImpl;
 import it.unisa.c03.myPersonalTrainer.subscription.service.SubscriptionService;
 import it.unisa.c03.myPersonalTrainer.subscription.service.SubscriptionServiceImpl;
+import org.apache.commons.mail.EmailException;
 
 /**
  * servlet for creating account.
@@ -100,9 +101,11 @@ public class CreateAccountServlet extends HttpServlet {
                         new SubscriptionServiceImpl(subDao);
                 subService.createSubscription(utente.getEmail());
 
+                //Notifica di creazione
+                accountService.sendEmail(email,password);
+
             }
-        } catch (IllegalArgumentException
-                | ExecutionException | InterruptedException exception) {
+        } catch (IllegalArgumentException | ExecutionException | InterruptedException | EmailException exception) {
             errors = errors + exception.getMessage();
         }
 
