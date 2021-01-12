@@ -3,8 +3,11 @@ package it.unisa.c03.myPersonalTrainer.parameters.dao;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
+
 import java.util.List;
+
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -21,10 +24,17 @@ class ParametersDAOImplTest {
     @AfterAll
     static void afterinsertaccount() throws IOException, ExecutionException, InterruptedException {
         List<QueryDocumentSnapshot> list_param_insert = DBConnection
-            .getConnection().collection("Account").whereEqualTo("email","prova@io.it").get().get().getDocuments();
+                .getConnection().collection("Parameters").whereEqualTo("mailClient", "prova@io.it").get().get().getDocuments();
 
-        for(QueryDocumentSnapshot document : list_param_insert)
-        {
+        for (QueryDocumentSnapshot document : list_param_insert) {
+            document.getReference().delete();
+        }
+
+
+        List<QueryDocumentSnapshot> list_param_insert1 = DBConnection
+                .getConnection().collection("Parameters").whereEqualTo("mailClient", "test@utente.it").get().get().getDocuments();
+
+        for (QueryDocumentSnapshot document : list_param_insert1) {
             document.getReference().delete();
         }
     }
@@ -36,16 +46,12 @@ class ParametersDAOImplTest {
     }
 
 
-
-
-    /*
-    inserire after e before per non trovare l'elemento nel db
-     */
-
     @Test
     void testMail() throws InterruptedException, ExecutionException, IOException {
         Parameters p1 = new Parameters(80, 48, 40, "test@utente.it");
+        parametersDAO.insertParameters(p1);
         ArrayList<Parameters> list = new ArrayList<>();
+        p1 = new Parameters(80, 48, 40, "test@utente.it");
         list.add(p1);
         assertEquals(1, parametersDAO.selectByMail("test@utente.it").size());
     }
