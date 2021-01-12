@@ -27,6 +27,9 @@ public class CreateTrainingPlanController extends
         TrainingPlanService trainingPlanService =
                 new TrainingPlanServiceImpl(trainingPlanDAO);
 
+        String emailCliente = (String) request.getSession().getAttribute("clienteMail");
+
+
         try {
             String action = request.getParameter("action");
             if (action.equals("addex")) {
@@ -89,7 +92,7 @@ public class CreateTrainingPlanController extends
                     response.sendRedirect("createTrainingPlan.jsp");
                 } else {
                     TrainingPlan trainingPlan =
-                            new TrainingPlan(exercises, "clientemail@prova.io");
+                            new TrainingPlan(exercises, emailCliente);
                     trainingPlanService.createTrainingPlan(trainingPlan);
                     request.getSession().removeAttribute("exercises");
                     request.getSession().setAttribute("success",
