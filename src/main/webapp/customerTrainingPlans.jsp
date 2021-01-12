@@ -9,6 +9,14 @@
   Time: 17:08
   To change this template use File | Settings | File Templates.
 --%>
+
+<%
+    String utente_email_sess = (String) request.getSession().getAttribute("clienteMail");
+
+    if (utente_email_sess == null) {
+        response.sendRedirect("./error.jsp");
+    }else {
+%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -20,10 +28,15 @@
 
 </head>
 <body>
-<%  TrainingPlanService tp = new TrainingPlanServiceImpl();
-    Collection<TrainingPlan> trainingPlanList = tp.getTrainingPlans("provatest@prova.io");
+
+<main>
+
+<%
+    TrainingPlanService tp = new TrainingPlanServiceImpl();
+    Collection<TrainingPlan> trainingPlanList = tp.getTrainingPlans(utente_email_sess);
     int i = trainingPlanList.size();
 %>
+
 <div class="card">
     <div class="card-body">
         <table class="table table-sm">
@@ -66,6 +79,12 @@
     </div>
 </div>
 
+</main>
+
 <%@include file="footer.jsp"%>
 </body>
 </html>
+
+<%
+    }
+%>
