@@ -1,7 +1,9 @@
 package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service;
 
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public interface RequiredTrainingPlanService {
@@ -44,4 +46,14 @@ public interface RequiredTrainingPlanService {
      */
     boolean changeRequest(String email, int status)
             throws IOException, ExecutionException, InterruptedException;
+
+    /**
+     * this method gets all requests.
+     * @return AllRequests
+     * @throws InterruptedException
+     * @throws ExecutionException
+     * @throws IOException
+     */
+    public ArrayList<RequiredTrainingPlan> getAllRequestes() throws InterruptedException, ExecutionException, IOException ;
+
 }
