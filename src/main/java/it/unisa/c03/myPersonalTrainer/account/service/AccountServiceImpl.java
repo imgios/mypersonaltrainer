@@ -146,11 +146,8 @@ public class AccountServiceImpl implements AccountService {
         //the email exists in the DB
         if (account.getEmail() != null) {
             return account;
-        } else if (account.getEmail() == null) {
-            //the email doesn't exist in the DB
-            return null;
         }
-
+        //the email doesn't exist in the DB
         return null;
     }
 

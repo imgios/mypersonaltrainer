@@ -137,6 +137,26 @@ class AccountServiceImplTest {
         assertEquals(true, service.searchAccountByEmail("cliente@gmail.com"));
     }
 
+    @Test
+    public void getAccountByEmailTrue() throws InterruptedException, ExecutionException, IOException {
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        Account a = new Account();
+        a.setEmail("mail@mail.com");
+        Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(a);
+        AccountService service  = new AccountServiceImpl(accountDAO);
+        assertEquals(Account.class, service.getAccountByEmail("cliente@gmail.com").getClass());
+    }
+
+    @Test
+    public void getAccountByEmailFalse() throws InterruptedException, ExecutionException, IOException {
+        AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
+        Account a = new Account();
+        Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(a);
+        AccountService service  = new AccountServiceImpl(accountDAO);
+        assertEquals(null, service.getAccountByEmail("cliente@gmail.com"));
+    }
+
+
 
 
     @Test
