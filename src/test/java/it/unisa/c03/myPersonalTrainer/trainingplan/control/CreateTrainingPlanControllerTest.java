@@ -9,10 +9,8 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,9 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.verify;
 
 class CreateTrainingPlanControllerTest {
 
@@ -31,17 +27,7 @@ class CreateTrainingPlanControllerTest {
     TrainingPlanServiceImpl trainingPlanService = Mockito.mock(TrainingPlanServiceImpl.class);
 
 
-    @AfterAll
-    static void afterinserttp() throws IOException, ExecutionException, InterruptedException {
 
-        List<QueryDocumentSnapshot> lqds = DBConnection
-            .getConnection().collection("TrainingPlan").whereEqualTo("email","giampieroferrara@test.it").get().get().getDocuments();
-
-        for(QueryDocumentSnapshot document : lqds)
-        {
-            document.getReference().delete();
-        }
-    }
 
 
 
@@ -103,13 +89,14 @@ class CreateTrainingPlanControllerTest {
         HttpSession session = Mockito.mock(HttpSession.class);
 
         Mockito.when(request.getSession()).thenReturn(session);
-
+        request.getParameter("email");
         Mockito.when(session
                 .getAttribute("exercises")).thenReturn(null);
 
         doNothing().when(session).setAttribute("noEx", "nontuttobene");
 
         Mockito.when(request.getParameter("email")).thenReturn("giampieroferrara@test.it");
+
 
         new CreateTrainingPlanController().doPost(request, response);
 
@@ -126,10 +113,9 @@ class CreateTrainingPlanControllerTest {
         Mockito.when(request.getSession()).thenReturn(session);
 
         Mockito.when(session
-                .getAttribute("exercises")).thenReturn("someesercizi");
+                .getAttribute("exercises")).thenReturn("someeserciziVirevi");
 
-
-        doNothing().when(session).setAttribute("exercises", "someeserciziplus");
+        //doNothing().when(session).setAttribute("exercises", "someeserciziplus");
 
         doNothing().when(session).setAttribute("success", "tuttobene");
 
@@ -192,5 +178,18 @@ class CreateTrainingPlanControllerTest {
         new CreateTrainingPlanController().doGet(request, response);
     }
     */
+
+
+    @AfterAll
+    static void afterinserttp() throws IOException, ExecutionException, InterruptedException {
+
+        List<QueryDocumentSnapshot> lqds = DBConnection
+                .getConnection().collection("TrainingPlan").whereEqualTo("email","giampieroferrara@test.it").get().get().getDocuments();
+
+        for(QueryDocumentSnapshot document : lqds)
+        {
+            document.getReference().delete();
+        }
+    }
 
 }
