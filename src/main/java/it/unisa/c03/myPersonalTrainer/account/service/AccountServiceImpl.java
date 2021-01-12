@@ -3,6 +3,10 @@ package it.unisa.c03.myPersonalTrainer.account.service;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,6 +32,8 @@ public class AccountServiceImpl implements AccountService {
      * */
     public static final int MAX_PASSWORD_LENGTH = 30;
 
+    private static final int PORT = 465;
+
     /**
      * @exclude
      * */
@@ -42,7 +48,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     public AccountServiceImpl() {
-
     }
 
     /**
@@ -189,7 +194,7 @@ public class AccountServiceImpl implements AccountService {
 
         AccountDAO accountDAO = new AccountDAOImpl();
 
-        System.out.println("CONTROLLO EMAIL PRIMA DELL'INSERIMENTO NEL DB");
+        //System.out.println("CONTROLLO EMAIL PRIMA DELL'INSERIMENTO NEL DB");
 
         // System.out.println(utente.getEmail());
         // System.out.println(accountDAO.findAccountByEmail(utente.getEmail()));
@@ -198,16 +203,16 @@ public class AccountServiceImpl implements AccountService {
         ricerca = accountDAO.findAccountByEmail(utente.getEmail());
 
         //stampa delle due email
-        System.out.println(utente.getEmail());
-        System.out.println(ricerca.getEmail());
+        //System.out.println(utente.getEmail());
+        //System.out.println(ricerca.getEmail());
 
         //if (utente.getEmail() != ricerca.getEmail()){
         if (ricerca.getEmail() == null) {
-            System.out.println("email non presente, la inserisco nel DB");
+          //  System.out.println("email non presente, la inserisco nel DB");
             accountDAO.saveAccount(utente);
             return true;
         } else {
-            System.out.println("email già presente");
+            //System.out.println("email già presente");
             throw new IllegalArgumentException("email già presente"
                     + " nel DB, utilizza una nuova email");
         }
@@ -222,6 +227,29 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public boolean verifyIsAdmin(Account account) {
         return account.getRole() == 1;
+    }
+
+    /**
+     * This method send an Email with new account credentials.
+     * @param account
+     * @param pw
+     * @throws EmailException
+     */
+    public void sendEmail(String account, String pw)
+            throws EmailException {
+        Email email = new SimpleEmail();
+        email.setHostName("smtp.gmail.com");
+        email.setSmtpPort(PORT);
+        email.setAuthenticator(new DefaultAuthenticator
+                ("mypt.gps.is@gmail.com", "mypt2021"));
+        email.setSSLOnConnect(true);
+        email.setFrom("mypt.gps.is@gmail.com");
+        email.setSubject("Registrazione myPersonalTrainer");
+        email.setMsg("Benvenuto/a in myPersonalTrainer. "
+                + "La sua password per accedere al sistema è: "
+                + pw);
+        email.addTo(account);
+        email.send();
     }
 
 }

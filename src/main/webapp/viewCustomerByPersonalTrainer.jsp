@@ -79,7 +79,7 @@
 <div id = "main">
 
     <div class="card">
-        <h5 class="card-header"> <img src="images/user1.png"> <%=accountCustomer.getName()%> <%=accountCustomer.getSurname()%> <br></h5>
+        <h5 class="card-header"> <i class="fas fa-user"></i> <%=accountCustomer.getName()%> <%=accountCustomer.getSurname()%> <br></h5>
         <h7 class="card-header"> Informazioni</h7>
         <div class="card-body">
             <form>
@@ -210,7 +210,6 @@
             </div>
         </div>
 
-
     <div class="card text-right">
         <div class="card-body">
             <p class="card-text">
@@ -231,8 +230,9 @@
                 </tbody>
             </table>
             </p>
-            <a href="http://localhost:8080/myPersonalTrainer_war/createTrainingPlan.jsp" class="btn btn-primary">Crea Nuova Scheda</a>
-        </div>
+                <form action="createTrainingPlan.jsp?exercises=<%=email%>" method="post">
+                    <button type="submit" class="btn btn-sm btn-outline-primary">Crea nuova scheda</button>
+                </form>
     </div>
 </div>
 

@@ -20,9 +20,9 @@
     <title>Abbonamenti</title>
 
 
-    <%@include file="meta.jsp" %>
-    <%@include file="head.jsp" %>
-    <%@include file="navbar.jsp" %>
+    <%@include file="meta.jsp"%>
+    <%@include file="head.jsp"%>
+    <%@include file="navbar.jsp"%>
 
     <!--
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -50,7 +50,6 @@
 
     AccountDAO accountDao = new AccountDAOImpl();
     AccountService accountService = new AccountServiceImpl(accountDao);
-
 %>
 
 <main>
@@ -61,9 +60,7 @@
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
-                        <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne">
-                            Abbonamenti attivi
-                        </button>
+                        <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne">Abbonamenti attivi</button>
                     </h2>
                 </div>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -80,28 +77,23 @@
                                 </thead>
                                 <tbody>
 
-                                <% for (Subscription s : activeList) {
+                                <% for(Subscription s : activeList) {
                                     Account a = accountService.getAccountByEmail(s.getCustomerMail());
-                                    if (a == null) {
+                                    if(a == null)
+                                    {
                                 %>
                                 <tr>
                                     <td>Account non trovato</td>
                                 </tr>
-                                <% } else { %>
+                                <% } else{ %>
                                 <tr>
-                                    <td><%=a.getName()%>
-                                    </td>
-                                    <td><%=a.getSurname()%>
-                                    </td>
-                                    <td><%=s.getCustomerMail()%>
-                                    </td>
-                                    <td><%=s.getExpDate()%>
-                                    </td>
+                                    <td><%=a.getName()%></td>
+                                    <td><%=a.getSurname()%></td>
+                                    <td><%=s.getCustomerMail()%></td>
+                                    <td><%=s.getExpDate()%></td>
                                 </tr>
-                                <%
-                                        }
-                                    }
-                                %>
+                                <%}
+                                }%>
                                 </tbody>
                             </table>
                         </div>
@@ -110,16 +102,14 @@
             </div>
 
 
+
             <div class="card">
                 <div class="card-header" id="headingTwo">
                     <h2 class="mb-0">
-                        <button type="button" class="btn btn-link collapsed" data-toggle="collapse"
-                                data-target="#collapseTwo">Abbonamenti in scadenza
-                        </button>
+                        <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo">Abbonamenti in scadenza</button>
                     </h2>
                 </div>
-                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
-                     data-parent="#accordionExample">
+                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
                     <div class="card-body">
                         <div class="table-responsive-sm">
                             <table class="table table table-warning table-hover">
@@ -133,28 +123,23 @@
                                 </thead>
                                 <tbody>
 
-                                <% for (Subscription s : expiringList) {
+                                <% for(Subscription s : expiringList) {
                                     Account a = accountService.getAccountByEmail(s.getCustomerMail());
-                                    if (a == null) {
+                                    if(a == null)
+                                    {
                                 %>
                                 <tr>
                                     <td>Account non trovato</td>
                                 </tr>
-                                <% } else { %>
+                                <% } else{ %>
                                 <tr>
-                                    <td><%=a.getName()%>
-                                    </td>
-                                    <td><%=a.getSurname()%>
-                                    </td>
-                                    <td><%=s.getCustomerMail()%>
-                                    </td>
-                                    <td><%=s.getExpDate()%>
-                                    </td>
+                                    <td><%=a.getName()%></td>
+                                    <td><%=a.getSurname()%></td>
+                                    <td><%=s.getCustomerMail()%></td>
+                                    <td><%=s.getExpDate()%></td>
                                 </tr>
-                                <%
-                                        }
-                                    }
-                                %>
+                                <%}
+                                }%>
                                 </tbody>
                             </table>
                         </div>
@@ -165,9 +150,7 @@
             <div class="card">
                 <div class="card-header" id="headingThree">
                     <h2 class="mb-0">
-                        <button type="button" class="btn btn-link collapsed" data-toggle="collapse"
-                                data-target="#collapseThree">Abbonamenti scaduti
-                        </button>
+                        <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree">Abbonamenti scaduti</button>
                     </h2>
                 </div>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
@@ -184,28 +167,23 @@
                                 </thead>
                                 <tbody>
 
-                                <% for (Subscription s : expiredList) {
+                                <% for(Subscription s : expiredList) {
                                     Account a = accountService.getAccountByEmail(s.getCustomerMail());
-                                    if (a == null) {
+                                    if(a == null)
+                                    {
                                 %>
                                 <tr>
                                     <td>Account non trovato</td>
                                 </tr>
-                                <% } else { %>
+                                <% } else{ %>
                                 <tr>
-                                    <td><%=a.getName()%>
-                                    </td>
-                                    <td><%=a.getSurname()%>
-                                    </td>
-                                    <td><%=s.getCustomerMail()%>
-                                    </td>
-                                    <td><%=s.getExpDate()%>
-                                    </td>
+                                    <td><%=a.getName()%></td>
+                                    <td><%=a.getSurname()%></td>
+                                    <td><%=s.getCustomerMail()%></td>
+                                    <td><%=s.getExpDate()%></td>
                                 </tr>
-                                <%
-                                        }
-                                    }
-                                %>
+                                <%}
+                                }%>
                                 </tbody>
                             </table>
                         </div>
@@ -219,7 +197,7 @@
 </main>
 
 
-<%@include file="footer.jsp" %>
+<%@include file="footer.jsp"%>
 
 
 </body>

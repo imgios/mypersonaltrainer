@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
+
 
 /**
  * this class enable to download a training plan in pdf.
@@ -22,15 +22,15 @@ import java.util.concurrent.ExecutionException;
     private static final
     long serialVersionUID = 1L;
 
-    Document doc;
+  private Document doc;
 
-    public DownloadTrainingPlanServlet(Document document) {
+     DownloadTrainingPlanServlet(Document document) {
         this.doc = document;
     }
 
-    public DownloadTrainingPlanServlet() {
+     DownloadTrainingPlanServlet() {
         super();
-        // TODO Auto-generated constructor stub
+
     }
 
     protected void doPost(HttpServletRequest request,

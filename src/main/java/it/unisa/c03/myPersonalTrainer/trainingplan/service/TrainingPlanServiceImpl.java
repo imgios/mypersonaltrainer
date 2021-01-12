@@ -101,7 +101,6 @@ public class TrainingPlanServiceImpl implements TrainingPlanService {
 
     /**
      * This method calls TrainingPlanDAO.
-     *
      * @param trainingPlan
      * @return boolean
      * @throws IOException

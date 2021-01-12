@@ -33,7 +33,6 @@ public class HoursServlet extends HttpServlet {
             out.print(new Gson().toJson(ore));
             out.flush();
 
-
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

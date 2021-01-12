@@ -1,15 +1,16 @@
 package it.unisa.c03.myPersonalTrainer.trainingplan.service;
 
+import it.unisa.c03.myPersonalTrainer.trainingplan.bean.TrainingPlan;
 import it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAO;
-import it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAOImpl;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 
 class TrainingPlanServiceImplTest {
     TrainingPlanDAO trainingPlanDAO = Mockito.mock(TrainingPlanDAO.class);
@@ -194,7 +195,6 @@ class TrainingPlanServiceImplTest {
         assertTrue(trainingPlanService.checkExercise(exercise, repetitions, series, recoveryTime));
     }
 
-
     @Test
     void checkExerciseTimeNotLenght() {
 
@@ -209,7 +209,6 @@ class TrainingPlanServiceImplTest {
         });
         assertEquals("invalid recoveryTime length", exception.getMessage());
     }
-
 
     @Test
     void checkExerciseTimeNotLenghtMin() {
@@ -233,8 +232,15 @@ class TrainingPlanServiceImplTest {
     }
 
     @Test
-    void createTrainingPlanFals() throws IOException {
+    void createTrainingPlanFails() throws IOException {
         Mockito.when(trainingPlanDAO.insertTrainingPlan(any())).thenReturn(false);
         assertEquals(false, trainingPlanService.createTrainingPlan(any()));
+    }
+
+    @Test
+    void getTrainingPlansByNotValidEmail() throws InterruptedException, ExecutionException, IOException {
+        ArrayList<TrainingPlan> list = new ArrayList<>();
+        Mockito.when(trainingPlanDAO.getTrainingPlansByEmail(anyString())).thenReturn(list);
+        assertEquals(0, trainingPlanService.getTrainingPlans(anyString()).size());
     }
 }

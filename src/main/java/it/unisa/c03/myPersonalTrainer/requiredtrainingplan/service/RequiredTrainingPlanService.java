@@ -8,12 +8,11 @@ public interface RequiredTrainingPlanService {
 
     /**
      * This function give the possibility to register a
-     * new user into the system.
+     * user and his first request of TrainigPlan into the system.
      * @param requiredTrainingPlan request into the db
      * @return true if is possibly to insert the
      * account after check of the credentials,
-     * false when fails the check of the
-     * credentials or the email is just registered
+     * false when fails the email is just registered
      * @throws IOException //
      * @throws IllegalArgumentException //
      */
@@ -22,7 +21,7 @@ public interface RequiredTrainingPlanService {
             ExecutionException, InterruptedException;
 
     /**
-     * This service method checks if an account exists in the database.
+     * This service method checks if an account exists in the RequiredTrainingPlan.
      * @param email referring to the account to search for
      * @return true if the account exists, false if not
      */
@@ -38,7 +37,7 @@ public interface RequiredTrainingPlanService {
             throws InterruptedException, ExecutionException, IOException;
 
     /**
-     * This service method changes the password of an account.
+     * This service method changes the status of an account.
      * @param email of the account
      * @param status updated
      * @return true after the change has taken place

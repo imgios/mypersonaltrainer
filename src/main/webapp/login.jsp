@@ -27,7 +27,6 @@
 
     <link rel="stylesheet" href="css/login.css"/>
 
-
     <title>Login Account</title>
 </head>
 <body>
@@ -48,16 +47,16 @@
                     <!-- controllo servlet inserimento -->
                     <form class="card2 card border-0 px-4 py-5" action="<%=request.getContextPath()%>/LoginServlet"
                           method="post" onsubmit="return stopsubmit(this);">
-                        <div class="row px-3"><label class="mb-1">
-                            <label for="idEmail"><h6 class="mb-0 text-sm">Email</h6></label> <label
-                                id="controlEmail"></label>
+                        <div class="row px-3"> <label class="mb-1" for="idEmail"> </label>
+                            <!--<label for="idEmail">--> <h6 class="mb-0 text-sm">Email &nbsp;</h6> <label
+                                id="controlEmail"></label> <!--</label>-->
                             <input class="mb-4" type="email" id="idEmail" name="email" onkeyup="validateEmail()"
-                                   placeholder="Inserisci un indirizzo email"> </label></div>
-                        <div class="row px-3"><label class="mb-1">
-                            <label for="idPassword"><h6 class="mb-0 text-sm">Password</h6></label><label
-                                id="controlPassword"></label>
+                                   placeholder="Inserisci un indirizzo email"> <!-- </label> --> </div>
+                        <div class="row px-3"> <label class="mb-1" for="idPassword"> </label>
+                          <!--  <label for="idPassword"> --><h6 class="mb-0 text-sm">Password &nbsp;</h6> <label
+                                    id="controlPassword"></label>
                             <input type="password" id="idPassword" name="password" onkeyup="validatePassword()"
-                                   placeholder="Inserisci password"> </label></div>
+                                   placeholder="Inserisci password"> <!--</label> --> </div>
                         <div class="row mb-3 px-3">
                             <button type="submit" id="login_btn" class="btn btn-blue text-center">Login</button>
                         </div>

@@ -97,6 +97,7 @@ class CreateTrainingPlanControllerTest {
 
         System.out.println(request.getSession().getAttribute("noEx"));
     }
+
     @Test
     void doPostActionaddtpNotNull() throws IOException {
 
