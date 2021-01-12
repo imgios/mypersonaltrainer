@@ -10,14 +10,15 @@
 
 <head>
 
-    <title>myPersonalTrainer | Clienti</title>
     <%@include file="meta.jsp"%>
     <%@include file="head.jsp"%>
     <%@include file="navbar.jsp"%>
 
+    <title>myPersonalTrainer | Clienti</title>
 </head>
 <body>
 
+<main>
 <%
     AccountService accounts = new AccountServiceImpl();
     Collection<Account> accountsBean = accounts.viewInfoAccount();
@@ -57,6 +58,8 @@
         </table>
     </div>
 </div>
+
+</main>
 
 <%@include file="footer.jsp"%>
 

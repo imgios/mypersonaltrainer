@@ -39,8 +39,9 @@
 </head>
 <body>
 
+<main>
 <div>
-    <h1>Gestisci Profilo</h1>
+    <h3>Gestisci Profilo</h3>
 </div>
 
 <div class="container">
@@ -207,9 +208,10 @@
 
 </div>
 
-<!--FOOTER -->
+
+</main>
+
 <%@include file="footer.jsp"%>
-<!--FINE FOOTER-->
 
 </body>
 <% }%>

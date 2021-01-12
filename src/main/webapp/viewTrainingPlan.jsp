@@ -18,6 +18,8 @@
 
 <body>
 
+<main>
+
 <%String s = request.getParameter("exercises");%>
 
 <div class="card text-center">
@@ -30,6 +32,9 @@
         Just do it!
     </div>
 </div>
+
+
+</main>
 
 <%@include file="footer.jsp"%>
 

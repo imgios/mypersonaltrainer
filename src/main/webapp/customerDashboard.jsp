@@ -39,16 +39,15 @@
 
 
     <%
-        //cambiare quando finito
-        String utente_dashboard = "prova@io.it";
 
         ParametersDAO paramDao = new ParametersDAOImpl();
         ParametersService sparam = new ParametersServiceImpl(paramDao);
         //  sparam.getByMail(email);
-        ArrayList<Parameters> list = sparam.getByMail(utente_dashboard);
+        ArrayList<Parameters> list = sparam.getByMail(emailCliente);
         //  for (Parameters param: list){
         //    System.out.println(param);
     %>
+
     <%
         String passaggio ="";
         String dati = "";
@@ -63,9 +62,9 @@
 
     <link rel="stylesheet" href="css/viewProgress.css"/>
 
-    <title>myPersonalTrainer | myAccount</title>
-
     <link rel="stylesheet" href="css/dashboard.css"/>
+
+    <title>myPersonalTrainer | myAccount</title>
 
 </head>
 
