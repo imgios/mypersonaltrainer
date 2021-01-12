@@ -1,7 +1,9 @@
 package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao;
+import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public interface RequiredTrainingPlanDAO {
@@ -49,4 +51,16 @@ public interface RequiredTrainingPlanDAO {
      */
     String getAccountDocumentIdByEmail(String email)
             throws IOException, ExecutionException, InterruptedException;
+
+    /**
+     * This method gets all requestes.
+     * @return
+     * @throws IOException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+    public ArrayList<RequiredTrainingPlan> getAllRequests()
+            throws IOException, ExecutionException, InterruptedException;
+
+
 }

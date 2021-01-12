@@ -2,8 +2,10 @@ package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service;
 
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAO;
+import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAOImpl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class RequiredTrainingPlanServiceImpl implements
@@ -20,6 +22,10 @@ public class RequiredTrainingPlanServiceImpl implements
     public RequiredTrainingPlanServiceImpl(
             RequiredTrainingPlanDAO requiredTrainingPlanDao) {
         requiredTrainingPlanDAO = requiredTrainingPlanDao;
+    }
+
+    public RequiredTrainingPlanServiceImpl() {
+
     }
 
     /**
@@ -107,4 +113,17 @@ public class RequiredTrainingPlanServiceImpl implements
             return false;
         }
     }
+
+    /**
+     * this method gets all requests.
+     * @return AllRequests
+     * @throws InterruptedException
+     * @throws ExecutionException
+     * @throws IOException
+     */
+    public ArrayList<RequiredTrainingPlan> getAllRequestes() throws InterruptedException, ExecutionException, IOException {
+        RequiredTrainingPlanDAO rtpDAO = new RequiredTrainingPlanDAOImpl();
+        return rtpDAO.getAllRequests();
+    }
+
 }
