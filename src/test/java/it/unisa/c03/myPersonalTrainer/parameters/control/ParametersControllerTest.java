@@ -1,7 +1,10 @@
 package it.unisa.c03.myPersonalTrainer.parameters.control;
 
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
 import it.unisa.c03.myPersonalTrainer.parameters.service.ParametersServiceImpl;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -12,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -22,14 +27,29 @@ class ParametersControllerTest {
     HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
     ParametersServiceImpl parametersService = Mockito.mock(ParametersServiceImpl.class);
 
+    @AfterAll
+    static void afterinserttp() throws IOException, ExecutionException, InterruptedException {
+
+        List<QueryDocumentSnapshot> lqds = DBConnection
+                .getConnection().collection("Parameters").whereEqualTo("email","giampieroferrara@test.it").get().get().getDocuments();
+
+        for(QueryDocumentSnapshot document : lqds)
+        {
+            document.getReference().delete();
+        }
+    }
+
+
+
     @Test
     void doPostPass() throws IOException, ServletException {
 
+        Parameters a = new Parameters(100, 20, 30, "giampieroferrara@test.it");
         when(request.getParameter("weight")).thenReturn("50");
         when(request.getParameter("leanMass")).thenReturn("20%");
         when(request.getParameter("fatMass")).thenReturn("25%");
         when(parametersService.createParameters(
-                "50", "20%", "25%")).thenReturn(new Parameters());
+                "50", "20%", "25%")).thenReturn(a);
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         when(response.getWriter()).thenReturn(writer);
@@ -39,12 +59,13 @@ class ParametersControllerTest {
 
     @Test
     void doGetPass() throws IOException, ServletException {
+        Parameters a = new Parameters(100, 20, 30, "giampieroferrara@test.it");
 
         when(request.getParameter("weight")).thenReturn("50");
         when(request.getParameter("leanMass")).thenReturn("20%");
         when(request.getParameter("fatMass")).thenReturn("25%");
         when(parametersService.createParameters(
-                "50", "20%", "25%")).thenReturn(new Parameters());
+                "50", "20%", "25%")).thenReturn(a);
 
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);

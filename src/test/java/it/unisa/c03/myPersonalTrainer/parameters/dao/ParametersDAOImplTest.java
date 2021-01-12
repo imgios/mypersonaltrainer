@@ -17,7 +17,7 @@ class ParametersDAOImplTest {
 
     ParametersDAO parametersDAO = new ParametersDAOImpl();
 
-    /*  questo pare funzionare, ma è necessario un controllo
+    //  questo pare funzionare, ma è necessario un controllo
     @AfterAll
     static void afterinsertaccount() throws IOException, ExecutionException, InterruptedException {
         List<QueryDocumentSnapshot> list_param_insert = DBConnection
@@ -27,7 +27,7 @@ class ParametersDAOImplTest {
         {
             document.getReference().delete();
         }
-    }*/
+    }
 
     @Test
     void populatAndtest() throws IOException {

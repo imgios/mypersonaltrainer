@@ -27,9 +27,6 @@ public class CreateTrainingPlanController extends
         TrainingPlanService trainingPlanService =
                 new TrainingPlanServiceImpl(trainingPlanDAO);
 
-        String emailCliente = (String) request.getSession().getAttribute("clienteMail");
-
-
         try {
             String action = request.getParameter("action");
             if (action.equals("addex")) {
@@ -91,8 +88,11 @@ public class CreateTrainingPlanController extends
                             "Inserisci almeno un esercizio per creare una scheda!");
                     response.sendRedirect("createTrainingPlan.jsp");
                 } else {
+
+                    String mail = request.getParameter("email");
+
                     TrainingPlan trainingPlan =
-                            new TrainingPlan(exercises, emailCliente);
+                            new TrainingPlan(exercises, mail);
                     trainingPlanService.createTrainingPlan(trainingPlan);
                     request.getSession().removeAttribute("exercises");
                     request.getSession().setAttribute("success",

@@ -109,7 +109,7 @@ class CreateTrainingPlanControllerTest {
 
         doNothing().when(session).setAttribute("noEx", "nontuttobene");
 
-        doNothing().when(session).setAttribute("clienteMail", "giampieroferrara@test.it");
+        Mockito.when(request.getParameter("email")).thenReturn("giampieroferrara@test.it");
 
         new CreateTrainingPlanController().doPost(request, response);
 
@@ -133,7 +133,7 @@ class CreateTrainingPlanControllerTest {
 
         doNothing().when(session).setAttribute("success", "tuttobene");
 
-        doNothing().when(session).setAttribute("clienteMail", "giampieroferrara@test.it");
+        Mockito.when(request.getParameter("email")).thenReturn("giampieroferrara@test.it");
 
         new CreateTrainingPlanController().doPost(request, response);
 
