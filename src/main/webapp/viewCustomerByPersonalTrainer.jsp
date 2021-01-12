@@ -47,6 +47,8 @@
 </head>
 <body>
 
+<main>
+
 <%
     ParametersDAO paramDao = new ParametersDAOImpl();
     ParametersService sparam = new ParametersServiceImpl(paramDao);
@@ -62,7 +64,9 @@
     ArrayList<Parameters> list = sparam.getByMail(email);
     accountCustomer=serviceAccount.getAccountByEmail(email);
 %>
-<% String passaggio ="";
+
+<%
+    String passaggio ="";
     String dati = "";
     String massamagra = "";
     String massagrassa = "";
@@ -75,6 +79,7 @@
 %>
 <!--inserimento script-->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
 
 <div id = "main">
 
@@ -235,6 +240,9 @@
                 </form>
     </div>
 </div>
+</div>
+
+</main>
 
 <!--  inserimento footer -->
 <%@include file="footer.jsp"%>

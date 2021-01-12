@@ -63,7 +63,7 @@
                 </td>
                 <td>
                     <div class="col text-right">
-                        <form action="download-training-plan" method="post">
+                        <form action="<%=request.getContextPath()%>/DownloadSchedaServlet" method="post">
                             <input type="hidden" name="date" value=<%=t.getDate()%>>
                             <input type="hidden" name="exercises" value="<%=t.getExercises()%>">
                             <button class="btn btn-sm btn-outline-primary" type="submit">Download PDF!</button>
