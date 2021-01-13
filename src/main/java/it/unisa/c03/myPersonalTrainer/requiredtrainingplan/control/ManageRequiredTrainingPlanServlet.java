@@ -35,7 +35,7 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
             throws ServletException, IOException {
 
         /*Da sostituire con i dati della sessione*/
-        String email = "marcorossi@gmail.com";
+        String email = "giampieroferrara@test.it";
         int required = 0;
         RequiredTrainingPlan requireTest =
                 new RequiredTrainingPlan(email, required);

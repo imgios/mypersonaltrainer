@@ -39,7 +39,6 @@
 
 
     <%
-
         ParametersDAO paramDao = new ParametersDAOImpl();
         ParametersService sparam = new ParametersServiceImpl(paramDao);
         //  sparam.getByMail(email);
@@ -132,16 +131,21 @@
             </div>
         </div>
 
+        <% String email = "giampieroferrara@test.it";
+        RequiredTrainingPlan requireTest;
+        RequiredTrainingPlanDAO requiredTrainingPlanDao = new RequiredTrainingPlanDAOImpl();
+        RequiredTrainingPlanService requiredTrainingPlanService = new RequiredTrainingPlanServiceImpl(requiredTrainingPlanDao);
+        boolean checked = requiredTrainingPlanService.searchAccountByEmail(email);
+        if (!checked) { %>
 
-        <!-- Richiedi nuova scheda -->
+        <!-- Richiedi nuova scheda abled -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1"><a href="#" style="color: #36b9cc">Richiedi scheda</a>
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1"><a href="./requestTrainingPlan.jsp" style="color: #36b9cc">Richiedi scheda</a>
                             </div>
-
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -150,7 +154,47 @@
                 </div>
             </div>
         </div>
+        <%} else {%>
+        <%
+        requireTest = requiredTrainingPlanService.getAccountByEmail(email);
+        if (requireTest.getRequired() == 1) {
+        %>
+        <!-- Richiedi nuova scheda disabled -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Scheda già richiesta<br>Attendere la creazione
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } else {%>
 
+        <!-- Richiedi nuova scheda abled -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1"><a href="./requestTrainingPlan.jsp"  style="color: #36b9cc">Richiedi scheda</a>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }
+        }%>
 
         <!-- Abbonamento -->
         <div class="col-xl-3 col-md-6 mb-4">
@@ -252,60 +296,7 @@
             </div>
         </div>
     </div>
-
 </main>
-
-
-
-
-<!-- da guardare -->
-<!--
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Example textarea</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            <div class="w-100"></div>
-            <div class="col">
-                <div class="row justify-content-md-center">
-                    <div class="row align-items-end">
-                        <form action="< %=request.getContextPath()%>/ManageRequiredTrainingPlanServlet" method="post"
-                              onsubmit="return stopsubmit(this);">
-                            < % String email = "trainerino@testing.com";
-                                RequiredTrainingPlan requireTest;
-                                RequiredTrainingPlanDAO requiredTrainingPlanDao = new RequiredTrainingPlanDAOImpl();
-                                RequiredTrainingPlanService requiredTrainingPlanService = new RequiredTrainingPlanServiceImpl(requiredTrainingPlanDao);
-                                boolean checked = requiredTrainingPlanService.searchAccountByEmail(email);
-                                System.out.println("la mail è:" + email);
-                                System.out.println("Cheked è" + checked);
-                                if (!checked) { %>
-                            <button type="submit" class="btn btn-primary">Richiedi una Nuova Scheda</button>
-                            < % System.out.println("la mail aricontrollata è:" + email);
-                            } else {%>
-                            < %
-                                requireTest = requiredTrainingPlanService.getAccountByEmail(email);
-                                System.out.println("la mail aricontrollata è:" + email);
-                                if (requireTest.getRequired() == 1) {
-                            %>
-                            <button type="submit" class="btn btn-primary" disabled>Richiedi una Nuova Scheda</button>
-                            < % } else {%>
-                            <button type="submit" class="btn btn-primary">Richiedi una Nuova Scheda</button>
-                            < % }
-                            }%>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->
-
-
-
-
 
 <%@ include file="footer.jsp" %>
 </body>
