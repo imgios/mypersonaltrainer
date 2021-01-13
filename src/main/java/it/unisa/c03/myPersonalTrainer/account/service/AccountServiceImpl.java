@@ -65,7 +65,11 @@ public class AccountServiceImpl implements AccountService {
           throws IOException, ExecutionException, InterruptedException {
       Account accountLogged;
       accountLogged = accountDAO.findAccountByEmail(email);
-        return accountLogged != null;
+         if(accountLogged != null)
+         {
+             return true;
+         }
+         return false;
     }
 
     /**
