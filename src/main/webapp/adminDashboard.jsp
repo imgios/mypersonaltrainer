@@ -52,7 +52,7 @@
             <div class="col-lg-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Agenda di oggi</h4>
+                        <h4 class="card-title">Appuntamenti di oggi</h4>
 
                         <%
                             AgendaDAO agendaDAO = new AgendaDAOImpl();
@@ -62,7 +62,8 @@
                             List<Appointment> appuntamenti = agendaService.findAppointmentByDate(today.toString());
                         %>
 
-                        <table class="table table-hover">
+                        <div class="table-responsive-sm">
+                        <table class="table table table-info table-hover">
                             <thead>
                             <tr>
                                 <th>Orario</th>
@@ -75,18 +76,21 @@
 
                             <%
                                 for(Appointment app : appuntamenti){
+                                    Account account = a_serv.getAccountByEmail(app.getCustomerMail());
                             %>
 
                             <tr>
-                                <td><%= app.getDate() %></td>
+                                <td><%= app.getTime() %></td>
                                 <td><%= app.getCustomerMail() %></td>
-                                <td><%= app.getCustomerMail() %></td>
-                                <td><%= app.getCustomerMail() %></td>
+                                <td><%= account.getName() %></td>
+                                <td><%= account.getSurname() %></td>
                             </tr>
                             <% } %>
 
                             </tbody>
                         </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
