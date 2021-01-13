@@ -3,6 +3,7 @@ $("#datepicker").hide();
 $("#ricaricaore").hide();
     $("#cercadisponibilità").hide();
     $("#errorDiv").hide();
+    $("#prenota").hide();
     $("#SuccessDiv").hide();
 });
 
@@ -42,13 +43,20 @@ function caricaore() {
         "url": "./HoursServlet",
         "data": {dataappuntamento: datacosa},
         "success": function (result) {
-            var s = '';
-            for (var i = 0; i < result.length; i++) {
-                s += '<a class="list-group-item list-group-item-action" id=' + result[i].time + ' aria-controls=' + result[i].time + ' role="tab" data-toggle="list" onclick="savetime(this)">' + result[i].time + '</a>';
-            }
-            document.getElementById('listaore').innerHTML = s;
-            $("#ricaricaore").load();
 
+            if (result == 0) {
+                document.getElementById('listaore').innerHTML = "nessuna ora disponibile per questa data";
+                $("#prenota").hide();
+            } else {
+
+                var s = "";
+                for (var i = 0; i < result.length; i++) {
+                    s += '<a class="list-group-item list-group-item-action" id=' + result[i].time + ' aria-controls=' + result[i].time + ' role="tab" data-toggle="list" onclick="savetime(this)">' + result[i].time + '</a>';
+                }
+                document.getElementById('listaore').innerHTML = s;
+                $("#prenota").show();
+                $("#ricaricaore").load();
+            }
         }
     })
 }

@@ -62,7 +62,9 @@
 <main>
 
 <div id="ricarica">
-<div class="conteiner" id="container">
+<div class="container">
+    <div class="row">
+        <div class="col">
 <div id="listaappuntamento" class="card border-dark mb-3">
     <%
         AgendaDAO dao= new AgendaDAOImpl();
@@ -91,17 +93,24 @@
 </table>
 
 </div>
-    <button id="richiediappuntamento"  onclick="showdataform()"> Richiedi Appuntamento</button>
+   <!-- <button id="richiediappuntamento"  onclick="showdataform()"> Richiedi Appuntamento</button> -->
+        <button class="btn btn-primary"  onclick="showdataform()"> Richiedi Appuntamento</button>
+        </div>
+        <div class="col">
     <div id="datepicker"></div>
-    <button id="cercadisponibilità" onclick="caricaore()" > Ricerca</button>
+        <!-- <button id="cercadisponibilità" onclick="caricaore()" > Ricerca</button> -->
+    <button  id="cercadisponibilità" class="btn btn-primary" onclick="caricaore()" > Ricerca</button>
+        </div>
 </div>
 
-<div>
+
+<div class="row">
     <div id="ricaricaore">
         <div class="list-group" id="listaore" role="tablist">
         </div>
-        <button id="prenota" onclick="prenota(<%= "'"+mail+"'"%>)" > Prenota Appuntamento</button>
+        <button class="btn btn-primary" id="prenota" onclick="prenota(<%= "'"+mail+"'"%>)" > Prenota Appuntamento</button>
     </div>
+</div>
     <input id="data" hidden type="text">
     <input id="time" hidden name="time" type="text">
 
@@ -112,10 +121,7 @@
     </div>
 </div>
 </div>
-
 </main>
-
 <%@include file="footer.jsp"%>
-
 </body>
 </html>
