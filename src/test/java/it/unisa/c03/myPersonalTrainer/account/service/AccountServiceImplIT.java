@@ -117,8 +117,6 @@ public class AccountServiceImplIT {
     AccountDAO accountDAO = new AccountDAOImpl();
     Account a = new Account();
     a.setEmail(null);
-    //Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(a);
-
     AccountService service  = new AccountServiceImpl(accountDAO);
     assertEquals(false, service.searchAccountByEmail("mailnot@italy.it"));
   }
@@ -154,8 +152,6 @@ public class AccountServiceImplIT {
     Account user = new Account("nome_controllo_email", "cognome_controllo_email", "1231231234",
         "test_it_trovato@gmail.com", "Password12",
         0);
-
-    // Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(a);
     AccountService service  = new AccountServiceImpl(accountDAO);
     assertEquals(true, service.searchAccountByEmail("test_it_trovato@gmail.com"));
   }
@@ -170,7 +166,6 @@ public class AccountServiceImplIT {
       document.getReference().delete();
     }
   }
-
 
 
   @BeforeAll
@@ -192,12 +187,9 @@ public class AccountServiceImplIT {
     Account user_test2 = new Account("nome_controllo_email", "cognome_controllo_email", "1231231234",
         "test_it_trovato_mail@gmail.com", "Password12",
         0);
-   // a.setEmail("mail@mail.com");
-    //Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(a);
     AccountService service  = new AccountServiceImpl(accountDAO);
     assertEquals(Account.class, service.getAccountByEmail("test_it_trovato_mail@gmail.com").getClass());
   }
-
 
   @Test
   public void getAccountByEmailFalseIT() throws InterruptedException, ExecutionException, IOException {
@@ -207,27 +199,6 @@ public class AccountServiceImplIT {
     AccountService service  = new AccountServiceImpl(accountDAO);
     assertEquals(null, service.getAccountByEmail("account_non_trovato@gmail.com"));
   }
-
-  /*
-  @BeforeAll
-  static void cancellaemailtrovata_5() throws IOException, ExecutionException, InterruptedException {
-
-    List<QueryDocumentSnapshot> list_account_5 = DBConnection.getConnection().collection("Account").whereEqualTo("email","cliente_da_modificare@test.it").get().get().getDocuments();
-    for(QueryDocumentSnapshot document : list_account_5)
-    {
-      document.getReference().delete();
-    }
-
-  }
-
-  @Test
-  public void changePasswordFalseIT() throws IOException, ExecutionException, InterruptedException {
-    AccountDAO accountDAO = new AccountDAOImpl();
-    //when(accountDAO.updatePassword(anyString(),anyString())).thenReturn(false);
-    AccountService service  = new AccountServiceImpl(accountDAO);
-    assertEquals(false, service.changePassword("cliente_da_modificare@test.it", "nuovaPassword45"));
-  }
-  */
 
   @BeforeAll
   static void inserimentoemailIT_3() throws IOException, ExecutionException, InterruptedException  {
@@ -252,14 +223,13 @@ public class AccountServiceImplIT {
   @Test
   public void changePasswordTrueIT() throws IOException, ExecutionException, InterruptedException {
     AccountDAO accountDAO = new AccountDAOImpl();
-  //  when(accountDAO.updatePassword(anyString(),anyString())).thenReturn(true);
     AccountService service  = new AccountServiceImpl(accountDAO);
     assertEquals(true, service.changePassword("cliente_modificato@gmail.com", "nuovaPassword45"));
   }
 
 
 
-  // after per cancellare!
+
   @Test
   void registerAccountTrueIT() throws IOException, IllegalArgumentException,
       ExecutionException, InterruptedException {
@@ -270,13 +240,6 @@ public class AccountServiceImplIT {
 
     AccountService accounts = new AccountServiceImpl(accountDAO);
 
-    //accountDAO.findAccountByEmail(user.getEmail());
-
-    //Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(user);
-   // Mockito.when(accountDAO.saveAccount(any())).thenReturn(true);
-   // Account user_test = new Account("nome","cognome","1223232312321", "test_1@test.it", "Test0232", 0);
-
-    //accountDAO.saveAccount(account);
     assertTrue(accounts.registerAccount(user));
   }
 
@@ -318,26 +281,62 @@ public class AccountServiceImplIT {
 
     AccountDAO accountDAO = new AccountDAOImpl();
     AccountService accountS = new AccountServiceImpl(accountDAO);
-
-   // Mockito.when(accountDAO.findAccountByEmail(anyString())).thenReturn(user);
-
-   // Account user_test = new Account("nome", "cognome", "121212121212", "test_2@test.it",
-     //   "Password12", 0);
-
-    // assertFalse(accountS.registerAccount(user_test));
     assertThrows(IllegalArgumentException.class, () -> {
           accountS.registerAccount(user);
         }
     );
   }
 
-/*Controlliamo prima*/
+
+
+
+  @BeforeAll
+  static void insertAdminFalse() throws IOException {
+
+    Account a = new Account("nameTest", "surnameTest","1234567895","testmail@test.com","testPasswordIT1",0);
+
+    DBConnection.getConnection().collection("Account").add(a);
+
+  }
+
+  @AfterAll
+  static void cancellaFalse() throws IOException, ExecutionException, InterruptedException {
+
+    List<QueryDocumentSnapshot> list_account = DBConnection.getConnection().collection("Account").whereEqualTo("email","testmail@test.com").get().get().getDocuments();
+    for(QueryDocumentSnapshot document : list_account)
+    {
+      document.getReference().delete();
+    }
+
+  }
+
+
   @Test
   void verifyIsAdminFalseIT() {
     AccountDAO accountDAO = new AccountDAOImpl();
     Account a = new Account("nameTest", "surnameTest","1234567895","testmail@test.com","testPasswordIT1",0);
     AccountService service  = new AccountServiceImpl(accountDAO);
     assertEquals(false, service.verifyIsAdmin(a));
+  }
+
+  @BeforeAll
+  static void insertAdmintrue() throws IOException {
+
+    Account a = new Account("nameTest1", "surnameTest1","1234567865","testmailadmin@test.com","testPassAdminIT1",1);
+
+    DBConnection.getConnection().collection("Account").add(a);
+
+  }
+
+  @AfterAll
+  static void cancellaTrue() throws IOException, ExecutionException, InterruptedException {
+
+    List<QueryDocumentSnapshot> list_account = DBConnection.getConnection().collection("Account").whereEqualTo("email","testmailadmin@test.com").get().get().getDocuments();
+    for(QueryDocumentSnapshot document : list_account)
+    {
+      document.getReference().delete();
+    }
+
   }
 
   @Test
@@ -348,19 +347,66 @@ public class AccountServiceImplIT {
     assertEquals(true, service.verifyIsAdmin(a));
   }
 
+
+  @BeforeAll
+  static void insertcheckaccount() throws IOException {
+
+
+    Account user = new Account("nome", "cognome", "120120120120",
+        "test_verifica@test.it", "LoginTrue1",
+        0);
+
+    DBConnection.getConnection().collection("Account").add(user);
+
+  }
+
+  @AfterAll
+  static void cancellautenteinserito() throws IOException, ExecutionException, InterruptedException {
+
+    List<QueryDocumentSnapshot> list_account = DBConnection.getConnection().collection("Account").whereEqualTo("email","test_verifica@test.it").get().get().getDocuments();
+    for(QueryDocumentSnapshot document : list_account)
+    {
+      document.getReference().delete();
+    }
+
+  }
+
   @Test
   void loginAccountTrueIT() throws IOException, ExecutionException, InterruptedException {
     AccountDAO accountDAO = new AccountDAOImpl();
-    Account a = new Account("Giampiero", "Ferrara","1234567890","giampieroferrara@test.it","Giampiero1",0);
+    //Account a = new Account("Giampiero", "Ferrara","1234567890","giampieroferrara@test.it","Giampiero1",0);
+    Account user = new Account("nome", "cognome", "120120120120",
+        "test_verifica@test.it", "LoginTrue1",
+        0);
     AccountService service  = new AccountServiceImpl(accountDAO);
-    assertEquals(true, service.loginAccount("giampieroferrara@test.it", "Giampiero1"));
+    assertEquals(true, service.loginAccount("test_verifica@test.it", "LoginTrue1"));
+  }
+
+  @BeforeAll
+  static void insertViewInfoAcconut() throws IOException {
+
+
+    Account a = new Account("Giampiero", "Ferrara", "1234567890", "giampiero@test.it", "Giampiero1", 0);
+    DBConnection.getConnection().collection("Account").add(a);
+
+  }
+
+  @AfterAll
+  static void cancellaViewInfoAcconut() throws IOException, ExecutionException, InterruptedException {
+
+    List<QueryDocumentSnapshot> list_account = DBConnection.getConnection().collection("Account").whereEqualTo("email","giampiero@test.it").get().get().getDocuments();
+    for(QueryDocumentSnapshot document : list_account)
+    {
+      document.getReference().delete();
+    }
+
   }
 
   @Test
   void viewInfoAccountIT() throws IOException, ExecutionException, InterruptedException{
     AccountDAO accDAO = new AccountDAOImpl();
     ArrayList<Account> listToReturn = new ArrayList<>();
-    Account a = new Account("Giampiero", "Ferrara", "1234567890", "giampieroferrara@test.it", "Giampiero1", 0);
+    Account a = new Account("Giampiero", "Ferrara", "1234567890", "giampiero@test.it", "Giampiero1", 0);
     listToReturn.add(a);
     //Mockito.when(accDAO.getAccounts()).thenReturn(listToReturn);
     assertEquals(listToReturn.size(), listToReturn.size());
