@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <div>
-                    <button type="submit" id="buttonSubmit" class="btn btn-primary">Submit</button>
+                    <button type="submit" id="buttonSubmit" class="btn btn-primary">Invia Dati e Richiedi Scheda</button>
                 </div>
             </form>
         </div>

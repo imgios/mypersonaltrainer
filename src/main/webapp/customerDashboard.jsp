@@ -131,11 +131,11 @@
             </div>
         </div>
 
-        <% String email = "giampieroferrara@test.it";
+        <%
         RequiredTrainingPlan requireTest;
         RequiredTrainingPlanDAO requiredTrainingPlanDao = new RequiredTrainingPlanDAOImpl();
         RequiredTrainingPlanService requiredTrainingPlanService = new RequiredTrainingPlanServiceImpl(requiredTrainingPlanDao);
-        boolean checked = requiredTrainingPlanService.searchAccountByEmail(email);
+        boolean checked = requiredTrainingPlanService.searchAccountByEmail(utente_sess.getEmail());
         if (!checked) { %>
 
         <!-- Richiedi nuova scheda abled -->
@@ -156,7 +156,7 @@
         </div>
         <%} else {%>
         <%
-        requireTest = requiredTrainingPlanService.getAccountByEmail(email);
+        requireTest = requiredTrainingPlanService.getAccountByEmail(utente_sess.getEmail());
         if (requireTest.getRequired() == 1) {
         %>
         <!-- Richiedi nuova scheda disabled -->
