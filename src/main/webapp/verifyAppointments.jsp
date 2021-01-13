@@ -44,6 +44,7 @@
             <div class="row">
                 <div class="col">
             <div id="datepicker"></div>
+                    <br>
             <input hidden type="text" id="data">
                     <button class="btn btn-primary"  onclick="seeAppointments()">Visualizza</button>
                     <button class="btn btn-primary">Programma Disponibilità</button>
