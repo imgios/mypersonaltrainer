@@ -3,6 +3,13 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.account.service.AccountService" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.account.bean.Account" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAOImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.agenda.service.AgendaService" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.agenda.service.AgendaServiceImpl" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.util.List" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment" %>
 <%@ page language="java" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 
@@ -45,7 +52,15 @@
             <div class="col-lg-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Hoverable Table</h4>
+                        <h4 class="card-title">Agenda di oggi</h4>
+
+                        <%
+                            AgendaDAO agendaDAO = new AgendaDAOImpl();
+                            AgendaService agendaService = new AgendaServiceImpl(agendaDAO);
+
+                            LocalDate today = LocalDate.now();
+                            List<Appointment> appuntamenti = agendaService.findAppointmentByDate(today.toString());
+                        %>
 
                         <table class="table table-hover">
                             <thead>
@@ -57,51 +72,19 @@
                             </tr>
                             </thead>
                             <tbody>
+
+                            <%
+                                for(Appointment app : appuntamenti){
+                            %>
+
                             <tr>
-                                <td>Jacob</td>
-                                <td>Photoshop</td>
-                                <td class="text-danger"> 28.76% <i class="mdi mdi-arrow-down"></i>
-                                </td>
-                                <td>
-                                    <label class="badge badge-danger">Pending</label>
-                                </td>
+                                <td><%= app.getDate() %></td>
+                                <td><%= app.getCustomerMail() %></td>
+                                <td><%= app.getCustomerMail() %></td>
+                                <td><%= app.getCustomerMail() %></td>
                             </tr>
-                            <tr>
-                                <td>Messsy</td>
-                                <td>Flash</td>
-                                <td class="text-danger"> 21.06% <i class="mdi mdi-arrow-down"></i>
-                                </td>
-                                <td>
-                                    <label class="badge badge-warning">In progress</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>John</td>
-                                <td>Premier</td>
-                                <td class="text-danger"> 35.00% <i class="mdi mdi-arrow-down"></i>
-                                </td>
-                                <td>
-                                    <label class="badge badge-info">Fixed</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Peter</td>
-                                <td>After effects</td>
-                                <td class="text-success"> 82.00% <i class="mdi mdi-arrow-up"></i>
-                                </td>
-                                <td>
-                                    <label class="badge badge-success">Completed</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Dave</td>
-                                <td>53275535</td>
-                                <td class="text-success"> 98.05% <i class="mdi mdi-arrow-up"></i>
-                                </td>
-                                <td>
-                                    <label class="badge badge-warning">In progress</label>
-                                </td>
-                            </tr>
+                            <% } %>
+
                             </tbody>
                         </table>
                     </div>
