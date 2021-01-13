@@ -20,13 +20,26 @@
 
 <main>
 
-<%String s = request.getParameter("exercises");%>
+<%
+
+    String s = request.getParameter("exercises");
+
+    String ex = s.replaceAll("nome esercizio: ", "<br>");
+
+    ex.replaceAll("\\^([0-9]+)", " "+"\\^([0-9]+)");
+
+    ex.replaceAll("serie%20" , "serie"+" ");
+
+    ex.replaceAll("secondi di recupero", " secondi di recupero &nbsp;");
+
+
+%>
 
 <div class="card text-center">
     <div class="card-header"></div>
     <div class="card-body">
         <h5 class="card-title">La tua scheda</h5>
-        <p class="card-text"><%=s%></p>
+        <p class="card-text"><p><%=ex%></p>
     </div>
     <div class="card-footer text-muted">
         Just do it!
