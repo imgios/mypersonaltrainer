@@ -207,9 +207,9 @@ public class AccountServiceImplIT {
     assertEquals(null, service.getAccountByEmail("account_non_trovato@gmail.com"));
   }
 
-
+  /*
   @BeforeAll
-  static void cancellaemailtrovata_4() throws IOException, ExecutionException, InterruptedException {
+  static void cancellaemailtrovata_5() throws IOException, ExecutionException, InterruptedException {
 
     List<QueryDocumentSnapshot> list_account_5 = DBConnection.getConnection().collection("Account").whereEqualTo("email","cliente_da_modificare@test.it").get().get().getDocuments();
     for(QueryDocumentSnapshot document : list_account_5)
@@ -226,7 +226,7 @@ public class AccountServiceImplIT {
     AccountService service  = new AccountServiceImpl(accountDAO);
     assertEquals(false, service.changePassword("cliente_da_modificare@test.it", "nuovaPassword45"));
   }
-
+  */
 
   @BeforeAll
   static void inserimentoemailIT_3() throws IOException, ExecutionException, InterruptedException  {
