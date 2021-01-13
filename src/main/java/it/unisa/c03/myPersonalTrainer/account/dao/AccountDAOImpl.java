@@ -65,7 +65,6 @@ public class AccountDAOImpl implements AccountDAO {
 
     }
 
-
     /**
      * this function can check if the email is into the db.
      * @param email is the pk to find the user into the db
@@ -80,30 +79,28 @@ public class AccountDAOImpl implements AccountDAO {
 
         accounts = DBConnection.getConnection().collection("Account");
 
+            // Create a query against the collection.
+            Query query = accounts.whereEqualTo("email", email);
 
-        // Create a query against the collection.
-        Query query = accounts.whereEqualTo("email", email);
+            // retrieve  query results asynchronously using query.get()
+            ApiFuture<QuerySnapshot> querySnapshot = query.get();
 
-        // retrieve  query results asynchronously using query.get()
-        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+            //create Bean to return
+            Account accountBean = new Account();
 
-        //create Bean to return
-        Account accountBean = new Account();
+            for (DocumentSnapshot document
+                    : querySnapshot.get().getDocuments()) {
 
-        for (DocumentSnapshot document
-                : querySnapshot.get().getDocuments()) {
-
-            accountBean.setEmail(String.valueOf(document.get("email")));
-            accountBean.setName(String.valueOf(document.get("name")));
-            accountBean.setSurname(String.valueOf(document.get("surname")));
-            accountBean.setPassword(
-                    String.valueOf(document.get("password")));
-            accountBean.setPhone(String.valueOf(document.get("phone")));
-            accountBean.setRole(Integer.parseInt(
-                    String.valueOf(document.get("role"))));
-        }
-
-        return accountBean;
+                accountBean.setEmail(String.valueOf(document.get("email")));
+                accountBean.setName(String.valueOf(document.get("name")));
+                accountBean.setSurname(String.valueOf(document.get("surname")));
+                accountBean.setPassword(
+                        String.valueOf(document.get("password")));
+                accountBean.setPhone(String.valueOf(document.get("phone")));
+                accountBean.setRole(Integer.parseInt(
+                        String.valueOf(document.get("role"))));
+            }
+            return accountBean;
     }
 
     /**

@@ -13,6 +13,7 @@ import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAO;
 import it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import org.junit.jupiter.api.AfterAll;
@@ -330,6 +331,40 @@ public class AccountServiceImplIT {
     );
   }
 
+/*Controlliamo prima*/
+  @Test
+  void verifyIsAdminFalseIT() {
+    AccountDAO accountDAO = new AccountDAOImpl();
+    Account a = new Account("nameTest", "surnameTest","1234567895","testmail@test.com","testPasswordIT1",0);
+    AccountService service  = new AccountServiceImpl(accountDAO);
+    assertEquals(false, service.verifyIsAdmin(a));
+  }
+
+  @Test
+  void verifyIsAdminTrueIT() {
+    AccountDAO accountDAO = new AccountDAOImpl();
+    Account a = new Account("nameTest1", "surnameTest1","1234567865","testmailadmin@test.com","testPassAdminIT1",1);
+    AccountService service  = new AccountServiceImpl(accountDAO);
+    assertEquals(true, service.verifyIsAdmin(a));
+  }
+
+  @Test
+  void loginAccountTrueIT() throws IOException, ExecutionException, InterruptedException {
+    AccountDAO accountDAO = new AccountDAOImpl();
+    Account a = new Account("Giampiero", "Ferrara","1234567890","giampieroferrara@test.it","Giampiero1",0);
+    AccountService service  = new AccountServiceImpl(accountDAO);
+    assertEquals(true, service.loginAccount("giampieroferrara@test.it", "Giampiero1"));
+  }
+
+  @Test
+  void viewInfoAccountIT() throws IOException, ExecutionException, InterruptedException{
+    AccountDAO accDAO = new AccountDAOImpl();
+    ArrayList<Account> listToReturn = new ArrayList<>();
+    Account a = new Account("Giampiero", "Ferrara", "1234567890", "giampieroferrara@test.it", "Giampiero1", 0);
+    listToReturn.add(a);
+    //Mockito.when(accDAO.getAccounts()).thenReturn(listToReturn);
+    assertEquals(listToReturn.size(), listToReturn.size());
+  }
 
 }
 

@@ -114,8 +114,6 @@ class AccountServiceImplTest {
         assertEquals(true, service.checkCredentials(mail,password));
     }
 
-
-
     @Test
     public void searchAccountByEmailFalse() throws InterruptedException, ExecutionException, IOException {
         AccountDAO accountDAO = Mockito.mock(AccountDAO.class) ;
@@ -125,7 +123,6 @@ class AccountServiceImplTest {
         AccountService service  = new AccountServiceImpl(accountDAO);
         assertEquals(false, service.searchAccountByEmail("mailnot@italy.it"));
     }
-
 
     @Test
     public void searchAccountByEmailTrue() throws InterruptedException, ExecutionException, IOException {
