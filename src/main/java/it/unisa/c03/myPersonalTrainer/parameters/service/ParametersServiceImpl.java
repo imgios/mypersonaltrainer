@@ -141,7 +141,7 @@ public class ParametersServiceImpl implements ParametersService {
      * @throws IOException
      */
     @Override
-    public boolean insertParametersDB(
+    public boolean saveParameters(
             Parameters parameters) throws IOException {
         return parametersDAO.insertParameters(parameters);
     }

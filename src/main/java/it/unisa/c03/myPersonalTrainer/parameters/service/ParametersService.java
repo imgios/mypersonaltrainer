@@ -30,7 +30,7 @@ public interface ParametersService {
      * @return true if the operation is done
      * @throws IOException
      */
-    boolean insertParametersDB(
+    boolean saveParameters(
             Parameters parameters) throws IOException;
 
     /**

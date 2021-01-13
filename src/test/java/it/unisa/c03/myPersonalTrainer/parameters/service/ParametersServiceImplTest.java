@@ -174,13 +174,13 @@ class ParametersServiceImplTest {
     @Test
     void testServiceInsert() throws IOException {
         Mockito.when(parametersDAO.insertParameters(any())).thenReturn(true);
-        assertEquals(true, pservice.insertParametersDB(any()));
+        assertEquals(true, pservice.saveParameters(any()));
     }
 
     @Test
     void testServiceInsertFalse() throws IOException {
         Mockito.when(parametersDAO.insertParameters(any())).thenReturn(false);
-        assertEquals(false, pservice.insertParametersDB(any()));
+        assertEquals(false, pservice.saveParameters(any()));
     }
 
     @Test

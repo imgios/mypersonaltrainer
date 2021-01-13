@@ -54,7 +54,7 @@ public class ParametersController
                     service.createParameters(weight, mm, mg, mail);
 
             if (p != null) {
-                if (service.insertParametersDB(p)) {
+                if (service.saveParameters(p)) {
                     res = new Gson().toJson(1);
                 }
             }
