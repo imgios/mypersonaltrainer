@@ -221,7 +221,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Scheda Allenamento</h4>
-
+                            <!--
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -234,13 +234,13 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td><%=s%></td>
+                                    <td>< %=s%></td>
                                 </tr>
 
                                 </tbody>
                             </table>
-
-                            <a class="btn btn-primary" href="#" role="button">Schede di Allenamento precedenti</a>
+                                -->
+                            <a class="btn btn-primary" href="./customerTrainingPlans.jsp" role="button">Schede di Allenamento precedenti</a>
                         </div>
                     </div>
                 </div>

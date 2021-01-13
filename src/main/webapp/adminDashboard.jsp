@@ -169,7 +169,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                    <a href="./createTrainingPlan.jsp" style="color: #ffc107">Nuova Scheda</a></div>
+                                                    <a href="./viewRequiredTrainingPlans.jsp" style="color: #ffc107">Nuova Scheda</a></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-bell fa-2x"></i>

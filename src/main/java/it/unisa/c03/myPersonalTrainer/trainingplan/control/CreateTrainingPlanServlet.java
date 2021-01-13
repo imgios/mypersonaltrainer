@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @WebServlet(name = "CreateNewTrainingPlanServlet",
         value = "/createTP-controller")
-public class CreateTrainingPlanController extends
+public class CreateTrainingPlanServlet extends
         HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)

@@ -7,6 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<%
+    String email_admin = (String) request.getSession().getAttribute("ptMail");
+    if(email_admin == null) {
+        response.sendRedirect("error.jsp");
+    } else {
+%>
 <head>
     <title>Nuova Scheda Allenamento</title>
 
@@ -15,6 +21,7 @@
     <%@include file="navbar.jsp" %>
 
     <script src="js/insertTrainingPlan.js"></script>
+
 </head>
 <body>
 
@@ -24,34 +31,38 @@
     <form id="formID" action="createTP-controller" onsubmit="return stopsubmit(this);">
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="idexercise">exercise</label><label id="controlexercise"></label>
+                <label for="idexercise">Esercizio</label><label id="controlexercise"></label>
                 <input class="form-control" id="idexercise" onkeyup="validateNameEx()" name="exercise">
             </div>
             <div class="form-group col-md-6">
 
-                <label for="idrepetitions">repetitions</label><label id="controlrepetitions"></label>
+                <label for="idrepetitions">Ripetizione</label><label id="controlrepetitions"></label>
                 <input class="form-control" id="idrepetitions" onkeyup="validaterepetitions()" name="repetitions">
             </div>
             <div class="form-group col-md-6">
 
-                <label for="idseries">number of series</label><label id="controlseries"></label>
+                <label for="idseries">Serie</label><label id="controlseries"></label>
                 <input class="form-control" id="idseries" onkeyup="validateSeries()" name="series">
             </div>
+
+
             <div class="form-group col-md-6">
 
-                <label for="idrecoveryTime">recoveryTime in second</label><label id="controlrecoveryTime"></label>
+                <label for="idrecoveryTime">Tempo di recupero</label><label id="controlrecoveryTime"></label>
                 <input class="form-control" id="idrecoveryTime" name="recoveryTime" onkeyup="validaterecoveryTime()"
                        placeholder="in secondi">
             </div>
 
         </div>
-        <button type="submit" name="action" value="addex">Invia Esercizio</button>
+        <button type="submit" class="btn btn-primary" name="action" value="addex">Invia Esercizio</button>
+
     </form>
 
     <form action="createTP-controller">
         <input type="hidden" name="email" value=<%=email%>>
-        <button type="submit" id="Salva" name="action" value="addtp">Crea Scheda</button>
+        <button type="submit" id="Salva" name="action" class="btn btn-primary" value="addtp">Crea Scheda</button>
     </form>
+
 
     <!-- Div in basso per errori -->
     <% String error = (String) request.getSession().getAttribute("error");
@@ -87,5 +98,9 @@
 
 <%@include file="footer.jsp" %>
 
+
+<%
+    }
+%>
 </body>
 </html>
