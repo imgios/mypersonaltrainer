@@ -21,7 +21,6 @@ public class CreateTrainingPlanController extends
                           HttpServletResponse response)
             throws IOException {
 
-
         TrainingPlanDAO trainingPlanDAO =
                 new TrainingPlanDAOImpl();
         TrainingPlanService trainingPlanService =
@@ -79,7 +78,11 @@ public class CreateTrainingPlanController extends
                                 + "o cliccare su Crea Scheda");
 
                 response.sendRedirect("createTrainingPlan.jsp");
+
             } else if (action.equals("addtp")) {
+
+
+                String mail = (String) request.getSession().getAttribute("mailutil");
 
                 String exercises = (String) request.getSession()
                         .getAttribute("exercises");
@@ -89,7 +92,6 @@ public class CreateTrainingPlanController extends
                     response.sendRedirect("createTrainingPlan.jsp");
                 } else {
 
-                    String mail = request.getParameter("email");
 
                     TrainingPlan trainingPlan =
                             new TrainingPlan(exercises, mail);
