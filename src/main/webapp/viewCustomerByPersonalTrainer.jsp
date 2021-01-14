@@ -236,7 +236,7 @@
                 </tbody>
             </table>
             </p>
-                <form action="createTrainingPlan.jsp?exercises=<%=email%>" method="post">
+                <form action="createTrainingPlan.jsp?email=<%=email%>" method="post">
                     <button type="submit" class="btn btn-sm btn-outline-primary">Crea nuova scheda</button>
                 </form>
     </div>

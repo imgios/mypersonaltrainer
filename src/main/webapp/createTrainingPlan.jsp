@@ -26,7 +26,13 @@
 <body>
 
 <% String email = (String) request.getParameter("email");
+
+    if(request.getSession().getAttribute("mailutil")==null){
+        request.getSession().setAttribute("mailutil", email);
+    }
+
 %>
+
 <main>
     <form id="formID" action="createTP-controller" onsubmit="return stopsubmit(this);">
         <div class="form-row">
