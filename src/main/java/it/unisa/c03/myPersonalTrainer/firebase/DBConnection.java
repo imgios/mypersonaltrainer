@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public final class DBConnection {
     /**
-     * connession to the database.
+     * connection to the database.
      */
     private static Firestore singleton;
 
