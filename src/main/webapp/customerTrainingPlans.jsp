@@ -2,13 +2,7 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.service.TrainingPlanService" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.service.TrainingPlanServiceImpl" %>
 <%@ page import="java.util.Collection" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: em
-  Date: 31/12/2020
-  Time: 17:08
-  To change this template use File | Settings | File Templates.
---%>
+
 
 <%
     String utente_email_sess = (String) request.getSession().getAttribute("clienteMail");

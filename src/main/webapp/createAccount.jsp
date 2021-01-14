@@ -1,11 +1,4 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.account.bean.Account" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: giampieroferrara
-  Date: 22/12/20
-  Time: 10:53
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 

@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: giampieroferrara
-  Date: 07/01/21
-  Time: 15:15
-  To change this template use File | Settings | File Templates.
---%>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 

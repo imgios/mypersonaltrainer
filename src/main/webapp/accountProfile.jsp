@@ -13,7 +13,6 @@
 
 <%
     String emailClientee = (String) request.getSession().getAttribute("clienteMail");
-    //String emailAdmin = (String) request.getSession().getAttribute("ptMail");
 
     if(emailClientee == null)
         response.sendRedirect("login.jsp");

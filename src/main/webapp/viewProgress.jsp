@@ -5,13 +5,6 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAO" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAOImpl" %>
 
-<%--
-  Created by IntelliJ IDEA.
-  User: giampieroferrara
-  Date: 28/12/20
-  Time: 11:39
-  To change this template use File | Settings | File Templates.
---%>
 
 
 <%
@@ -21,21 +14,7 @@
     response.sendRedirect("./error.jsp");
     } else {
 %>
-<!--
-< %
-    //String email = "mail@io.it";
-    //String email = "prova@io.it";
-    // String email = "test@utente.it";
-    //String email_utente="prova@io.it";
-% >
--->
 
-<!--
-< %
-String error = (String) request.getSession().getAttribute("error");
-String done = (String) request.getSession().getAttribute("done");
-% >
--->
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -54,10 +33,9 @@ String done = (String) request.getSession().getAttribute("done");
 <%
     ParametersDAO paramDao = new ParametersDAOImpl();
     ParametersService sparam = new ParametersServiceImpl(paramDao);
-    //  sparam.getByMail(email);
+
     ArrayList<Parameters> list = sparam.getByMail(utente_reg);
-    //  for (Parameters param: list){
-    //    System.out.println(param);
+
 %>
 <%
     String passaggio ="";
@@ -67,20 +45,17 @@ String done = (String) request.getSession().getAttribute("done");
 
     for (Parameters param: list){
         passaggio = passaggio + param.getweight() + ",";
-       // System.out.println(passaggio);
+
         dati = dati + "'" + param.getinsertionDate()+ "'" + ",";
-       // System.out.println(dati);
+
         massamagra = massamagra + param.getfatMass() + ",";
-       // System.out.println(massamagra);
+
         massagrassa = massagrassa + param.getleanMass() + ",";
-       // System.out.println(massagrassa);
+
     }
 %>
 
-<!--
-< %=param.getMailClient()+" , "+param.getweight()+", "+param.getfatMass()+", "+param.getleanMass() + " ," +param.getinsertionDate()%>
-< % }% >
--->
+
 
 <!-- inserimento script -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>

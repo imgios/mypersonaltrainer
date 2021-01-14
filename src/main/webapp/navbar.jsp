@@ -1,25 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Michele
-  Date: 05/01/2021
-  Time: 20:07
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>myPersonalTrainer</title>
 
-    <!-- Bootstrap
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-      -->
-
-    <!-- logo icons
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/v4-shims.css">
-    -->
 
     <!-- inserimento import head and meta data -->
     <%@include file="./meta.jsp"%>
@@ -40,9 +24,7 @@
 %>
                         <!-- Homepage nessuno loggato -->
 <nav class="navbar navbar-expand-lg navbar-custom_navbar">
-<!--
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
--->
+
     <div class="navbar-nav mx-auto">
         <img class="logo" src="./img/nlogo.png">
     </div>
@@ -51,9 +33,7 @@
 
 
                         <!-- NAVBAR CLIENTE -->
-<!--
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
--->
+
 <nav class="navbar navbar-expand-lg navbar-custom_navbar">
     <div class="navbar-nav mr-auto">
         <button class="openbtn" onclick="openNav()">☰</button>
@@ -80,9 +60,7 @@
 <% } else if (adminMail != null) {%>
 
                             <!-- NAVBAR PT -->
-<!--
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
--->
+
 <nav class="navbar navbar-expand-lg navbar-custom_navbar">
     <div class="navbar-nav mr-auto">
         <button class="openbtn" onclick="openNavPT()">☰</button>
@@ -93,7 +71,7 @@
     </div>
 
     <ul class="navbar-nav ml-auto">
-        <!--<li><a href="./PTProfile.jsp"><i class="fas fa-user"></i> Profilo &nbsp;</a></li> -->
+
         <li><a href="<%=request.getContextPath()%>/LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
 </nav>
@@ -137,11 +115,7 @@
   }
 </script>
 
-<!-- script bootstrap
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
--->
+
 
 </body>
 </html>

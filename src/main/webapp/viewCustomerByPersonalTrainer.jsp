@@ -40,10 +40,6 @@
     <%@include file="navbar.jsp"%>
 
 
-    <!--
-    <link href="css/footer.css" rel="stylesheet" type="text/css">
-    -->
-
 </head>
 <body>
 

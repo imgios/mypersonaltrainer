@@ -24,7 +24,6 @@
 <%
     String emailCliente = (String) request.getSession().getAttribute("clienteMail");
     if (emailCliente == null)
-    // response.sendRedirect("login.jsp");
     {
         response.sendRedirect("error.jsp");
     } else {
@@ -41,10 +40,9 @@
     <%
         ParametersDAO paramDao = new ParametersDAOImpl();
         ParametersService sparam = new ParametersServiceImpl(paramDao);
-        //  sparam.getByMail(email);
+
         ArrayList<Parameters> list = sparam.getByMail(emailCliente);
-        //  for (Parameters param: list){
-        //    System.out.println(param);
+
     %>
 
     <%
@@ -53,9 +51,9 @@
 
         for (Parameters param: list){
             passaggio = passaggio + param.getweight() + ",";
-            // System.out.println(passaggio);
+
             dati = dati + "'" + param.getinsertionDate()+ "'" + ",";
-            // System.out.println(dati);
+
         }
     %>
 
