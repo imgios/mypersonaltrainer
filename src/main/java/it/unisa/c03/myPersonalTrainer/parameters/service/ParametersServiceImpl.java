@@ -59,7 +59,7 @@ public class ParametersServiceImpl implements ParametersService {
      * @throws IllegalArgumentException
      */
     public Parameters createParameters(
-            String weight, String leanMass, String fatMass,String email)
+            String weight, String leanMass, String fatMass, String email)
             throws IllegalArgumentException, IOException {
 
         if (weight == null || leanMass == null || fatMass == null) {
@@ -131,7 +131,7 @@ public class ParametersServiceImpl implements ParametersService {
                 bigDecimalleanMassTot.doubleValue();
         Parameters pa =
                 new Parameters(weightD,
-                        fatMassTotal, leanMassTotal,email);
+                        fatMassTotal, leanMassTotal, email);
         return pa;
     }
 

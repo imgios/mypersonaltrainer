@@ -1,5 +1,4 @@
 package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao;
-import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
 
 import java.io.IOException;
@@ -59,7 +58,7 @@ public interface RequiredTrainingPlanDAO {
      * @throws ExecutionException
      * @throws InterruptedException
      */
-    public ArrayList<RequiredTrainingPlan> getAllRequests()
+     ArrayList<RequiredTrainingPlan> getAllRequests()
             throws IOException, ExecutionException, InterruptedException;
 
 

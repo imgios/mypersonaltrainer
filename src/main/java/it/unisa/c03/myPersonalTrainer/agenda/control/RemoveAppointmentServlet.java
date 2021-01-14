@@ -41,7 +41,7 @@ public class RemoveAppointmentServlet extends HttpServlet {
         response.setContentType("application/json");
         try {
 
-            Email email=new SimpleEmail();
+            Email email = new SimpleEmail();
             email.setHostName("smtp.gmail.com");
             email.setSmtpPort(PORT);
             email.setAuthenticator(new DefaultAuthenticator(
@@ -49,8 +49,9 @@ public class RemoveAppointmentServlet extends HttpServlet {
             email.setSSLOnConnect(true);
             email.setFrom("mypt.gps.is@gmail.com");
             email.setSubject("Appuntamento Cancellato");
-            email.setMsg("L'appuntamento del giorno "+data+" alle ore "+time+
-                    " e' stato cancellato!");
+            email.setMsg("L'appuntamento del giorno "
+                + data + " alle ore "
+                + time + " e' stato cancellato!");
             email.addTo(mail);
             email.addTo("mypt.gps.is@gmail.com");
             email.send();

@@ -54,6 +54,6 @@ public interface RequiredTrainingPlanService {
      * @throws ExecutionException
      * @throws IOException
      */
-    public ArrayList<RequiredTrainingPlan> getAllRequestes() throws InterruptedException, ExecutionException, IOException ;
+     ArrayList<RequiredTrainingPlan> getAllRequestes() throws InterruptedException, ExecutionException, IOException;
 
 }
