@@ -1,4 +1,5 @@
 package it.unisa.c03.myPersonalTrainer.subscription.service;
+
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
@@ -11,7 +12,9 @@ import it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAOImpl;
 import org.apache.commons.mail.EmailException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,20 +22,33 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 
-public class SubscriptionServiceImplIT {
+class SubscriptionServiceImplIT {
 
     @BeforeAll
     static void setUp() throws IOException {
+        //Sub per test: get expiring
         Subscription sub4 = new Subscription("abbonamento@gmail.com","2021-01-13","30");
         DBConnection.getConnection().collection("Subscription").add(sub4);
 
+        //Sub per test: get expired
+        Subscription subScad = new Subscription("abbonamento@scaduto.com","2020-01-13","30");
+        DBConnection.getConnection().collection("Subscription").add(subScad);
+
+        //Sub per test: get active
+        Subscription subAct = new Subscription("abbonamento@attivo.com","2020-01-13","30");
+        DBConnection.getConnection().collection("Subscription").add(subAct);
+
+        //Sub per test:SEND EMAIL
         Account user_test2 = new Account("nome_cambio_email", "cognome_cambioemail_email", "1212121212",
-                "mypt.gps.is@gmail.com", "PasswordVecchia12",
+                "myptgps@gmail.com", "PasswordVecchia12",
                 0);
 
         DBConnection.getConnection().collection("Account").add(user_test2);
-        Subscription sub = new Subscription("mypt.gps.is@gmail.com","2021-01-13","30");
+        Subscription sub = new Subscription("myptgps@gmail.com","2021-01-13","30");
         DBConnection.getConnection().collection("Subscription").add(sub);
 
         Account user_test1 = new Account("nome_cambio_email", "cognome_cambioemail_email", "1212121212",
@@ -48,19 +64,34 @@ public class SubscriptionServiceImplIT {
     @AfterAll
     static void cancella() throws IOException, ExecutionException, InterruptedException {
 
+        //Sub per test: get expiring
         List<QueryDocumentSnapshot> list_sub4 = DBConnection.getConnection().collection("Subscription").whereEqualTo("customerMail","abbonamento@gmail.com").get().get().getDocuments();
         for(QueryDocumentSnapshot document : list_sub4)
         {
             document.getReference().delete();
         }
+        //Sub per test: get expired
+        List<QueryDocumentSnapshot> list_subExp = DBConnection.getConnection().collection("Subscription").whereEqualTo("customerMail","abbonamento@scaduto.com").get().get().getDocuments();
+        for(QueryDocumentSnapshot document : list_subExp)
+        {
+            document.getReference().delete();
+        }
 
-        List<QueryDocumentSnapshot> list_account_3 = DBConnection.getConnection().collection("Account").whereEqualTo("email","mypt.gps.is@gmail.com").get().get().getDocuments();
+        //Sub per test: get active
+        List<QueryDocumentSnapshot> list_subAct = DBConnection.getConnection().collection("Subscription").whereEqualTo("customerMail","abbonamento@attivo.com").get().get().getDocuments();
+        for(QueryDocumentSnapshot document : list_subAct)
+        {
+            document.getReference().delete();
+        }
+
+        //Sub per test:SEND EMAIL
+        List<QueryDocumentSnapshot> list_account_3 = DBConnection.getConnection().collection("Account").whereEqualTo("email","myptgps@gmail.com").get().get().getDocuments();
         for(QueryDocumentSnapshot document : list_account_3)
         {
             document.getReference().delete();
         }
 
-        List<QueryDocumentSnapshot> list_sub = DBConnection.getConnection().collection("Subscription").whereEqualTo("customerMail","mypt.gps.is@gmail.com").get().get().getDocuments();
+        List<QueryDocumentSnapshot> list_sub = DBConnection.getConnection().collection("Subscription").whereEqualTo("customerMail","myptgps@gmail.com").get().get().getDocuments();
         for(QueryDocumentSnapshot document : list_sub)
         {
             document.getReference().delete();
@@ -107,6 +138,40 @@ public class SubscriptionServiceImplIT {
     }
 
     @Test
+    void getExpiredSubscriptions() throws InterruptedException, ExecutionException, IOException {
+        SubscriptionDAO subDao = new SubscriptionDAOImpl();
+
+        SubscriptionService subService = new SubscriptionServiceImpl(subDao);
+
+        //il delete serve a simulare una prima connessione al db, altrimenti non funziona
+        AgendaDAO agendaDAO = new AgendaDAOImpl();
+        Appointment x = new Appointment();
+        agendaDAO.deleteappointment(x);
+
+        ArrayList<Subscription> listToReturnService = subService.getExpiredSubscriptions();
+
+        assertEquals(Subscription.class, listToReturnService.get(0).getClass());
+
+    }
+
+    @Test
+    void getActiveSubscriptions() throws InterruptedException, ExecutionException, IOException {
+        SubscriptionDAO subDao = new SubscriptionDAOImpl();
+
+        SubscriptionService subService = new SubscriptionServiceImpl(subDao);
+
+        //il delete serve a simulare una prima connessione al db, altrimenti non funziona
+        AgendaDAO agendaDAO = new AgendaDAOImpl();
+        Appointment x = new Appointment();
+        agendaDAO.deleteappointment(x);
+
+        ArrayList<Subscription> listToReturnService = subService.getActiveSubscriptions();
+
+        assertEquals(Subscription.class, listToReturnService.get(0).getClass());
+
+    }
+
+    @Test
     void testUpdateInsert() throws IOException, ExecutionException, InterruptedException {
 
         SubscriptionDAO subscriptionDAO = new SubscriptionDAOImpl();
@@ -123,7 +188,7 @@ public class SubscriptionServiceImplIT {
         SubscriptionDAO subDao = new SubscriptionDAOImpl();
         SubscriptionService subService1 = new SubscriptionServiceImpl(subDao);
 
-        subService1.checkIfSent("mypt.gps.is@gmail.com");
+        subService1.checkIfSent("myptgps@gmail.com");
     }
 
     @Test
@@ -133,8 +198,6 @@ public class SubscriptionServiceImplIT {
         SubscriptionService subService1 = new SubscriptionServiceImpl(subDao);
 
         subService1.checkIfSent("marco@libero.it");
-
     }
-
 
 }

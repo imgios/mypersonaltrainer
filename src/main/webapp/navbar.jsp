@@ -103,7 +103,7 @@
     <a href="adminDashboard.jsp">Dashboard</a>
     <a href="verifyAppointments.jsp">Agenda</a>
     <a href="customersList.jsp">Clienti</a>
-    <a href="createTrainingPlan.jsp">Schede</a>
+    <a href="viewRequiredTrainingPlans.jsp">Schede</a>
     <a href="viewSubscriptionList.jsp">Abbonamenti</a>
 </div>
 

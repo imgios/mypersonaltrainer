@@ -1,7 +1,26 @@
 $(document).ready(function (){
     $("#appuntamenti").hide();
     $("#giornoscelto").hide();
+    $("#success-alert").hide();
 });
+
+function deleteappointmentfromDB(date,time,mail)
+{
+    $.ajax({
+        "type":"POST",
+        "url":"./RemoveAppointmentServlet",
+        "data":{dataapp:date,ora:time,mail:mail},
+        "success":function ()
+        {
+            seeAppointments();
+            $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+                $("#success-alert").slideUp(500);
+            });
+        }
+
+    });
+}
+
 
 
 
@@ -16,13 +35,19 @@ function seeAppointments() {
             {
                 $("#appuntamenti").show();
                 $("#giornoscelto").show();
-                document.getElementById('lista').innerHTML ="<tr><td> nessun appuntamento per il giorno selezionato</td></tr>";
+                document.getElementById('lista').innerHTML =" nessun appuntamento per il giorno selezionato";
             }
             else {
                 for (var i = 0; i < result.length; i++) {
+                    var dataappuntamento="\'"+document.getElementById('data').value+"\'";
+                    var timeappuntamento="\'"+result[i].time+"\'";
+                    var mailappuntamento="\'"+result[i].customerMail+"\'";
+                    var param=dataappuntamento+","+timeappuntamento+","+mailappuntamento;
+                    var funzione="onclick=\"deleteappointmentfromDB("+param+")\"";
                     s += "<tr>" +
                         "<td>" + result[i].time + "</td>" +
                         "<td>" + result[i].customerMail + "</td>" +
+                        "<td><button "+funzione+"><i class=\"far fa-trash-alt\"></i></button></td>"+
                         "</tr>"
                 }
                 document.getElementById('lista').innerHTML = s;

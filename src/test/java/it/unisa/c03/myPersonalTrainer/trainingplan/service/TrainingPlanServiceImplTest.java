@@ -13,6 +13,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 
 class TrainingPlanServiceImplTest {
+
     TrainingPlanDAO trainingPlanDAO = Mockito.mock(TrainingPlanDAO.class);
     TrainingPlanService trainingPlanService = new TrainingPlanServiceImpl(trainingPlanDAO);
 
@@ -243,4 +244,5 @@ class TrainingPlanServiceImplTest {
         Mockito.when(trainingPlanDAO.getTrainingPlansByEmail(anyString())).thenReturn(list);
         assertEquals(0, trainingPlanService.getTrainingPlans(anyString()).size());
     }
+
 }

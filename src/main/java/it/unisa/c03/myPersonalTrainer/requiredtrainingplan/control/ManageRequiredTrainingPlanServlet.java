@@ -33,64 +33,70 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response)
             throws ServletException, IOException {
+        String error = (String) request.getSession().getAttribute("error");
+        String done = (String) request.getSession().getAttribute("done");
 
-        /*Da sostituire con i dati della sessione*/
-        String email = "marcorossi@gmail.com";
-        int required = 0;
-        RequiredTrainingPlan requireTest =
-                new RequiredTrainingPlan(email, required);
+        String emailClientee = (String) request.getSession().getAttribute("clienteMail");
 
-        //richiamo della funzione per registrare un nuovo account
-        RequiredTrainingPlanDAO requiredTrainingPlanDao =
-                new RequiredTrainingPlanDAOImpl();
-        RequiredTrainingPlanService requiredTrainingPlanService =
-                new RequiredTrainingPlanServiceImpl(requiredTrainingPlanDao);
-        boolean checked = false;
+        if (emailClientee == null)
+            response.sendRedirect("login.jsp");
+        else {
+            int required = 0;
+            RequiredTrainingPlan requireTest =
+                    new RequiredTrainingPlan(emailClientee, required);
 
-        try {
-            checked = requiredTrainingPlanService.searchAccountByEmail(email);
-            if (!checked) {
-                //non esiste, quindi lo creiamo
-                requireTest.setRequired(1);
-                requiredTrainingPlanService.registerRequest(requireTest);
-                response.sendRedirect("customerDashboard.jsp");
-            } else {
-                try {
-                    requireTest = requiredTrainingPlanService
-                            .getAccountByEmail(email);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-                //Esiste, quindi procediamo a verificare se
-                // ha già richiesto o no la scheda
-                if (requireTest.getRequired() == 1) {
-                    response.sendRedirect("customerDashboard.jsp");
-                } else if (requireTest.getRequired() == 0) {
+            //richiamo della funzione per registrare un nuovo account
+            RequiredTrainingPlanDAO requiredTrainingPlanDao =
+                    new RequiredTrainingPlanDAOImpl();
+            RequiredTrainingPlanService requiredTrainingPlanService =
+                    new RequiredTrainingPlanServiceImpl(requiredTrainingPlanDao);
+            boolean checked = false;
+
+            try {
+                checked = requiredTrainingPlanService.searchAccountByEmail(emailClientee);
+                if (!checked) {
+                    //non esiste, quindi lo creiamo
                     requireTest.setRequired(1);
-                    requiredTrainingPlanService.changeRequest(email, 1);
+                    requiredTrainingPlanService.registerRequest(requireTest);
                     response.sendRedirect("customerDashboard.jsp");
+                } else {
+                    try {
+                        requireTest = requiredTrainingPlanService
+                                .getAccountByEmail(emailClientee);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+                    //Esiste, quindi procediamo a verificare se
+                    // ha già richiesto o no la scheda
+                    if (requireTest.getRequired() == 1) {
+                        response.sendRedirect("customerDashboard.jsp");
+                    } else if (requireTest.getRequired() == 0) {
+                        requireTest.setRequired(1);
+                        requiredTrainingPlanService.changeRequest(emailClientee, 1);
+                        response.sendRedirect("customerDashboard.jsp");
+                    }
                 }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+            boolean control = false;
         }
-        boolean control = false;
     }
-
-    /**
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
-    public void doGet(HttpServletRequest request,
-                      HttpServletResponse response)
+        /**
+         *
+         * @param request
+         * @param response
+         * @throws ServletException
+         * @throws IOException
+         */
+        public void doGet (HttpServletRequest request,
+                HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
-    }
+            doPost(request, response);
+        }
+
 }

@@ -65,9 +65,9 @@ class SubscriptionDAOImplTest {
     }
 
     @Test
-    void updatePassword() throws IOException, ExecutionException, InterruptedException {
+    void updateNotification() throws IOException, ExecutionException, InterruptedException {
         SubscriptionDAO subDao = new SubscriptionDAOImpl();
-        assertEquals(true, subDao.updateSentNotification("marcosica99@libero.it"));
+        assertEquals(true, subDao.updateSentNotification("subs@looking.com"));
     }
 
 }

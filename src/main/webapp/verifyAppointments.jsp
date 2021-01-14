@@ -39,10 +39,19 @@
     <body>
 
     <main>
-        <div id="container">
+        <div class="alert alert-success" role="alert" id="success-alert"><p>Appuntamento cancellato con successo</p></div>
+        <div class="container" >
+            <div class="row">
+                <div class="col">
             <div id="datepicker"></div>
+                    <br>
             <input hidden type="text" id="data">
-            <button id="visualizzaappuntamenti" onclick="seeAppointments()">Visualizza</button>
+                    <button class="btn btn-primary"  onclick="seeAppointments()">Visualizza</button>
+                    <button class="btn btn-primary">Programma Disponibilità</button>
+                    <button class="btn btn-primary">Visualizza Disponibilità</button>
+                    </div>
+            <!-- <button id="visualizzaappuntamenti" onclick="seeAppointments()">Visualizza</button>-->
+                <div class="col">
             <div id="giornoscelto"></div>
             <div id="appuntamenti" class="card border-dark mb-3">
                 <table  id="tuttiappuntamenti" class="table">
@@ -50,14 +59,19 @@
                     <tr>
                         <th scope="col">ora</th>
                         <th scope="col">Utente</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
-                    <tbody id="lista">
+                        <tbody id="lista">
                     </tbody>
                 </table>
             </div>
-
-            <button id="inseriscidisponibilità">Programma Disponibilità</button>
+                </div>
+            <!--<button id="inseriscidisponibilità">Programma Disponibilità</button>
+                <div class="col">
+                    <button class="btn btn-primary">Programma Disponibilità</button>
+                </div>-->
+            </div>
         </div>
 
     </main>

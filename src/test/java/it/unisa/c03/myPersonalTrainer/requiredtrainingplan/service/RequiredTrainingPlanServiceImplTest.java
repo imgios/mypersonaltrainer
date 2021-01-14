@@ -117,6 +117,7 @@ class RequiredTrainingPlanServiceImplTest {
         {
             document.getReference().delete();
         }
+
     }
 
     @Test

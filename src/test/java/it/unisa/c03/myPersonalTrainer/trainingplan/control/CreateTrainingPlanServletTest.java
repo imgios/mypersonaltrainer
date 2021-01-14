@@ -20,7 +20,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doNothing;
 
-class CreateTrainingPlanControllerTest {
+class CreateTrainingPlanServletTest {
 
     HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
     HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
@@ -52,7 +52,7 @@ class CreateTrainingPlanControllerTest {
         doNothing().when(session).setAttribute("success", "tuttobene");
 
 
-        new CreateTrainingPlanController().doPost(request, response);
+        new CreateTrainingPlanServlet().doPost(request, response);
     }
 
 
@@ -77,7 +77,7 @@ class CreateTrainingPlanControllerTest {
         doNothing().when(session).setAttribute("success", "tuttobene");
 
 
-        new CreateTrainingPlanController().doPost(request, response);
+        new CreateTrainingPlanServlet().doPost(request, response);
     }
 
 
@@ -98,7 +98,7 @@ class CreateTrainingPlanControllerTest {
         Mockito.when(request.getParameter("email")).thenReturn("giampieroferrara@test.it");
 
 
-        new CreateTrainingPlanController().doPost(request, response);
+        new CreateTrainingPlanServlet().doPost(request, response);
 
         System.out.println(request.getSession().getAttribute("noEx"));
     }
@@ -121,7 +121,7 @@ class CreateTrainingPlanControllerTest {
 
         Mockito.when(request.getParameter("email")).thenReturn("giampieroferrara@test.it");
 
-        new CreateTrainingPlanController().doPost(request, response);
+        new CreateTrainingPlanServlet().doPost(request, response);
 
         System.out.println(request.getSession().getAttribute("noEx"));
     }
@@ -149,7 +149,7 @@ class CreateTrainingPlanControllerTest {
         });
         assertEquals("invalid repetitions format", exception.getMessage());
 
-        new CreateTrainingPlanController().doPost(request, response);
+        new CreateTrainingPlanServlet().doPost(request, response);
     }
 
     /*

@@ -30,8 +30,13 @@ public class HoursServlet extends HttpServlet {
         try {
             PrintWriter out = response.getWriter();
             List<Availability> ore = service.getAvailabilityByDate(data);
-            out.print(new Gson().toJson(ore));
-            out.flush();
+            if(ore.size() != 0 && ore != null) {
+                out.print(new Gson().toJson(ore));
+                out.flush();
+            }
+            else {
+                out.print(new Gson().toJson(0));
+            }
 
         } catch (ExecutionException e) {
             e.printStackTrace();
