@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 public class TrainingPlanDAOImpl implements TrainingPlanDAO {
 
     /**
-     * This method add a new TrainingPlan
-     * @param tp
-     * @return boolean
+     * This method adds a new TrainingPlan
+     * @param tp the training plan
+     * @return true
      * @throws IOException
      */
     @Override
@@ -26,9 +26,9 @@ public class TrainingPlanDAOImpl implements TrainingPlanDAO {
     }
 
     /**
-     * This method delete a TrainingPlan.
+     * This method deletes a TrainingPlan.
      * @param email
-     * @return boolean
+     * @return true
      * @throws IOException
      * @throws ExecutionException
      * @throws InterruptedException

@@ -28,7 +28,7 @@ public class TrainingPlanServiceImpl implements TrainingPlanService {
     }
 
     /**
-     * this is TrainingPlan.
+     * this is TrainingPlanDAO.
      */
     private TrainingPlanDAO trainingPlanDAO;
 

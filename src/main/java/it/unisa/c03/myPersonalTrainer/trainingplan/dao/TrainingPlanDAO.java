@@ -20,7 +20,7 @@ public interface TrainingPlanDAO {
             throws IOException, ExecutionException, InterruptedException;
 
     /**
-     * This method add a new TrainingPlan.
+     * This method adds a new TrainingPlan.
      * @param tp
      * @return boolean
      * @throws IOException
@@ -29,7 +29,7 @@ public interface TrainingPlanDAO {
             throws IOException;
 
     /**
-     * This method delete a TrainingPlan.
+     * This method deletes a TrainingPlan.
      * @param email
      * @return boolean
      * @throws IOException
