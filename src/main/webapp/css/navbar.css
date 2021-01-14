@@ -2,12 +2,6 @@ body {
     font-family: "Lato", sans-serif;
 }
 
-/*
-.bg-primary {
-    background-color: #9fc5f8 !important;
-}
- */
-
 .navbar-custom_navbar {
     background-color: #9fc5f8;
 }
@@ -59,12 +53,6 @@ body {
     background-color: #9fc5f8;
 }
 
-/* div nella navbar animazione
-#main {
-    transition: margin-left .5s;
-    padding: 16px;
-}*/
-
 .navbar-nav a {
     color: white;
 }
@@ -86,7 +74,9 @@ body {
     padding: 10px 0px;
 }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+/* On smaller screens, where height is less than 450px,
+change the style of the sidenav
+(less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
     .sidebar {padding-top: 15px;}
     .sidebar a {font-size: 18px;}

@@ -2,10 +2,6 @@ body {
   color: #000;
   overflow-x: hidden;
   height: 100%;
-  /*
-  background-color: #B0BEC5;
-  background-repeat: no-repeat;
-   */
 }
 
 .card0 {
@@ -16,15 +12,6 @@ body {
 .card2 {
   margin: 0px 40px
 }
-
-/*
-.logo {
-  width: 200px;
-  height: 100px;
-  margin-top: 20px;
-  margin-left: 35px
-}
-*/
 
 .image {
   width: 360px;
@@ -121,11 +108,6 @@ a {
 }
 
 @media screen and (max-width: 991px) {
-  /*
-  .logo {
-    margin-left: 0px
-  }
-  */
 
   .image {
     width: 300px;

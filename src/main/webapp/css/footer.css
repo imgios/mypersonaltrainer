@@ -1,10 +1,3 @@
-/*****FOOTER CSS*****/
-
-/*
-.navbar-default{
- background-color: #000000;
-}
-*/
 
 .navbar-custom_footer{
     background-color: #000000;
@@ -14,21 +7,9 @@ footer {
     bottom: 0;
     width: 100%;
     position: fixed;
-    /*
-    height: 80px;
-    */
-    /*
-    height: 11%;
-     */
-    /*
-    height: 136px;
-    */
     height: fit-content;
     background-color: #000000;
     color: black;
-    /*
-    min-height: 80%;
-    */
 }
 
 footer ul.footerleft{
@@ -58,18 +39,6 @@ footer p{
     color: #ffffff;
     font-size: small;
 }
-/*
-footer h1:hover{
-    color: #09ffc4;
-    text-decoration: none;
-}
-*/
-/*
-#main {
-    overflow:auto;
-    padding-bottom: 100px;
-                        // il padding deve essere uguale altezza del footer
-}*/
 
 .social:hover {
     -webkit-transform: scale(1.0);
@@ -90,42 +59,3 @@ footer h1:hover{
     padding: 10px;
 }
 
-
-/*
-html, body {height: 100%;}
-*/
-
-/*
-#wrap {min-height: 100%;}
-*/
-
-/* allineamento centrale canvas */
-/*
-canvas{
-    margin: 0 auto;
-}
-.chartContainer{
-    text-align: center;
-}
-
-.chartContainer{
-    text-align: center;
-}
-
-myChart{
-    width: 80% !important;
-    height: 700px !important;
-    margin: 0;
-}
-
-.myChart {
-    text-align: center;
-    margin: 0 auto;
-}
-*/
-
-/*
-.login_form{
-    padding-top: 200px;
-}
- */
