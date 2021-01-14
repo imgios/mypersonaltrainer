@@ -20,13 +20,10 @@ public class CreateTrainingPlanServlet extends
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws IOException {
-
-
         TrainingPlanDAO trainingPlanDAO =
                 new TrainingPlanDAOImpl();
         TrainingPlanService trainingPlanService =
                 new TrainingPlanServiceImpl(trainingPlanDAO);
-
         try {
             String action = request.getParameter("action");
             if (action.equals("addex")) {
@@ -47,7 +44,6 @@ public class CreateTrainingPlanServlet extends
 
                 trainingPlanService.checkExercise(exercise, repetitions,
                         series, recoveryTime);
-
 
                 String exercises = (String) request.getSession()
                         .getAttribute("exercises");
@@ -80,7 +76,6 @@ public class CreateTrainingPlanServlet extends
 
                 response.sendRedirect("createTrainingPlan.jsp");
             } else if (action.equals("addtp")) {
-
                 String exercises = (String) request.getSession()
                         .getAttribute("exercises");
                 if (exercises == null) {
@@ -88,9 +83,7 @@ public class CreateTrainingPlanServlet extends
                             "Inserisci almeno un esercizio per creare una scheda!");
                     response.sendRedirect("createTrainingPlan.jsp");
                 } else {
-
                     String mail = request.getParameter("email");
-
                     TrainingPlan trainingPlan =
                             new TrainingPlan(exercises, mail);
                     trainingPlanService.createTrainingPlan(trainingPlan);
@@ -101,7 +94,6 @@ public class CreateTrainingPlanServlet extends
                 }
             }
         } catch (IllegalArgumentException e) {
-
             request.getSession().setAttribute("error", e.getMessage());
             response.sendRedirect("createTrainingPlan.jsp");
         }

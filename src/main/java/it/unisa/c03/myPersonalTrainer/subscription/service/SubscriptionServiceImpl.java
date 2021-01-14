@@ -96,7 +96,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         // calucating difference
         long dayBetween = DAYS.between(oggi, scadenza);
 
-
         //      A : if difference is >= 10 return 1, state : attivo
         if (dayBetween >= TEN_DAYS) {
             return 1;
@@ -108,7 +107,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
             //      A : if difference is < 0 return -1, state : scaduto
             return -1;
         }
-
         return -1;
     }
 
@@ -189,7 +187,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
                 listToReturn.add(s);
             }
         }
-
         return listToReturn;
     }
 
@@ -213,7 +210,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
                 listToReturn.add(s);
             }
         }
-
         return listToReturn;
     }
 
@@ -227,17 +223,14 @@ public class SubscriptionServiceImpl implements SubscriptionService {
             throws InterruptedException, ExecutionException, IOException {
         //create the list to return
         ArrayList<Subscription> listToReturn = new ArrayList<>();
-
         //call dao to get all subs
         ArrayList<Subscription> listDao = subscriptionDAO.getAllSubscriptions();
-
         //filter each sub and add to list only expired subs
         for (Subscription s : listDao) {
             if (checkSubscriptionState(s.getCustomerMail()) == 1) {
                 listToReturn.add(s);
             }
         }
-
         return listToReturn;
     }
 

@@ -12,10 +12,9 @@
 
 <%
     String utente_email_sess = (String) request.getSession().getAttribute("clienteMail");
-
-    if (utente_email_sess == null) {
+    if ( utente_email_sess == null ){
         response.sendRedirect("./error.jsp");
-    }else {
+    } else {
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

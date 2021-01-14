@@ -33,7 +33,6 @@ public class TrainingPlanServiceImpl implements TrainingPlanService {
     private TrainingPlanDAO trainingPlanDAO;
 
     public TrainingPlanServiceImpl() {
-
     }
 
     /**
@@ -95,7 +94,6 @@ public class TrainingPlanServiceImpl implements TrainingPlanService {
         } else {
             result = true;
         }
-
         return result;
     }
 

@@ -20,7 +20,6 @@
     <%@include file="head.jsp"%>
     <%@include file="navbar.jsp"%>
 
-
     <link rel="stylesheet" href="css/error.css"/>
 
     <title>Error!</title>

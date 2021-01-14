@@ -43,10 +43,10 @@ public class TrainingPlan {
      * constructor of the class.
      */
     public TrainingPlan() {
-
     }
 
-   /* @Override
+   /*
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -65,7 +65,7 @@ public class TrainingPlan {
         }
         return email.equals(that.email);
     }
-*/
+    */
 
     /**
      * constructor of the class.

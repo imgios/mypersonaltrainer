@@ -13,11 +13,12 @@
     String utente = (String) request.getSession().getAttribute("clienteMail");
     String pt = (String) request.getSession().getAttribute("ptMail");
 %>
-<% if (utente != null) {
+<%
+    if (utente != null) {
     response.sendRedirect("./customerDashboard.jsp");
-} else if (pt != null) {
+    } else if (pt != null) {
     response.sendRedirect("./adminDashboard.jsp");
-}
+    }
 %>
 <head>
 
