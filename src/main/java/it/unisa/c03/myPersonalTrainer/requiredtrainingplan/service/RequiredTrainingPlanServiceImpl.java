@@ -46,7 +46,7 @@ public class RequiredTrainingPlanServiceImpl implements
         //the email exists yet in the DB
         if (requiredTrainingPlan.getEmail() != null) {
             result = true;
-        }/* else if (requiredTrainingPlan.getEmail() == null) {
+        } /* else if (requiredTrainingPlan.getEmail() == null) {
             //the email doesn't exist in the DB
             result = false;
         }*/

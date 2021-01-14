@@ -20,7 +20,7 @@ public interface ParametersService {
      * @throws IOException
      */
     Parameters createParameters(String weight, String leanMass,
-                                String fatMass,String email)
+                                String fatMass, String email)
             throws IllegalArgumentException, IOException;
 
     /**

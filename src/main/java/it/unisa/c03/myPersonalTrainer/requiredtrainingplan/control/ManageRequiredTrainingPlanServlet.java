@@ -38,9 +38,9 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
 
         String emailClientee = (String) request.getSession().getAttribute("clienteMail");
 
-        if (emailClientee == null)
+        if (emailClientee == null) {
             response.sendRedirect("login.jsp");
-        else {
+        } else {
             int required = 0;
             RequiredTrainingPlan requireTest =
                     new RequiredTrainingPlan(emailClientee, required);
@@ -93,7 +93,7 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
          * @throws ServletException
          * @throws IOException
          */
-        public void doGet (HttpServletRequest request,
+        public void doGet(HttpServletRequest request,
                 HttpServletResponse response)
             throws ServletException, IOException {
             doPost(request, response);

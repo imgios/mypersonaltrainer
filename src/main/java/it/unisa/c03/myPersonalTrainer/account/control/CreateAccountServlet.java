@@ -102,7 +102,7 @@ public class CreateAccountServlet extends HttpServlet {
                 subService.createSubscription(utente.getEmail());
 
                 //Notifica di creazione
-                accountService.sendEmail(email,password);
+                accountService.sendEmail(email, password);
 
             }
         } catch (IllegalArgumentException | ExecutionException | InterruptedException | EmailException exception) {
