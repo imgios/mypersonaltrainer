@@ -1,4 +1,5 @@
 package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.control;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
@@ -30,13 +31,11 @@ class ManageRequiredTrainingPlanServletTest {
     RequiredTrainingPlan requireB = Mockito.mock(RequiredTrainingPlan.class);
     RequiredTrainingPlanServiceImpl requiredTrainingPlanService = Mockito.mock(RequiredTrainingPlanServiceImpl.class);
 
-    boolean checked = false;
-
     String email = "marcorossi@gmail.com";
     int required = 1;
 
     @Test
-    void doPostCredentialTrue() throws IOException, ServletException, ExecutionException, InterruptedException {
+    void doPostCatchIAE() throws IOException, ServletException, ExecutionException, InterruptedException {
         Mockito.when(request.getParameter("email")).thenReturn("test@test.pt");
         assertEquals("test@test.pt", request.getParameter("email"));
         Mockito.when(request.getParameter("required")).thenReturn("0");
@@ -57,7 +56,7 @@ class ManageRequiredTrainingPlanServletTest {
     }
 
     @Test
-    void doPostCatch() throws IOException, ServletException, ExecutionException, InterruptedException {
+    void doPostCredTrue() throws IOException, ServletException, ExecutionException, InterruptedException {
         Mockito.when(request.getParameter("email")).thenReturn("test@test.pt");
         assertEquals("test@test.pt", request.getParameter("email"));
         Mockito.when(request.getParameter("required")).thenReturn("0");
@@ -78,18 +77,18 @@ class ManageRequiredTrainingPlanServletTest {
 
     }
 
-  @AfterAll
-  static void afterinsertdelete() throws IOException, ExecutionException, InterruptedException {
-    List<QueryDocumentSnapshot> lqds = DBConnection
-        .getConnection().collection("RequiredTrainingPlan").whereEqualTo("email","marcorossi@gmail.com").get().get().getDocuments();
-    for(QueryDocumentSnapshot document : lqds)
-    {
-      document.getReference().delete();
+    @AfterAll
+    static void afterinsertdelete() throws IOException, ExecutionException, InterruptedException {
+        List<QueryDocumentSnapshot> lqds = DBConnection
+                .getConnection().collection("RequiredTrainingPlan").whereEqualTo("email","marcorossi@gmail.com").get().get().getDocuments();
+        for(QueryDocumentSnapshot document : lqds)
+        {
+            document.getReference().delete();
+        }
     }
-  }
 
     @Test
-    void doPostCredentialTrueandControl() throws IOException, ServletException, ExecutionException, InterruptedException {
+    void doPostCredTrueandControl() throws IOException, ServletException, ExecutionException, InterruptedException {
         Mockito.when(request.getParameter("email")).thenReturn("test@test.pt");
         assertEquals("test@test.pt", request.getParameter("email"));
         Mockito.when(request.getParameter("required")).thenReturn("0");
@@ -197,4 +196,5 @@ class ManageRequiredTrainingPlanServletTest {
 
         new ManageRequiredTrainingPlanServlet().doGet(request,response);
     }
+    
 }
