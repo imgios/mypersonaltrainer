@@ -12,12 +12,12 @@ public interface AccountService {
 
   /**
    * This function allow to verify the credentials
-   * typed between form before the login.
+   * typed in login form.
    * @param email
    * @param password
    * @return true if credentials are in the Database,
-   * false if the credentials aren't linked to an account s
-   * tored in the Database
+   * false if the credentials aren't linked to an account
+   * stored in the Database
    * @throws IOException
    * @throws ExecutionException
    * @throws InterruptedException
@@ -26,8 +26,8 @@ public interface AccountService {
           throws IOException, ExecutionException, InterruptedException;
 
   /**
-   * This function return the list of the account insert into the db.
-   * @return list of every account store
+   * This function return the list of the accounts registered into the db.
+   * @return list of all accounts saved.
    * @throws IOException exception
    */
     ArrayList<Account> viewInfoAccount()
@@ -37,7 +37,7 @@ public interface AccountService {
      * This function give the possibility to register a
      * new user into the system.
      * @param utente user into the db
-     * @return true if is possibly to insert the
+     * @return true if is possible to insert the
      * account after check of the credentials,
      * false when fails the check of the
      * credentials or the email is just registered
@@ -53,8 +53,8 @@ public interface AccountService {
      * the client before insert into the db.
      * @param clientMail email of the client
      * @param newPassword new password to update
-     * @return true if the credentials follow the expression-regular,
-     * false when something is typing wrong.
+     * @return true if the credentials follow the regular-expression,
+     * false when something is typed wrong.
      * @throws IllegalArgumentException //
      */
      boolean checkCredentials(String clientMail, String newPassword)

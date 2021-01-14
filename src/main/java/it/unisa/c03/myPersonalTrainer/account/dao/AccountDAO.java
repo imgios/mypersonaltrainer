@@ -9,7 +9,7 @@ public interface AccountDAO {
 
     /**
      * this function save the account into the db.
-     * @param utente describe the user
+     * @param utente the user
      * @throws IOException
      * @return true or false
      */
@@ -18,8 +18,8 @@ public interface AccountDAO {
     /** this function can search if the email is
      * just registered into the db.
      * @param email is the pk to find the user into the db
-     * @return if the email is in the parameters of
-     * the user and if the email isn't registered "null"
+     * @return the Account if the email is registered,
+     * or "null" if the email isn't registered.
      */
      Account findAccountByEmail(String email)
              throws IOException, ExecutionException, InterruptedException;
