@@ -242,7 +242,7 @@ class TrainingPlanServiceImplTest {
     void getTrainingPlansByNotValidEmail() throws InterruptedException, ExecutionException, IOException {
         ArrayList<TrainingPlan> list = new ArrayList<>();
         Mockito.when(trainingPlanDAO.getTrainingPlansByEmail(anyString())).thenReturn(list);
-        assertEquals(0, trainingPlanService.getTrainingPlans(anyString()).size());
+        assertEquals(0, trainingPlanService.getTrainingPlans("anyString()").size());
     }
 
 }

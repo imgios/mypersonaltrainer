@@ -31,11 +31,11 @@ class SubscriptionServiceImplIT {
     @BeforeAll
     static void setUp() throws IOException {
         //Sub per test: get expiring
-        Subscription sub4 = new Subscription("abbonamento@gmail.com","2021-01-13","30");
+        Subscription sub4 = new Subscription("abbonamento@gmail.com","2021-01-19","30");
         DBConnection.getConnection().collection("Subscription").add(sub4);
 
         //Sub per test: get expired
-        Subscription subScad = new Subscription("abbonamento@scaduto.com","2020-01-13","30");
+        Subscription subScad = new Subscription("abbonamento@scaduto.com","2020-01-19","30");
         DBConnection.getConnection().collection("Subscription").add(subScad);
 
         //Sub per test: get active
