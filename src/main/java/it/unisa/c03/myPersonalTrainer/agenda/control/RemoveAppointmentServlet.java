@@ -40,7 +40,6 @@ public class RemoveAppointmentServlet extends HttpServlet {
         AgendaService service = new AgendaServiceImpl(dao);
         response.setContentType("application/json");
         try {
-
             Email email=new SimpleEmail();
             email.setHostName("smtp.gmail.com");
             email.setSmtpPort(PORT);

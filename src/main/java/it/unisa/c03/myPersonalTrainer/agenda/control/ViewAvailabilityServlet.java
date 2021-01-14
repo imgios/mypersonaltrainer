@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * this class controls the interaction between personal
  * trainer and system to view personal trainer availability.
- * return 1+"Message" if there is an error in the date input ,
+ * return 1+"Message" if there is an error in the date input,
  * 0 if there aren't availability, else return the
  * availability list for this date.
  */
@@ -59,7 +59,6 @@ public class ViewAvailabilityServlet
          * stringa che verra' data in output in formato json
          */
         String res = "";
-
 
         try {
             agendaService.checkAvailability(

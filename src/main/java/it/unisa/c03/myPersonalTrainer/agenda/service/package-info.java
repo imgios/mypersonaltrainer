@@ -1,6 +1,6 @@
 /**
- * this package provides the classes that
- * provides service methods to the controller.
- * check also the data and the time.
+ * this package provides the service
+ * methods to the controller.
+ * It also checks the data and the time.
  */
 package it.unisa.c03.myPersonalTrainer.agenda.service;

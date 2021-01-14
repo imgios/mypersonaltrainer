@@ -6,7 +6,7 @@ public class Availability implements Serializable {
 
     private static final long serialVersionUID = 1L;
     /**
-     * represent the availabilit date yyyy-mm-dd.
+     * represent the availability date yyyy-mm-dd.
      */
     private String date;
     /**

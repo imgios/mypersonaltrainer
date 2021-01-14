@@ -70,8 +70,6 @@ public final class AgendaServiceImpl implements AgendaService {
     }
 
 
-//AVAIL
-
     /**
      * define the min time to make availability.
      */

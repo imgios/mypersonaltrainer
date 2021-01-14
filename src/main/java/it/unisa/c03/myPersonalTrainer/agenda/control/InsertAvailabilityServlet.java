@@ -49,13 +49,13 @@ public class InsertAvailabilityServlet
 
         String res = "";
         try {
-            System.out.println(
-                    agendaService.checkAvailability(data, x));
+
+                    agendaService.checkAvailability(data, x);
 
             Availability prova =
                     agendaService.getAvailabilityByDateAndTime(
                             data, Integer.parseInt(x));
-            System.out.println(prova);
+
             if (prova == null) {
                 //si puo creare availability poiche non esiste gia
                 Availability avaiability =
@@ -66,8 +66,8 @@ public class InsertAvailabilityServlet
                 res = new Gson().toJson(2);
             }
         } catch (IllegalArgumentException
-                | InterruptedException | ExecutionException e) { // se non ritorna 1 o 2,allora ritorna un messaggio di errore
-            System.out.println(e.getMessage());
+                | InterruptedException | ExecutionException e) {
+            // se non ritorna 1 o 2,allora ritorna un messaggio di errore
             res = new Gson().toJson(e.getMessage());
             response.getWriter().write(res);
             return;
