@@ -162,7 +162,6 @@ public class AgendaDAOImpl implements AgendaDAO {
         Stream<Availability> sa = docs.stream().map(queryDocumentSnapshot ->
                 queryDocumentSnapshot.toObject(Availability.class));
         dispo = sa.collect(Collectors.toList());
-        System.out.println("\n\n" + dispo.size());
         if (dispo.size() == 0) {
             return null;
         } else {

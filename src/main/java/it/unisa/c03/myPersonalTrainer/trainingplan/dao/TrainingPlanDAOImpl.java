@@ -21,7 +21,6 @@ public class TrainingPlanDAOImpl implements TrainingPlanDAO {
     @Override
     public boolean insertTrainingPlan(TrainingPlan tp)
             throws IOException {
-        System.out.println(tp);
         DBConnection.getConnection().collection("TrainingPlan").add(tp);
         return true;
     }
