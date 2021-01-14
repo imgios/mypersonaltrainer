@@ -23,14 +23,11 @@ import java.io.IOException;
 public class ParametersController
         extends HttpServlet {
 
-    /**
-     * private ParametersDAO parametersDAO =
-     * new ParametersDAOImpl();
-     */
+
     private ParametersDAO parametersDAO =
             new ParametersDAOImpl();
     /**
-     * ParametersService to use the service methods
+     * ParametersService to use the service methods.
      */
     private ParametersService service =
             new ParametersServiceImpl(parametersDAO);

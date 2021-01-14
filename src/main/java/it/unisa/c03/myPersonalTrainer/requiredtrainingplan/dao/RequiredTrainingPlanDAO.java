@@ -57,6 +57,7 @@ public interface RequiredTrainingPlanDAO {
      * @throws IOException
      * @throws ExecutionException
      * @throws InterruptedException
+     * @return the list
      */
      ArrayList<RequiredTrainingPlan> getAllRequests()
             throws IOException, ExecutionException, InterruptedException;

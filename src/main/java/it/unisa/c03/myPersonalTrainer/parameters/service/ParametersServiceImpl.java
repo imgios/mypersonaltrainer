@@ -12,31 +12,31 @@ import java.util.concurrent.ExecutionException;
 public class ParametersServiceImpl implements ParametersService {
 
     /**
-     * the MIN_WEIGHT allowed
+     * the MIN_WEIGHT allowed.
      */
     private static final int MIN_WEIGHT = 40;
     /**
-     * the MAX_WEIGHT allowed
+     * the MAX_WEIGHT allowed.
      */
     private static final int MAX_WEIGHT = 150;
     /**
-     * the MIN_PERCENTAGE allowed
+     * the MIN_PERCENTAGE allowed.
      */
     private static final int MIN_PERCENTAGE = 10;
     /**
-     * the MAX_PERCENTAGE allowed
+     * the MAX_PERCENTAGE allowed.
      */
     private static final int MAX_PERCENTAGE = 70;
     /**
-     * the MIN_LENGHT for the WEIGHT allowed
+     * the MIN_LENGHT for the WEIGHT allowed.
      */
     private static final int MIN_LENGHT_WEIGHT = 2;
     /**
-     * the MAX_LENGHT for the WEIGHT allowed
+     * the MAX_LENGHT for the WEIGHT allowed.
      */
     private static final int MAX_LENGHT_WEIGHT = 6;
     /**
-     * the PERCENTAGE
+     * the PERCENTAGE.
      */
     private static final int PERCENTAGE = 100;
 
@@ -52,12 +52,13 @@ public class ParametersServiceImpl implements ParametersService {
      * @param weight   between 40 and 150 format allowed XXX.XX
      * @param leanMass between 10% and 70%
      * @param fatMass  between 10% and 70%
+     * @param email
      * @return the parameters, null if the parameters in input are not good
      * @throws NumberFormatException
      * @throws IllegalArgumentException
      */
     public Parameters createParameters(
-            String weight, String leanMass, String fatMass,String email)
+            String weight, String leanMass, String fatMass, String email)
             throws IllegalArgumentException, IOException {
 
         if (weight == null || leanMass == null || fatMass == null) {
@@ -129,7 +130,7 @@ public class ParametersServiceImpl implements ParametersService {
                 bigDecimalleanMassTot.doubleValue();
         Parameters pa =
                 new Parameters(weightD,
-                        fatMassTotal, leanMassTotal,email);
+                        fatMassTotal, leanMassTotal, email);
         return pa;
     }
 

@@ -224,7 +224,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public boolean changeSentNotification(String email) throws IOException, ExecutionException, InterruptedException {
+    public boolean changeSentNotification(String email)
+            throws IOException, ExecutionException, InterruptedException {
         return subscriptionDAO.updateSentNotification(email);
     }
 }

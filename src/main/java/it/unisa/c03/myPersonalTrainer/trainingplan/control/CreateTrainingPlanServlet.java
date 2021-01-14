@@ -80,7 +80,8 @@ public class CreateTrainingPlanServlet extends
                         .getAttribute("exercises");
                 if (exercises == null) {
                     request.getSession().setAttribute("noEx",
-                            "Inserisci almeno un esercizio per creare una scheda!");
+                            "Inserisci almeno un "
+                                    + "esercizio per creare una scheda!");
                     response.sendRedirect("createTrainingPlan.jsp");
                 } else {
                     String mail = request.getParameter("email");

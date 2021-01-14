@@ -22,9 +22,11 @@ public class TrainingPlanServiceImpl implements TrainingPlanService {
      * @throws ExecutionException
      * @throws IOException
      */
-    public List<TrainingPlan> getTrainingPlans(String email) throws InterruptedException, ExecutionException, IOException {
+    public List<TrainingPlan> getTrainingPlans(String email)
+            throws InterruptedException, ExecutionException, IOException {
         TrainingPlanDAO trainingPlanList = new TrainingPlanDAOImpl();
-        return (List<TrainingPlan>) trainingPlanList.getTrainingPlansByEmail(email);
+        return (List<TrainingPlan>)
+                trainingPlanList.getTrainingPlansByEmail(email);
     }
 
     /**
@@ -66,7 +68,8 @@ public class TrainingPlanServiceImpl implements TrainingPlanService {
         final int MIN_LENGHT_EX = 4;
         final int MIN_LENGHT = 1;
 
-        if (series == null || repetitions == null || exercise == null || recoveryTime == null) {
+        if (series == null || repetitions == null
+                || exercise == null || recoveryTime == null) {
             throw new IllegalArgumentException(
                     "valori mancanti");
         }

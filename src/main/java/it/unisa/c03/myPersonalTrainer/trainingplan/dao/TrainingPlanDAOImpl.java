@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class TrainingPlanDAOImpl implements TrainingPlanDAO {
 
     /**
-     * This method adds a new TrainingPlan
+     * This method adds a new TrainingPlan.
      * @param tp the training plan
      * @return true
      * @throws IOException

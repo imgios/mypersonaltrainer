@@ -73,7 +73,8 @@ public interface SubscriptionService {
      * @param subscription Account subscription.
      * @throws EmailException
      */
-    void sendEmail(String customerMail, Subscription subscription) throws EmailException;
+    void sendEmail(String customerMail, Subscription subscription)
+            throws EmailException;
 
     /**
      * This method is called only if the client's subscription
@@ -86,5 +87,7 @@ public interface SubscriptionService {
      * @throws IOException
      * @throws EmailException
      */
-    void checkIfSent(String customerMail) throws InterruptedException, ExecutionException, IOException, EmailException;
+    void checkIfSent(String customerMail)
+            throws InterruptedException, ExecutionException,
+            IOException, EmailException;
 }

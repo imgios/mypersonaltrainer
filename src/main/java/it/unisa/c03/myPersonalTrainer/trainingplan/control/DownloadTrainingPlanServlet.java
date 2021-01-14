@@ -24,7 +24,8 @@ public class DownloadTrainingPlanServlet extends HttpServlet {
       throws IOException, ServletException {
     String date = request.getParameter("date");
 
-    String emailCliente = (String) request.getSession().getAttribute("clienteMail");
+    String emailCliente = (String)
+            request.getSession().getAttribute("clienteMail");
 
     String exercises = request.getParameter("exercises");
 

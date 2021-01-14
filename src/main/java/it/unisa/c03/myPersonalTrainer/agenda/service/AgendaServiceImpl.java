@@ -31,7 +31,8 @@ public final class AgendaServiceImpl implements AgendaService {
     @Override
     public boolean checkDate(String date) {
         LocalDate data = LocalDate.parse(date);
-        boolean check = data.isAfter(LocalDate.now()) || data.isEqual(LocalDate.now()) ;
+        boolean check = data.isAfter(
+                LocalDate.now()) || data.isEqual(LocalDate.now());
         return check;
     }
 

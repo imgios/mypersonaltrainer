@@ -28,18 +28,20 @@ import java.util.concurrent.ExecutionException;
 public class ViewAvailabilityServlet
         extends HttpServlet {
     /**
-     * AgendaDAO
+     * AgendaDAO.
      */
     private AgendaDAO agendaDAO =
             new AgendaDAOImpl();
     /**
-     * AgendaService to use the service methods
+     * AgendaService to use the service methods.
      */
     private AgendaService agendaService =
             new AgendaServiceImpl(agendaDAO);
 
     /**
      *parametro fittizio per effettuare solo il check sulla data.
+     * @param request
+     * @param response
      */
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
@@ -75,7 +77,9 @@ public class ViewAvailabilityServlet
                 res = new Gson().toJson(list);
             }
         } catch (IllegalArgumentException
-            | InterruptedException | ExecutionException e) { //ritorna il valore 1+il messaggio del relativo errore. 1 e' un valore sentinella.
+            | InterruptedException | ExecutionException e) {
+            //ritorna il valore 1+il messaggio del relativo errore.
+            // 1 e' un valore sentinella.
             res = new Gson().toJson(
                     "1" + e.getMessage());
             //formato non valido o data precedente

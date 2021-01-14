@@ -12,6 +12,7 @@ public interface ParametersDAO {
      * this method interact with database to insert the parameters.
      * @param param the parameters to insert into database
      * @throws IOException
+     * @return boolean
      */
     boolean insertParameters(
             Parameters param) throws IOException;

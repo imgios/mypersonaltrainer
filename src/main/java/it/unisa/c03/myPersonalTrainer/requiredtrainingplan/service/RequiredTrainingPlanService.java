@@ -23,7 +23,8 @@ public interface RequiredTrainingPlanService {
             ExecutionException, InterruptedException;
 
     /**
-     * This service method checks if an account exists in the RequiredTrainingPlan.
+     * This service method checks if an account
+     * exists in the RequiredTrainingPlan.
      * @param email referring to the account to search for
      * @return true if the account exists, false if not
      */
@@ -54,6 +55,7 @@ public interface RequiredTrainingPlanService {
      * @throws ExecutionException
      * @throws IOException
      */
-    public ArrayList<RequiredTrainingPlan> getAllRequestes() throws InterruptedException, ExecutionException, IOException ;
+     ArrayList<RequiredTrainingPlan> getAllRequestes()
+             throws InterruptedException, ExecutionException, IOException;
 
 }

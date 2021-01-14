@@ -36,11 +36,12 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
         String error = (String) request.getSession().getAttribute("error");
         String done = (String) request.getSession().getAttribute("done");
 
-        String emailClientee = (String) request.getSession().getAttribute("clienteMail");
+        String emailClientee = (String)
+                request.getSession().getAttribute("clienteMail");
 
-        if (emailClientee == null)
+        if (emailClientee == null) {
             response.sendRedirect("login.jsp");
-        else {
+        } else {
             int required = 0;
             RequiredTrainingPlan requireTest =
                     new RequiredTrainingPlan(emailClientee, required);
@@ -49,11 +50,13 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
             RequiredTrainingPlanDAO requiredTrainingPlanDao =
                     new RequiredTrainingPlanDAOImpl();
             RequiredTrainingPlanService requiredTrainingPlanService =
-                    new RequiredTrainingPlanServiceImpl(requiredTrainingPlanDao);
+                    new RequiredTrainingPlanServiceImpl(
+                            requiredTrainingPlanDao);
             boolean checked = false;
 
             try {
-                checked = requiredTrainingPlanService.searchAccountByEmail(emailClientee);
+                checked = requiredTrainingPlanService.
+                        searchAccountByEmail(emailClientee);
                 if (!checked) {
                     //it doesn't exists, so we create it
                     requireTest.setRequired(1);
@@ -74,7 +77,8 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
                         response.sendRedirect("customerDashboard.jsp");
                     } else if (requireTest.getRequired() == 0) {
                         requireTest.setRequired(1);
-                        requiredTrainingPlanService.changeRequest(emailClientee, 1);
+                        requiredTrainingPlanService.
+                                changeRequest(emailClientee, 1);
                         response.sendRedirect("customerDashboard.jsp");
                     }
                 }
@@ -93,7 +97,7 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
          * @throws ServletException
          * @throws IOException
          */
-        public void doGet (HttpServletRequest request,
+        public void doGet(HttpServletRequest request,
                 HttpServletResponse response)
             throws ServletException, IOException {
             doPost(request, response);

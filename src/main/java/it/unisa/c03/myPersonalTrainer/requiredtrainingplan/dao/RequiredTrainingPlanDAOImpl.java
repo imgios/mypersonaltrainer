@@ -6,7 +6,6 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
-import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
 
@@ -138,13 +137,15 @@ public class RequiredTrainingPlanDAOImpl implements RequiredTrainingPlanDAO {
      * @throws IOException
      * @throws ExecutionException
      * @throws InterruptedException
+     * @return the list
      */
     public ArrayList<RequiredTrainingPlan> getAllRequests()
             throws IOException, ExecutionException, InterruptedException {
 
         CollectionReference accounts = null;
 
-        accounts = DBConnection.getConnection().collection("RequiredTrainingPlan");
+        accounts = DBConnection.getConnection().
+                collection("RequiredTrainingPlan");
 
         Query query = accounts.whereEqualTo("required", 1);
 
@@ -154,7 +155,8 @@ public class RequiredTrainingPlanDAOImpl implements RequiredTrainingPlanDAO {
 
         for (DocumentSnapshot document
                 : querySnapshot.get().getDocuments()) {
-            RequiredTrainingPlan a = document.toObject(RequiredTrainingPlan.class);
+            RequiredTrainingPlan a = document.
+                    toObject(RequiredTrainingPlan.class);
             rtpBean.add(a);
         }
 

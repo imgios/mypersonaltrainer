@@ -65,8 +65,7 @@ public class AccountServiceImpl implements AccountService {
           throws IOException, ExecutionException, InterruptedException {
       Account accountLogged;
       accountLogged = accountDAO.findAccountByEmail(email);
-         if(accountLogged != null)
-         {
+         if (accountLogged != null) {
              return true;
          }
          return false;
@@ -229,8 +228,8 @@ public class AccountServiceImpl implements AccountService {
         Email email = new SimpleEmail();
         email.setHostName("smtp.gmail.com");
         email.setSmtpPort(PORT);
-        email.setAuthenticator(new DefaultAuthenticator
-                ("mypt.gps.is@gmail.com", "mypt2021"));
+        email.setAuthenticator(new DefaultAuthenticator(
+                "mypt.gps.is@gmail.com", "mypt2021"));
         email.setSSLOnConnect(true);
         email.setFrom("mypt.gps.is@gmail.com");
         email.setSubject("Registrazione myPersonalTrainer");
