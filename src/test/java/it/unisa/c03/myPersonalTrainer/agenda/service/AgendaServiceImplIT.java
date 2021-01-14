@@ -75,6 +75,65 @@ public class AgendaServiceImplIT
         assertNull(service.findAppointmentByDate("2019-06-18"));
     }
 
+    @Test
+    void dateformatnotvalid()
+    {
+        AgendaDAO dao=new AgendaDAOImpl();
+        AgendaService service=new AgendaServiceImpl(dao);
+        String data="x23-";
+        String time="12";
+        assertThrows(IllegalArgumentException.class,()->service.checkAvailability(data,time));
+    }
+    @Test
+    void timeformatnotvalid()
+    {
+        AgendaDAO dao=new AgendaDAOImpl();
+        AgendaService service=new AgendaServiceImpl(dao);
+        String data="2120-02-03";
+        String time="xx";
+        assertThrows(IllegalArgumentException.class,()->service.checkAvailability(data,time));
+    }
+
+    @Test
+    void datebeforetoday()
+    {
+        AgendaDAO dao=new AgendaDAOImpl();
+        AgendaService service=new AgendaServiceImpl(dao);
+        String data="1920-02-03";
+        String time="xx";
+        assertThrows(IllegalArgumentException.class,()->service.checkAvailability(data,time));
+    }
+
+    @Test
+    void timeminusMin()
+    {
+        AgendaDAO dao=new AgendaDAOImpl();
+        AgendaService service=new AgendaServiceImpl(dao);
+        String data="2120-02-03";
+        String time="6";
+        assertThrows(IllegalArgumentException.class,()->service.checkAvailability(data,time));
+    }
+
+    @Test
+    void timemorethanMAX()
+    {
+        AgendaDAO dao=new AgendaDAOImpl();
+        AgendaService service=new AgendaServiceImpl(dao);
+        String data="2120-02-03";
+        String time="22";
+        assertThrows(IllegalArgumentException.class,()->service.checkAvailability(data,time));
+    }
+
+    @Test
+    void goodavailability()
+    {
+        AgendaDAO dao=new AgendaDAOImpl();
+        AgendaService service=new AgendaServiceImpl(dao);
+        String data="2120-02-03";
+        String time="17";
+        assertTrue(service.checkAvailability(data,time));
+    }
+
 
 
 
