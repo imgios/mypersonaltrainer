@@ -9,12 +9,12 @@ import java.util.concurrent.ExecutionException;
 public interface RequiredTrainingPlanService {
 
     /**
-     * This function give the possibility to register a
-     * user and his first request of TrainigPlan into the system.
+     * This function gives the possibility to register an
+     * user and his first request of TrainingPlan into the system.
      * @param requiredTrainingPlan request into the db
-     * @return true if is possibly to insert the
-     * account after check of the credentials,
-     * false when fails the email is just registered
+     * @return true if is possible to insert the
+     * account after the credentials check,
+     * false when fails because email is just registered
      * @throws IOException //
      * @throws IllegalArgumentException //
      */
@@ -31,7 +31,7 @@ public interface RequiredTrainingPlanService {
             throws InterruptedException, ExecutionException, IOException;
 
     /**
-     * This method return the account given its mail.
+     * This method returns the account given its mail.
      * @param email referring to the account to search for
      * @return the Account if it exists, null if not
      */

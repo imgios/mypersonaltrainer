@@ -1,5 +1,4 @@
 package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao;
-import it.unisa.c03.myPersonalTrainer.account.bean.Account;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
 
 import java.io.IOException;
@@ -9,13 +8,13 @@ import java.util.concurrent.ExecutionException;
 public interface RequiredTrainingPlanDAO {
 
     /**
-     * this function alert if
+     * this function alerts if
      * the Training Plan's request
      * is successfully stored into the db.
      * @param requiredTrainingPlan Object
      * RequiredTrainingPlan.
      * @throws IOException
-     * @return true if request will correctly store
+     * @return true if request will correctly store,
      * false instead.
      */
     boolean storeRequest(RequiredTrainingPlan requiredTrainingPlan)
@@ -23,11 +22,11 @@ public interface RequiredTrainingPlanDAO {
 
     /** this function can search if the email of
      * the user that try to make a request of
-     * TrainingPlna is just registered
+     * TrainingPlan is just registered
      * into the RequiredTrainingPlan Document.
-     * @param email is the pk to find the user into the db
-     * @return if the email is in the parameters of
-     * the user and if the email isn't registered "null"
+     * @param email to find the user into the db
+     * @return the object if the email exists,
+     * and "null" if the email isn't registered
      */
     RequiredTrainingPlan findAccountByEmail(String email)
             throws IOException, ExecutionException, InterruptedException;
@@ -53,13 +52,13 @@ public interface RequiredTrainingPlanDAO {
             throws IOException, ExecutionException, InterruptedException;
 
     /**
-     * This method gets all requestes.
+     * This method gets all requests.
      * @return
      * @throws IOException
      * @throws ExecutionException
      * @throws InterruptedException
      */
-    public ArrayList<RequiredTrainingPlan> getAllRequests()
+     ArrayList<RequiredTrainingPlan> getAllRequests()
             throws IOException, ExecutionException, InterruptedException;
 
 

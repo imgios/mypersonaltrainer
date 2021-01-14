@@ -17,7 +17,7 @@ import java.io.IOException;
 public class RequiredTrainingPlanDAOImpl implements RequiredTrainingPlanDAO {
 
     /**
-     * this function store the email of the account
+     * this function stores the email of the account
      * into the RequiredTrainingPlan document.
      * @param requiredTrainingPlan Object that
      * describe the requiredTrainingPlan.
@@ -41,7 +41,7 @@ public class RequiredTrainingPlanDAOImpl implements RequiredTrainingPlanDAO {
     /**
      * this function can check if the email is into the
      * RequiredTrainingPlan document so this user has yet a TrainngPlan request.
-     * @param email is the pk to find the user into the
+     * @param email to find the user into the
      * RequiredTrainingPlan document.
      * @return the RequiredTrainingPlan given its mail.
      */
@@ -133,7 +133,7 @@ public class RequiredTrainingPlanDAOImpl implements RequiredTrainingPlanDAO {
 
 
     /**
-     * This method gets all requestes.
+     * This method gets all requests.
      * @return
      * @throws IOException
      * @throws ExecutionException

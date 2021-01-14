@@ -54,7 +54,7 @@ public class RequiredTrainingPlanServiceImpl implements
     }
 
     /**
-     * This method return the account given its mail.
+     * This method returns the account given its mail.
      * @param email referring to the account to search for
      * @return the RequiredTrainingPlan if it exists, null if not
      */
@@ -90,7 +90,7 @@ public class RequiredTrainingPlanServiceImpl implements
     }
 
     /**
-     * this function register the account into RequiredTrainingPlan.
+     * this function registers the account into RequiredTrainingPlan.
      * @param requiredTrainingPlan user into the
      * RequiredTrainingPlan.
      * @return utente user mem into the

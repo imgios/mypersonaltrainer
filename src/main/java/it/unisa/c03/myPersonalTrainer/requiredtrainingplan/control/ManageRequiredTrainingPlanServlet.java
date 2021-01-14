@@ -45,7 +45,7 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
             RequiredTrainingPlan requireTest =
                     new RequiredTrainingPlan(emailClientee, required);
 
-            //richiamo della funzione per registrare un nuovo account
+            //call the function to register a new account
             RequiredTrainingPlanDAO requiredTrainingPlanDao =
                     new RequiredTrainingPlanDAOImpl();
             RequiredTrainingPlanService requiredTrainingPlanService =
@@ -55,7 +55,7 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
             try {
                 checked = requiredTrainingPlanService.searchAccountByEmail(emailClientee);
                 if (!checked) {
-                    //non esiste, quindi lo creiamo
+                    //it doesn't exists, so we create it
                     requireTest.setRequired(1);
                     requiredTrainingPlanService.registerRequest(requireTest);
                     response.sendRedirect("customerDashboard.jsp");
@@ -68,8 +68,8 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     }
-                    //Esiste, quindi procediamo a verificare se
-                    // ha già richiesto o no la scheda
+                    //it exists, so we verify if the training plan has
+                    //  been requested or not
                     if (requireTest.getRequired() == 1) {
                         response.sendRedirect("customerDashboard.jsp");
                     } else if (requireTest.getRequired() == 0) {

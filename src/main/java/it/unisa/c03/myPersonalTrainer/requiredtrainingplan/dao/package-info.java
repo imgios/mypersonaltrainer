@@ -1,6 +1,5 @@
 /**
- *
  * This package contains RequiredTrainingPlan's DAO interfaces
- * of Account and their implementation.
+ *  and its implementation.
  */
 package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao;
