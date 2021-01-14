@@ -6,6 +6,8 @@ import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
 
 import java.util.List;
 
+import it.unisa.c03.myPersonalTrainer.parameters.service.ParametersService;
+import it.unisa.c03.myPersonalTrainer.parameters.service.ParametersServiceImpl;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -20,7 +22,28 @@ class ParametersDAOImplTest {
 
     ParametersDAO parametersDAO = new ParametersDAOImpl();
 
-    //  questo pare funzionare, ma è necessario un controllo
+    @BeforeAll
+    static void bef() throws IOException {
+        ParametersDAO parametersDAO = new ParametersDAOImpl();
+        Parameters p1 = new Parameters(80, 48, 40, "test@utente.it");
+        parametersDAO.insertParameters(p1);
+    }
+
+
+
+    @Test
+    void populatAndtest() throws IOException {
+        Parameters parameters = new Parameters(50, 25, 25, "prova@io.it");
+        assertTrue(parametersDAO.insertParameters(parameters));
+    }
+
+
+    @Test
+    void testMail() throws InterruptedException, ExecutionException, IOException {
+        assertNotEquals(-1, parametersDAO.selectByMail("test@utente.it").size());
+    }
+
+
     @AfterAll
     static void afterinsertaccount() throws IOException, ExecutionException, InterruptedException {
         List<QueryDocumentSnapshot> list_param_insert = DBConnection
@@ -39,20 +62,4 @@ class ParametersDAOImplTest {
         }
     }
 
-    @Test
-    void populatAndtest() throws IOException {
-        Parameters parameters = new Parameters(50, 25, 25, "prova@io.it");
-        assertTrue(parametersDAO.insertParameters(parameters));
-    }
-
-
-    @Test
-    void testMail() throws InterruptedException, ExecutionException, IOException {
-        Parameters p1 = new Parameters(80, 48, 40, "test@utente.it");
-        parametersDAO.insertParameters(p1);
-        ArrayList<Parameters> list = new ArrayList<>();
-        p1 = new Parameters(80, 48, 40, "test@utente.it");
-        list.add(p1);
-        assertEquals(1, parametersDAO.selectByMail("test@utente.it").size());
-    }
 }
