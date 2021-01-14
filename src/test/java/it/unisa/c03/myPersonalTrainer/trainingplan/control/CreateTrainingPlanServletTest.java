@@ -7,6 +7,7 @@ import it.unisa.c03.myPersonalTrainer.trainingplan.service.TrainingPlanService;
 import it.unisa.c03.myPersonalTrainer.trainingplan.service.TrainingPlanServiceImpl;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import javax.servlet.ServletException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -25,8 +26,6 @@ class CreateTrainingPlanServletTest {
     HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
     HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
     TrainingPlanServiceImpl trainingPlanService = Mockito.mock(TrainingPlanServiceImpl.class);
-
-
 
 
 
@@ -100,7 +99,7 @@ class CreateTrainingPlanServletTest {
 
         new CreateTrainingPlanServlet().doPost(request, response);
 
-        System.out.println(request.getSession().getAttribute("noEx"));
+        //System.out.println(request.getSession().getAttribute("noEx"));
     }
 
     @Test
@@ -123,7 +122,7 @@ class CreateTrainingPlanServletTest {
 
         new CreateTrainingPlanServlet().doPost(request, response);
 
-        System.out.println(request.getSession().getAttribute("noEx"));
+        //System.out.println(request.getSession().getAttribute("noEx"));
     }
 
 
@@ -152,7 +151,6 @@ class CreateTrainingPlanServletTest {
         new CreateTrainingPlanServlet().doPost(request, response);
     }
 
-    /*
     @Test
     void doGet() throws ServletException, IOException {
 
@@ -175,9 +173,9 @@ class CreateTrainingPlanServletTest {
         });
         assertEquals("invalid repetitions format", exception.getMessage());
 
-        new CreateTrainingPlanController().doGet(request, response);
+        new CreateTrainingPlanServlet().doGet(request, response);
     }
-    */
+
 
 
     @AfterAll

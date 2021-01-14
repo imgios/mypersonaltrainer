@@ -34,7 +34,7 @@ class ParametersControllerTest {
 
         List<QueryDocumentSnapshot> lqds = DBConnection
                 .getConnection().collection("Parameters").whereEqualTo("mailClient","parametri@test.it").get().get().getDocuments();
-        System.out.println(lqds.size());
+        //System.out.println(lqds.size());
         for(QueryDocumentSnapshot document : lqds)
         {
             document.getReference().delete();
@@ -141,7 +141,7 @@ class ParametersControllerTest {
 
         List<QueryDocumentSnapshot> lqds = DBConnection
                 .getConnection().collection("Parameters").whereEqualTo("mailClient","parametri@test.it").get().get().getDocuments();
-        System.out.println(lqds.size());
+        //System.out.println(lqds.size());
         for(QueryDocumentSnapshot document : lqds)
         {
             document.getReference().delete();

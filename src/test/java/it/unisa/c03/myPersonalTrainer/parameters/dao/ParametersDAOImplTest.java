@@ -53,7 +53,6 @@ class ParametersDAOImplTest {
             document.getReference().delete();
         }
 
-
         List<QueryDocumentSnapshot> list_param_insert1 = DBConnection
                 .getConnection().collection("Parameters").whereEqualTo("mailClient", "test@utente.it").get().get().getDocuments();
 
