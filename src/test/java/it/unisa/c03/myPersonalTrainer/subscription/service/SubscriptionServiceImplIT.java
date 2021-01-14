@@ -133,7 +133,7 @@ public class SubscriptionServiceImplIT {
         SubscriptionService subService1 = new SubscriptionServiceImpl(subDao);
 
         subService1.checkIfSent("marco@libero.it");
-        
+
     }
 
 

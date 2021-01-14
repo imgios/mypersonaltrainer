@@ -115,6 +115,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     /**
      * This method is called only if the client's subscription
      * is expiring and check if the client is already notified.
+     * if it has not been sent, this method send an email
+     * to the customer that his subscription is expiring
      *
      * @param customerMail the client in session to notify.
      * @throws InterruptedException
@@ -124,9 +126,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
      */
     @Override
     public void checkIfSent(String customerMail)
-            throws InterruptedException, ExecutionException, IOException, EmailException {
+            throws InterruptedException,
+            ExecutionException, IOException, EmailException {
 
-        Subscription subscription = searchSubscriptionByEmail(customerMail);
+        Subscription subscription =
+                searchSubscriptionByEmail(customerMail);
         if (subscription.getSentNotification() == NOT_SENT) {
             sendEmail(customerMail, subscription);
             changeSentNotification(customerMail);
@@ -151,9 +155,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         email.setSSLOnConnect(true);
         email.setFrom("mypt.gps.is@gmail.com");
         email.setSubject("Abbonamento in Scadenza");
-        email.setMsg("Salve " + customerMail + "\nLa contattiamo da myPersonalTrainer"
+        email.setMsg("Salve " + customerMail
+                + "\nLa contattiamo da myPersonalTrainer"
                 + " per informarla che il suo "
-                + "abbonamento è in scadenza\nLa data di scadenza e' fissata al "
+                + "abbonamento è in scadenza\nLa data di "
+                + "scadenza e' fissata al "
                 + subscription.getExpDate() + " al costo di "
                 + "" + subscription.getPrice()
                 + " euro.\nSaluti.");

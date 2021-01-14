@@ -67,9 +67,8 @@ public interface SubscriptionService {
     /**
      * This service method changes value sentNotification of Subscription .
      *
-     * @param email    of the account
-     * @param password updated
-     * @return true after the change has taken place
+     * @param email of the account
+     * @return true if the change has taken place, false otherwise.
      */
     boolean changeSentNotification(String email)
             throws IOException, ExecutionException, InterruptedException;
@@ -83,5 +82,17 @@ public interface SubscriptionService {
      */
     void sendEmail(String customerMail, Subscription subscription) throws EmailException;
 
+    /**
+     * This method is called only if the client's subscription
+     * is expiring and check if the client is already notified.
+     * if it has not been sent, this method send an email
+     * to the customer that his subscription is expiring
+     *
+     * @param customerMail the client in session to notify.
+     * @throws InterruptedException
+     * @throws ExecutionException
+     * @throws IOException
+     * @throws EmailException
+     */
     void checkIfSent(String customerMail) throws InterruptedException, ExecutionException, IOException, EmailException;
 }
