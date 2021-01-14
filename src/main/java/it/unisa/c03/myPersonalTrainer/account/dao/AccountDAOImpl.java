@@ -12,21 +12,13 @@ public class AccountDAOImpl implements AccountDAO {
 
     /**
      * this function save the account into the db.
-     * @param utente describe the user
+     * @param utente  the user
      * @throws IOException
-     * @return
+     * @return true or false
      */
     @Override
     public boolean saveAccount(Account utente) throws IOException {
 
-        //System.out.println("stampa dal DAO");
-        //System.out.println(utente);
-
-        /*
-        inserimento della connessione al db per il salvataggio del documento
-        Firestore connection
-        connection.getCollections();
-         */
         boolean controllo;
         controllo = false;
 
@@ -36,9 +28,8 @@ public class AccountDAOImpl implements AccountDAO {
         return controllo;
     }
 
-
     /**
-     *  This method estracts accounts into database.
+     *  This method extracts accounts from database.
      * @return list of the accounts
      */
     @Override

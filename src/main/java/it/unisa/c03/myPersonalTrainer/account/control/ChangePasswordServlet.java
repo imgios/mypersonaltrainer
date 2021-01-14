@@ -94,12 +94,7 @@ public class ChangePasswordServlet extends HttpServlet {
             // check if mail exists in the db
             try {
                 if (service.searchAccountByEmail(clientMail)) {
-                    /*TO DO
-                     * if esiste
-                     * se è uguale alla mail in session allora
-                     * tutto ok, cambiaPassword
-                     * altrimenti scrivi errore: questa non è la tua mail
-                     * */
+
                     String emailInSession = (String)
                             request.getSession().getAttribute("clienteMail");
                     if (clientMail.equals(emailInSession)) {

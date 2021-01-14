@@ -54,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
     * Check the credential before login.
     * @param email
     * @param password
-    * @return
+    * @return true or false
     * @throws IOException
     * @throws ExecutionException
     * @throws InterruptedException
@@ -170,8 +170,8 @@ public class AccountServiceImpl implements AccountService {
 
 
     /**
-     * This function return the list of the account insert into the db.
-     * @return list of every account store
+     * This function return the list of the accounts registered into the db.
+     * @return list of all accounts stored
      * @throws IOException exception
      */
     @Override
@@ -184,7 +184,7 @@ public class AccountServiceImpl implements AccountService {
     /**
      * this function register the account.
      * @param utente user into the db.
-     * @return utente user mem into the db.
+     * @return true.
      * @throws IOException
      * @throws IllegalArgumentException
      */
@@ -195,25 +195,13 @@ public class AccountServiceImpl implements AccountService {
 
         AccountDAO accountDAO = new AccountDAOImpl();
 
-        //System.out.println("CONTROLLO EMAIL PRIMA DELL'INSERIMENTO NEL DB");
-
-        // System.out.println(utente.getEmail());
-        // System.out.println(accountDAO.findAccountByEmail(utente.getEmail()));
-
         Account ricerca;
         ricerca = accountDAO.findAccountByEmail(utente.getEmail());
 
-        //stampa delle due email
-        //System.out.println(utente.getEmail());
-        //System.out.println(ricerca.getEmail());
-
-        //if (utente.getEmail() != ricerca.getEmail()){
         if (ricerca.getEmail() == null) {
-          //  System.out.println("email non presente, la inserisco nel DB");
             accountDAO.saveAccount(utente);
             return true;
         } else {
-            //System.out.println("email già presente");
             throw new IllegalArgumentException("email già presente"
                     + " nel DB, utilizza una nuova email");
         }

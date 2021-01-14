@@ -47,8 +47,8 @@ public class LoginServlet extends HttpServlet {
         String errors = ""; // Stringa per catturare l'errore.
 
         /*
-         * using checkCredentials method, we'll verify if insert
-         *  credential follow
+         * using checkCredentials method, we'll verify if
+         *  credentials follows
          * regular expression:
          * return true if correct
          * the boolean will stored in verifiedCredential.
@@ -93,7 +93,7 @@ public class LoginServlet extends HttpServlet {
                 /*
                  * Now we'll analize that loginAccount method after
                  * the research of account
-                 * between login's credentials
+                 * given login's credentials.
                  * the boolean will stored in control.
                  * if true: we'll continue getting all fields
                  * of relative account;
@@ -124,7 +124,7 @@ public class LoginServlet extends HttpServlet {
                         /*
                          * This last check is used to identify the
                          * role of logged user
-                         * between method verifyIsAdmin:
+                         * thanks to verifyIsAdmin method:
                          * true if his role is 1 and so "Admin" or
                          * "personal Trainer"
                          * false if his role is 0 and so "Customer".

@@ -33,9 +33,10 @@ public class Account implements Serializable {
     private String password;
 
     /**
-     * attribute that construct the user into the db
-     * role when is 1 the user is personal trainer when
-     * for 0 is the user.
+     * This attribute identifies the user type into
+     * the db.
+     * Role is 1 when user is personal trainer,
+     * 0 is the user.
      */
     private int role;
 
