@@ -14,23 +14,17 @@ public class Parameters {
     private String insertionDate;
 
     /**
-     * costructor for parameters
+     * constructor of the class.
      */
     public Parameters() {
-
-    }
-
-    public double getweight() {
-        return weight;
     }
 
     /**
-     * costructor for parameters
-     *
-     * @param weight
-     * @param leanMass
-     * @param fatMass
-     * @param mailClient
+     * param costructor.
+     * @param weight new weight
+     * @param leanMass new leanMass
+     * @param fatMass new fatMass
+     * @param mailClient new mailClient
      */
     public Parameters(double weight, double leanMass,
                       double fatMass, String mailClient) {
@@ -46,6 +40,9 @@ public class Parameters {
     }
 
 
+    /**
+     * method to string, to view the information during a stamp.
+     */
     @Override
     public String toString() {
         return "Parameters{"
@@ -55,6 +52,11 @@ public class Parameters {
                 + ", mailClient='" + mailClient + '\''
                 + ", insertionDate=" + insertionDate
                 + '}';
+    }
+
+
+    public double getweight() {
+        return weight;
     }
 
     public void setweight(double weight) {

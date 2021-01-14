@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public interface ParametersService {
+
     /**
-     * this methods check if the parameters are acceptable; then able to be insert into database.
+     * create parameters method
+     * this methods check if the parameters are acceptable;
+     * then able to be insert into database.
      * and create the parameters.
-     *
      * @param weight
      * @param leanMass
      * @param fatMass
@@ -24,8 +26,7 @@ public interface ParametersService {
             throws IllegalArgumentException, IOException;
 
     /**
-     * insert the parameters into database.
-     *
+     * save the parameters into the database.
      * @param parameters the parameters to insert
      * @return true if the operation is done
      * @throws IOException
@@ -34,6 +35,7 @@ public interface ParametersService {
             Parameters parameters) throws IOException;
 
     /**
+     * this method show the parameters for the input email.
      * @param email mail client who want to retrieve his parameters
      * @return list of parameters
      */

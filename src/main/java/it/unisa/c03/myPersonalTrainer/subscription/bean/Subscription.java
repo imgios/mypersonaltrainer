@@ -6,6 +6,7 @@ package it.unisa.c03.myPersonalTrainer.subscription.bean;
 public class Subscription {
 
     private static final int NOT_SENT = 0;
+
     /**
      * customer's email.
      */
@@ -25,15 +26,13 @@ public class Subscription {
     private int sentNotification;
 
     /**
-     * Void constructor of the class.
+     * constructor of the class.
      */
     public Subscription() {
-
     }
 
     /**
-     * Standard constructor of the class.
-     *
+     * constructor of the class.
      * @param customerEmail the customer email
      * @param date          the expiration date of the subscription
      * @param cost          the subscription price
@@ -55,7 +54,6 @@ public class Subscription {
 
     /**
      * method for get the customer email.
-     *
      * @return the email
      */
     public String getCustomerMail() {
@@ -64,7 +62,6 @@ public class Subscription {
 
     /**
      * method for set the email.
-     *
      * @param customerEmail email
      */
     public void setCustomerMail(String customerEmail) {
@@ -73,7 +70,6 @@ public class Subscription {
 
     /**
      * method for get the expiration date of the subscription.
-     *
      * @return the date
      */
     public String getExpDate() {
@@ -82,7 +78,6 @@ public class Subscription {
 
     /**
      * method for set the expiration date of the subscription.
-     *
      * @param date to set
      */
     public void setExpDate(String date) {
@@ -91,7 +86,6 @@ public class Subscription {
 
     /**
      * method for get the subscription price.
-     *
      * @return the price
      */
     public String getPrice() {
@@ -100,7 +94,6 @@ public class Subscription {
 
     /**
      * method for set the subscription price.
-     *
      * @param cost to set
      */
     public void setPrice(String cost) {
@@ -108,7 +101,7 @@ public class Subscription {
     }
 
     /**
-     * method to string, to view the information during a stamp.
+     * method to string.
      */
     @Override
     public String toString() {

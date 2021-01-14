@@ -18,6 +18,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class SubscriptionServiceImpl implements SubscriptionService {
     private static final int NOT_SENT = 0;
     private static final int PORT = 465;
+
     /**
      * @exclude
      */
@@ -30,7 +31,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     /**
      * Service constructor.
-     *
      * @param subscriptionDao is required, because is the DAO that
      *                        all the service methods will call.
      */
@@ -38,13 +38,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         subscriptionDAO = subscriptionDao;
     }
 
-
     /**
      * This service method register the subscription for a customer.
      * It only needs the customer email. Then it sets a standard price
      * and the expiration date, obtained by adding an extra month
      * to the registration date.
-     *
      * @param customerMail the customer mail
      */
     @Override
@@ -66,7 +64,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     /**
      * This method searches in the database for a customer's
      * subscription, given his email.
-     *
      * @param customerMail customer mail
      * @return the Subscription.
      */
@@ -78,7 +75,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     /**
      * This method check the state of a subscription.
-     *
      * @param customerMail the mail of the subscription owner
      * @return 1 if the subscription is valid, 0 if
      * subscription expiring, -1 for expired subscription.
@@ -92,10 +88,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         LocalDate oggi = LocalDate.now();
         // get subscription expDate
         LocalDate scadenza = LocalDate.parse(sub.getExpDate());
-
         // calucating difference
         long dayBetween = DAYS.between(oggi, scadenza);
-
         //      A : if difference is >= 10 return 1, state : attivo
         if (dayBetween >= TEN_DAYS) {
             return 1;
@@ -115,7 +109,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
      * is expiring and check if the client is already notified.
      * if it has not been sent, this method send an email
      * to the customer that his subscription is expiring
-     *
      * @param customerMail the client in session to notify.
      * @throws InterruptedException
      * @throws ExecutionException
@@ -137,7 +130,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     /**
      * Send an email to Client, because his subscription is expiring.
-     *
      * @param customerMail Account of user to send email.
      * @param subscription Account subscription.
      * @throws EmailException
@@ -168,7 +160,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     /**
      * This service method shows all expiring Subscriptions.
-     *
      * @return the list of expiring Subscriptions
      */
     @Override
@@ -192,7 +183,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     /**
      * This service method shows all expired Subscriptions.
-     *
      * @return the list of expired Subscriptions
      */
     @Override
@@ -215,7 +205,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     /**
      * This service method shows all active Subscriptions.
-     *
      * @return the list of active Subscriptions
      */
     @Override

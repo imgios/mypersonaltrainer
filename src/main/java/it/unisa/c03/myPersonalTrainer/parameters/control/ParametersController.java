@@ -1,6 +1,5 @@
 package it.unisa.c03.myPersonalTrainer.parameters.control;
 
-
 import com.google.gson.Gson;
 import it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAO;
 import it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAOImpl;
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * this class manage the insert parameters.
+ * servlet for the insert parameters.
  * if return 1 the insert passed, else return the oracle message.
  */
 @WebServlet(name = "ParametersController",
@@ -37,6 +36,13 @@ public class ParametersController
             new ParametersServiceImpl(parametersDAO);
 
 
+    /**
+     * method do post.
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {
@@ -67,6 +73,13 @@ public class ParametersController
         return;
     }
 
+    /**
+     * method do get.
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {

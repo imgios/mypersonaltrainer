@@ -15,12 +15,10 @@ import java.util.concurrent.ExecutionException;
 /**
  * this is an implementation of ParametersDAO.
  */
-
 public class ParametersDAOImpl implements ParametersDAO {
 
     /**
      * this method allows to insert user parameters into database.
-     *
      * @param parameters the parameters to add into database
      */
     @Override
@@ -31,9 +29,8 @@ public class ParametersDAOImpl implements ParametersDAO {
         return true;
     }
 
-
-    /***
-     *
+    /**
+     * this method show the parameters for the input email.
      * @param email client mail to retrieve his parameters
      * @return a list of client parameters
      */
@@ -44,13 +41,10 @@ public class ParametersDAOImpl implements ParametersDAO {
         // Create a reference to the account collection
         CollectionReference parameters = null;
         parameters = DBConnection.getConnection().collection("Parameters");
-
         // Create a query against the collection.
         Query query = parameters.whereEqualTo("mailClient", email);
-
         // retrieve  query results asynchronously using query.get()
         ApiFuture<QuerySnapshot> querySnapshot = query.get();
-
         //create Bean to return document.get("email"));
         ArrayList<Parameters> list = new ArrayList<Parameters>();
         for (DocumentSnapshot document

@@ -40,7 +40,6 @@ public class ParametersServiceImpl implements ParametersService {
      */
     private static final int PERCENTAGE = 100;
 
-
     private ParametersDAO parametersDAO;
 
     public ParametersServiceImpl(
@@ -49,8 +48,7 @@ public class ParametersServiceImpl implements ParametersService {
     }
 
     /**
-     * check the format parameters
-     *
+     * check the format parameters.
      * @param weight   between 40 and 150 format allowed XXX.XX
      * @param leanMass between 10% and 70%
      * @param fatMass  between 10% and 70%
@@ -136,6 +134,7 @@ public class ParametersServiceImpl implements ParametersService {
     }
 
     /**
+     * method to save the new parameters.
      * @param parameters the parameters to insert
      * @return true if the parameters are inserted into database
      * @throws IOException
@@ -147,6 +146,7 @@ public class ParametersServiceImpl implements ParametersService {
     }
 
     /**
+     * this method show the parameters for the input email.
      * @param email mail client who want to retrieve his parameters
      * @return list of parameters
      */

@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class SubscriptionDAOImpl implements SubscriptionDAO {
+
     /**
-     * this method interact with database to insert the subscription.
-     *
+     * This method interact with database to insert the subscription.
      * @param sub the subscription to insert into database
      * @throws IOException
      */
@@ -25,7 +25,6 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
     /**
      * This method searches in the database for a customer's
      * subscription, given his email.
-     *
      * @param clientMail customer mail
      * @return the Subscription.
      * @throws IOException
@@ -38,23 +37,17 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
             throws IOException, ExecutionException, InterruptedException {
         // Create a reference to the Subscription collection
         CollectionReference accounts = null;
-
         accounts = DBConnection.getConnection().collection(
                 "Subscription");
-
-
         // Create a query against the collection.
         Query query = accounts.whereEqualTo("customerMail", clientMail);
-
         // retrieve  query results asynchronously using query.get()
         ApiFuture<QuerySnapshot> querySnapshot = query.get();
-
         //create Bean to return
         Subscription subscriptionBean = new Subscription();
 
         for (DocumentSnapshot document
                 : querySnapshot.get().getDocuments()) {
-
             subscriptionBean.setCustomerMail(
                     String.valueOf(document.get("customerMail")));
             subscriptionBean.setExpDate(
@@ -70,7 +63,6 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 
     /**
      * This method retrieves all subscriptions saved in db.
-     *
      * @return subscription list
      */
     @Override
@@ -78,18 +70,13 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
             throws IOException, ExecutionException, InterruptedException {
         // Create a reference to the Subscription collection
         CollectionReference subColl = null;
-
         subColl = DBConnection.getConnection().collection("Subscription");
-
         // Create a query against the collection.
         Query query = subColl.select("customerMail", "expDate", "price");
-
         // retrieve  query results asynchronously using query.get()
         ApiFuture<QuerySnapshot> querySnapshot = query.get();
-
         //create the list to return
         ArrayList<Subscription> list = new ArrayList<>();
-
         for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
             Subscription s = document.toObject(Subscription.class);
             list.add(s);
@@ -99,7 +86,6 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 
     /**
      * This DAO method looks for the document id of subscription.
-     *
      * @param email of the account
      * @return the document Id
      */
@@ -109,17 +95,12 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
             throws IOException, ExecutionException, InterruptedException {
         // Create a reference to the account collection
         CollectionReference accounts = null;
-
         accounts = DBConnection.getConnection().collection("Subscription");
-
         // Create a query against the collection.
         Query query = accounts.whereEqualTo("customerMail", email);
-
         // retrieve  query results asynchronously using query.get()
         ApiFuture<QuerySnapshot> querySnapshot = query.get();
-
         String id = "";
-
         for (DocumentSnapshot document
                 : querySnapshot.get().getDocuments()) {
             id = id + document.getId();
@@ -127,10 +108,8 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
         return id;
     }
 
-
     /**
      * This DAO method marks that the client received the notification.
-     *
      * @param email client's subscription mail.
      * @return true after the change has taken place
      */
@@ -146,4 +125,5 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
         ApiFuture<WriteResult> future = docRef.update("sentNotification", 1);
         return true;
     }
+
 }
