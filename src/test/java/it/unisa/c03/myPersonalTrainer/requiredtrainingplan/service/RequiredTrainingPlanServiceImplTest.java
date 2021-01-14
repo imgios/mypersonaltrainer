@@ -63,6 +63,21 @@ class RequiredTrainingPlanServiceImplTest {
         assertEquals(true, service.changeRequest("cliente@gmail.com", 0));
     }
 
+    @Test
+    public void requiredTrainingPlanregisterfalse() throws InterruptedException, ExecutionException, IOException {
+        RequiredTrainingPlanDAO dao= new RequiredTrainingPlanDAOImpl();
+        RequiredTrainingPlanService service=new RequiredTrainingPlanServiceImpl(dao);
+        RequiredTrainingPlan x=new RequiredTrainingPlan("nonesisto",0);
+        assertFalse(service.registerRequest(x));
+    }
+
+    @Test
+    public void notsaved() throws InterruptedException, ExecutionException, IOException {
+        RequiredTrainingPlanDAO dao= new RequiredTrainingPlanDAOImpl();
+        RequiredTrainingPlanService service=new RequiredTrainingPlanServiceImpl(dao);
+        assertEquals(null,service.getAccountByEmail("nonesisto"));
+
+    }
     @BeforeAll
     static void deleteAccountifExist() throws IOException, ExecutionException, InterruptedException {
 
@@ -71,6 +86,7 @@ class RequiredTrainingPlanServiceImplTest {
         for (QueryDocumentSnapshot document : list_account) {
             document.getReference().delete();
         }
+
     }
 
     @AfterAll
