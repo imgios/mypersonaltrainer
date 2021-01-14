@@ -65,8 +65,6 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
                     Integer.parseInt(String.valueOf(
                             document.get("sentNotification"))));
         }
-
-
         return subscriptionBean;
     }
 
@@ -96,7 +94,6 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
             Subscription s = document.toObject(Subscription.class);
             list.add(s);
         }
-
         return list;
     }
 
@@ -127,7 +124,6 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
                 : querySnapshot.get().getDocuments()) {
             id = id + document.getId();
         }
-
         return id;
     }
 
@@ -141,17 +137,13 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
     @Override
     public boolean updateSentNotification(String email)
             throws IOException, ExecutionException, InterruptedException {
-
         //find document id
         String id = getSubscriptionDocumentIdByEmail(email);
-
         // Update an existing document thanks to its id
         DocumentReference docRef = DBConnection.getConnection()
                 .collection("Subscription").document(id);
-
         // Update password field
         ApiFuture<WriteResult> future = docRef.update("sentNotification", 1);
-
         return true;
     }
 }

@@ -18,7 +18,6 @@ public class DownloadTrainingPlanServlet extends HttpServlet {
 
   private Document doc;
 
-
   @Override
   protected void doPost(HttpServletRequest request,
       HttpServletResponse response)
@@ -28,7 +27,6 @@ public class DownloadTrainingPlanServlet extends HttpServlet {
     String emailCliente = (String) request.getSession().getAttribute("clienteMail");
 
     String exercises = request.getParameter("exercises");
-
 
     try {
       doc = new Document();
@@ -65,7 +63,6 @@ public class DownloadTrainingPlanServlet extends HttpServlet {
           "La tua Scheda\n " + exercises);
       p.setAlignment(Element.ALIGN_CENTER);
       doc.add(p);
-
 
       p = new Paragraph(
           "\nBUON LAVORO!");

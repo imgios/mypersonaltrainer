@@ -38,7 +38,6 @@ public class AllAppointmentsServlet extends HttpServlet {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
     protected void doGet(HttpServletRequest request,

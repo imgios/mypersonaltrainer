@@ -22,19 +22,13 @@
 <head>
     <title>Profilo Utente</title>
 
-
     <%@include file="meta.jsp"%>
     <%@include file="head.jsp"%>
     <%@include file="navbar.jsp"%>
 
-
     <!-- JavaScript -->
     <script src="js/profileScript.js"></script>
     <script src="js/controlChangePassword.js"></script>
-
-    <!--
-    < %@ include file="navbar.jsp"%>
-    -->
 
 </head>
 <body>
@@ -110,7 +104,6 @@
                                 </div>
                             </div>
 
-
                         </div>
 
                     </div>
@@ -145,9 +138,6 @@
                                     <input type="text" class="form-control" aria-label="Phone" aria-describedby="basic-addon1" value="<%=sub.getPrice()%>" readonly>
                                 </div>
                             </div>
-
-
-
 
                         </div>
 

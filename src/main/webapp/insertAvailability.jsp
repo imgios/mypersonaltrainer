@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     -->
+
     <%@include file="meta.jsp"%>
     <%@include file="head.jsp"%>
     <%@include file="navbar.jsp"%>
@@ -40,14 +41,12 @@
     </script>
 
      <script src="js/insertAvailability.js"></script>
-
 </head>
 <body>
 
 <main>
 <br>
 <br>
-
     <div class = "container">
         <div class="row justify-content-md-center">
 
@@ -70,7 +69,6 @@
             </div>
         </div>
     </div>
-
 
 </main>
 

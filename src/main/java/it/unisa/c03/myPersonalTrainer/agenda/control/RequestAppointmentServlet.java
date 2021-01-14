@@ -32,18 +32,13 @@ public class RequestAppointmentServlet extends HttpServlet {
                 response.getWriter().write(new Gson().toJson(true));
             } catch (ExecutionException e) {
                 response.getWriter().write(new Gson().toJson(false));
-
             } catch (InterruptedException e) {
                 response.getWriter().write(new Gson().toJson(false));
 
             }
-
         } else {
             response.getWriter().write(new Gson().toJson(false));
-
         }
-
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse
