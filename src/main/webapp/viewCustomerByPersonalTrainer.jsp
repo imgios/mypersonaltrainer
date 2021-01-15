@@ -46,7 +46,6 @@
     <%@include file="head.jsp"%>
     <%@include file="navbar.jsp"%>
 
-
 </head>
 <body>
 
@@ -55,7 +54,6 @@
     <div class="welcomeMessage">
         <h5> &nbsp;Riepilogo Profilo Utente</h5>
     </div>
-
 <%
     ParametersDAO paramDao = new ParametersDAOImpl();
     ParametersService sparam = new ParametersServiceImpl(paramDao);
@@ -86,7 +84,6 @@
 %>
 <!--inserimento script-->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
 
 <div id = "main">
 

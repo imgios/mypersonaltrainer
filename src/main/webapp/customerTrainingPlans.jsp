@@ -41,7 +41,7 @@
         for(TrainingPlan t : trainingPlanList) {
     %>
 
-    <section>
+    <section id="scheda">
         <details>
             <summary>
                 <%=t.getDate()%>
