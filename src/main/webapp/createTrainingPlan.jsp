@@ -28,6 +28,14 @@
 %>
 
 <main>
+
+    <div class = "container">
+
+        <div class="welcomeMessage">
+            <h5> &nbsp;Crea una nuova scheda di allenamento </h5>
+        </div>
+
+
     <form id="formID" action="createTP-controller" onsubmit="return stopsubmit(this);">
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -55,14 +63,18 @@
 
         </div>
         <button type="submit" class="btn btn-primary" name="action" value="addex">Invia Esercizio</button>
-
+        <form action="createTP-controller">
+            <input type="hidden" name="email" value=<%=email%>>
+            <button type="submit" id="Salva" name="action" class="btn btn-primary" value="addtp">Crea Scheda</button>
+        </form>
     </form>
 
+        <!--
     <form action="createTP-controller">
-        <input type="hidden" name="email" value=<%=email%>>
+        <input type="hidden" name="email" value=< %=email%>>
         <button type="submit" id="Salva" name="action" class="btn btn-primary" value="addtp">Crea Scheda</button>
     </form>
-
+    -->
 
     <!-- Div in basso per errori -->
     <% String error = (String) request.getSession().getAttribute("error");
@@ -93,6 +105,7 @@
     <% request.getSession().removeAttribute("noEx");
     }%>
 
+    </div>
 
 </main>
 

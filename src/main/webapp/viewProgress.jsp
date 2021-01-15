@@ -62,6 +62,12 @@
 
 <main>
     <!-- <div id = "main"> -->
+
+    <div class="welcomeMessage">
+        <h5> &nbsp;I tuoi progressi </h5>
+    </div>
+
+
     <div>
         <div class="chart-container" style="position: relative; height:auto; width:80vw">
             <canvas id="myChart"></canvas>

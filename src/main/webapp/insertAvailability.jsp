@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+<%
+    String emailAdmin = (String) request.getSession().getAttribute("ptMail");
+    if(emailAdmin == null) {
+        response.sendRedirect("error.jsp");
+    } else {
+%>
 <head>
     <title>Inserisci Disponibilita</title>
-
-
 
     <%@include file="meta.jsp"%>
     <%@include file="head.jsp"%>
     <%@include file="navbar.jsp"%>
-
-
-
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -29,6 +30,12 @@
 <body>
 
 <main>
+
+    <div class="welcomeMessage">
+        <h5> &nbsp;Inserisci Disponibilità</h5>
+    </div>
+
+
 <br>
 <br>
     <div class = "container">
@@ -59,4 +66,7 @@
 <%@include file="footer.jsp"%>
 
 </body>
+<%
+    }
+%>
 </html>

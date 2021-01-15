@@ -42,9 +42,9 @@
 
 <main>
 
-<div class="welcomeMessage">
-    <h5> &nbsp; Benvenuto, <b><i><%=admin_sess.getName()%></i></b> </h5>
-</div>
+    <div class="welcomeMessage">
+        <h1> &nbsp;Benvenuto, <b><i><%=admin_sess.getName()%></i></b> </h1>
+    </div>
 
     <div class="content-wrapper">
         <div class="row">

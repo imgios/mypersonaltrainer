@@ -7,6 +7,12 @@
 <!doctype html>
 
 <html lang="en">
+<%
+    String emailAdmin = (String) request.getSession().getAttribute("ptMail");
+    if(emailAdmin == null) {
+        response.sendRedirect("error.jsp");
+    } else {
+%>
 
 <head>
 
@@ -24,6 +30,10 @@
     Collection<Account> accountsBean = accounts.viewInfoAccount();
     int i = 0;
 %>
+
+    <div class="welcomeMessage">
+        <h5> &nbsp;Lista Utenti </h5>
+    </div>
 
 <div class="card">
     <div class="card-body">
@@ -64,4 +74,7 @@
 <%@include file="footer.jsp"%>
 
 </body>
+<%
+    }
+%>
 </html>

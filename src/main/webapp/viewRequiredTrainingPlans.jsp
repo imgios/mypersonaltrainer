@@ -5,6 +5,12 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanServiceImpl" %>
 
 <!doctype html>
+<%
+    String emailAdmin = (String) request.getSession().getAttribute("ptMail");
+    if(emailAdmin == null) {
+        response.sendRedirect("error.jsp");
+    } else {
+%>
 
 <html lang="en">
 
@@ -26,6 +32,10 @@
 %>
 
 <main>
+
+    <div class="welcomeMessage">
+        <h5> &nbsp;Richieste schede di allenamento</h5>
+    </div>
 
 <div class="card">
     <div class="card-body">
@@ -68,4 +78,7 @@
 <%@include file="footer.jsp"%>
 
 </body>
+<%
+    }
+%>
 </html>

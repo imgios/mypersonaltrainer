@@ -39,6 +39,11 @@
         accountCustomer=serviceAccount.getAccountByEmail(emailClientee);
     %>
 
+
+    <div class="welcomeMessage">
+        <h5> &nbsp;Parametri di Allenamento</h5>
+    </div>
+
     <div class="card">
         <h5 class="card-header"> <i class="fas fa-user"></i> <%=accountCustomer.getName()%> <%=accountCustomer.getSurname()%></h5>
         <h7 class="card-header">Inserisci i tuoi parametri</h7>

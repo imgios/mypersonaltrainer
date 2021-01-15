@@ -1,5 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<%
+    String emailAdmin = (String) request.getSession().getAttribute("ptMail");
+    if(emailAdmin == null) {
+        response.sendRedirect("error.jsp");
+    } else {
+%>
+
 <head>
     <title>Controllo Appuntamenti</title>
 
@@ -28,6 +35,10 @@
 
     <body>
 
+    <div class="welcomeMessage">
+        <h5> &nbsp;Verifica Appuntamenti</h5>
+    </div>
+
     <main>
         <div class="alert alert-success" role="alert" id="success-alert"><p>Appuntamento cancellato con successo</p></div>
         <div class="container" >
@@ -37,8 +48,8 @@
                     <br>
             <input hidden type="text" id="data">
                     <button class="btn btn-primary"  onclick="seeAppointments()">Visualizza</button>
-                    <button class="btn btn-primary">Programma Disponibilità</button>
-                    <button class="btn btn-primary">Visualizza Disponibilità</button>
+                    <a class="btn btn-primary" href="insertAvailability.jsp" role="button">Programma Disponibilità</a>
+                    <a class="btn btn-primary" href="viewAvailability.jsp" role="button">Visualizza Disponibilità</a>
                     </div>
             <!-- <button id="visualizzaappuntamenti" onclick="seeAppointments()">Visualizza</button>-->
                 <div class="col">
@@ -69,4 +80,7 @@
     <%@include file="footer.jsp"%>
 
     </body>
+<%
+    }
+%>
 </html>

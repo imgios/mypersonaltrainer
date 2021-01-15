@@ -19,3 +19,13 @@ summary {
     font-weight: 900;
     font-size: 1.2em;
 }
+
+section#scheda{
+    width: 50%;
+    margin: 7% auto 0;
+    background: #000;
+    opacity: 0.86;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}

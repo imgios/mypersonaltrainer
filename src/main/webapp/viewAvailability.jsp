@@ -1,5 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<%
+    String emailAdmin = (String) request.getSession().getAttribute("ptMail");
+    if(emailAdmin == null) {
+        response.sendRedirect("error.jsp");
+    } else {
+%>
 <head>
     <title>Visiona Agenda</title>
 
@@ -28,6 +34,10 @@
 <body>
 
 <main>
+
+    <div class="welcomeMessage">
+        <h5> &nbsp;Visualizza Disponibilità</h5>
+    </div>
 
 <!-- <div class="grid-container" align="center">
 
@@ -63,4 +73,7 @@
 <%@include file="footer.jsp"%>
 
 </body>
+<%
+    }
+%>
 </html>

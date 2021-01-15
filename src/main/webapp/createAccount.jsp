@@ -29,7 +29,9 @@
 
 <div class="container">
 
-    <h4>Registrazione di un nuovo Account</h4>
+    <div class="welcomeMessage">
+        <h5> &nbsp;Registrazione di un nuovo Account </h5>
+    </div>
 
     <form action="<%=request.getContextPath()%>/CreateAccountServlet" method="post" onsubmit="return stopsubmit(this);">
 

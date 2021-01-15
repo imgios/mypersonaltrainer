@@ -11,6 +11,12 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.account.bean.Account" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<%
+    String emailAdmin = (String) request.getSession().getAttribute("ptMail");
+    if(emailAdmin == null) {
+        response.sendRedirect("error.jsp");
+    } else {
+%>
 <head>
 
 
@@ -44,6 +50,10 @@
 %>
 
 <main>
+
+    <div class="welcomeMessage">
+        <h5> &nbsp;Abbonamenti</h5>
+    </div>
 
     <div class="bs-example">
         <div class="accordion" id="accordionExample">
@@ -192,6 +202,9 @@
 
 
 </body>
+<%
+    }
+%>
 </html>
 
 

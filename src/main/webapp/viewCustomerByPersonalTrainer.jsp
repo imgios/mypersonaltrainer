@@ -16,12 +16,19 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.bean.TrainingPlan" %>
 <%@ page import="java.util.List" %>
 
+<%
+    String emailAdmin = (String) request.getSession().getAttribute("ptMail");
+    if(emailAdmin == null) {
+        response.sendRedirect("error.jsp");
+    } else {
+%>
+
 <!--check if the user is log-->
 <%
     String email = (String) request.getParameter("email");
 
     if (email == null){
-        response.sendRedirect("index.jsp");   //login page che non ho al momento
+        response.sendRedirect("index.jsp");
     }
 %>
 <%  //check parameters %>
@@ -39,12 +46,14 @@
     <%@include file="head.jsp"%>
     <%@include file="navbar.jsp"%>
 
-
 </head>
 <body>
 
 <main>
 
+    <div class="welcomeMessage">
+        <h5> &nbsp;Riepilogo Profilo Utente</h5>
+    </div>
 <%
     ParametersDAO paramDao = new ParametersDAOImpl();
     ParametersService sparam = new ParametersServiceImpl(paramDao);
@@ -75,7 +84,6 @@
 %>
 <!--inserimento script-->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
 
 <div id = "main">
 
@@ -245,4 +253,7 @@
 <%@include file="footer.jsp"%>
 
 </body>
+<%
+    }
+%>
 </html>

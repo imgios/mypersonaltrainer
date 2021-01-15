@@ -1,4 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    String emailClientee = (String) request.getSession().getAttribute("clienteMail");
+
+    if(emailClientee == null)
+        response.sendRedirect("error.jsp");
+    else{
+%>
+
 <%
     String error = (String) request.getSession().getAttribute("error");
     String done = (String) request.getSession().getAttribute("done");
@@ -16,6 +25,10 @@
     <script src="js/insertParameters.js"></script>
 </head>
 <body>
+
+    <div class="welcomeMessage">
+        <h5> &nbsp;Parametri fisici</h5>
+    </div>
 
 <main>
 <form onsubmit="return stopsubmit(this);">
@@ -46,4 +59,5 @@
 <%@include file="footer.jsp"%>
 
 </body>
+<% }%>
 </html>
