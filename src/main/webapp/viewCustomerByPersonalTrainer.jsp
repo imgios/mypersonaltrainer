@@ -52,6 +52,10 @@
 
 <main>
 
+    <div class="welcomeMessage">
+        <h5> &nbsp;Riepilogo Profilo Utente</h5>
+    </div>
+
 <%
     ParametersDAO paramDao = new ParametersDAOImpl();
     ParametersService sparam = new ParametersServiceImpl(paramDao);

@@ -26,7 +26,10 @@
 
 <main>
 
-    <p class="font-weight-bold">Le tue schede</p>
+    <div class="welcomeMessage">
+        <h5> &nbsp;Le tue schede</h5>
+    </div>
+    <!-- <p class="font-weight-bold">Le tue schede</p> -->
 
 <%
     TrainingPlanService tp = new TrainingPlanServiceImpl();
@@ -34,11 +37,11 @@
     int i = 0;
 %>
 
-    <%      for(TrainingPlan t : trainingPlanList) {
+    <%
+        for(TrainingPlan t : trainingPlanList) {
     %>
 
     <section>
-
         <details>
             <summary>
                 <%=t.getDate()%>

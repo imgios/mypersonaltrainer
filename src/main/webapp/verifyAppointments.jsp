@@ -35,6 +35,10 @@
 
     <body>
 
+    <div class="welcomeMessage">
+        <h5> &nbsp;Verifica Appuntamenti</h5>
+    </div>
+
     <main>
         <div class="alert alert-success" role="alert" id="success-alert"><p>Appuntamento cancellato con successo</p></div>
         <div class="container" >

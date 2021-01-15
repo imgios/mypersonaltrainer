@@ -19,6 +19,7 @@
     else{
 %>
 <head>
+
     <title>Profilo Utente</title>
 
     <%@include file="meta.jsp"%>
@@ -33,11 +34,12 @@
 <body>
 
 <main>
-<div>
-    <h3>Gestisci Profilo</h3>
-</div>
 
-<div class="container">
+    <div class="welcomeMessage">
+        <h5> &nbsp;Gestisci Profilo </h5>
+    </div>
+
+    <div class="container">
 
     <div class="row">
         <div class="col-sm-4">

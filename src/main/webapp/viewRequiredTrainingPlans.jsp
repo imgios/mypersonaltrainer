@@ -33,6 +33,10 @@
 
 <main>
 
+    <div class="welcomeMessage">
+        <h5> &nbsp;Richieste schede di allenamento</h5>
+    </div>
+
 <div class="card">
     <div class="card-body">
         <table class="table table-sm">

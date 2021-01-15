@@ -21,6 +21,10 @@
 
 <main>
 
+    <div class="welcomeMessage">
+        <h5> &nbsp;Scheda di Allenamento</h5>
+    </div>
+
 <%String s = request.getParameter("exercises");%>
 
 <div class="card text-center">

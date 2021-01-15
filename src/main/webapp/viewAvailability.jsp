@@ -35,6 +35,10 @@
 
 <main>
 
+    <div class="welcomeMessage">
+        <h5> &nbsp;Visualizza Disponibilità</h5>
+    </div>
+
 <!-- <div class="grid-container" align="center">
 
 </div> -->
