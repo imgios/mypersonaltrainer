@@ -17,7 +17,13 @@ function showdataform()
 
 function ricaricalista()
 {
-    $("#ricarica").load("#ricarica");
+    $("#listaappuntamento").load(location.href+" #listaappuntamento");
+    $("#datepicker").hide();
+    $("#ricaricaore").hide();
+    $("#cercadisponibilità").hide();
+    $("#errorDiv").hide();
+    $("#prenota").hide();
+    $("#SuccessDiv").hide();
 }
 
 
