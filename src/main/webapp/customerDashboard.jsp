@@ -88,7 +88,7 @@
 <main>
 
     <div class="welcomeMessage">
-        <h5> &nbsp; Benvenuto, <b><i><%=utente_sess.getName()%></i></b> </h5>
+        <h1> &nbsp;Benvenuto, <b><i><%=utente_sess.getName()%></i></b> </h1>
     </div>
 
     <!-- Content Row -->
