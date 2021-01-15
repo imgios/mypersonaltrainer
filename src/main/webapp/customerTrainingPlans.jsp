@@ -34,8 +34,29 @@
 <%
     TrainingPlanService tp = new TrainingPlanServiceImpl();
     Collection<TrainingPlan> trainingPlanList = tp.getTrainingPlans(utente_email_sess);
-    int i = 0;
+
 %>
+
+    <%
+        if (trainingPlanList.size() == 0){
+          %>
+
+        <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+        <div class="card card0 border-0">
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">ALT!</h5>
+                    <p class="card-text">Non hai richiesto schede di allenamento!</p>
+                    <a href="requestTrainingPlan.jsp" class="btn btn-primary">Richiedi Scheda</a>
+                </div>
+            </div>
+        </div>
+        </div>
+
+            <%
+            } else {
+            %>
 
     <%
         for(TrainingPlan t : trainingPlanList) {
@@ -73,5 +94,8 @@
     }
 %>
 
+<%
+    }
+%>
 </body>
 </html>
