@@ -79,7 +79,8 @@ public class CreateTrainingPlanServlet extends
             } else if (action.equals("addtp")) {
 
 
-                String mail = (String) request.getSession().getAttribute("mailutil");
+                String mail = (String)
+                        request.getSession().getAttribute("mailutil");
 
                 String exercises = (String) request.getSession()
                         .getAttribute("exercises");
