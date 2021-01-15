@@ -8,6 +8,15 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
+<%
+    String emailCliente = (String) request.getSession().getAttribute("clienteMail");
+    if (emailCliente == null)
+    {
+        response.sendRedirect("error.jsp");
+    } else {
+%>
+
 <head>
     <title>Agenda</title>
 
@@ -107,4 +116,5 @@
 </main>
 <%@include file="footer.jsp"%>
 </body>
+<% }%>
 </html>
