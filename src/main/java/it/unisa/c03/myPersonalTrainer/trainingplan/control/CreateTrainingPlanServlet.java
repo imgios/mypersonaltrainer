@@ -89,7 +89,7 @@ public class CreateTrainingPlanServlet extends
                                     + "esercizio per creare una scheda!");
                     response.sendRedirect("createTrainingPlan.jsp");
                 } else {
-                    String mail = request.getParameter("email");
+                    //String mail = request.getParameter("email");
                     TrainingPlan trainingPlan =
                             new TrainingPlan(exercises, mail);
                     trainingPlanService.createTrainingPlan(trainingPlan);
