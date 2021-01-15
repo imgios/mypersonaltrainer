@@ -19,7 +19,7 @@
 <!--check if the user is log-->
 <%
     String email = (String) request.getParameter("email");
-    System.out.println(email);
+
     if (email == null){
         response.sendRedirect("index.jsp");   //login page che non ho al momento
     }

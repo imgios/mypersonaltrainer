@@ -96,7 +96,7 @@ class CreateTrainingPlanControllerTestGet {
 
         new CreateTrainingPlanController().doGet(request, response);
 
-        System.out.println(request.getSession().getAttribute("noEx"));
+
     }
     @Test
     void doGetActionaddtpNotNull() throws IOException, ServletException {
@@ -116,7 +116,7 @@ class CreateTrainingPlanControllerTestGet {
 
         new CreateTrainingPlanController().doGet(request, response);
 
-        System.out.println(request.getSession().getAttribute("noEx"));
+
     }
 
 
