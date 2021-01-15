@@ -48,8 +48,8 @@
                     <br>
             <input hidden type="text" id="data">
                     <button class="btn btn-primary"  onclick="seeAppointments()">Visualizza</button>
-                    <button class="btn btn-primary">Programma Disponibilità</button>
-                    <button class="btn btn-primary">Visualizza Disponibilità</button>
+                    <a class="btn btn-primary" href="insertAvailability.jsp" role="button">Programma Disponibilità</a>
+                    <a class="btn btn-primary" href="viewAvailability.jsp" role="button">Visualizza Disponibilità</a>
                     </div>
             <!-- <button id="visualizzaappuntamenti" onclick="seeAppointments()">Visualizza</button>-->
                 <div class="col">
