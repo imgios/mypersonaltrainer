@@ -16,12 +16,19 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.bean.TrainingPlan" %>
 <%@ page import="java.util.List" %>
 
+<%
+    String emailAdmin = (String) request.getSession().getAttribute("ptMail");
+    if(emailAdmin == null) {
+        response.sendRedirect("error.jsp");
+    } else {
+%>
+
 <!--check if the user is log-->
 <%
     String email = (String) request.getParameter("email");
-    System.out.println(email);
+
     if (email == null){
-        response.sendRedirect("index.jsp");   //login page che non ho al momento
+        response.sendRedirect("index.jsp");
     }
 %>
 <%  //check parameters %>
@@ -245,4 +252,7 @@
 <%@include file="footer.jsp"%>
 
 </body>
+<%
+    }
+%>
 </html>

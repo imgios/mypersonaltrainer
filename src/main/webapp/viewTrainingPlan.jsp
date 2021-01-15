@@ -1,6 +1,13 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<%
+    String emailCliente = (String) request.getSession().getAttribute("clienteMail");
+    if (emailCliente == null)
+    {
+        response.sendRedirect("error.jsp");
+    } else {
+%>
 <head>
     <title>myPersonalTrainer | La mia scheda</title>
 
@@ -33,4 +40,5 @@
 <%@include file="footer.jsp"%>
 
 </body>
+<% }%>
 </html>

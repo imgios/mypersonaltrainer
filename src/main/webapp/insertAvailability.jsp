@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<%
+    String emailAdmin = (String) request.getSession().getAttribute("ptMail");
+    if(emailAdmin == null) {
+        response.sendRedirect("error.jsp");
+    } else {
+%>
 <head>
     <title>Inserisci Disponibilita</title>
 
@@ -59,4 +65,7 @@
 <%@include file="footer.jsp"%>
 
 </body>
+<%
+    }
+%>
 </html>
