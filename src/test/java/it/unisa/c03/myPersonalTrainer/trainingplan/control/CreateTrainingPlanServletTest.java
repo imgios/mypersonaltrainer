@@ -28,9 +28,6 @@ class CreateTrainingPlanServletTest {
     TrainingPlanServiceImpl trainingPlanService = Mockito.mock(TrainingPlanServiceImpl.class);
 
 
-
-
-
     @Test
     void doPostexercisesNull() throws IOException {
         Mockito.when(request.getParameter("action")).thenReturn("addex");
@@ -174,7 +171,6 @@ class CreateTrainingPlanServletTest {
 
         new CreateTrainingPlanServlet().doGet(request, response);
     }
-
 
 
     @AfterAll
