@@ -19,58 +19,48 @@
     <%@include file="head.jsp"%>
     <%@include file="navbar.jsp"%>
 
+    <link rel="stylesheet" type="text/css" href="./css/viewTrainingPlan.css">
+
 </head>
 <body>
 
 <main>
 
+    <p class="font-weight-bold">Le tue schede</p>
+
 <%
     TrainingPlanService tp = new TrainingPlanServiceImpl();
     Collection<TrainingPlan> trainingPlanList = tp.getTrainingPlans(utente_email_sess);
-    int i = trainingPlanList.size();
+    int i = 0;
 %>
 
-<div class="card">
-    <div class="card-body">
-        <table class="table table-sm">
-            <thead>
-            <tr>
-                <th class="table-primary" scope="col">#</th>
-                <th class="table-primary" scope="col">Data</th>
-                <th class="table-primary" scope="col"> </th>
-                <th class="table-primary" scope="col"> </th>
-            </tr>
-            </thead>
-            <tbody>
-            <% for(TrainingPlan t : trainingPlanList) {
-            %>
-            <tr>
-                <th scope="row"><%=i--%></th>
-                <td><%=t.getDate()%></td>
-                <td>
-                    <div class="col text-right">
-                        <form action="viewTrainingPlan.jsp?exercises=<%=t.getExercises()%>" method="post">
-                            <button type="submit" class="btn btn-sm btn-outline-primary">Visualizza</button>
-                        </form>
-                    </div>
-                </td>
-                <td>
-                    <div class="col text-right">
-                        <form action="<%=request.getContextPath()%>/DownloadSchedaServlet" method="post">
-                            <input type="hidden" name="date" value=<%=t.getDate()%>>
-                            <input type="hidden" name="exercises" value="<%=t.getExercises()%>">
-                            <button class="btn btn-sm btn-outline-primary" type="submit">Download PDF!</button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-            <%
-                }
-            %>
-            </tbody>
-        </table>
-    </div>
-</div>
+    <%      for(TrainingPlan t : trainingPlanList) {
+    %>
+
+    <section>
+
+        <details>
+            <summary>
+                <%=t.getDate()%>
+            </summary>
+            <p>
+                <%String ex = t.getExercises().replaceAll("nome esercizio:", "<br>");%>
+                <%=ex%>
+            <div class="col text-right">
+            <form action="<%=request.getContextPath()%>/DownloadSchedaServlet" method="post">
+                <input type="hidden" name="date" value=<%=t.getDate()%>>
+                <input type="hidden" name="exercises" value="<%=t.getExercises()%>">
+                <button class="btn btn-sm btn-outline-primary" type="submit">Download PDF!</button>
+            </form>
+            </div>
+            </p>
+        </details>
+    </section>
+
+    <%
+        }
+    %>
+
 
 </main>
 
@@ -82,4 +72,3 @@
 
 </body>
 </html>
-

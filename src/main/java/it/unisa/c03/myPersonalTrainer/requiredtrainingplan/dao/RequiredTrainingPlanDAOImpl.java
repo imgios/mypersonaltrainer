@@ -90,7 +90,6 @@ public class RequiredTrainingPlanDAOImpl implements RequiredTrainingPlanDAO {
 
         //find document id
         String id = getAccountDocumentIdByEmail(email);
-        System.out.println(id);
         // Update an existing document thanks to its id
         DocumentReference docRef = DBConnection.getConnection()
                 .collection("RequiredTrainingPlan").document(id);

@@ -75,7 +75,12 @@ public class CreateTrainingPlanServlet extends
                                 + "o cliccare su Crea Scheda");
 
                 response.sendRedirect("createTrainingPlan.jsp");
+
             } else if (action.equals("addtp")) {
+
+
+                String mail = (String) request.getSession().getAttribute("mailutil");
+
                 String exercises = (String) request.getSession()
                         .getAttribute("exercises");
                 if (exercises == null) {

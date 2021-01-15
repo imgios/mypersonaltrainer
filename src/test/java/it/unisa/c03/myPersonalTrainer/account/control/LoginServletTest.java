@@ -122,4 +122,35 @@ class LoginServletTest {
         Mockito.when(request.getSession()).thenReturn(session);
         new LoginServlet().doGet(request, response);
     }
+
+    @Test
+    void doPostuserlogged() throws ServletException, IOException {
+        Mockito.when(request.getParameter("email")).thenReturn("umbertofranzes@gmail.com");
+        Mockito.when(request.getParameter("password")).thenReturn("mypt2021");
+        Mockito.when(accountService.checkCredentials(anyString(),anyString())).thenReturn(true);
+        HttpSession session = Mockito.mock(HttpSession.class);
+        Mockito.when(request.getSession()).thenReturn(session);
+        new LoginServlet().doGet(request, response);
+    }
+
+    @Test
+    void doPostuserfailpass() throws ServletException, IOException {
+        Mockito.when(request.getParameter("email")).thenReturn("umbertofranzes@gmail.com");
+        Mockito.when(request.getParameter("password")).thenReturn("mypt2022");
+        Mockito.when(accountService.checkCredentials(anyString(),anyString())).thenReturn(true);
+        HttpSession session = Mockito.mock(HttpSession.class);
+        Mockito.when(request.getSession()).thenReturn(session);
+        new LoginServlet().doGet(request, response);
+    }
+
+    @Test
+    void doPostuserAdmin() throws ServletException, IOException {
+        Mockito.when(request.getParameter("email")).thenReturn("umbertofranzese@test.it");
+        Mockito.when(request.getParameter("password")).thenReturn("Umberto1");
+        Mockito.when(accountService.checkCredentials(anyString(),anyString())).thenReturn(true);
+        HttpSession session = Mockito.mock(HttpSession.class);
+        Mockito.when(request.getSession()).thenReturn(session);
+        new LoginServlet().doGet(request, response);
+    }
+
 }

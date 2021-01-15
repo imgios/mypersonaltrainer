@@ -58,6 +58,9 @@ class RequestAppointmentServletTest {
         assertTrue(service.createAppointment(request.getParameter("data"),request.getParameter("time"),request.getParameter("mailutente")));
         Mockito.when(request.getSession()).thenReturn(session);
         Mockito.when(response.getWriter()).thenReturn(writer);
+        AgendaDAO dao1=new AgendaDAOImpl();
+        Appointment x=new Appointment();
+        dao1.deleteappointment(x);
         new RequestAppointmentServlet().doPost(request,response);
     }
 

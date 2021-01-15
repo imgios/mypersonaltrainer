@@ -99,7 +99,6 @@ class CreateTrainingPlanServletTest {
 
         new CreateTrainingPlanServlet().doPost(request, response);
 
-        //System.out.println(request.getSession().getAttribute("noEx"));
     }
 
     @Test
@@ -122,7 +121,7 @@ class CreateTrainingPlanServletTest {
 
         new CreateTrainingPlanServlet().doPost(request, response);
 
-        //System.out.println(request.getSession().getAttribute("noEx"));
+
     }
 
 
