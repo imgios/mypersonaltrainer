@@ -6,9 +6,6 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
-import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
-import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAO;
-import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAOImpl;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
 

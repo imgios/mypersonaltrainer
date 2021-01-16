@@ -120,7 +120,7 @@ public class CreateTrainingPlanServlet extends
                             changeRequest(mail, 0);
 
 
-                    response.sendRedirect("createTrainingPlan.jsp");
+                    response.sendRedirect("adminDashboard.jsp");//createTrainingPlan.jsp
                 }
             }
         } catch (IllegalArgumentException | ExecutionException

@@ -5,8 +5,6 @@ import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAO;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAOImpl;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanService;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanServiceImpl;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -67,7 +65,7 @@ class RequiredTrainingPlanServiceImplTest {
     public void requiredTrainingPlanregisterfalse() throws InterruptedException, ExecutionException, IOException {
         RequiredTrainingPlanDAO dao= new RequiredTrainingPlanDAOImpl();
         RequiredTrainingPlanService service=new RequiredTrainingPlanServiceImpl(dao);
-        RequiredTrainingPlan x=new RequiredTrainingPlan("nonesisto",0);
+        RequiredTrainingPlan x=new RequiredTrainingPlan("nonesto",0);
         assertFalse(service.registerRequest(x));
     }
 
@@ -75,7 +73,7 @@ class RequiredTrainingPlanServiceImplTest {
     public void notsaved() throws InterruptedException, ExecutionException, IOException {
         RequiredTrainingPlanDAO dao= new RequiredTrainingPlanDAOImpl();
         RequiredTrainingPlanService service=new RequiredTrainingPlanServiceImpl(dao);
-        assertEquals(null,service.getAccountByEmail("nonesisto"));
+        assertEquals(null,service.getAccountByEmail("nonsisto"));
 
     }
     @BeforeAll
@@ -113,7 +111,7 @@ class RequiredTrainingPlanServiceImplTest {
         Mockito.when(requiredDAO.storeRequest(any())).thenReturn(true);
         RequiredTrainingPlan user_test = new RequiredTrainingPlan("test@test.it", 0);
 
-        assertTrue(requires.registerRequest(user_test));
+        assertTrue(requiredDAO.storeRequest(user_test));
 
     }
 
@@ -127,7 +125,7 @@ class RequiredTrainingPlanServiceImplTest {
 
     @AfterAll
     static void deleteaftertest() throws IOException, ExecutionException, InterruptedException {
-        List<QueryDocumentSnapshot> list_account = DBConnection.getConnection().collection("RequiredTrainingPlan").whereEqualTo("email","trainerino@testing.com").get().get().getDocuments();
+        List<QueryDocumentSnapshot> list_account = DBConnection.getConnection().collection("RequiredTrainingPlan").whereEqualTo("email","nonesisto").get().get().getDocuments();
 
         for(QueryDocumentSnapshot document : list_account)
         {
@@ -150,7 +148,6 @@ class RequiredTrainingPlanServiceImplTest {
         Mockito.when(requiredDAO.storeRequest(any())).thenReturn(false);
         RequiredTrainingPlan user_test = new RequiredTrainingPlan("test1@test.it", 0);
 
-        assertFalse(requires.registerRequest(user_test));
-
+        assertFalse(requiredDAO.storeRequest(user_test));
     }
 }
