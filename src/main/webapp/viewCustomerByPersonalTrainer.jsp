@@ -15,6 +15,11 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAOImpl" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.bean.TrainingPlan" %>
 <%@ page import="java.util.List" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAOImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanService" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanServiceImpl" %>
 
 <%
     String emailAdmin = (String) request.getSession().getAttribute("ptMail");
@@ -220,6 +225,7 @@
             </div>
         </div>
 
+
     <div class="card text-right">
         <div class="card-body">
             <p class="card-text">
@@ -240,13 +246,34 @@
                 </tbody>
             </table>
             </p>
-                <form action="createTrainingPlan.jsp?email=<%=email%>" method="post">
-                    <button type="submit" class="btn btn-sm btn-outline-primary">Crea nuova scheda</button>
-                </form>
+
+            <%
+                RequiredTrainingPlan requireTest;
+                RequiredTrainingPlanDAO requiredTrainingPlanDao = new RequiredTrainingPlanDAOImpl();
+                RequiredTrainingPlanService requiredTrainingPlanService = new RequiredTrainingPlanServiceImpl(requiredTrainingPlanDao);
+                requireTest = requiredTrainingPlanService.getAccountByEmail(email);
+                boolean checked = requiredTrainingPlanService.searchAccountByEmail(email);
+                if (!checked) { %>
+            <form action="createTrainingPlan.jsp?exercises=<%=email%>" method="post">
+                <button type="submit" class="btn btn-sm btn-outline-primary" disabled>Crea nuova scheda</button>
+            </form>
+
+            <% }  else {
+                    if (requireTest.getRequired() == 1) {
+            %>
+            <form action="createTrainingPlan.jsp?exercises=<%=email%>" method="post">
+                <button type="submit" class="btn btn-sm btn-outline-primary">Crea nuova scheda</button>
+            </form>
+            <% } else {%>
+            <form action="createTrainingPlan.jsp?exercises=<%=email%>" method="post">
+                <button type="submit" class="btn btn-sm btn-outline-primary" disabled>Crea nuova scheda</button>
+            </form>
+            <%}
+                }%>
+
+        </div>
     </div>
 </div>
-</div>
-
 </main>
 
 <!--  inserimento footer -->

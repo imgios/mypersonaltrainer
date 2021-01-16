@@ -1,5 +1,10 @@
 package it.unisa.c03.myPersonalTrainer.trainingplan.control;
 
+import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
+import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAO;
+import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAOImpl;
+import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanService;
+import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanServiceImpl;
 import it.unisa.c03.myPersonalTrainer.trainingplan.bean.TrainingPlan;
 import it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAO;
 import it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAOImpl;
@@ -12,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 @WebServlet(name = "CreateNewTrainingPlanServlet",
         value = "/createTP-controller")
@@ -24,6 +30,14 @@ public class CreateTrainingPlanServlet extends
                 new TrainingPlanDAOImpl();
         TrainingPlanService trainingPlanService =
                 new TrainingPlanServiceImpl(trainingPlanDAO);
+
+
+        RequiredTrainingPlan newRequiredTP;
+        RequiredTrainingPlanDAO requiredTrainingPlanDao =
+                new RequiredTrainingPlanDAOImpl();
+        RequiredTrainingPlanService requiredTrainingPlanService =
+                new RequiredTrainingPlanServiceImpl(
+                        requiredTrainingPlanDao);
         try {
             String action = request.getParameter("action");
             if (action.equals("addex")) {
@@ -97,10 +111,18 @@ public class CreateTrainingPlanServlet extends
                     request.getSession().removeAttribute("exercises");
                     request.getSession().setAttribute("success",
                             "Scheda creata con successo");
+
+                    newRequiredTP = requiredTrainingPlanDao.findAccountByEmail(mail);
+                    System.out.println("Name "+newRequiredTP.getEmail()+"Status "+newRequiredTP.getRequired());
+                    newRequiredTP.setRequired(0);
+                    requiredTrainingPlanService.
+                            changeRequest(mail, 0);
+
+
                     response.sendRedirect("createTrainingPlan.jsp");
                 }
             }
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | ExecutionException | InterruptedException e) {
             request.getSession().setAttribute("error", e.getMessage());
             response.sendRedirect("createTrainingPlan.jsp");
         }

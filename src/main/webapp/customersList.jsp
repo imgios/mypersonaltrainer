@@ -28,7 +28,7 @@
 <%
     AccountService accounts = new AccountServiceImpl();
     Collection<Account> accountsBean = accounts.viewInfoAccount();
-    int i = 0;
+    int i = 1;
 %>
 
     <div class="welcomeMessage">

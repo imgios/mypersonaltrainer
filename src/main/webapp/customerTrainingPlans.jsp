@@ -2,6 +2,11 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.service.TrainingPlanService" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.service.TrainingPlanServiceImpl" %>
 <%@ page import="java.util.Collection" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanService" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAOImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanServiceImpl" %>
 
 
 <%
@@ -40,8 +45,15 @@
     <%
         if (trainingPlanList.size() == 0){
           %>
+    <%
+        RequiredTrainingPlan requireTest;
+        RequiredTrainingPlanDAO requiredTrainingPlanDao = new RequiredTrainingPlanDAOImpl();
+        RequiredTrainingPlanService requiredTrainingPlanService = new RequiredTrainingPlanServiceImpl(requiredTrainingPlanDao);
+        boolean checked = requiredTrainingPlanService.searchAccountByEmail(utente_email_sess);
+        if (!checked) { %>
 
-        <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+    <!-- Richiedi nuova scheda abled -->
+    <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
         <div class="card card0 border-0">
 
             <div class="card text-center">
@@ -52,12 +64,43 @@
                 </div>
             </div>
         </div>
+    </div>
+    <%} else {%>
+    <%
+        requireTest = requiredTrainingPlanService.getAccountByEmail(utente_email_sess);
+        if (requireTest.getRequired() == 1) {
+    %>
+    <!-- Richiedi nuova scheda disabled -->
+    <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+        <div class="card card0 border-0">
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">ALT!</h5>
+                    <p class="card-text">Non hai richiesto schede di allenamento!</p>
+                    <input type="button" class="btn btn-primary" disabled value="Richiedi Scheda">
+                </div>
+            </div>
         </div>
+    </div>
+    <% } else {%>
 
-            <%
-            } else {
-            %>
+    <!-- Richiedi nuova scheda abled -->
+    <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+        <div class="card card0 border-0">
 
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">ALT!</h5>
+                    <p class="card-text">Non hai richiesto schede di allenamento!</p>
+                    <a href="requestTrainingPlan.jsp" class="btn btn-primary">Richiedi Scheda</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% }
+    }%>
+    <% } else { %>
     <%
         for(TrainingPlan t : trainingPlanList) {
     %>
