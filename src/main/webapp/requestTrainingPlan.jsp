@@ -48,7 +48,7 @@
         <h5 class="card-header"> <i class="fas fa-user"></i> <%=accountCustomer.getName()%> <%=accountCustomer.getSurname()%></h5>
         <h7 class="card-header">Inserisci i tuoi parametri</h7>
         <div class="card-body">
-            <form action="<%=request.getContextPath()%>/ManageRequiredTrainingPlanServlet" method="post" onsubmit="return stopsubmit(this);">
+            <form action="<%=request.getContextPath()%>/ManageRequiredTrainingPlanServlet" method="post" onsubmit = "return stopsubmit(this);">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="idweight">Peso: </label> <label id="controlweight"></label>

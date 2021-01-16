@@ -85,7 +85,7 @@ class RequiredTrainingPlanDAOImplTest {
     }
 
     @Test
-    void storeRequest() throws IOException {
+    void storeRequest() throws IOException, ExecutionException, InterruptedException {
         RequiredTrainingPlan requiredTrainingPlan = new RequiredTrainingPlan("admin@admin.it", 1);
 
         RequiredTrainingPlanDAO adao = new RequiredTrainingPlanDAOImpl();

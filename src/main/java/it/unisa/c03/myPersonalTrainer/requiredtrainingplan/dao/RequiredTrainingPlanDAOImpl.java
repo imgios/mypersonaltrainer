@@ -6,6 +6,9 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
+import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
+import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAO;
+import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAOImpl;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
 
@@ -25,13 +28,13 @@ public class RequiredTrainingPlanDAOImpl implements RequiredTrainingPlanDAO {
      */
     @Override
     public boolean storeRequest(RequiredTrainingPlan requiredTrainingPlan)
-            throws IOException {
+            throws IOException, ExecutionException, InterruptedException {
 
         boolean controllo;
         controllo = false;
+        DBConnection.getConnection()
+                .collection("RequiredTrainingPlan").add(requiredTrainingPlan);
 
-        DBConnection.getConnection().collection("RequiredTrainingPlan")
-                .add(requiredTrainingPlan);
         controllo = true;
 
         return controllo;

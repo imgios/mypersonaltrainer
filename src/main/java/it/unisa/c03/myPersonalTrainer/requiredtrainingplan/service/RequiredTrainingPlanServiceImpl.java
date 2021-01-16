@@ -1,5 +1,8 @@
 package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service;
 
+import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
+import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAO;
+import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAOImpl;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAO;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAOImpl;
@@ -46,10 +49,10 @@ public class RequiredTrainingPlanServiceImpl implements
         //the email exists yet in the DB
         if (requiredTrainingPlan.getEmail() != null) {
             result = true;
-         } /* else if (requiredTrainingPlan.getEmail() == null) {
+         }  else if (requiredTrainingPlan.getEmail() == null) {
             //the email doesn't exist in the DB
             result = false;
-        }*/
+        }
         return result;
     }
 
@@ -106,12 +109,15 @@ public class RequiredTrainingPlanServiceImpl implements
         RequiredTrainingPlan ricerca;
         ricerca = requiredTrainingPlanDAO
                 .findAccountByEmail(requiredTrainingPlan.getEmail());
-        if (ricerca == null) {
-
-            return requiredTrainingPlanDAO.storeRequest(requiredTrainingPlan);
+        if (ricerca.getEmail() == null) {
+            System.out.println("email non presente, la inserisco nel DB");
+            requiredTrainingPlanDAO.storeRequest(requiredTrainingPlan);
+            return true;
         } else {
+            System.out.println("email già presente");
             return false;
         }
+
     }
 
     /**

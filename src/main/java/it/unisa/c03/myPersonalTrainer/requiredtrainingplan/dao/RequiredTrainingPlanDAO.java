@@ -18,7 +18,7 @@ public interface RequiredTrainingPlanDAO {
      * false instead.
      */
     boolean storeRequest(RequiredTrainingPlan requiredTrainingPlan)
-            throws IOException;
+            throws IOException, ExecutionException, InterruptedException;
 
     /** this function can search if the email of
      * the user that try to make a request of
