@@ -5,12 +5,12 @@
         "https://checkstyle.org/dtds/suppressions_1_0.dtd">
 
 <suppressions>
-    <suppress checks="javadoc" files="\.java"/>
-    <suppress checks="naming" files="\.java"/>
-    <suppress checks="FinalParameters" files="\.java"/>
-    <suppress checks="DesignForExtension" files="\.java"/>
-    <suppress checks="AvoidStarImport" files="\.java"/>
-    <suppress checks="MagicNumber" files="/src/test"/>
+    <suppress checks="javadoc" files=".*[\\/]src[\\/]"/>
+    <suppress checks="naming" files=".*[\\/]src[\\/]"/>
+    <suppress checks="FinalParameters" files=".*[\\/]src[\\/]"/>
+    <suppress checks="DesignForExtension" files=".*[\\/]src[\\/]"/>
+    <suppress checks="AvoidStarImport" files=".*[\\/]src[\\/]"/>
+    <suppress checks="MagicNumber" files=".*[\\/]src[\\/]test[\\/]"/>
 
-    <suppress checks="HiddenField" files="\.java"/>
+    <suppress checks="HiddenField" files=".*[\\/]src[\\/]"/>
 </suppressions>
