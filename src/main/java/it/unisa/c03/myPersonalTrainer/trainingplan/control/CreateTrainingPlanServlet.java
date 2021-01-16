@@ -112,8 +112,9 @@ public class CreateTrainingPlanServlet extends
                     request.getSession().setAttribute("success",
                             "Scheda creata con successo");
 
-                    newRequiredTP = requiredTrainingPlanDao.findAccountByEmail(mail);
-                    System.out.println("Name "+newRequiredTP.getEmail()+"Status "+newRequiredTP.getRequired());
+                    newRequiredTP =
+                            requiredTrainingPlanDao.findAccountByEmail(mail);
+
                     newRequiredTP.setRequired(0);
                     requiredTrainingPlanService.
                             changeRequest(mail, 0);
@@ -122,7 +123,8 @@ public class CreateTrainingPlanServlet extends
                     response.sendRedirect("createTrainingPlan.jsp");
                 }
             }
-        } catch (IllegalArgumentException | ExecutionException | InterruptedException e) {
+        } catch (IllegalArgumentException | ExecutionException
+                | InterruptedException e) {
             request.getSession().setAttribute("error", e.getMessage());
             response.sendRedirect("createTrainingPlan.jsp");
         }
