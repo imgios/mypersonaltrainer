@@ -59,12 +59,24 @@ class AgendaServiceImplTestAvailability {
         assertEquals("Orario non valido", exception.getMessage());
     }
 
+    // TC_3.3_3
     @Test
     void checkAvailabilityPass() throws IllegalArgumentException {
         String data = "2021-10-05";
         String time = "15";
         agendaService.checkAvailability(data, time);
         assertTrue(agendaService.checkAvailability(data, time));
+    }
+
+    //TC_3.3_2
+    @Test
+    void checkAvailabilityNotPass() throws IllegalArgumentException {
+        String data = "2021-10-05";
+        String time = "";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            agendaService.checkAvailability(data, time);
+        });
+        assertEquals("Fascia oraria non selezionata", exception.getMessage());
     }
 
 
@@ -91,6 +103,7 @@ class AgendaServiceImplTestAvailability {
         Mockito.when(agendaDAO.deleteAvailability(any())).thenReturn(true);
         assertEquals(true, agendaService.removeAvailability(any()));
     }
+
     @Test
     void removeAvailabilityFalse() throws InterruptedException, ExecutionException, IOException {
         Mockito.when(agendaDAO.deleteAvailability(any())).thenReturn(false);

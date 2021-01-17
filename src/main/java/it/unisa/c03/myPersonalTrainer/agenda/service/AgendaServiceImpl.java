@@ -31,8 +31,7 @@ public final class AgendaServiceImpl implements AgendaService {
     @Override
     public boolean checkDate(String date) {
         LocalDate data = LocalDate.parse(date);
-        boolean check = data.isAfter(
-                LocalDate.now()) || data.isEqual(LocalDate.now());
+        boolean check = data.isAfter(LocalDate.now()) || data.isEqual(LocalDate.now());
         return check;
     }
 
@@ -71,6 +70,8 @@ public final class AgendaServiceImpl implements AgendaService {
     }
 
 
+//AVAIL
+
     /**
      * define the min time to make availability.
      */
@@ -97,7 +98,11 @@ public final class AgendaServiceImpl implements AgendaService {
             throws IllegalArgumentException {
 
         boolean result = false;
-        if (!data.matches(
+
+        if (time.length() == 0) {
+            throw new IllegalArgumentException(
+                    "Fascia oraria non selezionata");
+        } else if (!data.matches(
                 "^((19|2[0-9])[0-9]{2})-"
                         + "(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$")) {
             throw new IllegalArgumentException(

@@ -19,6 +19,11 @@ $(document).ready(function () {
         var timeSelected = $("#idtimeSelected").val();
 
 
+        if (timeSelected == undefined || timeSelected == "" || timeSelected.length == 0) {
+            $('#divError').empty().append("<p>Fascia oraria non selezionata</p>");
+            $('#divError').show();
+            return;
+        }
         if (validName() == false) {
             $('#divError').empty().append("<p>Orario non valido puoi scegliere tra 9 e 19</p>");
             $('#divError').show();
@@ -29,7 +34,7 @@ $(document).ready(function () {
             "timeSelected": timeSelected,
         }, function (data) {
             if (data == 1) {
-                $('#divSuccess').empty().append("<p>Inserimento effettuato!</p>");
+                $('#divSuccess').empty().append("<p>Disponibilità inserita! Il " + dataSelected + " alle ore " + timeSelected + "</p>");
                 $('#divSuccess').show();
                 $("p").css({"font-style": "oblique", " font-variant": "small-caps"});
 
