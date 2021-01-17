@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -32,10 +33,18 @@ class SubscriptionServiceImplTest {
         SubscriptionDAO subDao = Mockito.mock(SubscriptionDAO.class);
 
         ArrayList<Subscription> listToReturn = new ArrayList<>();
-        Subscription s = new Subscription("subs@looking.com", "2021-01-16", "30");
+        Subscription s = new Subscription();
+        s.setCustomerMail("subs@looking.com");
+        s.setPrice("30");
+        s.setSentNotification(0);
+
+        // setting the exp date
+        LocalDate today = LocalDate.now();
+        LocalDate exp = today.plusDays(9);
+        s.setExpDate(exp.toString());
         listToReturn.add(s);
         Mockito.when(subDao.getAllSubscriptions()).thenReturn(listToReturn);
-        Mockito.when(subDao.getSubscriptionbyEmail(anyString())).thenReturn(new Subscription("subs@looking.com", "2021-01-16", "30"));
+        Mockito.when(subDao.getSubscriptionbyEmail(anyString())).thenReturn(s);
 
 
         SubscriptionService subService = new SubscriptionServiceImpl(subDao);
