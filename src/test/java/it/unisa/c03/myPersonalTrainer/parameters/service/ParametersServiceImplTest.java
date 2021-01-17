@@ -17,6 +17,7 @@ class ParametersServiceImplTest {
     ParametersDAO parametersDAO = Mockito.mock(ParametersDAO.class);
     ParametersService pservice = new ParametersServiceImpl(parametersDAO);
 
+    //TC_1.2_1
     @Test
     void lenghtWeightNotValid() throws IOException {
         String weight = "2";
@@ -69,6 +70,7 @@ class ParametersServiceImplTest {
         assertEquals("valori mancanti", exception.getMessage());
     }
 
+    //TC_1.2_2
     @Test
     void formatWeightNotValid() throws IOException {
         String weight = "5X";
@@ -82,19 +84,21 @@ class ParametersServiceImplTest {
         assertEquals("formato peso non valido", exception.getMessage());
     }
 
+    //TC_1.2_4
     @Test
     void lenghtFatMassNotValid() throws IOException {
         String weight = "50";
         String fatMass = "3%";
         String email = "parametri@test.it";
 
-        String leanMass = "55%";
+        String leanMass = "45%";
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             pservice.createParameters(weight, leanMass, fatMass, email);
         });
         assertEquals("lunghezza massa grassa non valida", exception.getMessage());
     }
 
+    //TC_1.2_5
     @Test
     void lenghtFatMassNotValidMax() throws IOException {
         String weight = "50";
@@ -135,6 +139,7 @@ class ParametersServiceImplTest {
         assertEquals("formato massa magra non valido", exception.getMessage());
     }
 
+    //TC_1.2_3
     @Test
     void lenghtleanMassNotValid() throws IOException {
         String weight = "50";
