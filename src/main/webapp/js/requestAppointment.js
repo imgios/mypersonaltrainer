@@ -74,9 +74,11 @@ function caricaore() {
             "time": time,
             "mailutente": mailutente
         },function (result){
-            if (result==true){
+            if (result){
+                ricaricalista();
                 $("#SuccessDiv").empty().append("<p>Appuntamento prenotato!</p>");
                 $("#SuccessDiv").show();
+
             }
             else{
                 $("#errorDiv").empty().append("<p>Errore durante la prenotazione!</p>");
