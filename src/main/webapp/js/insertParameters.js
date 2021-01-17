@@ -59,10 +59,6 @@ $(document).ready(function () {
         var idfatMass = $("#idfatMass").val();
         var idleanMass = $("#idleanMass").val();
 
-        if (!validateWeight() || !validatefatMass() || !validateLeanMass()) {
-            return false;
-        } else {
-
             $.get('parameters-controller', {
                 "leanMass": idleanMass,
                 "fatMass": idfatMass,
@@ -80,6 +76,5 @@ $(document).ready(function () {
             $('#divSuccess').empty();
             $('#divError').hide();
             $('#divSuccess').hide();
-        }
     });
 });
