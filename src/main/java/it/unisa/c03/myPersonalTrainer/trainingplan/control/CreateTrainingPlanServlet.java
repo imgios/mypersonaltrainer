@@ -119,8 +119,7 @@ public class CreateTrainingPlanServlet extends
                     requiredTrainingPlanService.
                             changeRequest(mail, 0);
 
-
-                    response.sendRedirect("adminDashboard.jsp");//createTrainingPlan.jsp
+                    response.sendRedirect("adminDashboard.jsp");
                 }
             }
         } catch (IllegalArgumentException | ExecutionException

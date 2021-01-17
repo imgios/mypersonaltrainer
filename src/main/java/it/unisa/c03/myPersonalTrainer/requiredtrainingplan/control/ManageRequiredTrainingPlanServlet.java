@@ -58,7 +58,7 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
                 checked = requiredTrainingPlanService.
                         searchAccountByEmail(emailClientee);
 
-                System.out.println("Vediamo checked: "+checked);
+                System.out.println("Vediamo checked: " + checked);
                 if (!checked) {
                     //it doesn't exists, so we create it
                     requireTest.setRequired(1);
