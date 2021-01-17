@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -31,7 +32,16 @@ class SubscriptionServiceImplIT {
     @BeforeAll
     static void setUp() throws IOException {
         //Sub per test: get expiring
-        Subscription sub4 = new Subscription("abbonamento@gmail.com","2021-01-19","30");
+        Subscription sub4 = new Subscription();
+        sub4.setCustomerMail("abbonamento@gmail.com");
+        sub4.setPrice("30");
+        sub4.setSentNotification(0);
+
+        // setting the exp date
+        LocalDate today = LocalDate.now();
+        LocalDate exp = today.plusDays(9);
+        sub4.setExpDate(exp.toString());
+
         DBConnection.getConnection().collection("Subscription").add(sub4);
 
         //Sub per test: get expired
@@ -39,7 +49,7 @@ class SubscriptionServiceImplIT {
         DBConnection.getConnection().collection("Subscription").add(subScad);
 
         //Sub per test: get active
-        Subscription subAct = new Subscription("abbonamento@attivo.com","2020-01-13","30");
+        Subscription subAct = new Subscription("abbonamento@attivo.com","2022-01-13","30");
         DBConnection.getConnection().collection("Subscription").add(subAct);
 
         //Sub per test:SEND EMAIL
