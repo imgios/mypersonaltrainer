@@ -32,7 +32,7 @@
 <main>
 
     <div class="welcomeMessage">
-        <h5> &nbsp;Inserisci Disponibilita'</h5>
+        <h5> &nbsp;Inserisci Disponibilità</h5>
     </div>
 
 
