@@ -31,7 +31,6 @@ public class CreateTrainingPlanServlet extends
         TrainingPlanService trainingPlanService =
                 new TrainingPlanServiceImpl(trainingPlanDAO);
 
-
         RequiredTrainingPlan newRequiredTP;
         RequiredTrainingPlanDAO requiredTrainingPlanDao =
                 new RequiredTrainingPlanDAOImpl();
@@ -104,7 +103,6 @@ public class CreateTrainingPlanServlet extends
                                     + "esercizio per creare una scheda!");
                     response.sendRedirect("createTrainingPlan.jsp");
                 } else {
-                    //String mail = request.getParameter("email");
                     TrainingPlan trainingPlan =
                             new TrainingPlan(exercises, mail);
                     trainingPlanService.createTrainingPlan(trainingPlan);
@@ -128,7 +126,6 @@ public class CreateTrainingPlanServlet extends
             response.sendRedirect("createTrainingPlan.jsp");
         }
     }
-
     protected void doGet(
             HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

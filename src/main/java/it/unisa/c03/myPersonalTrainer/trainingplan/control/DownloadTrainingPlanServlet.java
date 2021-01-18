@@ -36,7 +36,8 @@ public class DownloadTrainingPlanServlet extends HttpServlet {
       PdfWriter.getInstance(doc, baos);
       doc.open();
 
-      String filename = "https://github.com/imgios/mypersonaltrainer/blob/develop/src/main/webapp/img/logo_fattura.png?raw=true";
+      String filename = "https://github.com/imgios/mypersonaltrainer/blob"
+              + "/develop/src/main/webapp/img/logo_fattura.png?raw=true";
 
       Image image = Image.getInstance(filename);
       image.setAlignment(Element.ALIGN_CENTER);
