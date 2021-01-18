@@ -52,8 +52,6 @@
 <div class="alert alert-danger" role="alert" id="divError"></div>
 
 <div class="alert alert-success" role="alert" id="divSuccess"></div>
-
-
 </main>
 
 <%@include file="footer.jsp"%>

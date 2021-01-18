@@ -13,7 +13,6 @@ import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingP
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAOImpl;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanService;
 import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanServiceImpl;
-
 /**
  * servlet to manage requestedTrainingPlan.
  */
@@ -38,6 +37,15 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
 
         String emailClientee = (String)
                 request.getSession().getAttribute("clienteMail");
+        String action = request.getParameter("action");
+if (action.equals("addex")) {
+    request.getSession()
+            .setAttribute("success", "Inserimento effettuato, "
+                    + "puoi continuare ad inserire esercizi "
+                    + "o cliccare su Crea Scheda");
+
+    response.sendRedirect("requestTrainingPlan.jsp");
+}
 
         if (emailClientee == null) {
             response.sendRedirect("login.jsp");
@@ -45,26 +53,28 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
             int required = 0;
             RequiredTrainingPlan requireTest =
                     new RequiredTrainingPlan(emailClientee, required);
-
             //call the function to register a new account
+            RequiredTrainingPlan newRequiredTP;
             RequiredTrainingPlanDAO requiredTrainingPlanDao =
                     new RequiredTrainingPlanDAOImpl();
             RequiredTrainingPlanService requiredTrainingPlanService =
                     new RequiredTrainingPlanServiceImpl(
                             requiredTrainingPlanDao);
             boolean checked = false;
-
             try {
+                String mail = (String)
+                        request.getSession().getAttribute("mailutil");
+
                 checked = requiredTrainingPlanService.
                         searchAccountByEmail(emailClientee);
-
-                System.out.println("Vediamo checked: " + checked);
                 if (!checked) {
                     //it doesn't exists, so we create it
                     requireTest.setRequired(1);
                     requiredTrainingPlanService.registerRequest(requireTest);
 
-                    response.sendRedirect("customerDashboard.jsp");
+                    request.getSession().setAttribute("firstTPSuccess",
+                            "Prima Scheda creata con successo");
+                    response.sendRedirect("requestTrainingPlan.jsp");
                 } else {
                     try {
                         requireTest = requiredTrainingPlanService
@@ -77,12 +87,18 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
                     //it exists, so we verify if the training plan has
                     //  been requested or not
                     if (requireTest.getRequired() == 1) {
-                        response.sendRedirect("customerDashboard.jsp");
+                        request.getSession().setAttribute("alreadyRequired",
+                                "Scheda già richiesta: "
+                                        + "attenderne la creazione");
+                        response.sendRedirect("requestTrainingPlan.jsp");
                     } else if (requireTest.getRequired() == 0) {
                         requireTest.setRequired(1);
                         requiredTrainingPlanService.
                                 changeRequest(emailClientee, 1);
-                        response.sendRedirect("customerDashboard.jsp");
+                        request.getSession().setAttribute("success",
+                                "Scheda creata con successo");
+
+                        response.sendRedirect("requestTrainingPlan.jsp");
                     }
                 }
             } catch (InterruptedException e) {
@@ -90,9 +106,9 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
+        }
             boolean control = false;
         }
-    }
         /**
          *
          * @param request

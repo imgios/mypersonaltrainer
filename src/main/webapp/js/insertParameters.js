@@ -1,6 +1,11 @@
 $(document).ready(function () {
     $('#divError').hide();
     $('#divSuccess').hide();
+
+    $('#divErrorRequired').hide();
+    $('#divSuccessRequired').hide();
+    $('#Salva').hide();
+
 });
 
 function validateWeight() {
@@ -39,6 +44,7 @@ function validateLeanMass() {
 
     if (!leanMass.match("([0-9]+\\%){1,2}$")) {
         producePrompt("<span class='badge badge-pill badge-danger'>Formato massa magra non valida</span>", "controlleanMass", "red");
+
         return false;
     }
 
@@ -52,29 +58,95 @@ function producePrompt(message, promptLocation, color) {
     document.getElementById(promptLocation).style.color = color;
 }
 
-$(document).ready(function () {
+function stopsubmit()
+{
+    var idweight = document.getElementById("idweight").value;
+    var idfatMass = document.getElementById("idfatMass").value;
+    var idleanMass = document.getElementById("idleanMass").value;
 
+    if (!idweight.match("([0-9]){2,3}\\.?[0-9]{0,2}?$")) {
+        producePrompt("<span class='badge badge-pill badge-danger'>Formato peso non valido!</span>", "controlweight", "red");
+        $('#Salva').hide();
+        event.preventDefault();
+        return false;
+    } else {
+        $('#Salva').show();
+        event.preventDefault();
+    }
+
+    if (weight < 40 || weight > 150) {
+        producePrompt("<span class='badge badge-pill badge-danger'>Formato peso non valido!</span>", "controlweight", "red");
+        event.preventDefault();
+        $('#Salva').hide();
+        return false;
+    } else {
+        $('#Salva').show();
+        event.preventDefault();
+    }
+
+    if (!idfatMass.match("([0-9]+\\%){1,2}$")) {
+        producePrompt("<span class='badge badge-pill badge-danger'>Formato massa grassa non valida</span>", "controlfatMass", "red");
+        $('#Salva').hide();
+        event.preventDefault();
+        return false;
+    } else {
+        $('#Salva').show();
+        event.preventDefault();
+    }
+
+    if (!idleanMass.match("([0-9]+\\%){1,2}$")) {
+        producePrompt("<span class='badge badge-pill badge-danger'>Formato massa magra non valida</span>", "controlleanMass", "red");
+        $('#Salva').hide();
+        event.preventDefault();
+        return false;
+    } else {
+        $('#Salva').show();
+        event.preventDefault();
+    }
+
+
+    if ((((!idweight.match("([0-9]){2,3}\\.?[0-9]{0,2}?$"))&&(!(weight < 40 || weight > 150))&&(!(idweight.match("([0-9]){2,3}\\.?[0-9]{0,2}?$")))&&(!idfatMass.match("([0-9]+\\%){1,2}$"))))) {
+        $('#buttonSubmit').show();
+        $('#Salva').hide();
+    }
+
+    if ((((idweight.match("([0-9]){2,3}\\.?[0-9]{0,2}?$"))&&(weight < 40 || weight > 150)&&(idweight.match("([0-9]){2,3}\\.?[0-9]{0,2}?$"))&&(idfatMass.match("([0-9]+\\%){1,2}$"))))) {
+        $('#buttonSubmit').show();
+        $('#Salva').show();
+    }
+}
+
+$(document).ready(function () {
+    $('#buttonSubmit').show();
     $("#buttonSubmit").click(function () {
         var idweight = $("#idweight").val();
         var idfatMass = $("#idfatMass").val();
         var idleanMass = $("#idleanMass").val();
-
-            $.get('parameters-controller', {
-                "leanMass": idleanMass,
-                "fatMass": idfatMass,
-                "weight": idweight,
-            }, function (data) {
-                if (data == 1) {
-                    $('#divSuccess').empty().append("<p>Inserimento effettuato!</p>");
-                    $('#divSuccess').show();
-                } else {
-                    $('#divError').empty().append("<p>" + data + "</p>");
-                    $('#divError').show();
-                }
-            });
-            $('#divError').empty();
-            $('#divSuccess').empty();
-            $('#divError').hide();
-            $('#divSuccess').hide();
+        $.get('parameters-controller', {
+            "leanMass": idleanMass,
+            "fatMass": idfatMass,
+            "weight": idweight,
+        }, function (data) {
+            if (data == 1) {
+                $('#divSuccess').empty().append("<p>Inserimento effettuato!</p>");
+                $('#divSuccess').show();
+                $('#divSuccessRequired').empty().append("<p>Scheda richiesta!</p>");
+                $('#divSuccessRequired').show();
+            } else {
+                $('#divError').empty().append("<p>" + data + "</p>");
+                $('#divError').show();
+                $('#divErrorRequired').empty().append("<p>Scheda non richiesta! Dati errati</p>");
+                $('#divErrorRequired').show();
+            }
+        });
+        $('#divError').empty();
+        $('#divSuccess').empty();
+        $('#divError').hide();
+        $('#divSuccess').hide();
+        $('#divErrorRequired').empty();
+        $('#divSuccessRequired').empty();
+        $('#divErrorRequired').hide();
+        $('#divSuccessRequired').hide();
     });
+
 });
