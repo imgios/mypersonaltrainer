@@ -38,14 +38,6 @@ public class ManageRequiredTrainingPlanServlet extends HttpServlet {
         String emailClientee = (String)
                 request.getSession().getAttribute("clienteMail");
         String action = request.getParameter("action");
-if (action.equals("addex")) {
-    request.getSession()
-            .setAttribute("success", "Inserimento effettuato, "
-                    + "puoi continuare ad inserire esercizi "
-                    + "o cliccare su Crea Scheda");
-
-    response.sendRedirect("requestTrainingPlan.jsp");
-}
 
         if (emailClientee == null) {
             response.sendRedirect("login.jsp");

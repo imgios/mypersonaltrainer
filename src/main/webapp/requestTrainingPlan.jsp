@@ -71,17 +71,19 @@
                     </div>
                 </div>
                 <%if (!checked) {%>
-                <button type="submit" class="btn btn-primary" id="buttonSubmit" name="action" value="addex">Invia Parametri</button>
+                <button type="submit" class="btn btn-primary" id="buttonSubmit" name="action">Invia Parametri</button>
             </form>
             <% } else { %>
             <%
                 requireTest = requiredTrainingPlanService.getAccountByEmail(emailClientee);
                 if (requireTest.getRequired() == 1) {
             %>
-            <button type="submit" class="btn btn-primary" id="buttonSubmit" name="action" value="addex" disabled>Invia Parametri</button>
+            <div class="alert alert-danger" role="alert" id="divRequestedTrainingPlan">Scheda già richiesta! Attenderne la creazione</div>
+            <button type="submit" class="btn btn-primary" id="buttonSubmit" name="action" disabled>Invia Parametri</button>
+
             </form>
             <% } else { %>
-            <button type="submit" class="btn btn-primary" id="buttonSubmit" name="action" value="addex">Invia Parametri</button>
+            <button type="submit" class="btn btn-primary" id="buttonSubmit" name="action">Invia Parametri</button>
             </form>
             <% }
             }%>
