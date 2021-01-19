@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AgendaDAOImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myPersonalTrainer</a> &gt; <a href="index.source.html" class="el_package">it.unisa.c03.myPersonalTrainer.agenda.dao</a> &gt; <span class="el_source">AgendaDAOImpl.java</span></div><h1>AgendaDAOImpl.java</h1><pre class="source lang-java linenums">package it.unisa.c03.myPersonalTrainer.agenda.dao;
+
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.*;
+import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
+import it.unisa.c03.myPersonalTrainer.agenda.bean.Availability;
+import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+<span class="fc" id="L15">public class AgendaDAOImpl implements AgendaDAO {</span>
+
+    @Override
+    public boolean saveAppointment(Appointment appuntamento)
+            throws IOException {
+<span class="fc" id="L20">        Firestore connection = DBConnection.getConnection();</span>
+<span class="fc" id="L21">        ApiFuture&lt;DocumentReference&gt; doc = connection.</span>
+<span class="fc" id="L22">                collection(&quot;Appointment&quot;).add(appuntamento);</span>
+<span class="fc" id="L23">        return true;</span>
+    }
+
+    @Override
+    public List&lt;Appointment&gt; findAppointmetsByEmail(String mail) throws
+            IOException, ExecutionException, InterruptedException {
+<span class="fc" id="L29">        Firestore connection = DBConnection.getConnection();</span>
+<span class="fc" id="L30">        List&lt;Appointment&gt; appuntamenti = null;</span>
+<span class="fc" id="L31">        Query query = connection.collection(&quot;Appointment&quot;).</span>
+<span class="fc" id="L32">                whereEqualTo(&quot;customerMail&quot;, mail);</span>
+<span class="fc" id="L33">        ApiFuture&lt;QuerySnapshot&gt; querySnap = query.get();</span>
+<span class="fc" id="L34">        List&lt;QueryDocumentSnapshot&gt; docs = querySnap.get().getDocuments();</span>
+<span class="fc" id="L35">        Stream&lt;Appointment&gt; sa = docs.stream().map(queryDocumentSnapshot -&gt;</span>
+<span class="fc" id="L36">                queryDocumentSnapshot.toObject(Appointment.class));</span>
+<span class="fc" id="L37">        appuntamenti = sa.collect(Collectors.toList());</span>
+<span class="fc" id="L38">        return appuntamenti;</span>
+    }
+
+    @Override
+    public List&lt;Appointment&gt; findAppointmentByDate(String date) throws
+            IOException, ExecutionException, InterruptedException {
+<span class="fc" id="L44">        Firestore connection = DBConnection.getConnection();</span>
+<span class="fc" id="L45">        List&lt;Appointment&gt; appuntamenti = null;</span>
+<span class="fc" id="L46">        Query query = connection.collection(&quot;Appointment&quot;)</span>
+<span class="fc" id="L47">                .whereEqualTo(&quot;date&quot;, date);</span>
+<span class="fc" id="L48">        ApiFuture&lt;QuerySnapshot&gt; querySnapShot = query.get();</span>
+<span class="fc" id="L49">        List&lt;QueryDocumentSnapshot&gt; docs = querySnapShot.get().getDocuments();</span>
+<span class="fc" id="L50">        Stream&lt;Appointment&gt; sa = docs.stream().map(queryDocumentSnapshot -&gt;</span>
+<span class="fc" id="L51">                queryDocumentSnapshot.toObject(Appointment.class));</span>
+<span class="fc" id="L52">        appuntamenti = sa.collect(Collectors.toList());</span>
+<span class="fc" id="L53">        return appuntamenti;</span>
+    }
+
+    @Override
+    public boolean deleteappointment(Appointment appuntamento) throws
+            IOException, ExecutionException, InterruptedException {
+
+<span class="fc" id="L60">        Firestore connection = DBConnection.getConnection();</span>
+<span class="fc" id="L61">        List&lt;QueryDocumentSnapshot&gt; lqds = connection.collection(&quot;Appointment&quot;).</span>
+<span class="fc" id="L62">                whereEqualTo(&quot;date&quot;, appuntamento.getDate())</span>
+<span class="fc" id="L63">                .whereEqualTo(&quot;time&quot;, appuntamento.getTime()).</span>
+<span class="fc" id="L64">                        get().get().getDocuments();</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        for (QueryDocumentSnapshot d : lqds) {</span>
+<span class="fc" id="L66">            String id = d.getId();</span>
+<span class="fc" id="L67">            connection.collection(&quot;Appointment&quot;).document(id).delete();</span>
+<span class="fc" id="L68">        }</span>
+<span class="fc" id="L69">        return true;</span>
+    }
+
+
+    /**
+     * @param availability the availability to insert into database
+     * @return true if the insertion occurred, false otherwise
+     * @throws IOException
+     */
+    @Override
+    public boolean insertAvailability(
+            Availability availability)
+            throws IOException {
+<span class="fc" id="L82">        DBConnection.getConnection().collection(</span>
+<span class="fc" id="L83">                &quot;Availability&quot;).add(availability);</span>
+<span class="fc" id="L84">        return true;</span>
+    }
+
+    /**
+     * find an availability by date.
+     *
+     * @param date to find availability.
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     * @throws ExecutionException
+     */
+    @Override
+    public List&lt;Availability&gt; findAvailabilityByDate(
+            String date)
+            throws IOException, InterruptedException, ExecutionException {
+<span class="fc" id="L100">        Firestore connection = DBConnection.getConnection();</span>
+<span class="fc" id="L101">        List&lt;Availability&gt; dispo = null;</span>
+<span class="fc" id="L102">        Query query = connection.collection(&quot;Availability&quot;)</span>
+<span class="fc" id="L103">                .whereEqualTo(&quot;date&quot;, date);</span>
+<span class="fc" id="L104">        ApiFuture&lt;QuerySnapshot&gt; querySnapShot =</span>
+<span class="fc" id="L105">                query.get();</span>
+<span class="fc" id="L106">        List&lt;QueryDocumentSnapshot&gt; docs =</span>
+<span class="fc" id="L107">                querySnapShot.get().getDocuments();</span>
+<span class="fc" id="L108">        Stream&lt;Availability&gt; sa =</span>
+<span class="fc" id="L109">                docs.stream().map(queryDocumentSnapshot -&gt;</span>
+<span class="fc" id="L110">                        queryDocumentSnapshot.toObject(Availability.class));</span>
+<span class="fc" id="L111">        dispo = sa.collect(Collectors.toList());</span>
+<span class="fc" id="L112">        return dispo;</span>
+    }
+
+    /**
+     * remove an availability.
+     *
+     * @param availability the availability to remove.
+     * @return
+     * @throws IOException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     * @return true
+     */
+    public boolean deleteAvailability(
+            Availability availability)
+            throws IOException, ExecutionException, InterruptedException {
+
+        Firestore connection =
+<span class="fc" id="L130">                DBConnection.getConnection();</span>
+<span class="fc" id="L131">        List&lt;QueryDocumentSnapshot&gt; lqds =</span>
+<span class="fc" id="L132">                connection.collection(&quot;Availability&quot;).</span>
+<span class="fc" id="L133">                        whereEqualTo(&quot;date&quot;, availability.getDate())</span>
+<span class="fc" id="L134">                        .whereEqualTo(&quot;time&quot;, availability.getTime()).</span>
+<span class="fc" id="L135">                        get().get().getDocuments();</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">        for (QueryDocumentSnapshot document : lqds) {</span>
+<span class="fc" id="L137">            document.getReference().delete();</span>
+<span class="fc" id="L138">        }</span>
+<span class="fc" id="L139">        return true;</span>
+    }
+
+    /**
+     * search an availability with this time and date.
+     *
+     * @param date
+     * @param time
+     * @return the availability, null if there isn't
+     * @throws IOException
+     * @throws InterruptedException
+     * @throws ExecutionException
+     */
+    @Override
+    public Availability findAvailabilityByDateAndTime(
+            String date, int time)
+            throws IOException, InterruptedException, ExecutionException {
+<span class="fc" id="L156">        Firestore connection = DBConnection.getConnection();</span>
+<span class="fc" id="L157">        List&lt;Availability&gt; dispo = null;</span>
+<span class="fc" id="L158">        Query query = connection.collection(&quot;Availability&quot;)</span>
+<span class="fc" id="L159">                .whereEqualTo(&quot;date&quot;, date).whereEqualTo(&quot;time&quot;, time);</span>
+<span class="fc" id="L160">        ApiFuture&lt;QuerySnapshot&gt; querySnapShot = query.get();</span>
+<span class="fc" id="L161">        List&lt;QueryDocumentSnapshot&gt; docs = querySnapShot.get().getDocuments();</span>
+<span class="fc" id="L162">        Stream&lt;Availability&gt; sa = docs.stream().map(queryDocumentSnapshot -&gt;</span>
+<span class="fc" id="L163">                queryDocumentSnapshot.toObject(Availability.class));</span>
+<span class="fc" id="L164">        dispo = sa.collect(Collectors.toList());</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">        if (dispo.size() == 0) {</span>
+<span class="fc" id="L166">            return null;</span>
+        } else {
+<span class="fc" id="L168">            return dispo.get(0);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

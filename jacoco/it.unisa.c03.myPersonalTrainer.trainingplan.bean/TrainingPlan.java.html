@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TrainingPlan.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myPersonalTrainer</a> &gt; <a href="index.source.html" class="el_package">it.unisa.c03.myPersonalTrainer.trainingplan.bean</a> &gt; <span class="el_source">TrainingPlan.java</span></div><h1>TrainingPlan.java</h1><pre class="source lang-java linenums">package it.unisa.c03.myPersonalTrainer.trainingplan.bean;
+
+import java.time.LocalDate;
+
+/**
+ * TrainingPlan class.
+ */
+public class TrainingPlan {
+
+    /**
+     * trainingplan's exercises.
+     */
+    private String exercises;
+    /**
+     * trainingplan's date.
+     */
+    private String date;
+    /**
+     * trainingplan's recipient.
+     */
+    private String email;
+
+    /**
+     * method to string, to view the information during a stamp.
+     * @return String
+     */
+    @Override
+    public String toString() {
+<span class="nc" id="L29">        return &quot;TrainingPlan{&quot;</span>
+                + &quot;exercises='&quot;
+                + exercises
+                + '\''
+                + &quot;, date='&quot;
+                + date
+                + '\''
+                + &quot;, email='&quot;
+                + email
+                + '\''
+                + '}';
+    }
+
+    /**
+     * constructor of the class.
+     */
+<span class="fc" id="L45">    public TrainingPlan() {</span>
+<span class="fc" id="L46">    }</span>
+
+   /*
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        TrainingPlan that = (TrainingPlan) o;
+
+        if (!exercises.equals(that.exercises)) {
+            return false;
+        }
+        if (!date.equals(that.date)) {
+            return false;
+        }
+        return email.equals(that.email);
+    }
+    */
+
+    /**
+     * constructor of the class.
+     * @param exercises
+     * @param email
+     */
+<span class="fc" id="L75">    public TrainingPlan(String exercises, String email) {</span>
+<span class="fc" id="L76">        this.exercises = exercises;</span>
+<span class="fc" id="L77">        LocalDate date = LocalDate.now();</span>
+<span class="fc" id="L78">        String dataaa = date.toString();</span>
+<span class="fc" id="L79">        this.date = dataaa;</span>
+<span class="fc" id="L80">        this.email = email;</span>
+<span class="fc" id="L81">    }</span>
+
+    /**
+     * method for set exercises.
+     * @param exercises
+     */
+    public void setExercises(String exercises) {
+<span class="fc" id="L88">        this.exercises = exercises;</span>
+<span class="fc" id="L89">    }</span>
+
+    /**
+     * method for set date.
+     * @param date
+     */
+    public void setDate(String date) {
+<span class="fc" id="L96">        this.date = date;</span>
+<span class="fc" id="L97">    }</span>
+
+    /**
+     * method for set email.
+     * @param email
+     */
+    public void setEmail(String email) {
+<span class="fc" id="L104">        this.email = email;</span>
+<span class="fc" id="L105">    }</span>
+
+    /**
+     * method for get exercises.
+     * @return String
+     */
+    public String getExercises() {
+<span class="fc" id="L112">        return exercises;</span>
+    }
+
+    /**
+     * method for get the date.
+     * @return String
+     */
+    public String getDate() {
+<span class="fc" id="L120">        return date;</span>
+    }
+
+    /**
+     * method for get email.
+     * @return String
+     */
+    public String getEmail() {
+<span class="fc" id="L128">        return email;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

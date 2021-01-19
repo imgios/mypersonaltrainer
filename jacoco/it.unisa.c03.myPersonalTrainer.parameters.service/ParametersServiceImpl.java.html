@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ParametersServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myPersonalTrainer</a> &gt; <a href="index.source.html" class="el_package">it.unisa.c03.myPersonalTrainer.parameters.service</a> &gt; <span class="el_source">ParametersServiceImpl.java</span></div><h1>ParametersServiceImpl.java</h1><pre class="source lang-java linenums">package it.unisa.c03.myPersonalTrainer.parameters.service;
+
+import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
+import it.unisa.c03.myPersonalTrainer.parameters.dao.ParametersDAO;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
+public class ParametersServiceImpl implements ParametersService {
+
+    /**
+     * the MIN_WEIGHT allowed.
+     */
+    private static final int MIN_WEIGHT = 40;
+    /**
+     * the MAX_WEIGHT allowed.
+     */
+    private static final int MAX_WEIGHT = 150;
+    /**
+     * the MIN_PERCENTAGE allowed.
+     */
+    private static final int MIN_PERCENTAGE = 10;
+    /**
+     * the MAX_PERCENTAGE allowed.
+     */
+    private static final int MAX_PERCENTAGE = 70;
+    /**
+     * the MIN_LENGHT for the WEIGHT allowed.
+     */
+    private static final int MIN_LENGHT_WEIGHT = 2;
+    /**
+     * the MAX_LENGHT for the WEIGHT allowed.
+     */
+    private static final int MAX_LENGHT_WEIGHT = 6;
+    /**
+     * the PERCENTAGE.
+     */
+    private static final int PERCENTAGE = 100;
+
+    private ParametersDAO parametersDAO;
+
+    public ParametersServiceImpl(
+<span class="fc" id="L46">            ParametersDAO parametersDAO) {</span>
+<span class="fc" id="L47">        this.parametersDAO = parametersDAO;</span>
+<span class="fc" id="L48">    }</span>
+
+    /**
+     * check the format parameters.
+     * @param weight   between 40 and 150 format allowed XXX.XX
+     * @param leanMass between 10% and 70%
+     * @param fatMass  between 10% and 70%
+     * @param email
+     * @return the parameters, null if the parameters in input are not good
+     * @throws NumberFormatException
+     * @throws IllegalArgumentException
+     */
+    public Parameters createParameters(
+            String weight, String leanMass, String fatMass, String email)
+            throws IllegalArgumentException, IOException {
+
+<span class="pc bpc" id="L64" title="2 of 6 branches missed.">        if (weight == null || leanMass == null || fatMass == null) {</span>
+<span class="fc" id="L65">            throw new IllegalArgumentException(</span>
+                    &quot;valori mancanti&quot;);
+        }
+
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        if (weight.length() &lt; MIN_LENGHT_WEIGHT</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">                || weight.length() &gt; MAX_LENGHT_WEIGHT) {</span>
+<span class="fc" id="L71">            throw new IllegalArgumentException(</span>
+                    &quot;lunghezza peso non valida&quot;);
+        }
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (!weight.matches(</span>
+                &quot;([0-9]){2,3}\\.?[0-9]{0,2}?$&quot;)) {
+<span class="fc" id="L76">            throw new NumberFormatException(</span>
+                    &quot;formato peso non valido&quot;);
+        }
+
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        if (!fatMass.matches(</span>
+                &quot;([0-9]+\\%){1,2}$&quot;)) {
+<span class="fc" id="L82">            throw new NumberFormatException(</span>
+                    &quot;formato massa grassa non valido&quot;);
+        }
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        if (!leanMass.matches(</span>
+                &quot;([0-9]+\\%){1,2}$&quot;)) {
+<span class="fc" id="L87">            throw new NumberFormatException(</span>
+                    &quot;formato massa magra non valido&quot;);
+        }
+<span class="fc" id="L90">        double weightD = Double.parseDouble(weight);</span>
+
+<span class="fc bfc" id="L92" title="All 4 branches covered.">        if (weightD &lt; MIN_WEIGHT || weightD &gt; MAX_WEIGHT) {</span>
+<span class="fc" id="L93">            throw new NumberFormatException(</span>
+                    &quot;valore peso non valido&quot;);
+        }
+
+<span class="fc" id="L97">        double leanMassD =</span>
+<span class="fc" id="L98">                Double.parseDouble(leanMass.substring(</span>
+<span class="fc" id="L99">                        0, leanMass.length() - 1));</span>
+<span class="fc" id="L100">        double fatMassD =</span>
+<span class="fc" id="L101">                Double.parseDouble(fatMass.substring(</span>
+<span class="fc" id="L102">                        0, fatMass.length() - 1));</span>
+<span class="fc bfc" id="L103" title="All 4 branches covered.">        if (fatMassD &lt; MIN_PERCENTAGE</span>
+                || fatMassD &gt; MAX_PERCENTAGE) {
+<span class="fc" id="L105">            throw new IllegalArgumentException(</span>
+                    &quot;lunghezza massa grassa non valida&quot;);
+        }
+<span class="fc bfc" id="L108" title="All 4 branches covered.">        if (leanMassD &lt; MIN_PERCENTAGE</span>
+                || leanMassD &gt; MAX_PERCENTAGE) {
+<span class="fc" id="L110">            throw new IllegalArgumentException(</span>
+                    &quot;lunghezza massa magra non valida&quot;);
+        }
+<span class="fc" id="L113">        double fatMassTotal =</span>
+                (weightD / PERCENTAGE) * fatMassD;
+<span class="fc" id="L115">        double leanMassTotal =</span>
+                (weightD / PERCENTAGE) * leanMassD;
+<span class="fc" id="L117">        BigDecimal bigDecimalleanMassTot =</span>
+<span class="fc" id="L118">                new BigDecimal(Double.toString(leanMassTotal));</span>
+<span class="fc" id="L119">        BigDecimal bigDecimalfatMassTot =</span>
+<span class="fc" id="L120">                new BigDecimal(Double.toString(fatMassTotal));</span>
+<span class="fc" id="L121">        bigDecimalleanMassTot =</span>
+<span class="fc" id="L122">                bigDecimalleanMassTot.setScale(</span>
+                        1, RoundingMode.HALF_UP);
+<span class="fc" id="L124">        bigDecimalfatMassTot =</span>
+<span class="fc" id="L125">                bigDecimalfatMassTot.setScale(</span>
+                        1, RoundingMode.HALF_UP);
+<span class="fc" id="L127">        fatMassTotal =</span>
+<span class="fc" id="L128">                bigDecimalfatMassTot.doubleValue();</span>
+<span class="fc" id="L129">        leanMassTotal =</span>
+<span class="fc" id="L130">                bigDecimalleanMassTot.doubleValue();</span>
+<span class="fc" id="L131">        Parameters pa =</span>
+                new Parameters(weightD,
+                        fatMassTotal, leanMassTotal, email);
+<span class="fc" id="L134">        return pa;</span>
+    }
+
+    /**
+     * method to save the new parameters.
+     * @param parameters the parameters to insert
+     * @return true if the parameters are inserted into database
+     * @throws IOException
+     */
+    @Override
+    public boolean saveParameters(
+            Parameters parameters) throws IOException {
+<span class="fc" id="L146">        return parametersDAO.insertParameters(parameters);</span>
+    }
+
+    /**
+     * this method show the parameters for the input email.
+     * @param email mail client who want to retrieve his parameters
+     * @return list of parameters
+     */
+    public ArrayList&lt;Parameters&gt; getByMail(
+            String email) throws InterruptedException,
+            ExecutionException, IOException {
+<span class="fc bfc" id="L157" title="All 2 branches covered.">        if (email == null) {</span>
+<span class="fc" id="L158">            throw new IllegalArgumentException(</span>
+                    &quot;Email non valida&quot;);
+        }
+<span class="fc" id="L161">        ArrayList&lt;Parameters&gt; list =</span>
+<span class="fc" id="L162">                parametersDAO.selectByMail(email);</span>
+<span class="fc" id="L163">        return list;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

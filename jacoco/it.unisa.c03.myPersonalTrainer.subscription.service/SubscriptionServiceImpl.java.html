@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SubscriptionServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myPersonalTrainer</a> &gt; <a href="index.source.html" class="el_package">it.unisa.c03.myPersonalTrainer.subscription.service</a> &gt; <span class="el_source">SubscriptionServiceImpl.java</span></div><h1>SubscriptionServiceImpl.java</h1><pre class="source lang-java linenums">package it.unisa.c03.myPersonalTrainer.subscription.service;
+
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
+
+import it.unisa.c03.myPersonalTrainer.subscription.bean.Subscription;
+import it.unisa.c03.myPersonalTrainer.subscription.dao.SubscriptionDAO;
+
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
+import static java.time.temporal.ChronoUnit.DAYS;
+
+public class SubscriptionServiceImpl implements SubscriptionService {
+    private static final int NOT_SENT = 0;
+    private static final int PORT = 465;
+
+    /**
+     * @exclude
+     */
+    private SubscriptionDAO subscriptionDAO;
+
+    /**
+     * @exclude
+     */
+    public static final int TEN_DAYS = 10;
+
+    /**
+     * Service constructor.
+     * @param subscriptionDao is required, because is the DAO that
+     *                        all the service methods will call.
+     */
+<span class="fc" id="L37">    public SubscriptionServiceImpl(SubscriptionDAO subscriptionDao) {</span>
+<span class="fc" id="L38">        subscriptionDAO = subscriptionDao;</span>
+<span class="fc" id="L39">    }</span>
+
+    /**
+     * This service method register the subscription for a customer.
+     * It only needs the customer email. Then it sets a standard price
+     * and the expiration date, obtained by adding an extra month
+     * to the registration date.
+     * @param customerMail the customer mail
+     */
+    @Override
+    public void createSubscription(String customerMail) throws IOException {
+
+        // subscription registration
+<span class="fc" id="L52">        Subscription subBean = new Subscription();</span>
+<span class="fc" id="L53">        subBean.setCustomerMail(customerMail);</span>
+<span class="fc" id="L54">        subBean.setPrice(&quot;30&quot;);</span>
+<span class="fc" id="L55">        subBean.setSentNotification(0);</span>
+
+        //setting the date one month later
+<span class="fc" id="L58">        LocalDate local = LocalDate.now();</span>
+<span class="fc" id="L59">        LocalDate oneMonthLater = local.plusMonths(1);</span>
+<span class="fc" id="L60">        subBean.setExpDate(oneMonthLater.toString());</span>
+<span class="fc" id="L61">        subscriptionDAO.insertSubscription(subBean);</span>
+<span class="fc" id="L62">    }</span>
+
+    /**
+     * This method searches in the database for a customer's
+     * subscription, given his email.
+     * @param customerMail customer mail
+     * @return the Subscription.
+     */
+    @Override
+    public Subscription searchSubscriptionByEmail(String customerMail)
+            throws InterruptedException, ExecutionException, IOException {
+<span class="fc" id="L73">        return subscriptionDAO.getSubscriptionbyEmail(customerMail);</span>
+    }
+
+    /**
+     * This method check the state of a subscription.
+     * @param customerMail the mail of the subscription owner
+     * @return 1 if the subscription is valid, 0 if
+     * subscription expiring, -1 for expired subscription.
+     */
+    @Override
+    public int checkSubscriptionState(String customerMail)
+            throws InterruptedException, ExecutionException, IOException {
+<span class="fc" id="L85">        Subscription sub = searchSubscriptionByEmail(customerMail);</span>
+
+        // get today date
+<span class="fc" id="L88">        LocalDate oggi = LocalDate.now();</span>
+        // get subscription expDate
+<span class="fc" id="L90">        LocalDate scadenza = LocalDate.parse(sub.getExpDate());</span>
+        // calucating difference
+<span class="fc" id="L92">        long dayBetween = DAYS.between(oggi, scadenza);</span>
+        //      A : if difference is &gt;= 10 return 1, state : attivo
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        if (dayBetween &gt;= TEN_DAYS) {</span>
+<span class="fc" id="L95">            return 1;</span>
+<span class="pc bpc" id="L96" title="1 of 4 branches missed.">        } else if (dayBetween &gt;= 0 &amp;&amp; dayBetween &lt; TEN_DAYS) {</span>
+            //      B : if difference is &gt;= 0 and &lt; 10 return 0,
+            //      state : in scadenza
+<span class="fc" id="L99">            return 0;</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        } else if (dayBetween &lt; 0) {</span>
+            //      A : if difference is &lt; 0 return -1, state : scaduto
+<span class="fc" id="L102">            return -1;</span>
+        }
+<span class="nc" id="L104">        return -1;</span>
+    }
+
+    /**
+     * This method is called only if the client's subscription
+     * is expiring and check if the client is already notified.
+     * if it has not been sent, this method send an email
+     * to the customer that his subscription is expiring
+     * @param customerMail the client in session to notify.
+     * @throws InterruptedException
+     * @throws ExecutionException
+     * @throws IOException
+     * @throws EmailException
+     */
+    @Override
+    public void checkIfSent(String customerMail)
+            throws InterruptedException,
+            ExecutionException, IOException, EmailException {
+
+<span class="fc" id="L123">        Subscription subscription =</span>
+<span class="fc" id="L124">                searchSubscriptionByEmail(customerMail);</span>
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        if (subscription.getSentNotification() == NOT_SENT) {</span>
+<span class="fc" id="L126">            sendEmail(customerMail, subscription);</span>
+<span class="fc" id="L127">            changeSentNotification(customerMail);</span>
+        }
+<span class="fc" id="L129">    }</span>
+
+    /**
+     * Send an email to Client, because his subscription is expiring.
+     * @param customerMail Account of user to send email.
+     * @param subscription Account subscription.
+     * @throws EmailException
+     */
+    @Override
+    public void sendEmail(String customerMail,
+                          Subscription subscription) throws EmailException {
+<span class="fc" id="L140">        Email email = new SimpleEmail();</span>
+<span class="fc" id="L141">        email.setHostName(&quot;smtp.gmail.com&quot;);</span>
+<span class="fc" id="L142">        email.setSmtpPort(PORT);</span>
+<span class="fc" id="L143">        email.setAuthenticator(new DefaultAuthenticator(</span>
+                &quot;mypt.gps.is@gmail.com&quot;, &quot;mypt2021&quot;));
+<span class="fc" id="L145">        email.setSSLOnConnect(true);</span>
+<span class="fc" id="L146">        email.setFrom(&quot;mypt.gps.is@gmail.com&quot;);</span>
+<span class="fc" id="L147">        email.setSubject(&quot;Abbonamento in Scadenza&quot;);</span>
+<span class="fc" id="L148">        email.setMsg(&quot;Salve &quot; + customerMail</span>
+                + &quot;\nLa contattiamo da myPersonalTrainer&quot;
+                + &quot; per informarla che il suo &quot;
+                + &quot;abbonamento è in scadenza\nLa data di &quot;
+                + &quot;scadenza e' fissata al &quot;
+<span class="fc" id="L153">                + subscription.getExpDate() + &quot; al costo di &quot;</span>
+<span class="fc" id="L154">                + &quot;&quot; + subscription.getPrice()</span>
+                + &quot; euro.\nSaluti.&quot;);
+<span class="fc" id="L156">        email.addTo(customerMail);</span>
+<span class="fc" id="L157">        email.send();</span>
+<span class="fc" id="L158">    }</span>
+
+
+    /**
+     * This service method shows all expiring Subscriptions.
+     * @return the list of expiring Subscriptions
+     */
+    @Override
+    public ArrayList&lt;Subscription&gt; getExpiringSubscriptions()
+            throws InterruptedException, ExecutionException, IOException {
+
+        //create the list to return
+<span class="fc" id="L170">        ArrayList&lt;Subscription&gt; listToReturn = new ArrayList&lt;&gt;();</span>
+
+        //call dao to get all subs
+<span class="fc" id="L173">        ArrayList&lt;Subscription&gt; listDao = subscriptionDAO.getAllSubscriptions();</span>
+
+        //filter each sub and add to list only expiring subs
+<span class="fc bfc" id="L176" title="All 2 branches covered.">        for (Subscription s : listDao) {</span>
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">            if (checkSubscriptionState(s.getCustomerMail()) == 0) {</span>
+<span class="fc" id="L178">                listToReturn.add(s);</span>
+            }
+<span class="fc" id="L180">        }</span>
+<span class="fc" id="L181">        return listToReturn;</span>
+    }
+
+    /**
+     * This service method shows all expired Subscriptions.
+     * @return the list of expired Subscriptions
+     */
+    @Override
+    public ArrayList&lt;Subscription&gt; getExpiredSubscriptions()
+            throws InterruptedException, ExecutionException, IOException {
+        //create the list to return
+<span class="fc" id="L192">        ArrayList&lt;Subscription&gt; listToReturn = new ArrayList&lt;&gt;();</span>
+
+        //call dao to get all subs
+<span class="fc" id="L195">        ArrayList&lt;Subscription&gt; listDao = subscriptionDAO.getAllSubscriptions();</span>
+
+        //filter each sub and add to list only expired subs
+<span class="fc bfc" id="L198" title="All 2 branches covered.">        for (Subscription s : listDao) {</span>
+<span class="pc bpc" id="L199" title="1 of 2 branches missed.">            if (checkSubscriptionState(s.getCustomerMail()) == -1) {</span>
+<span class="fc" id="L200">                listToReturn.add(s);</span>
+            }
+<span class="fc" id="L202">        }</span>
+<span class="fc" id="L203">        return listToReturn;</span>
+    }
+
+    /**
+     * This service method shows all active Subscriptions.
+     * @return the list of active Subscriptions
+     */
+    @Override
+    public ArrayList&lt;Subscription&gt; getActiveSubscriptions()
+            throws InterruptedException, ExecutionException, IOException {
+        //create the list to return
+<span class="fc" id="L214">        ArrayList&lt;Subscription&gt; listToReturn = new ArrayList&lt;&gt;();</span>
+        //call dao to get all subs
+<span class="fc" id="L216">        ArrayList&lt;Subscription&gt; listDao = subscriptionDAO.getAllSubscriptions();</span>
+        //filter each sub and add to list only expired subs
+<span class="fc bfc" id="L218" title="All 2 branches covered.">        for (Subscription s : listDao) {</span>
+<span class="pc bpc" id="L219" title="1 of 2 branches missed.">            if (checkSubscriptionState(s.getCustomerMail()) == 1) {</span>
+<span class="fc" id="L220">                listToReturn.add(s);</span>
+            }
+<span class="fc" id="L222">        }</span>
+<span class="fc" id="L223">        return listToReturn;</span>
+    }
+
+    @Override
+    public boolean changeSentNotification(String email)
+            throws IOException, ExecutionException, InterruptedException {
+<span class="fc" id="L229">        return subscriptionDAO.updateSentNotification(email);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

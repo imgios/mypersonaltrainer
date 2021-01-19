@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HoursServlet.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myPersonalTrainer</a> &gt; <a href="index.source.html" class="el_package">it.unisa.c03.myPersonalTrainer.agenda.control</a> &gt; <span class="el_source">HoursServlet.java</span></div><h1>HoursServlet.java</h1><pre class="source lang-java linenums">package it.unisa.c03.myPersonalTrainer.agenda.control;
+
+import com.google.gson.Gson;
+import it.unisa.c03.myPersonalTrainer.agenda.bean.Availability;
+import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAO;
+import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAOImpl;
+import it.unisa.c03.myPersonalTrainer.agenda.service.AgendaService;
+import it.unisa.c03.myPersonalTrainer.agenda.service.AgendaServiceImpl;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+@WebServlet(name = &quot;HoursServlet&quot;, value = &quot;/HoursServlet&quot;)
+<span class="fc" id="L21">public class HoursServlet extends HttpServlet {</span>
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="fc" id="L25">        AgendaDAO dao = new AgendaDAOImpl();</span>
+<span class="fc" id="L26">        String data = request.getParameter(&quot;dataappuntamento&quot;);</span>
+<span class="fc" id="L27">        AgendaService service = new AgendaServiceImpl(dao);</span>
+<span class="fc" id="L28">        response.setContentType(&quot;application/json&quot;);</span>
+<span class="fc" id="L29">        response.setCharacterEncoding(&quot;UTF-8&quot;);</span>
+        try {
+<span class="fc" id="L31">            PrintWriter out = response.getWriter();</span>
+<span class="fc" id="L32">            List&lt;Availability&gt; ore = service.getAvailabilityByDate(data);</span>
+<span class="pc bpc" id="L33" title="2 of 4 branches missed.">            if (ore.size() != 0 &amp;&amp; ore != null) {</span>
+<span class="fc" id="L34">                out.print(new Gson().toJson(ore));</span>
+<span class="fc" id="L35">                out.flush();</span>
+            } else {
+<span class="nc" id="L37">                out.print(new Gson().toJson(0));</span>
+            }
+
+<span class="nc" id="L40">        } catch (ExecutionException e) {</span>
+<span class="nc" id="L41">            e.printStackTrace();</span>
+<span class="nc" id="L42">        } catch (InterruptedException e) {</span>
+<span class="nc" id="L43">            e.printStackTrace();</span>
+<span class="pc" id="L44">        }</span>
+
+<span class="fc" id="L46">    }</span>
+
+
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="fc" id="L52">        doPost(request, response);</span>
+
+<span class="fc" id="L54">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

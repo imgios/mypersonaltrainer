@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SubscriptionDAOImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myPersonalTrainer</a> &gt; <a href="index.source.html" class="el_package">it.unisa.c03.myPersonalTrainer.subscription.dao</a> &gt; <span class="el_source">SubscriptionDAOImpl.java</span></div><h1>SubscriptionDAOImpl.java</h1><pre class="source lang-java linenums">package it.unisa.c03.myPersonalTrainer.subscription.dao;
+
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.*;
+import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
+import it.unisa.c03.myPersonalTrainer.subscription.bean.Subscription;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
+<span class="fc" id="L12">public class SubscriptionDAOImpl implements SubscriptionDAO {</span>
+
+    /**
+     * This method interact with database to insert the subscription.
+     * @param sub the subscription to insert into database
+     * @throws IOException
+     */
+    @Override
+    public void insertSubscription(Subscription sub) throws IOException {
+<span class="fc" id="L21">        DBConnection.getConnection().collection(</span>
+<span class="fc" id="L22">                &quot;Subscription&quot;).add(sub);</span>
+<span class="fc" id="L23">    }</span>
+
+    /**
+     * This method searches in the database for a customer's
+     * subscription, given his email.
+     * @param clientMail customer mail
+     * @return the Subscription.
+     * @throws IOException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+    @Override
+    public Subscription getSubscriptionbyEmail(
+            String clientMail)
+            throws IOException, ExecutionException, InterruptedException {
+        // Create a reference to the Subscription collection
+<span class="fc" id="L39">        CollectionReference accounts = null;</span>
+<span class="fc" id="L40">        accounts = DBConnection.getConnection().collection(</span>
+                &quot;Subscription&quot;);
+        // Create a query against the collection.
+<span class="fc" id="L43">        Query query = accounts.whereEqualTo(&quot;customerMail&quot;, clientMail);</span>
+        // retrieve  query results asynchronously using query.get()
+<span class="fc" id="L45">        ApiFuture&lt;QuerySnapshot&gt; querySnapshot = query.get();</span>
+        //create Bean to return
+<span class="fc" id="L47">        Subscription subscriptionBean = new Subscription();</span>
+
+        for (DocumentSnapshot document
+<span class="fc bfc" id="L50" title="All 2 branches covered.">                : querySnapshot.get().getDocuments()) {</span>
+<span class="fc" id="L51">            subscriptionBean.setCustomerMail(</span>
+<span class="fc" id="L52">                    String.valueOf(document.get(&quot;customerMail&quot;)));</span>
+<span class="fc" id="L53">            subscriptionBean.setExpDate(</span>
+<span class="fc" id="L54">                    String.valueOf(document.get(&quot;expDate&quot;)));</span>
+<span class="fc" id="L55">            subscriptionBean.setPrice(</span>
+<span class="fc" id="L56">                    String.valueOf(document.get(&quot;price&quot;)));</span>
+<span class="fc" id="L57">            subscriptionBean.setSentNotification(</span>
+<span class="fc" id="L58">                    Integer.parseInt(String.valueOf(</span>
+<span class="fc" id="L59">                            document.get(&quot;sentNotification&quot;))));</span>
+<span class="fc" id="L60">        }</span>
+<span class="fc" id="L61">        return subscriptionBean;</span>
+    }
+
+    /**
+     * This method retrieves all subscriptions saved in db.
+     * @return subscription list
+     */
+    @Override
+    public ArrayList&lt;Subscription&gt; getAllSubscriptions()
+            throws IOException, ExecutionException, InterruptedException {
+        // Create a reference to the Subscription collection
+<span class="fc" id="L72">        CollectionReference subColl = null;</span>
+<span class="fc" id="L73">        subColl = DBConnection.getConnection().collection(&quot;Subscription&quot;);</span>
+        // Create a query against the collection.
+<span class="fc" id="L75">        Query query = subColl.select(&quot;customerMail&quot;, &quot;expDate&quot;, &quot;price&quot;);</span>
+        // retrieve  query results asynchronously using query.get()
+<span class="fc" id="L77">        ApiFuture&lt;QuerySnapshot&gt; querySnapshot = query.get();</span>
+        //create the list to return
+<span class="fc" id="L79">        ArrayList&lt;Subscription&gt; list = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {</span>
+<span class="fc" id="L81">            Subscription s = document.toObject(Subscription.class);</span>
+<span class="fc" id="L82">            list.add(s);</span>
+<span class="fc" id="L83">        }</span>
+<span class="fc" id="L84">        return list;</span>
+    }
+
+    /**
+     * This DAO method looks for the document id of subscription.
+     * @param email of the account
+     * @return the document Id
+     */
+    @Override
+    public String getSubscriptionDocumentIdByEmail(
+            String email)
+            throws IOException, ExecutionException, InterruptedException {
+        // Create a reference to the account collection
+<span class="fc" id="L97">        CollectionReference accounts = null;</span>
+<span class="fc" id="L98">        accounts = DBConnection.getConnection().collection(&quot;Subscription&quot;);</span>
+        // Create a query against the collection.
+<span class="fc" id="L100">        Query query = accounts.whereEqualTo(&quot;customerMail&quot;, email);</span>
+        // retrieve  query results asynchronously using query.get()
+<span class="fc" id="L102">        ApiFuture&lt;QuerySnapshot&gt; querySnapshot = query.get();</span>
+<span class="fc" id="L103">        String id = &quot;&quot;;</span>
+        for (DocumentSnapshot document
+<span class="fc bfc" id="L105" title="All 2 branches covered.">                : querySnapshot.get().getDocuments()) {</span>
+<span class="fc" id="L106">            id = id + document.getId();</span>
+<span class="fc" id="L107">        }</span>
+<span class="fc" id="L108">        return id;</span>
+    }
+
+    /**
+     * This DAO method marks that the client received the notification.
+     * @param email client's subscription mail.
+     * @return true after the change has taken place
+     */
+    @Override
+    public boolean updateSentNotification(String email)
+            throws IOException, ExecutionException, InterruptedException {
+        //find document id
+<span class="fc" id="L120">        String id = getSubscriptionDocumentIdByEmail(email);</span>
+        // Update an existing document thanks to its id
+<span class="fc" id="L122">        DocumentReference docRef = DBConnection.getConnection()</span>
+<span class="fc" id="L123">                .collection(&quot;Subscription&quot;).document(id);</span>
+        // Update password field
+<span class="fc" id="L125">        ApiFuture&lt;WriteResult&gt; future = docRef.update(&quot;sentNotification&quot;, 1);</span>
+<span class="fc" id="L126">        return true;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

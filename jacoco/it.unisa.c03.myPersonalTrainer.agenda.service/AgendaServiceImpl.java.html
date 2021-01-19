@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AgendaServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myPersonalTrainer</a> &gt; <a href="index.source.html" class="el_package">it.unisa.c03.myPersonalTrainer.agenda.service</a> &gt; <span class="el_source">AgendaServiceImpl.java</span></div><h1>AgendaServiceImpl.java</h1><pre class="source lang-java linenums">package it.unisa.c03.myPersonalTrainer.agenda.service;
+
+import it.unisa.c03.myPersonalTrainer.agenda.bean.Appointment;
+import it.unisa.c03.myPersonalTrainer.agenda.bean.Availability;
+import it.unisa.c03.myPersonalTrainer.agenda.dao.AgendaDAO;
+
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+public final class AgendaServiceImpl implements AgendaService {
+
+    /**
+     * max possible value for time.
+     */
+    private static final int MAX = 19;
+    /**
+     * min possible value for time.
+     */
+    private static final int MIN = 9;
+    /**
+     * variable initialization to execute CRUD operation.
+     */
+    private AgendaDAO dao;
+
+<span class="fc" id="L27">    public AgendaServiceImpl(AgendaDAO agendaDAO) {</span>
+<span class="fc" id="L28">        dao = agendaDAO;</span>
+<span class="fc" id="L29">    }</span>
+
+    @Override
+    public boolean checkDate(String date) {
+<span class="fc" id="L33">        LocalDate data = LocalDate.parse(date);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        boolean check = data.isAfter(LocalDate.now())</span>
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">                || data.isEqual(LocalDate.now());</span>
+<span class="fc" id="L36">        return check;</span>
+    }
+
+    @Override
+    public boolean createAppointment(String date, String time, String mail)
+            throws IOException, ExecutionException, InterruptedException {
+<span class="fc" id="L42">        int num = Integer.valueOf(time);</span>
+<span class="fc" id="L43">        boolean datacheck = checkDate(date);</span>
+<span class="fc bfc" id="L44" title="All 4 branches covered.">        boolean timecheck = num &lt;= MAX &amp;&amp; num &gt;= MIN;</span>
+<span class="fc" id="L45">        boolean mailcheck = mail.matches(</span>
+                &quot;\\w+([\\._\\-]?\\w+)*@\\w+([\\.\\-]?\\w+)*(\\.\\w+)+$&quot;);
+<span class="fc bfc" id="L47" title="All 6 branches covered.">        if (datacheck &amp;&amp; timecheck &amp;&amp; mailcheck) {</span>
+<span class="fc" id="L48">            Appointment appuntamento = new Appointment(date, time, mail);</span>
+<span class="fc" id="L49">            dao.deleteAvailability(dao.</span>
+<span class="fc" id="L50">                    findAvailabilityByDateAndTime(date, num));</span>
+<span class="fc" id="L51">            return dao.saveAppointment(appuntamento);</span>
+        }
+<span class="fc" id="L53">        return false;</span>
+    }
+
+    @Override
+    public boolean removeAppointment(Appointment appuntamento) throws
+            InterruptedException, ExecutionException, IOException {
+<span class="fc" id="L59">        dao.deleteappointment(appuntamento);</span>
+<span class="fc" id="L60">        return true;</span>
+    }
+
+    @Override
+    public List&lt;Appointment&gt; findAppointmentByDate(String date) throws
+            InterruptedException, ExecutionException, IOException {
+<span class="fc" id="L66">        boolean datacheck = checkDate(date);</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (datacheck) {</span>
+<span class="fc" id="L68">            return dao.findAppointmentByDate(date);</span>
+        }
+<span class="fc" id="L70">        return null;</span>
+    }
+
+
+//AVAIL
+
+    /**
+     * define the min time to make availability.
+     */
+    private static final int MIN_TIME = 9;
+    /**
+     * define the max time to make availability.
+     */
+    private static final int MAX_TIME = 19;
+    /**
+     * define the agendaDao.
+     */
+
+    /**
+     * this class check if the data and the time format
+     * are good to be insert into database.
+     *
+     * @param data the data to check
+     * @param time the time to check
+     * @return true if the check success, false otherwise.
+     * @throws IllegalArgumentException
+     */
+    @Override
+    public boolean checkAvailability(String data, String time)
+            throws IllegalArgumentException {
+
+<span class="fc" id="L101">        boolean result = false;</span>
+
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">        if (time.length() == 0) {</span>
+<span class="nc" id="L104">            throw new IllegalArgumentException(</span>
+                    &quot;Fascia oraria non selezionata&quot;);
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">        } else if (!data.matches(</span>
+                &quot;^((19|2[0-9])[0-9]{2})-&quot;
+                        + &quot;(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$&quot;)) {
+<span class="nc" id="L109">            throw new IllegalArgumentException(</span>
+                    &quot;Formato data non valido&quot;);
+        } else {
+<span class="fc" id="L112">            LocalDate dateL = LocalDate.parse(data);</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">            if (dateL.isBefore(LocalDate.now())) {</span>
+<span class="fc" id="L114">                throw new IllegalArgumentException(</span>
+                        &quot;Data precedente a quella odierna&quot;);
+            }
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">            if (!time.matches(&quot;([0-9]){1,2}&quot;)) {</span>
+<span class="nc" id="L118">                throw new IllegalArgumentException(</span>
+                        &quot;Formato orario non valido&quot;);
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">            } else if (Integer.parseInt(time) &lt; MIN_TIME</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">                    || Integer.parseInt(time) &gt; MAX_TIME) {</span>
+<span class="nc" id="L122">                throw new IllegalArgumentException(</span>
+                        &quot;Orario non valido&quot;);
+            } else {
+<span class="fc" id="L125">                result = true;</span>
+            }
+        }
+<span class="fc" id="L128">        return result;</span>
+    }
+
+    /**
+     * this methods enables to insert an availability into database.
+     *
+     * @param availability the availability to insert into database
+     * @return true if the insertion is done; else otherwise.
+     * @throws IOException
+     */
+    @Override
+    public boolean createAvailability(Availability availability)
+            throws IOException {
+
+<span class="fc" id="L142">        return dao.insertAvailability(availability);</span>
+    }
+
+    /**
+     * return the availability list from the date in input.
+     *
+     * @param date the date to find the availability
+     * @return
+     * @throws ExecutionException
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    @Override
+    public List&lt;Availability&gt; getAvailabilityByDate(
+            String date)
+            throws ExecutionException, IOException, InterruptedException {
+
+<span class="fc" id="L159">        return dao.findAvailabilityByDate(date);</span>
+    }
+
+    /**
+     * enable to remove the availability.
+     *
+     * @param availability the availability to remove
+     * @return true if the remove is done.
+     * @throws IOException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+    @Override
+    public boolean removeAvailability(Availability availability)
+            throws IOException, ExecutionException, InterruptedException {
+<span class="nc" id="L174">        return dao.deleteAvailability(availability);</span>
+    }
+
+    /**
+     * retrieve the availability with this  time and date.
+     *
+     * @param date
+     * @param time
+     * @return the availability that contains this time and date.
+     * @throws IOException
+     * @throws InterruptedException
+     * @throws ExecutionException
+     */
+    @Override
+    public Availability getAvailabilityByDateAndTime(
+            String date, int time)
+            throws IOException, InterruptedException, ExecutionException {
+<span class="fc" id="L191">        return dao.findAvailabilityByDateAndTime(date, time);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

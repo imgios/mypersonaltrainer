@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ManageRequiredTrainingPlanServlet.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myPersonalTrainer</a> &gt; <a href="index.source.html" class="el_package">it.unisa.c03.myPersonalTrainer.requiredtrainingplan.control</a> &gt; <span class="el_source">ManageRequiredTrainingPlanServlet.java</span></div><h1>ManageRequiredTrainingPlanServlet.java</h1><pre class="source lang-java linenums">package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.control;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+
+import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
+import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAO;
+import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAOImpl;
+import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanService;
+import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanServiceImpl;
+/**
+ * servlet to manage requestedTrainingPlan.
+ */
+@WebServlet(name = &quot;ManageRequiredTrainingPlanServlet&quot;,
+        value = &quot;/ManageRequiredTrainingPlanServlet&quot;)
+
+<span class="fc" id="L22">public class ManageRequiredTrainingPlanServlet extends HttpServlet {</span>
+
+    /**
+     * method do post.
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void doPost(HttpServletRequest request,
+                       HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="fc" id="L35">        String error = (String) request.getSession().getAttribute(&quot;error&quot;);</span>
+<span class="fc" id="L36">        String done = (String) request.getSession().getAttribute(&quot;done&quot;);</span>
+
+<span class="fc" id="L38">        String emailClientee = (String)</span>
+<span class="fc" id="L39">                request.getSession().getAttribute(&quot;clienteMail&quot;);</span>
+<span class="fc" id="L40">        String action = request.getParameter(&quot;action&quot;);</span>
+
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if (emailClientee == null) {</span>
+<span class="fc" id="L43">            response.sendRedirect(&quot;login.jsp&quot;);</span>
+        } else {
+<span class="nc" id="L45">            int required = 0;</span>
+<span class="nc" id="L46">            RequiredTrainingPlan requireTest =</span>
+                    new RequiredTrainingPlan(emailClientee, required);
+            //call the function to register a new account
+            RequiredTrainingPlan newRequiredTP;
+<span class="nc" id="L50">            RequiredTrainingPlanDAO requiredTrainingPlanDao =</span>
+                    new RequiredTrainingPlanDAOImpl();
+<span class="nc" id="L52">            RequiredTrainingPlanService requiredTrainingPlanService =</span>
+                    new RequiredTrainingPlanServiceImpl(
+                            requiredTrainingPlanDao);
+<span class="nc" id="L55">            boolean checked = false;</span>
+            try {
+<span class="nc" id="L57">                String mail = (String)</span>
+<span class="nc" id="L58">                        request.getSession().getAttribute(&quot;mailutil&quot;);</span>
+
+<span class="nc" id="L60">                checked = requiredTrainingPlanService.</span>
+<span class="nc" id="L61">                        searchAccountByEmail(emailClientee);</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">                if (!checked) {</span>
+                    //it doesn't exists, so we create it
+<span class="nc" id="L64">                    requireTest.setRequired(1);</span>
+<span class="nc" id="L65">                    requiredTrainingPlanService.registerRequest(requireTest);</span>
+
+<span class="nc" id="L67">                    request.getSession().setAttribute(&quot;firstTPSuccess&quot;,</span>
+                            &quot;Prima Scheda creata con successo&quot;);
+<span class="nc" id="L69">                    response.sendRedirect(&quot;requestTrainingPlan.jsp&quot;);</span>
+                } else {
+                    try {
+<span class="nc" id="L72">                        requireTest = requiredTrainingPlanService</span>
+<span class="nc" id="L73">                                .getAccountByEmail(emailClientee);</span>
+<span class="nc" id="L74">                    } catch (InterruptedException e) {</span>
+<span class="nc" id="L75">                        e.printStackTrace();</span>
+<span class="nc" id="L76">                    } catch (ExecutionException e) {</span>
+<span class="nc" id="L77">                        e.printStackTrace();</span>
+<span class="nc" id="L78">                    }</span>
+                    //it exists, so we verify if the training plan has
+                    //  been requested or not
+<span class="nc bnc" id="L81" title="All 2 branches missed.">                    if (requireTest.getRequired() == 1) {</span>
+<span class="nc" id="L82">                        request.getSession().setAttribute(&quot;alreadyRequired&quot;,</span>
+                                &quot;Scheda già richiesta: &quot;
+                                        + &quot;attenderne la creazione&quot;);
+<span class="nc" id="L85">                        response.sendRedirect(&quot;requestTrainingPlan.jsp&quot;);</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">                    } else if (requireTest.getRequired() == 0) {</span>
+<span class="nc" id="L87">                        requireTest.setRequired(1);</span>
+<span class="nc" id="L88">                        requiredTrainingPlanService.</span>
+<span class="nc" id="L89">                                changeRequest(emailClientee, 1);</span>
+<span class="nc" id="L90">                        request.getSession().setAttribute(&quot;success&quot;,</span>
+                                &quot;Scheda creata con successo&quot;);
+
+<span class="nc" id="L93">                        response.sendRedirect(&quot;requestTrainingPlan.jsp&quot;);</span>
+                    }
+                }
+<span class="nc" id="L96">            } catch (InterruptedException e) {</span>
+<span class="nc" id="L97">                e.printStackTrace();</span>
+<span class="nc" id="L98">            } catch (ExecutionException e) {</span>
+<span class="nc" id="L99">                e.printStackTrace();</span>
+<span class="nc" id="L100">            }</span>
+        }
+<span class="fc" id="L102">            boolean control = false;</span>
+<span class="fc" id="L103">        }</span>
+        /**
+         *
+         * @param request
+         * @param response
+         * @throws ServletException
+         * @throws IOException
+         */
+        public void doGet(HttpServletRequest request,
+                HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="fc" id="L114">            doPost(request, response);</span>
+<span class="fc" id="L115">        }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

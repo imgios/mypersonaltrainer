@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RequiredTrainingPlanDAOImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myPersonalTrainer</a> &gt; <a href="index.source.html" class="el_package">it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao</a> &gt; <span class="el_source">RequiredTrainingPlanDAOImpl.java</span></div><h1>RequiredTrainingPlanDAOImpl.java</h1><pre class="source lang-java linenums">package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.CollectionReference;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.Query;
+import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.WriteResult;
+import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
+import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.io.IOException;
+
+<span class="fc" id="L16">public class RequiredTrainingPlanDAOImpl implements RequiredTrainingPlanDAO {</span>
+
+    /**
+     * this function stores the email of the account
+     * into the RequiredTrainingPlan document.
+     * @param requiredTrainingPlan Object that
+     * describe the requiredTrainingPlan.
+     * @throws IOException
+     * @return
+     */
+    @Override
+    public boolean storeRequest(RequiredTrainingPlan requiredTrainingPlan)
+            throws IOException, ExecutionException, InterruptedException {
+
+        boolean controllo;
+<span class="fc" id="L31">        controllo = false;</span>
+<span class="fc" id="L32">        DBConnection.getConnection()</span>
+<span class="fc" id="L33">                .collection(&quot;RequiredTrainingPlan&quot;).add(requiredTrainingPlan);</span>
+
+<span class="fc" id="L35">        controllo = true;</span>
+
+<span class="fc" id="L37">        return controllo;</span>
+    }
+
+    /**
+     * this function can check if the email is into the
+     * RequiredTrainingPlan document so this user has yet a TrainngPlan request.
+     * @param email to find the user into the
+     * RequiredTrainingPlan document.
+     * @return the RequiredTrainingPlan given its mail.
+     */
+    @Override
+    public RequiredTrainingPlan findAccountByEmail(String email)
+            throws IOException, ExecutionException, InterruptedException {
+
+        // Create a reference to the requestTrainingPlan collection
+<span class="fc" id="L52">        CollectionReference requestedTrainingPlans = null;</span>
+
+<span class="fc" id="L54">        requestedTrainingPlans = DBConnection.getConnection()</span>
+<span class="fc" id="L55">                .collection(&quot;RequiredTrainingPlan&quot;);</span>
+
+
+        // Create a query against the collection.
+<span class="fc" id="L59">        Query query = requestedTrainingPlans.whereEqualTo(&quot;email&quot;, email);</span>
+
+        // retrieve  query results asynchronously using query.get()
+<span class="fc" id="L62">        ApiFuture&lt;QuerySnapshot&gt; querySnapshot = query.get();</span>
+
+        //create Bean to return
+<span class="fc" id="L65">        RequiredTrainingPlan requiredTrainingPlanBean =</span>
+                new RequiredTrainingPlan();
+
+        for (DocumentSnapshot document
+<span class="fc bfc" id="L69" title="All 2 branches covered.">                : querySnapshot.get().getDocuments()) {</span>
+
+<span class="fc" id="L71">            requiredTrainingPlanBean.setEmail(</span>
+<span class="fc" id="L72">                    String.valueOf(document.get(&quot;email&quot;)));</span>
+<span class="fc" id="L73">            requiredTrainingPlanBean.setRequired(Integer.parseInt(</span>
+<span class="fc" id="L74">                    String.valueOf(document.get(&quot;required&quot;))));</span>
+<span class="fc" id="L75">        }</span>
+
+<span class="fc" id="L77">        return requiredTrainingPlanBean;</span>
+    }
+
+    /**
+     * This DAO method changes the status of an account
+     * into RequiredTrainingPlan.
+     * @param email of the account
+     * @param status updated
+     * @return true after the change has taken place
+     */
+    @Override
+    public boolean updateRequest(String email, int status) //updateRequest
+            throws IOException, ExecutionException, InterruptedException {
+
+        //find document id
+<span class="fc" id="L92">        String id = getAccountDocumentIdByEmail(email);</span>
+        // Update an existing document thanks to its id
+<span class="fc" id="L94">        DocumentReference docRef = DBConnection.getConnection()</span>
+<span class="fc" id="L95">                .collection(&quot;RequiredTrainingPlan&quot;).document(id);</span>
+
+        // Update password field
+<span class="fc" id="L98">        ApiFuture&lt;WriteResult&gt; future = docRef.update(&quot;required&quot;, status);</span>
+
+<span class="fc" id="L100">        return true;</span>
+    }
+
+    /**
+     * This DAO method looks for the document id of an account.
+     * @param email of the account
+     * @return the document Id
+     */
+    @Override
+    public String getAccountDocumentIdByEmail(String email)
+            throws IOException, ExecutionException, InterruptedException {
+        // Create a reference to the account collection
+<span class="fc" id="L112">        CollectionReference requestedTrainingPlans = null;</span>
+
+<span class="fc" id="L114">        requestedTrainingPlans = DBConnection.getConnection()</span>
+<span class="fc" id="L115">                .collection(&quot;RequiredTrainingPlan&quot;);</span>
+
+        // Create a query against the collection.
+<span class="fc" id="L118">        Query query = requestedTrainingPlans.whereEqualTo(&quot;email&quot;, email);</span>
+
+        // retrieve  query results asynchronously using query.get()
+<span class="fc" id="L121">        ApiFuture&lt;QuerySnapshot&gt; querySnapshot = query.get();</span>
+
+<span class="fc" id="L123">        String id = &quot;&quot;;</span>
+
+        for (DocumentSnapshot document
+<span class="fc bfc" id="L126" title="All 2 branches covered.">                : querySnapshot.get().getDocuments()) {</span>
+<span class="fc" id="L127">            id = id + document.getId();</span>
+<span class="fc" id="L128">        }</span>
+<span class="fc" id="L129">        return id;</span>
+    }
+
+
+    /**
+     * This method gets all requests.
+     * @return
+     * @throws IOException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     * @return the list
+     */
+    public ArrayList&lt;RequiredTrainingPlan&gt; getAllRequests()
+            throws IOException, ExecutionException, InterruptedException {
+
+<span class="nc" id="L144">        CollectionReference accounts = null;</span>
+
+<span class="nc" id="L146">        accounts = DBConnection.getConnection().</span>
+<span class="nc" id="L147">                collection(&quot;RequiredTrainingPlan&quot;);</span>
+
+<span class="nc" id="L149">        Query query = accounts.whereEqualTo(&quot;required&quot;, 1);</span>
+
+<span class="nc" id="L151">        ApiFuture&lt;QuerySnapshot&gt; querySnapshot = query.get();</span>
+
+<span class="nc" id="L153">        ArrayList&lt;RequiredTrainingPlan&gt; rtpBean = new ArrayList&lt;&gt;();</span>
+
+        for (DocumentSnapshot document
+<span class="nc bnc" id="L156" title="All 2 branches missed.">                : querySnapshot.get().getDocuments()) {</span>
+<span class="nc" id="L157">            RequiredTrainingPlan a = document.</span>
+<span class="nc" id="L158">                    toObject(RequiredTrainingPlan.class);</span>
+<span class="nc" id="L159">            rtpBean.add(a);</span>
+<span class="nc" id="L160">        }</span>
+
+<span class="nc" id="L162">        return rtpBean;</span>
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

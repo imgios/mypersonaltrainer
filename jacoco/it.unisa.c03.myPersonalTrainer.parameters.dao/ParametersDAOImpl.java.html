@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ParametersDAOImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myPersonalTrainer</a> &gt; <a href="index.source.html" class="el_package">it.unisa.c03.myPersonalTrainer.parameters.dao</a> &gt; <span class="el_source">ParametersDAOImpl.java</span></div><h1>ParametersDAOImpl.java</h1><pre class="source lang-java linenums">package it.unisa.c03.myPersonalTrainer.parameters.dao;
+
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.CollectionReference;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.Query;
+import com.google.cloud.firestore.QuerySnapshot;
+import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
+import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
+/**
+ * this is an implementation of ParametersDAO.
+ */
+<span class="fc" id="L18">public class ParametersDAOImpl implements ParametersDAO {</span>
+
+    /**
+     * this method allows to insert user parameters into database.
+     * @param parameters the parameters to add into database
+     */
+    @Override
+    public boolean insertParameters(
+            Parameters parameters) throws IOException {
+<span class="fc" id="L27">        DBConnection.getConnection().collection(</span>
+<span class="fc" id="L28">                &quot;Parameters&quot;).add(parameters);</span>
+<span class="fc" id="L29">        return true;</span>
+    }
+
+    /**
+     * this method show the parameters for the input email.
+     * @param email client mail to retrieve his parameters
+     * @return a list of client parameters
+     */
+    @Override
+    public ArrayList&lt;Parameters&gt; selectByMail(
+            String email) throws
+            InterruptedException, IOException, ExecutionException {
+        // Create a reference to the account collection
+<span class="fc" id="L42">        CollectionReference parameters = null;</span>
+<span class="fc" id="L43">        parameters = DBConnection.getConnection().collection(&quot;Parameters&quot;);</span>
+        // Create a query against the collection.
+<span class="fc" id="L45">        Query query = parameters.whereEqualTo(&quot;mailClient&quot;, email);</span>
+        // retrieve  query results asynchronously using query.get()
+<span class="fc" id="L47">        ApiFuture&lt;QuerySnapshot&gt; querySnapshot = query.get();</span>
+        //create Bean to return document.get(&quot;email&quot;));
+<span class="fc" id="L49">        ArrayList&lt;Parameters&gt; list = new ArrayList&lt;Parameters&gt;();</span>
+        for (DocumentSnapshot document
+<span class="fc bfc" id="L51" title="All 2 branches covered.">                : querySnapshot.get().getDocuments()) {</span>
+<span class="fc" id="L52">            Parameters params = new Parameters();</span>
+<span class="fc" id="L53">            params.setfatMass((Double)</span>
+<span class="fc" id="L54">                    document.get(&quot;fatMass&quot;));</span>
+<span class="fc" id="L55">            params.setleanMass((Double)</span>
+<span class="fc" id="L56">                    document.get(&quot;leanMass&quot;));</span>
+<span class="fc" id="L57">            params.setweight((Double)</span>
+<span class="fc" id="L58">                    document.get(&quot;weight&quot;));</span>
+<span class="fc" id="L59">            params.setMailClient(</span>
+<span class="fc" id="L60">                    String.valueOf(document.get(&quot;mailClient&quot;)));</span>
+<span class="fc" id="L61">            params.setinsertionDate(</span>
+<span class="fc" id="L62">                    String.valueOf(document.get(&quot;insertionDate&quot;)));</span>
+<span class="fc" id="L63">            list.add(params);</span>
+<span class="fc" id="L64">        }</span>
+<span class="fc" id="L65">        return list;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

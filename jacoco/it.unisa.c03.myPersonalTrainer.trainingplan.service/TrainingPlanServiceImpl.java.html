@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TrainingPlanServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myPersonalTrainer</a> &gt; <a href="index.source.html" class="el_package">it.unisa.c03.myPersonalTrainer.trainingplan.service</a> &gt; <span class="el_source">TrainingPlanServiceImpl.java</span></div><h1>TrainingPlanServiceImpl.java</h1><pre class="source lang-java linenums">package it.unisa.c03.myPersonalTrainer.trainingplan.service;
+
+import it.unisa.c03.myPersonalTrainer.trainingplan.bean.TrainingPlan;
+import it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAO;
+import it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAOImpl;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+/**
+ * Implementation of TrainingPlanService.
+ */
+public class TrainingPlanServiceImpl implements TrainingPlanService {
+
+    /**
+     * This method asks to DAO TrainingPlans.
+     *
+     * @param email of the customer
+     * @return List of TrainingPlans
+     * @throws InterruptedException
+     * @throws ExecutionException
+     * @throws IOException
+     */
+    public List&lt;TrainingPlan&gt; getTrainingPlans(String email)
+            throws InterruptedException, ExecutionException, IOException {
+<span class="fc" id="L27">        TrainingPlanDAO trainingPlanList = new TrainingPlanDAOImpl();</span>
+<span class="fc" id="L28">        return (List&lt;TrainingPlan&gt;)</span>
+<span class="fc" id="L29">                trainingPlanList.getTrainingPlansByEmail(email);</span>
+    }
+
+    /**
+     * this is TrainingPlanDAO.
+     */
+    private TrainingPlanDAO trainingPlanDAO;
+
+<span class="nc" id="L37">    public TrainingPlanServiceImpl() {</span>
+<span class="nc" id="L38">    }</span>
+
+    /**
+     * .
+     *
+     * @param trainingPlanDAO
+     */
+<span class="fc" id="L45">    public TrainingPlanServiceImpl(TrainingPlanDAO trainingPlanDAO) {</span>
+<span class="fc" id="L46">        this.trainingPlanDAO = trainingPlanDAO;</span>
+<span class="fc" id="L47">    }</span>
+
+    /**
+     * This method checks TrainingPlan entries.
+     *
+     * @param exercise
+     * @param repetitions
+     * @param series
+     * @param recoveryTime
+     * @return
+     * @throws IllegalArgumentException
+     */
+    @Override
+    public boolean checkExercise(String exercise, String repetitions,
+                                 String series, String recoveryTime)
+            throws IllegalArgumentException {
+
+<span class="fc" id="L64">        boolean result = false;</span>
+
+<span class="fc" id="L66">        final int MAX_LENGHT_EX = 25;</span>
+<span class="fc" id="L67">        final int MAX_LENGHT = 3;</span>
+<span class="fc" id="L68">        final int MIN_LENGHT_EX = 4;</span>
+<span class="fc" id="L69">        final int MIN_LENGHT = 1;</span>
+
+<span class="pc bpc" id="L71" title="3 of 8 branches missed.">        if (series == null || repetitions == null</span>
+                || exercise == null || recoveryTime == null) {
+<span class="fc" id="L73">            throw new IllegalArgumentException(</span>
+                    &quot;valori mancanti&quot;);
+        }
+
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (!exercise.matches(&quot;[a-zA-Z\\s]+&quot;)) {</span>
+<span class="fc" id="L78">            throw new IllegalArgumentException(&quot;invalid exercise&quot;);</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        } else if (exercise.length() &lt; MIN_LENGHT_EX</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">                || exercise.length() &gt; MAX_LENGHT_EX) {</span>
+<span class="fc" id="L81">            throw new IllegalArgumentException(&quot;invalid exercise length&quot;);</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        } else if (series.length() &lt; MIN_LENGHT</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">                || series.length() &gt; MAX_LENGHT) {</span>
+<span class="fc" id="L84">            throw new IllegalArgumentException(&quot;invalid series length&quot;);</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        } else if (!series.matches(&quot;^[0-9]+$&quot;)) {</span>
+<span class="fc" id="L86">            throw new IllegalArgumentException(&quot;invalid series format&quot;);</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        } else if (repetitions.length() &lt; MIN_LENGHT</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">                || repetitions.length() &gt; MAX_LENGHT) {</span>
+<span class="fc" id="L89">            throw new IllegalArgumentException(&quot;invalid repetitions length&quot;);</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        } else if (!repetitions.matches(&quot;^[0-9]+$&quot;)) {</span>
+<span class="fc" id="L91">            throw new IllegalArgumentException(&quot;invalid repetitions format&quot;);</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        } else if (recoveryTime.length() &lt; MIN_LENGHT</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">                || recoveryTime.length() &gt; MAX_LENGHT) {</span>
+<span class="fc" id="L94">            throw new IllegalArgumentException(&quot;invalid recoveryTime length&quot;);</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        } else if (!recoveryTime.matches(&quot;^[0-9]+$&quot;)) {</span>
+<span class="fc" id="L96">            throw new IllegalArgumentException(&quot;invalid recoveryTime format&quot;);</span>
+        } else {
+<span class="fc" id="L98">            result = true;</span>
+        }
+<span class="fc" id="L100">        return result;</span>
+    }
+
+    /**
+     * This method calls TrainingPlanDAO.
+     * @param trainingPlan
+     * @return boolean
+     * @throws IOException
+     */
+    @Override
+    public boolean createTrainingPlan(TrainingPlan trainingPlan)
+            throws IOException {
+<span class="fc" id="L112">        return trainingPlanDAO.insertTrainingPlan(trainingPlan);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

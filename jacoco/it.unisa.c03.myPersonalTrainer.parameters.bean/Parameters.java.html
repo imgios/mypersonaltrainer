@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Parameters.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">myPersonalTrainer</a> &gt; <a href="index.source.html" class="el_package">it.unisa.c03.myPersonalTrainer.parameters.bean</a> &gt; <span class="el_source">Parameters.java</span></div><h1>Parameters.java</h1><pre class="source lang-java linenums">package it.unisa.c03.myPersonalTrainer.parameters.bean;
+
+import java.text.DateFormat;
+import java.util.Date;
+
+/**
+ * this class show the user parameters details.
+ */
+public class Parameters {
+    private double weight;
+    private double leanMass;
+    private double fatMass;
+    private String mailClient;
+    private String insertionDate;
+
+    /**
+     * constructor of the class.
+     */
+<span class="nc" id="L19">    public Parameters() {</span>
+<span class="nc" id="L20">    }</span>
+
+    /**
+     * param costructor.
+     * @param weight new weight
+     * @param leanMass new leanMass
+     * @param fatMass new fatMass
+     * @param mailClient new mailClient
+     */
+    public Parameters(double weight, double leanMass,
+<span class="nc" id="L30">                      double fatMass, String mailClient) {</span>
+<span class="nc" id="L31">        this.weight = weight;</span>
+<span class="nc" id="L32">        this.leanMass = leanMass;</span>
+<span class="nc" id="L33">        this.fatMass = fatMass;</span>
+<span class="nc" id="L34">        this.mailClient = mailClient;</span>
+
+<span class="nc" id="L36">        Date d = new Date();</span>
+<span class="nc" id="L37">        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);</span>
+<span class="nc" id="L38">        String x = (df.format(d));</span>
+<span class="nc" id="L39">        this.insertionDate = x;</span>
+<span class="nc" id="L40">    }</span>
+
+
+    /**
+     * method to string, to view the information during a stamp.
+     */
+    @Override
+    public String toString() {
+<span class="nc" id="L48">        return &quot;Parameters{&quot;</span>
+                + &quot;weight=&quot; + weight
+                + &quot;, leanMass=&quot; + leanMass
+                + &quot;, fatMass=&quot; + fatMass
+                + &quot;, mailClient='&quot; + mailClient + '\''
+                + &quot;, insertionDate=&quot; + insertionDate
+                + '}';
+    }
+
+
+    public double getweight() {
+<span class="nc" id="L59">        return weight;</span>
+    }
+
+    public void setweight(double weight) {
+<span class="nc" id="L63">        this.weight = weight;</span>
+<span class="nc" id="L64">    }</span>
+
+    public double getleanMass() {
+<span class="nc" id="L67">        return leanMass;</span>
+    }
+
+    public void setleanMass(double leanMass) {
+<span class="nc" id="L71">        this.leanMass = leanMass;</span>
+<span class="nc" id="L72">    }</span>
+
+    public double getfatMass() {
+<span class="nc" id="L75">        return fatMass;</span>
+    }
+
+    public void setfatMass(double fatMass) {
+<span class="nc" id="L79">        this.fatMass = fatMass;</span>
+<span class="nc" id="L80">    }</span>
+
+    public String getMailClient() {
+<span class="nc" id="L83">        return mailClient;</span>
+    }
+
+    public void setMailClient(String mailClient) {
+<span class="nc" id="L87">        this.mailClient = mailClient;</span>
+<span class="nc" id="L88">    }</span>
+
+    public String getinsertionDate() {
+<span class="nc" id="L91">        return insertionDate;</span>
+    }
+
+    public void setinsertionDate(String insertionDate) {
+<span class="nc" id="L95">        this.insertionDate = insertionDate;</span>
+<span class="nc" id="L96">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
