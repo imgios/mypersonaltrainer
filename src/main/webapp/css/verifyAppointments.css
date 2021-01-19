@@ -1,0 +1,36 @@
+#datepicker{
+    margin-top: 10px;
+}
+
+#visualizzaappuntamenti{
+    grid-column: 1;
+    margin-top:15px;
+    margin-left: 180px;
+    height: fit-content;
+    width: fit-content;
+    background-color: dodgerblue;
+    color: white;
+}
+
+#appuntamenti{
+    margin-top: 5px;
+    height: 250px;
+    margin-right: 20px;
+    min-width: fit-content;
+    overflow-y: scroll;
+}
+
+#giornoscelto{
+
+    text-decoration-color: #2e4ead;
+    margin-left: 5%;
+    margin-top: 20px;
+}
+
+#inseriscidisponibilità{
+    margin-left: 80%;
+    margin-right:20%;
+    width: fit-content;
+    background-color: dodgerblue;
+    color: white;
+}
