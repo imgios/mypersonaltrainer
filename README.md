@@ -8,7 +8,8 @@
 </p>
 
 <h6 align="center">
-  <a href="https://imgios.github.io/mypersonaltrainer">📄 API Docs</a>
+  <a href="https://imgios.github.io/mypersonaltrainer/javadoc">📄 API Docs</a> ·
+  <a href="https://imgios.github.io/mypersonaltrainer/jacoco">📊 Coverage Report</a>
 </h6>
 
 <!-- ## Getting Started
