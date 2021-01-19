@@ -1,14 +1,8 @@
 package it.unisa.c03.myPersonalTrainer.agenda.control;
 
-import com.google.api.client.json.Json;
-import com.google.gson.Gson;
 import it.unisa.c03.myPersonalTrainer.agenda.bean.Availability;
 import it.unisa.c03.myPersonalTrainer.agenda.service.AgendaService;
-import it.unisa.c03.myPersonalTrainer.agenda.service.AgendaServiceImpl;
-import it.unisa.c03.myPersonalTrainer.parameters.bean.Parameters;
-import it.unisa.c03.myPersonalTrainer.parameters.control.ParametersController;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import javax.servlet.ServletException;

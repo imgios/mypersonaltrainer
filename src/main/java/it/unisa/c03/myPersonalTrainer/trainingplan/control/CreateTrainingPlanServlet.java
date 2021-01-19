@@ -1,10 +1,10 @@
 package it.unisa.c03.myPersonalTrainer.trainingplan.control;
 
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAO;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAOImpl;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanService;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanServiceImpl;
+import it.unisa.c03.myPersonalTrainer.trainingplan.bean.RequiredTrainingPlan;
+import it.unisa.c03.myPersonalTrainer.trainingplan.dao.RequiredTrainingPlanDAO;
+import it.unisa.c03.myPersonalTrainer.trainingplan.dao.RequiredTrainingPlanDAOImpl;
+import it.unisa.c03.myPersonalTrainer.trainingplan.service.RequiredTrainingPlanService;
+import it.unisa.c03.myPersonalTrainer.trainingplan.service.RequiredTrainingPlanServiceImpl;
 import it.unisa.c03.myPersonalTrainer.trainingplan.bean.TrainingPlan;
 import it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAO;
 import it.unisa.c03.myPersonalTrainer.trainingplan.dao.TrainingPlanDAOImpl;

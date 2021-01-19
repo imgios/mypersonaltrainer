@@ -1,4 +1,4 @@
-package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.control;
+package it.unisa.c03.myPersonalTrainer.trainingplan.control;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAO;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAOImpl;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanService;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanServiceImpl;
+import it.unisa.c03.myPersonalTrainer.trainingplan.bean.RequiredTrainingPlan;
+import it.unisa.c03.myPersonalTrainer.trainingplan.dao.RequiredTrainingPlanDAO;
+import it.unisa.c03.myPersonalTrainer.trainingplan.dao.RequiredTrainingPlanDAOImpl;
+import it.unisa.c03.myPersonalTrainer.trainingplan.service.RequiredTrainingPlanService;
+import it.unisa.c03.myPersonalTrainer.trainingplan.service.RequiredTrainingPlanServiceImpl;
 /**
  * servlet to manage requestedTrainingPlan.
  */

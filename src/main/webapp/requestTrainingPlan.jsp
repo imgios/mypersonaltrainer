@@ -3,11 +3,11 @@
 <%@ page import="it.unisa.c03.myPersonalTrainer.account.dao.AccountDAOImpl" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.account.service.AccountService" %>
 <%@ page import="it.unisa.c03.myPersonalTrainer.account.service.AccountServiceImpl" %>
-<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan" %>
-<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAO" %>
-<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanService" %>
-<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAOImpl" %>
-<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanServiceImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.bean.RequiredTrainingPlan" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.dao.RequiredTrainingPlanDAO" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.service.RequiredTrainingPlanService" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.dao.RequiredTrainingPlanDAOImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.service.RequiredTrainingPlanServiceImpl" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String error1 = (String) request.getSession().getAttribute("error");

@@ -18,9 +18,9 @@ import java.io.IOException;
  * servlet for the insert parameters.
  * if return 1 the insert passed, else return the oracle message.
  */
-@WebServlet(name = "ParametersController",
+@WebServlet(name = "ParametersServlet",
         value = "/parameters-controller")
-public class ParametersController
+public class ParametersServlet
         extends HttpServlet {
 
 
