@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.Collection" %>
-<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan" %>
-<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanService" %>
-<%@ page import="it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanServiceImpl" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.bean.RequiredTrainingPlan" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.service.RequiredTrainingPlanService" %>
+<%@ page import="it.unisa.c03.myPersonalTrainer.trainingplan.service.RequiredTrainingPlanServiceImpl" %>
 
 <!doctype html>
 <%

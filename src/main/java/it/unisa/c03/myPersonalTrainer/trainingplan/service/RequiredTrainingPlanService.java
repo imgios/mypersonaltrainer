@@ -1,6 +1,6 @@
-package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service;
+package it.unisa.c03.myPersonalTrainer.trainingplan.service;
 
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
+import it.unisa.c03.myPersonalTrainer.trainingplan.bean.RequiredTrainingPlan;
 
 import java.io.IOException;
 import java.util.ArrayList;

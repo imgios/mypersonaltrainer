@@ -1,4 +1,4 @@
-package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.control;
+package it.unisa.c03.myPersonalTrainer.trainingplan.control;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -13,10 +13,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAO;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAOImpl;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service.RequiredTrainingPlanServiceImpl;
+import it.unisa.c03.myPersonalTrainer.trainingplan.bean.RequiredTrainingPlan;
+import it.unisa.c03.myPersonalTrainer.trainingplan.dao.RequiredTrainingPlanDAO;
+import it.unisa.c03.myPersonalTrainer.trainingplan.dao.RequiredTrainingPlanDAOImpl;
+import it.unisa.c03.myPersonalTrainer.trainingplan.service.RequiredTrainingPlanServiceImpl;
+import it.unisa.c03.myPersonalTrainer.trainingplan.control.ManageRequiredTrainingPlanServlet;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

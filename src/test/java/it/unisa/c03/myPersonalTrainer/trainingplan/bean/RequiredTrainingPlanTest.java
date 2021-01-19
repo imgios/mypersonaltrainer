@@ -1,7 +1,6 @@
-package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean;
+package it.unisa.c03.myPersonalTrainer.trainingplan.bean;
 
-import it.unisa.c03.myPersonalTrainer.account.bean.Account;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
+import it.unisa.c03.myPersonalTrainer.trainingplan.bean.RequiredTrainingPlan;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

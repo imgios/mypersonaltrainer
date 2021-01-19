@@ -1,10 +1,12 @@
-package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.service;
+package it.unisa.c03.myPersonalTrainer.trainingplan.service;
 
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAO;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao.RequiredTrainingPlanDAOImpl;
+import it.unisa.c03.myPersonalTrainer.trainingplan.bean.RequiredTrainingPlan;
+import it.unisa.c03.myPersonalTrainer.trainingplan.dao.RequiredTrainingPlanDAO;
+import it.unisa.c03.myPersonalTrainer.trainingplan.dao.RequiredTrainingPlanDAOImpl;
+import it.unisa.c03.myPersonalTrainer.trainingplan.service.RequiredTrainingPlanService;
+import it.unisa.c03.myPersonalTrainer.trainingplan.service.RequiredTrainingPlanServiceImpl;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

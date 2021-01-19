@@ -1,4 +1,4 @@
-package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao;
+package it.unisa.c03.myPersonalTrainer.trainingplan.dao;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -7,7 +7,8 @@ import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
+import it.unisa.c03.myPersonalTrainer.trainingplan.bean.RequiredTrainingPlan;
+import it.unisa.c03.myPersonalTrainer.trainingplan.dao.RequiredTrainingPlanDAO;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;

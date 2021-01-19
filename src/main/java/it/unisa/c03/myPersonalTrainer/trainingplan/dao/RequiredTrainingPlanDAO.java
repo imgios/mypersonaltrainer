@@ -1,5 +1,5 @@
-package it.unisa.c03.myPersonalTrainer.requiredtrainingplan.dao;
-import it.unisa.c03.myPersonalTrainer.requiredtrainingplan.bean.RequiredTrainingPlan;
+package it.unisa.c03.myPersonalTrainer.trainingplan.dao;
+import it.unisa.c03.myPersonalTrainer.trainingplan.bean.RequiredTrainingPlan;
 
 import java.io.IOException;
 import java.util.ArrayList;
