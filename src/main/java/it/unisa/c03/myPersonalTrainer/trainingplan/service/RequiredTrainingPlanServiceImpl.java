@@ -3,7 +3,6 @@ package it.unisa.c03.myPersonalTrainer.trainingplan.service;
 import it.unisa.c03.myPersonalTrainer.trainingplan.bean.RequiredTrainingPlan;
 import it.unisa.c03.myPersonalTrainer.trainingplan.dao.RequiredTrainingPlanDAO;
 import it.unisa.c03.myPersonalTrainer.trainingplan.dao.RequiredTrainingPlanDAOImpl;
-import it.unisa.c03.myPersonalTrainer.trainingplan.service.RequiredTrainingPlanService;
 
 import java.io.IOException;
 import java.util.ArrayList;
