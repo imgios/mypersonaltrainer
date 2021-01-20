@@ -8,7 +8,6 @@ import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
 import it.unisa.c03.myPersonalTrainer.firebase.DBConnection;
 import it.unisa.c03.myPersonalTrainer.trainingplan.bean.RequiredTrainingPlan;
-import it.unisa.c03.myPersonalTrainer.trainingplan.dao.RequiredTrainingPlanDAO;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;

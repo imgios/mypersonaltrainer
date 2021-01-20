@@ -37,7 +37,7 @@ public class DownloadTrainingPlanServlet extends HttpServlet {
       doc.open();
 
       String filename = "https://github.com/imgios/mypersonaltrainer/blob"
-              + "/develop/src/main/webapp/img/logo_fattura.png?raw=true";
+          + "/main/src/main/webapp/img/logo_fattura.png?raw=true";
 
       Image image = Image.getInstance(filename);
       image.setAlignment(Element.ALIGN_CENTER);
