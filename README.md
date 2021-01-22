@@ -12,41 +12,36 @@
   <a href="https://imgios.github.io/mypersonaltrainer/jacoco">📊 Coverage Report</a>
 </h6>
 
-<!-- ## Getting Started
+## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+- JDK 15
+- Maven
+- Tomcat
+- Firebase account
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
+1. Clone the repository:
+```bash
+$ git clone https://github.com/imgios/mypersonaltrainer.git
 ```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+2. Open the project with your IDE and wait for Maven to install all the dependencies.
+3. Configure Tomcat in your IDE.
+4. Add Firebase Account Service .json as env.
+4. Build and deploy the project.
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+There are two options in order to run tests:
 
-### Break down into end to end tests
+- Run the entire project build (and tests) with Maven: `mvn -B package --file pom.xml`
+- Run just tests with Maven: `mvn clean test`
+
+<!--  ### Break down into end to end tests
 
 Explain what these tests test and why
 
@@ -72,10 +67,12 @@ Add additional notes about how to deploy this on a live system -->
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [Firebase](https://firebase.google.com/) - Cloud solution used for storing data and files
 * [Bootstrap](https://getboostrap.com/) - Front-end framework
+* [JUnit](https://junit.org/) - Unit testing framework
+* [Mockito](https://site.mockito.org/) - Mocking framework
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/imgios/mypersonaltrainer/tags). 
 
 ## Authors
 
